@@ -16,7 +16,7 @@ class Game extends EventEmitter {
     }
 
     public debug(message : any) {
-        console.log(message);
+        this.emit("debug", message);
     }
 }
 
