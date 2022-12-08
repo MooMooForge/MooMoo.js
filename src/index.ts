@@ -19,4 +19,3 @@ class Game extends EventEmitter {
 
 hookWS();
 export default Game;
-

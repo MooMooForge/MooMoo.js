@@ -12,7 +12,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
-        minimize: false,
+        minimize: true,
         minimizer: [new TerserWebpackPlugin({
             terserOptions: {
                 compress: {
@@ -21,7 +21,7 @@ module.exports = {
                     passes: 20,
                     drop_console: false,
                     drop_debugger: true,
-                    ecma: 2015,
+                    ecma: 2022,
                     unsafe: true,
                     toplevel: true,
                     booleans_as_integers: true,
