@@ -12,11 +12,11 @@ class Game extends EventEmitter {
         super();
         this.teams = [];
     }
-
-    public debug(message : any) {
+    debug(message : any) {
         this.emit("debug", message);
     }
 }
 
 hookWS();
 export default Game;
+

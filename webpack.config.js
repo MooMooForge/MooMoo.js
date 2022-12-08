@@ -21,7 +21,7 @@ module.exports = {
                     passes: 20,
                     drop_console: false,
                     drop_debugger: true,
-                    ecma: 2022,
+                    ecma: 2015,
                     unsafe: true,
                     toplevel: true,
                     booleans_as_integers: true,

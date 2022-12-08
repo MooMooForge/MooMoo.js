@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@types/websocket": "^1.0.5",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0"
   },
