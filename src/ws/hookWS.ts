@@ -1,12 +1,12 @@
 import decode from "../lib/decode.js";
 import { handlePacket } from "./handlePacket";
-import { ws } from "../index";
+import MooMoo from "../index";
 
 export default function hookWS() {
     WebSocket = new Proxy(WebSocket, {
         construct(target: any, args) {
-            ws.ws = Reflect.construct(target, args);
-            ws.addEventListener("message", (e: any) => {
+            MooMoo.ws = Reflect.construct(target, args);
+            MooMoo.ws.addEventListener("message", (e: any) => {
                 let data = e.data;
                 try {
                     let decoded = decode(data);
@@ -16,7 +16,7 @@ export default function hookWS() {
                     throw new Error(e);
                 }
             });
-            return ws;
+            return MooMoo.ws;
         }
     });
 }

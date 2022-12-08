@@ -1,9 +1,13 @@
 import { MooMoo } from "../../app";
 import { array } from "../index";
 
+// packets
+import setInitData from "./packets/setInitData";
+
 export function handlePacket(packet: string, data: array) {
     switch (packet) {
         case "id": // setInitData
+            setInitData(data[0]);
             break;
         case "d": // disconnect
             break;
