@@ -19,4 +19,13 @@ export default function hookWS() {
             return MooMoo.ws;
         }
     });
+
+    WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
+        apply(target, thisArg, args) {
+            MooMoo.debug("Sent: " + args[0]);
+            return Reflect.apply(target, thisArg, args);
+        }
+    });
 }
+
+

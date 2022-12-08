@@ -5,6 +5,9 @@ export type array = Array<any>;
 export type MessageEvent = Event
 
 class Game extends EventEmitter {
+    static debug(arg0: string) {
+        throw new Error("Method not implemented.");
+    }
     static ws: any;
     teams: any[];
 
@@ -12,7 +15,8 @@ class Game extends EventEmitter {
         super();
         this.teams = [];
     }
-    debug(message : any) {
+
+    public debug(message : any) {
         this.emit("debug", message);
     }
 }
