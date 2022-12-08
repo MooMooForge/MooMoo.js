@@ -12,7 +12,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
-        minimize: true,
+        minimize: false,
         minimizer: [new TerserWebpackPlugin({
             terserOptions: {
                 compress: {
@@ -30,7 +30,7 @@ module.exports = {
                 },
                 mangle: {
                     properties: {
-                        reserved: ["packet", "data", "emit", "addEventListener", "on", "packet", "ws", "players", "teams", "Alliance", "Player"]
+                        reserved: ["packet", "data", "emit", "addEventListener", "on", "packet", "ws", "players", "teams", "Alliance", "Player", "Teams"]
                     },
                 },
                 output: {
