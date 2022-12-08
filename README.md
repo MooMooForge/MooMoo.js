@@ -42,3 +42,19 @@ MooMoo.on("packet", (obj) => {
     // Do stuff with the packet
 })
 ```
+
+- `debug` - Fired when a debug message is sent
+
+This event is run when any sort of debug message is sent from the api. This is usually for developing purposes. You can use this the following way:
+
+```js
+MooMoo.on("debug", message => {
+    // Do stuff with the message
+})
+```
+
+### 2. Data and Information
+
+- `MooMoo.ws` - The websocket connection
+- `MooMoo.teams` - An Array of Alliances that are currently in the game (needs to be updated)
+
