@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
@@ -11,12 +10,4 @@
     "lib": ["dom"],
     "strict": false,
   }
-=======
-    "compilerOptions": {
-      "outDir": "./dist/",
-      "strict": false,
-      "moduleResolution": "node",
-      "target": "es2020",
-    }
->>>>>>> parent of e37eb7e (:recycle: Refactor patch)
 }
