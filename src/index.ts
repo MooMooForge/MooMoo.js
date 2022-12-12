@@ -12,19 +12,17 @@ export default class Game extends EventEmitter {
 
     // idk random variables
     teams: any = [];
-    players: any = [];
-    nearPlayers: any = [];
+    GamePlayerManager: PlayerManager = new PlayerManager();
+    ActivePlayerManager: PlayerManager = new PlayerManager();
     myPlayer: any;
 
-    // managers
-    playerManager: PlayerManager = new PlayerManager();
 
     // lib functions
     sendPacket: Function;
 
     // lib vars
     vars: any = <any>{};
-    
+
     constructor() {
         super();
     }

@@ -32,6 +32,10 @@ class PlayerManager {
         return this.players.find(player => player.id === id);
     }
 
+    clearPlayers() {
+        this.players = [];
+    }
+
 }
 
 export default PlayerManager;
