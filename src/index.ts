@@ -4,13 +4,13 @@ import hookWS from "./ws/hookWS";
 export type array = Array<any>;
 export type MessageEvent = Event
 
-class Game extends EventEmitter {
-    static ws: any;
+export default class Game extends EventEmitter {
+    ws: WebSocket;
     teams: any[];
+    sendPacket: Function;
 
     constructor() {
         super();
-        this.teams = [];
     }
     debug(message : any) {
         this.emit("debug", message);
@@ -18,5 +18,4 @@ class Game extends EventEmitter {
 }
 
 hookWS();
-export default Game;
 
