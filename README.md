@@ -56,10 +56,17 @@ MooMoo.on("debug", message => {
 ### 2. Data and Information
 
 - `MooMoo.ws` - The websocket connection
+
+Returns the WebSocket class, including the URL, `readyState`, or anything that is on the WS class.
+
 - `MooMoo.teams` - An Array of Alliances that are currently in the game (needs to be updated)
+- `MooMoo.myPlayer` - returns an Object of your current player, including x, y, hats, and other information.
+
+It is currently in work though, so for now it only includes `sid`.
 
 #### 2.1 Functions
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
 
 Usage: `MooMoo.sendPacket("ch", "Hello World")` - `(packetType, ...data)`
+
