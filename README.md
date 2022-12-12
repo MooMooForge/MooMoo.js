@@ -61,8 +61,24 @@ Returns the WebSocket class, including the URL, `readyState`, or anything that i
 
 - `MooMoo.teams` - An Array of Alliances that are currently in the game (needs to be updated)
 - `MooMoo.myPlayer` - returns an Object of your current player, including x, y, hats, and other information.
+- `MooMoo.ActivePlayerManager` - returns an Instance of the ActivePlayermanager class. This class contains all players, which are currently on your screen.
 
-It is currently in work though, so for now it only includes `sid`.
+this class has the following usabillities:
+```js
+MooMoo.ActivePlayerManager.players // returns an array of all players on your screen
+MooMoo.ActivePlayerManager.getPlayerBySid(id) // returns the player with the given sid
+MooMoo.ActivePlayerManager.getPlayerById(team) // returns an array of all players with the given id
+```
+
+- `MooMoo.GamePlayerManager` - returns an Instance of the GamePlayerManager class. This class contains all players, which are currently in the game.
+
+Obviously, this only contains the players that joined after you did.
+
+```js
+MooMoo.GamePlayerManager.players // returns an array of all players in the game
+MooMoo.GamePlayerManager.getPlayerBySid(id) // returns the player with the given sid
+MooMoo.GamePlayerManager.getPlayerById(team) // returns an array of all players with the given id
+```
 
 #### 2.1 Functions
 
