@@ -68,7 +68,7 @@ It is currently in work though, so for now it only includes `sid`.
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
 
-Usage: (packetType, ...data)`
+Usage: `(packetType, ...data)`
 ```js
 MooMoo.sendPacket("ch", "Hello World")`
 ```
