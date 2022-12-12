@@ -1,15 +1,13 @@
 class Player {
-    public id: number;
-    public playerName: string;
+    public id: string;
+    public name: string;
     public x: number;
     public y: number;
     public team: string;
+    public sid: number;
 
-    constructor(id: number, playerName: string, x: number, y: number) {
-        this.id = id;
-        this.playerName = playerName;
-        this.x = x;
-        this.y = y;
+    constructor(sid: number) {
+        this.sid = sid;
     }
 }
 

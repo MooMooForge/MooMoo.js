@@ -4,6 +4,9 @@ import { array } from "../index";
 // packets
 import setInitData from "./packets/setInitData";
 import setUpGame from "./packets/setupGame";
+import addPlayer from "./packets/addPlayer";
+import removePlayer from "./packets/removePlayer";
+
 
 export function handlePacket(packet: string, data: array) {
     switch (packet) {
@@ -16,8 +19,10 @@ export function handlePacket(packet: string, data: array) {
             setUpGame(data[0]);
             break;
         case "2": // addPlayer
+            addPlayer(data[0], data[1]);
             break;
         case "4": // removePlayer
+            removePlayer(data[0]);
             break;
         case "33": // updatePlayers
             break;

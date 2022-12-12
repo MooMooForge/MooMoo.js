@@ -1,7 +1,7 @@
 setInitData: [x]
 disconnect: []
 setupGame: [x]
-addPlayer: []
+addPlayer: [x]
 removePlayer: []
 updatePlayers: []
 updateLeaderboard: []
