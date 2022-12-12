@@ -9,7 +9,6 @@ export default class Game extends EventEmitter {
     teams: any = [];
     myPlayer: any;
 
-
     sendPacket: Function;
 
     constructor() {
