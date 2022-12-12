@@ -58,3 +58,7 @@ MooMoo.on("debug", message => {
 - `MooMoo.ws` - The websocket connection
 - `MooMoo.teams` - An Array of Alliances that are currently in the game (needs to be updated)
 
+#### 2.1 Functions
+
+- `MooMoo.sendPacket(packet)` - Sends a packet to the server
+Usage: `MooMoo.sendPacket("ch", "Hello World")` - `(packetType, ...data)`
