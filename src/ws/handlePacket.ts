@@ -3,6 +3,7 @@ import { array } from "../index";
 
 // packets
 import setInitData from "./packets/setInitData";
+import setUpGame from "./packets/setupGame";
 
 export function handlePacket(packet: string, data: array) {
     switch (packet) {
@@ -12,6 +13,7 @@ export function handlePacket(packet: string, data: array) {
         case "d": // disconnect
             break;
         case "1": // setUpGame
+            setUpGame(data[0]);
             break;
         case "2": // addPlayer
             break;

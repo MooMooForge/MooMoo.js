@@ -6,7 +6,10 @@ export type MessageEvent = Event
 
 export default class Game extends EventEmitter {
     ws: WebSocket;
-    teams: any[];
+    teams: any = [];
+    myPlayer: any;
+
+
     sendPacket: Function;
 
     constructor() {

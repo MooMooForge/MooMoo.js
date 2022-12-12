@@ -14,22 +14,18 @@ export default function hookWS() {
                 _onmessage = true;
                 MooMoo.ws.addEventListener("message", (e: any) => {
                     let data = e.data;
-                    try {
-                        let decoded = decode(data);
-                        let [packet, [...packetData]] = decoded;
-                        handlePacket(packet, packetData);
+                    let decoded = decode(data);
+                    let [packet, [...packetData]] = decoded;
+                    handlePacket(packet, packetData);
 
-                        MooMoo.sendPacket = function(type: string) {
-                            let data = Array.prototype.slice.call(arguments, 1);
-                            let binary = encode([type, data]);
-        
-                            MooMoo.ws.send(binary);
-                        }
-                    } catch (e) {
-                        throw new Error(e);
+                    MooMoo.sendPacket = function (type: string) {
+                        let data = Array.prototype.slice.call(arguments, 1);
+                        let binary = encode([type, data]);
+
+                        MooMoo.ws.send(binary);
                     }
                 })
-                
+
 
             }
             return Reflect.apply(target, thisArg, args);
