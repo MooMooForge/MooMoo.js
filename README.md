@@ -61,4 +61,5 @@ MooMoo.on("debug", message => {
 #### 2.1 Functions
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
+
 Usage: `MooMoo.sendPacket("ch", "Hello World")` - `(packetType, ...data)`
