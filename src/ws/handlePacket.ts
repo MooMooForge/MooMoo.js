@@ -9,6 +9,8 @@ import removePlayer from "./packets/removePlayer";
 import updatePlayers from "./packets/updatePlayers";
 import updateLeaderboard from "./packets/updateLeaderboard";
 import loadGameObject from "./packets/loadGameObject";
+import killObject from "./packets/killObject";
+import killObjects from "./packets/killObjects";
 
 export function handlePacket(packet: string, data: array) {
     switch (packet) {
@@ -52,8 +54,10 @@ export function handlePacket(packet: string, data: array) {
         case "11": // kill player
             break;
         case "12": // kill object
+            killObject(data[0]);
             break;
         case "13": // kill objects
+            killObjects(data[0]);
             break;
         case "14": // update item count
             break;

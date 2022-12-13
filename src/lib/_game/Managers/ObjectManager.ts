@@ -39,6 +39,18 @@ class ObjectManager {
 
         return objs;
     }
+
+    removeObjectBySid(sid: number) {
+        this.objects.delete(sid);
+    }
+
+    removeObjectsByOwnerSid(sid: number) {
+        this.objects.forEach((obj: GameObject) => {
+            if (obj.ownerSid == sid) {
+                this.objects.delete(obj.sid);
+            }
+        })
+    }
 }
 
 export default ObjectManager;
