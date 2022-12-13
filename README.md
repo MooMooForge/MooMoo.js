@@ -87,6 +87,14 @@ let leaderboard = MooMoo.LeaderboardManager.leaderboard // returns a Map of the 
 let top1 = leaderboard.get(1) // returns the top 1 player
 ```
 
+- `MooMoo.GameObjectManager` - returns an Instance of the GameObjectManager class. This class contains all game objects, which are currently in the game and have been loaded.
+
+```js
+let gameObjects = MooMoo.GameObjectManager.gameObjects // returns a Map of all game objects
+let obj = gameObjects.get(sid) // returns the game object with the given sid
+let objByOwner = MooMoo.GameObjectManager.getObjectsBySid(sid) // returns an array of all game objects with the given player sid
+```
+
 #### 2.1 Functions
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
