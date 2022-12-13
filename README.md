@@ -80,6 +80,13 @@ MooMoo.GamePlayerManager.getPlayerBySid(id) // returns the player with the given
 MooMoo.GamePlayerManager.getPlayerById(team) // returns an array of all players with the given id
 ```
 
+- `MooMoo.LeaderboardManager` - returns an Instance of the LeaderboardManager class. This class contains the TOP 10 players.
+
+```js
+let leaderboard = MooMoo.LeaderboardManager.leaderboard // returns a Map of the top 10 players
+let top1 = leaderboard.get(1) // returns the top 1 player
+```
+
 #### 2.1 Functions
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
