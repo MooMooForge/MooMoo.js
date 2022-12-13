@@ -19,27 +19,12 @@ module.exports = {
                 compress: {
                     hoist_funs: true,
                     reduce_funcs: true,
-                    passes: 20,
-                    drop_console: false,
-                    drop_debugger: true,
-                    ecma: 2015,
-                    unsafe: true,
-                    toplevel: true,
-                    booleans_as_integers: true,
-                    expression: true,
-                    unsafe: false,
-                },
-                mangle: {
-                    properties: {
-                        reserved: ["packet", "data", "emit", "addEventListener", "on", "packet", "ws", "players", "teams", "Alliance", "Player", "Teams"]
-                    },
                 },
                 output: {
                     beautify: true,
                     comments: false,
                 },
                 ecma: 2020,
-                toplevel: true,
             }
         })],
     },
