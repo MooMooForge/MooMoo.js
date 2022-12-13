@@ -7,7 +7,7 @@ import setUpGame from "./packets/setupGame";
 import addPlayer from "./packets/addPlayer";
 import removePlayer from "./packets/removePlayer";
 import updatePlayers from "./packets/updatePlayers";
-
+import updateLeaderboard from "./packets/updateLeaderboard";
 export function handlePacket(packet: string, data: array) {
     switch (packet) {
         case "id": // setInitData
@@ -28,6 +28,7 @@ export function handlePacket(packet: string, data: array) {
             updatePlayers(data[0]);
             break;
         case "5": // updateLeaderboard
+            updateLeaderboard(data[0]);
             break;
         case "6": // load game object
             break;

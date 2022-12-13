@@ -1,7 +1,8 @@
 import EventEmitter from "./lib/EventEmitter";
 import hookWS from "./ws/hookWS";
 
-import PlayerManager from "./lib/_game/PlayerManager";
+import PlayerManager from "./lib/_game/Managers/PlayerManager";
+import Leaderboardmanager from "./lib/_game/Managers/LeaderboardManager";
 
 export type array = Array<any>;
 export type MessageEvent = Event
@@ -12,10 +13,12 @@ export default class Game extends EventEmitter {
 
     // idk random variables
     teams: any = [];
-    GamePlayerManager: PlayerManager = new PlayerManager();
-    ActivePlayerManager: PlayerManager = new PlayerManager();
     myPlayer: any;
 
+    // managers
+    GamePlayerManager: PlayerManager = new PlayerManager();
+    ActivePlayerManager: PlayerManager = new PlayerManager();
+    LeaderboardManager: Leaderboardmanager = new Leaderboardmanager();
 
     // lib functions
     sendPacket: Function;
