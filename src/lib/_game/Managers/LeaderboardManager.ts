@@ -1,6 +1,7 @@
 import chunk from "../external/funcs/chunk";
 import { MooMoo } from "../../../../app";
 import Player from "../Player";
+
 class Leaderboardmanager {
     leaderboard: Map<any, any>;
 

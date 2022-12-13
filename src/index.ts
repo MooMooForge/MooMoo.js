@@ -3,6 +3,7 @@ import hookWS from "./ws/hookWS";
 
 import PlayerManager from "./lib/_game/Managers/PlayerManager";
 import Leaderboardmanager from "./lib/_game/Managers/LeaderboardManager";
+import ObjectManager from "./lib/_game/Managers/ObjectManager";
 
 export type array = Array<any>;
 export type MessageEvent = Event
@@ -19,7 +20,8 @@ export default class Game extends EventEmitter {
     GamePlayerManager: PlayerManager = new PlayerManager();
     ActivePlayerManager: PlayerManager = new PlayerManager();
     LeaderboardManager: Leaderboardmanager = new Leaderboardmanager();
-
+    GameObjectManager: ObjectManager = new ObjectManager();
+    
     // lib functions
     sendPacket: Function;
 

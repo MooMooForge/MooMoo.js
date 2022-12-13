@@ -8,6 +8,8 @@ import addPlayer from "./packets/addPlayer";
 import removePlayer from "./packets/removePlayer";
 import updatePlayers from "./packets/updatePlayers";
 import updateLeaderboard from "./packets/updateLeaderboard";
+import loadGameObject from "./packets/loadGameObject";
+
 export function handlePacket(packet: string, data: array) {
     switch (packet) {
         case "id": // setInitData
@@ -31,6 +33,7 @@ export function handlePacket(packet: string, data: array) {
             updateLeaderboard(data[0]);
             break;
         case "6": // load game object
+            loadGameObject(data[0]);
             break;
         case "a": // load game AI
             break;
