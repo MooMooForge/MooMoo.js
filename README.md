@@ -95,6 +95,17 @@ let obj = gameObjects.get(sid) // returns the game object with the given sid
 let objByOwner = MooMoo.GameObjectManager.getObjectsBySid(sid) // returns an array of all game objects with the given player sid
 ```
 
+- `MooMoo.msgpack` - returns 2 functions, `encode` and `decode`, which are used to encode and decode msgpack data.
+
+```js
+let msgpack = MooMoo.msgpack
+
+let packet = msgpack.encode(["ch", "Hello World"]) // encodes the packet
+
+MooMoo.ws.send(packet) // sends the packet to the server
+```
+works the same for decoding.
+
 #### 2.1 Functions
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
