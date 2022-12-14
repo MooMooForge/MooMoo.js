@@ -4,7 +4,7 @@
     "webpack-cli": "^5.0.0"
   },
   "scripts": {
-    "run": "webpack --watch"
+    "build": "webpack --watch"
   },
   "devDependencies": {
     "ts-loader": "^9.4.2",

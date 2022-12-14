@@ -13,11 +13,12 @@ module.exports = {
         clean: true,
     },
     optimization: {
-        minimize: false,
+        minimize: true,
         minimizer: [new TerserWebpackPlugin({
             terserOptions: {
+                keep_classnames: true,
+                keep_fnames: true,
                 compress: {
-                    hoist_funs: true,
                     reduce_funcs: true,
                 },
                 output: {
