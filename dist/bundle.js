@@ -286,26 +286,28 @@
             L.teams.push(b);
         }
     };
-    const p = function setupGame(e) {
-        L.myPlayer = {}, L.myPlayer.sid = e;
+    const p = function place(e, t) {
+        var r = L.myPlayer.inventory;
+        L.sendPacket("5", e, t), L.sendPacket("c", 1, t), L.sendPacket("c", 0, t), L.sendPacket("5", r.primary, !0);
     };
-    const g = function addPlayer(e, t) {
+    const g = function setupGame(e) {
+        L.myPlayer = {}, L.myPlayer.sid = e, L.myPlayer.place = p, console.log(L.myPlayer);
+    };
+    const h = function addPlayer(e, t) {
         var r = L.GamePlayerManager.getPlayerBySid(e[1]);
         r || ((r = new n(e[1])).name = e[2], r.id = e[0], L.GamePlayerManager.addPlayer(r)), 
         L.debug("Player " + r.name + " has joined the game."), t && console.log("You are now in game!");
     };
-    const h = function removePlayer(e) {
+    const b = function removePlayer(e) {
         L.GamePlayerManager.removePlayerById(e), L.debug("Player " + e + " has left the game.");
     };
-    const b = function chunk(e, t) {
+    const m = function chunk(e, t) {
         for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
         return r;
     };
-    const m = function isElementVisible(e) {
-        return null !== e.offsetParent;
-    };
     const P = function cacheItems() {
-        L.myPlayer.inventory = {}, [ {
+        L.myPlayer.inventory = {};
+        for (var e = [ {
             category: "primary",
             start: 0,
             end: 9
@@ -358,22 +360,22 @@
             start: 36,
             end: 37,
             subtract: !0
-        } ].forEach((function(e) {
-            var t = e.category, r = e.start, n = e.end, y = e.subtract;
-            Array(n - r).fill(null).forEach((function(e, n) {
-                var p = r + n;
-                m(document.getElementById("actionBarItem".concat(p))) && (L.myPlayer.inventory[t] = y ? p - 16 : p);
-            }));
-        }));
+        } ], t = 0; t < e.length; t++) for (var r = e[t], n = r.category, y = r.start, p = r.end, g = r.subtract, h = y; h < p; h++) {
+            var b = document.getElementById("actionBarItem".concat(h));
+            if (b && null !== b.offsetParent) {
+                L.myPlayer.inventory[n] = g ? h - 16 : h;
+                break;
+            }
+        }
     };
     const v = function updatePlayers(e) {
-        var t = b(e, 13);
+        var t = m(e, 13);
         L.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
             var t = L.GamePlayerManager.getPlayerBySid(e[0]);
             t || (t = new n(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
             t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
             t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
-            L.ActivePlayerManager.addPlayer(t), t.sid === L.myPlayer.sid && (L.myPlayer = t);
+            L.ActivePlayerManager.addPlayer(t), t.sid === L.myPlayer.sid && Object.assign(L.myPlayer, t);
         })), P();
     };
     const M = function updateLeaderboard(e) {
@@ -382,21 +384,21 @@
     const j = function GameObject(e) {
         this.sid = e;
     };
-    const O = function loadGameObject(e) {
-        b(e, 8).forEach((function(e) {
+    const k = function loadGameObject(e) {
+        m(e, 8).forEach((function(e) {
             var t = L.GameObjectManager.getGameObjectBySid(e[0]);
             t || (t = new j(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
             t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], L.GameObjectManager.addObject(t);
         }));
     };
-    const E = function killObject(e) {
+    const O = function killObject(e) {
         L.GameObjectManager.removeObjectBySid(e);
     };
     const S = function killObjects(e) {
         L.GameObjectManager.removeObjectsByOwnerSid(e);
     };
-    var k = !1;
-    const A = function() {
+    var A = !1;
+    const E = function() {
         function PlayerManager() {
             this.players = [];
         }
@@ -429,7 +431,7 @@
             this.leaderboard = new Map;
         }
         return Leaderboardmanager.prototype.updateLeaderboard = function(e) {
-            var t = this, r = b(e, 3);
+            var t = this, r = m(e, 3);
             e.length;
             r.forEach((function(e, r) {
                 var y = L.GamePlayerManager.getPlayerBySid(e[0]);
@@ -497,7 +499,7 @@
     const G = function(e) {
         function Game() {
             var t = e.call(this) || this;
-            return t.teams = [], t.GamePlayerManager = new A, t.ActivePlayerManager = new A, 
+            return t.teams = [], t.GamePlayerManager = new E, t.ActivePlayerManager = new E, 
             t.LeaderboardManager = new I, t.GameObjectManager = new U, t.UTILS = new x, t.vars = {}, 
             t.msgpack = {}, t.msgpack.decode = msgpack_decode, t.msgpack.encode = msgpack_encode, 
             t;
@@ -512,7 +514,7 @@
                 return L.ws = t, L.sendPacket = function(e) {
                     var t = Array.prototype.slice.call(arguments, 1), r = msgpack_encode([ e, t ]);
                     L.ws.send(r);
-                }, 1 !== L.ws.readyState || (k || (k = !0, L.ws.addEventListener("message", (function(e) {
+                }, 1 !== L.ws.readyState || (A || (A = !0, L.ws.addEventListener("message", (function(e) {
                     var t = e.data, r = msgpack_decode(t);
                     !function handlePacket(e, t) {
                         switch (e) {
@@ -550,15 +552,15 @@
                             break;
 
                           case "1":
-                            p(t[0]);
+                            g(t[0]);
                             break;
 
                           case "2":
-                            g(t[0], t[1]);
+                            h(t[0], t[1]);
                             break;
 
                           case "4":
-                            h(t[0]);
+                            b(t[0]);
                             break;
 
                           case "33":
@@ -570,11 +572,11 @@
                             break;
 
                           case "6":
-                            O(t[0]);
+                            k(t[0]);
                             break;
 
                           case "12":
-                            E(t[0]);
+                            O(t[0]);
                             break;
 
                           case "13":

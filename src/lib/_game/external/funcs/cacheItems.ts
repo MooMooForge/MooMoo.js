@@ -1,9 +1,7 @@
 import { MooMoo } from "../../../../../app";
-import isElementVisible from "./isElementVisible";
-// skid alert
 function cacheItems() {
-    MooMoo.myPlayer.inventory = {}
-    
+    MooMoo.myPlayer.inventory = {};
+
     const inventoryCategories = [
         { category: "primary", start: 0, end: 9 },
         { category: "secondary", start: 9, end: 16 },
@@ -16,20 +14,18 @@ function cacheItems() {
         { category: "trap", start: 31, end: 33, subtract: true },
         { category: "turret", start: 33, end: 36, subtract: true },
         { category: "spawnPad", start: 36, end: 37, subtract: true }
-      ];
-      
-      inventoryCategories.forEach(({ category, start, end, subtract }) => {
-        Array(end - start)
-          .fill(null)
-          .forEach((_, index) => {
-            const i = start + index;
-            if (isElementVisible(document.getElementById(`actionBarItem${i}`))) {
-              MooMoo.myPlayer.inventory[category] = subtract ? i - 16 : i;
+    ];
+
+    for (let i = 0; i < inventoryCategories.length; i++) {
+        const { category, start, end, subtract } = inventoryCategories[i];
+        for (let j = start; j < end; j++) {
+            const element = document.getElementById(`actionBarItem${j}`);
+            if (element && element.offsetParent !== null) {
+                MooMoo.myPlayer.inventory[category] = subtract ? j - 16 : j;
+                break;
             }
-          });
-      });
-      
-    
+        }
+    }
 }
 
 export default cacheItems;

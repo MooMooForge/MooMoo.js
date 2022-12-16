@@ -30,7 +30,7 @@ function updatePlayers(data: Array<any>) {
         MooMoo.ActivePlayerManager.addPlayer(tmpPlayer);
 
         if(tmpPlayer.sid === MooMoo.myPlayer.sid) {
-            MooMoo.myPlayer = tmpPlayer;
+            Object.assign(MooMoo.myPlayer, tmpPlayer);
         }
     });
     
