@@ -1,5 +1,5 @@
 import { MooMoo } from "../../../app";
-import Player from "../../lib/_game/Player";
+import Player from "../../lib/_game/types/Player";
 
 function addPlayer (data : Array<any>, isYou: boolean) {
     let tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(data[1]);

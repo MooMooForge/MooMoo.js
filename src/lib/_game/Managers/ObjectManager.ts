@@ -1,5 +1,5 @@
 import { MooMoo } from "../../../../app";
-import GameObject from "../GameObject";
+import GameObject from "../types/GameObject";
 
 class ObjectManager {
 

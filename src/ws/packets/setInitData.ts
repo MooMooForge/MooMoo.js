@@ -1,5 +1,5 @@
-import Alliance from "../../lib/_game/Alliance";
-import Player from "../../lib/_game/Player";
+import Alliance from "../../lib/_game/types/Alliance";
+import Player from "../../lib/_game/types/Player";
 
 import { MooMoo } from "../../../app";
 
