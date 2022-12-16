@@ -1,7 +1,7 @@
 import chunk from "../../lib/_game/external/funcs/chunk";
 import { MooMoo } from "../../../app";
 import Player from "../../lib/_game/Player";
-
+import cacheItems from "../../lib/_game/external/funcs/cacheItems";
 function updatePlayers(data: Array<any>) {
     let arr = chunk(data, 13);
 
@@ -33,6 +33,8 @@ function updatePlayers(data: Array<any>) {
             MooMoo.myPlayer = tmpPlayer;
         }
     });
+    
+    cacheItems();
 }
 
 export default updatePlayers;

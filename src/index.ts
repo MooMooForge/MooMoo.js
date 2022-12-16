@@ -17,7 +17,7 @@ export default class Game extends EventEmitter {
 
     // idk random variables
     teams: any = [];
-    myPlayer: any;
+    myPlayer: any
 
     // managers
     GamePlayerManager: PlayerManager = new PlayerManager();
