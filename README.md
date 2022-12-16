@@ -107,15 +107,6 @@ MooMoo.ws.send(packet) // sends the packet to the server
 ```
 works the same for decoding.
 
-#### 2.1 Functions
-
-- `MooMoo.sendPacket(packet)` - Sends a packet to the server
-
-Usage: `(packetType, ...data)`
-```js
-MooMoo.sendPacket("ch", "Hello World")`
-```
-
 - `MooMoo.myPlayer.inventory` - returns an array of all item ids in your "inventory"
 
 ```js
@@ -134,6 +125,15 @@ let inventory = MooMoo.myPlayer.inventory
     - `trap`
     - `turret`
     - `spawnPad`
+
+#### 2.1 Functions
+
+- `MooMoo.sendPacket(packet)` - Sends a packet to the server
+
+Usage: `(packetType, ...data)`
+```js
+MooMoo.sendPacket("ch", "Hello World")`
+```
 
 
 
