@@ -122,7 +122,7 @@ MooMoo.sendPacket("ch", "Hello World")`
 let inventory = MooMoo.myPlayer.inventory
 ```
 
-It has the following properties:
+- It has the following properties:
     - `primary`
     - `secondary`
     - `food`
