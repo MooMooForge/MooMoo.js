@@ -143,7 +143,7 @@ MooMoo.sendPacket("ch", "Hello World")`
 - [x] Add a jsdelivr link
 - [ ] Add place function
 - [ ] Add math helper:
-    - [ ] Distance between 2 points
+    - [X] Distance between 2 points
     - [ ] create radian angle from 2 points
 - [ ] Equip / Unequip Hat
 - [ ] Equip / Unequip Acc
