@@ -8,6 +8,8 @@ import ObjectManager from "./lib/_game/Managers/ObjectManager";
 import decode from "./lib/_game/external/funcs/msgpack/decode.js";
 import encode from "./lib/_game/external/funcs/msgpack/encode.js";
 
+import UTILS from "./lib/_game/Managers/UTILS";
+
 export type array = Array<any>;
 export type MessageEvent = Event
 
@@ -25,6 +27,9 @@ export default class Game extends EventEmitter {
     LeaderboardManager: Leaderboardmanager = new Leaderboardmanager();
     GameObjectManager: ObjectManager = new ObjectManager();
     
+    // UTILS
+    UTILS: UTILS = new UTILS();
+
     // lib functions
     sendPacket: Function;
 

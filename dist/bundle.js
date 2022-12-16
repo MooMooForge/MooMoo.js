@@ -10,7 +10,7 @@
         o: (e, t) => Object.prototype.hasOwnProperty.call(e, t)
     };
     e.d({}, {
-        t: () => B
+        t: () => L
     });
     const t = function() {
         function EventEmitter() {
@@ -283,19 +283,19 @@
     const y = function setInitData(e) {
         for (var t = e.teams, y = 0; y < t.length; y++) {
             var p = t[y], g = p.sid, h = p.owner, b = new r(new n(h), g);
-            B.teams.push(b);
+            L.teams.push(b);
         }
     };
     const p = function setupGame(e) {
-        B.myPlayer = {}, B.myPlayer.sid = e;
+        L.myPlayer = {}, L.myPlayer.sid = e;
     };
     const g = function addPlayer(e, t) {
-        var r = B.GamePlayerManager.getPlayerBySid(e[1]);
-        r || ((r = new n(e[1])).name = e[2], r.id = e[0], B.GamePlayerManager.addPlayer(r)), 
-        B.debug("Player " + r.name + " has joined the game."), t && console.log("You are now in game!");
+        var r = L.GamePlayerManager.getPlayerBySid(e[1]);
+        r || ((r = new n(e[1])).name = e[2], r.id = e[0], L.GamePlayerManager.addPlayer(r)), 
+        L.debug("Player " + r.name + " has joined the game."), t && console.log("You are now in game!");
     };
     const h = function removePlayer(e) {
-        B.GamePlayerManager.removePlayerById(e), B.debug("Player " + e + " has left the game.");
+        L.GamePlayerManager.removePlayerById(e), L.debug("Player " + e + " has left the game.");
     };
     const b = function chunk(e, t) {
         for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
@@ -305,7 +305,7 @@
         return null !== e.offsetParent;
     };
     const P = function cacheItems() {
-        B.myPlayer.inventory = {}, [ {
+        L.myPlayer.inventory = {}, [ {
             category: "primary",
             start: 0,
             end: 9
@@ -362,41 +362,41 @@
             var t = e.category, r = e.start, n = e.end, y = e.subtract;
             Array(n - r).fill(null).forEach((function(e, n) {
                 var p = r + n;
-                m(document.getElementById("actionBarItem".concat(p))) && (B.myPlayer.inventory[t] = y ? p - 16 : p);
+                m(document.getElementById("actionBarItem".concat(p))) && (L.myPlayer.inventory[t] = y ? p - 16 : p);
             }));
         }));
     };
     const v = function updatePlayers(e) {
         var t = b(e, 13);
-        B.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
-            var t = B.GamePlayerManager.getPlayerBySid(e[0]);
+        L.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
+            var t = L.GamePlayerManager.getPlayerBySid(e[0]);
             t || (t = new n(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
             t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
             t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
-            B.ActivePlayerManager.addPlayer(t), t.sid === B.myPlayer.sid && (B.myPlayer = t);
+            L.ActivePlayerManager.addPlayer(t), t.sid === L.myPlayer.sid && (L.myPlayer = t);
         })), P();
     };
     const M = function updateLeaderboard(e) {
-        B.LeaderboardManager.updateLeaderboard(e);
+        L.LeaderboardManager.updateLeaderboard(e);
     };
     const j = function GameObject(e) {
         this.sid = e;
     };
     const O = function loadGameObject(e) {
         b(e, 8).forEach((function(e) {
-            var t = B.GameObjectManager.getGameObjectBySid(e[0]);
+            var t = L.GameObjectManager.getGameObjectBySid(e[0]);
             t || (t = new j(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
-            t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], B.GameObjectManager.addObject(t);
+            t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], L.GameObjectManager.addObject(t);
         }));
     };
     const E = function killObject(e) {
-        B.GameObjectManager.removeObjectBySid(e);
+        L.GameObjectManager.removeObjectBySid(e);
     };
-    const k = function killObjects(e) {
-        B.GameObjectManager.removeObjectsByOwnerSid(e);
+    const S = function killObjects(e) {
+        L.GameObjectManager.removeObjectsByOwnerSid(e);
     };
-    var A = !1;
-    const S = function() {
+    var k = !1;
+    const A = function() {
         function PlayerManager() {
             this.players = [];
         }
@@ -424,7 +424,7 @@
             this.players = [];
         }, PlayerManager;
     }();
-    const x = function() {
+    const I = function() {
         function Leaderboardmanager() {
             this.leaderboard = new Map;
         }
@@ -432,8 +432,8 @@
             var t = this, r = b(e, 3);
             e.length;
             r.forEach((function(e, r) {
-                var y = B.GamePlayerManager.getPlayerBySid(e[0]);
-                y || ((y = new n(e[0])).sid = e[0], y.name = e[1], B.GamePlayerManager.addPlayer(y)), 
+                var y = L.GamePlayerManager.getPlayerBySid(e[0]);
+                y || ((y = new n(e[0])).sid = e[0], y.name = e[1], L.GamePlayerManager.addPlayer(y)), 
                 t.leaderboard.set(r + 1, {
                     player: y,
                     sid: e[0],
@@ -445,12 +445,12 @@
             this.leaderboard = new Map;
         }, Leaderboardmanager;
     }();
-    const G = function() {
+    const U = function() {
         function ObjectManager() {
             this.objects = new Map;
         }
         return ObjectManager.prototype.addObject = function(e) {
-            var t = B.GameObjectManager.getGameObjectBySid(e.sid);
+            var t = L.GameObjectManager.getGameObjectBySid(e.sid);
             t || (t = new j(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
             t.sid = e.sid, this.objects.set(e.sid, t);
         }, ObjectManager.prototype.getGameObjectBySid = function(e) {
@@ -469,40 +469,50 @@
             }));
         }, ObjectManager;
     }();
-    var I, U = (I = function(e, t) {
-        return I = Object.setPrototypeOf || {
+    const x = function() {
+        function UTILS() {
+            this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints, this.dist = UTILS.getDistanceBetweenTwoPoints, 
+            this.distance = UTILS.getDistanceBetweenTwoPoints;
+        }
+        return UTILS.getDistanceBetweenTwoPoints = function(e, t, r, n) {
+            return Math.sqrt(Math.pow(r - e, 2) + Math.pow(n - t, 2));
+        }, UTILS;
+    }();
+    var B, T = (B = function(e, t) {
+        return B = Object.setPrototypeOf || {
             __proto__: []
         } instanceof Array && function(e, t) {
             e.__proto__ = t;
         } || function(e, t) {
             for (var r in t) Object.prototype.hasOwnProperty.call(t, r) && (e[r] = t[r]);
-        }, I(e, t);
+        }, B(e, t);
     }, function(e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Class extends value " + String(t) + " is not a constructor or null");
         function __() {
             this.constructor = e;
         }
-        I(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
+        B(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
         new __);
     });
-    const _ = function(e) {
+    const G = function(e) {
         function Game() {
             var t = e.call(this) || this;
-            return t.teams = [], t.GamePlayerManager = new S, t.ActivePlayerManager = new S, 
-            t.LeaderboardManager = new x, t.GameObjectManager = new G, t.vars = {}, t.msgpack = {}, 
-            t.msgpack.decode = msgpack_decode, t.msgpack.encode = msgpack_encode, t;
+            return t.teams = [], t.GamePlayerManager = new A, t.ActivePlayerManager = new A, 
+            t.LeaderboardManager = new I, t.GameObjectManager = new U, t.UTILS = new x, t.vars = {}, 
+            t.msgpack = {}, t.msgpack.decode = msgpack_decode, t.msgpack.encode = msgpack_encode, 
+            t;
         }
-        return U(Game, e), Game.prototype.debug = function(e) {
+        return T(Game, e), Game.prototype.debug = function(e) {
             this.emit("debug", e);
         }, Game;
     }(t);
     !function hookWS() {
         WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
             apply: function(e, t, r) {
-                return B.ws = t, B.sendPacket = function(e) {
+                return L.ws = t, L.sendPacket = function(e) {
                     var t = Array.prototype.slice.call(arguments, 1), r = msgpack_encode([ e, t ]);
-                    B.ws.send(r);
-                }, 1 !== B.ws.readyState || (A || (A = !0, B.ws.addEventListener("message", (function(e) {
+                    L.ws.send(r);
+                }, 1 !== L.ws.readyState || (k || (k = !0, L.ws.addEventListener("message", (function(e) {
                     var t = e.data, r = msgpack_decode(t);
                     !function handlePacket(e, t) {
                         switch (e) {
@@ -568,13 +578,13 @@
                             break;
 
                           case "13":
-                            k(t[0]);
+                            S(t[0]);
                             break;
 
                           default:
                             console.log("Unknown packet: " + e);
                         }
-                        B.emit("packet", {
+                        L.emit("packet", {
                             packet: e,
                             data: t
                         });
@@ -583,10 +593,10 @@
             }
         });
     }();
-    var B = new _;
+    var L = new G;
     Object.defineProperty(Function.prototype, 69, {
         get: function() {
-            return "MooMooJS_beta" === this.name ? B : null;
+            return "MooMooJS_beta" === this.name ? L : null;
         }
     });
 })();
