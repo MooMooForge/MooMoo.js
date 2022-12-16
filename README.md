@@ -13,7 +13,8 @@ you can follow the instructions [here](https://greasyfork.org/en/scripts/456235-
 
 You can grab it from greasyfork and paste it into your userscript manager.
 
-I will add a jsdelivr link soon.
+or require this:
+https://cdn.jsdelivr.net/gh/NuroC/MooMoo.js/dist/bundle.js
 
 ## Usage
 
