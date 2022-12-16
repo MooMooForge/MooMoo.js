@@ -116,17 +116,38 @@ Usage: `(packetType, ...data)`
 MooMoo.sendPacket("ch", "Hello World")`
 ```
 
+- `MooMoo.myPlayer.inventory` - returns an array of all item ids in your "inventory"
+
+```js
+let inventory = MooMoo.myPlayer.inventory
+```
+
+It has the following properties:
+    - `primary`
+    - `secondary`
+    - `food`
+    - `wall`
+    - `spike`
+    - `mill`
+    - `mine`
+    - `boostPad`
+    - `trap`
+    - `turret`
+    - `spawnPad`
+
+
+
+
 ## TODO
 
-- [ ] Add a jsdelivr link
-- [ ] Add a better readme
+- [x] Add a jsdelivr link
 - [ ] Add place function
 - [ ] Add math helper:
     - [ ] Distance between 2 points
     - [ ] create radian angle from 2 points
 - [ ] Equip / Unequip Hat
 - [ ] Equip / Unequip Acc
-- [ ] add items
+- [x] add items
 - [ ] add bot class
 - [ ] add bot manager
 - [ ] add bot functions
