@@ -1,4 +1,4 @@
-import EventEmitter from "./lib/EventEmitter";
+import EventEmitter from "./lib/_game/external/funcs/EventEmitter";
 import hookWS from "./ws/hookWS";
 
 import PlayerManager from "./lib/_game/Managers/PlayerManager";
