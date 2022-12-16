@@ -1,5 +1,5 @@
-import decode from "../lib/decode.js";
-import encode from "../lib/encode.js";
+import decode from "../lib/_game/external/funcs/msgpack/decode.js";
+import encode from "../lib/_game/external/funcs/msgpack/encode.js";
 import { handlePacket } from "./handlePacket";
 import { MooMoo } from "../../app";
 

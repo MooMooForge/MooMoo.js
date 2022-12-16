@@ -26,7 +26,7 @@
         }, EventEmitter.prototype.addEventListener = function(e, t) {
             this.on(e, t);
         }, EventEmitter;
-    }(), lib_decode = function(e) {
+    }(), msgpack_decode = function(e) {
         let t = 0;
         if (e instanceof ArrayBuffer && (e = new Uint8Array(e)), "object" != typeof e || void 0 === e.length) throw new Error("Invalid argument type: Expected a byte array (Array or Uint8Array) to deserialize.");
         if (!e.length) throw new Error("Invalid argument: The byte array to deserialize is empty.");
@@ -158,7 +158,7 @@
                 data: y
             };
         }
-    }, lib_encode = function(e) {
+    }, msgpack_encode = function(e) {
         const t = 4294967296;
         let r, n, y = new Uint8Array(128), p = 0;
         return a(e), y.subarray(0, p);
@@ -490,7 +490,7 @@
             var t = e.call(this) || this;
             return t.teams = [], t.GamePlayerManager = new S, t.ActivePlayerManager = new S, 
             t.LeaderboardManager = new x, t.GameObjectManager = new G, t.vars = {}, t.msgpack = {}, 
-            t.msgpack.decode = lib_decode, t.msgpack.encode = lib_encode, t;
+            t.msgpack.decode = msgpack_decode, t.msgpack.encode = msgpack_encode, t;
         }
         return U(Game, e), Game.prototype.debug = function(e) {
             this.emit("debug", e);
@@ -500,10 +500,10 @@
         WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
             apply: function(e, t, r) {
                 return B.ws = t, B.sendPacket = function(e) {
-                    var t = Array.prototype.slice.call(arguments, 1), r = lib_encode([ e, t ]);
+                    var t = Array.prototype.slice.call(arguments, 1), r = msgpack_encode([ e, t ]);
                     B.ws.send(r);
                 }, 1 !== B.ws.readyState || (A || (A = !0, B.ws.addEventListener("message", (function(e) {
-                    var t = e.data, r = lib_decode(t);
+                    var t = e.data, r = msgpack_decode(t);
                     !function handlePacket(e, t) {
                         switch (e) {
                           case "id":
