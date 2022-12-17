@@ -135,6 +135,18 @@ Usage: `(packetType, ...data)`
 MooMoo.sendPacket("ch", "Hello World")`
 ```
 
+- `MooMoo.myPlayer.place(iteM)` - Places an item on the map
+
+Usage: `(item, angle)`
+```js
+let place = MooMoo.myPlayer.place
+let inventory = MooMoo.myPlayer.inventory
+
+place(inventory.mill)
+```
+
+The angle takes a randian angle.
+
 
 
 

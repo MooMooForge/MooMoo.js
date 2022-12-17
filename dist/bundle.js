@@ -287,8 +287,8 @@
         }
     };
     const p = function place(e, t) {
-        var r = L.myPlayer.inventory;
-        L.sendPacket("5", e, t), L.sendPacket("c", 1, t), L.sendPacket("c", 0, t), L.sendPacket("5", r.primary, !0);
+        var r = L.myPlayer.weaponIndex;
+        L.sendPacket("5", e, t), L.sendPacket("c", 1, t), L.sendPacket("c", 0, t), L.sendPacket("5", r, !0);
     };
     const g = function setupGame(e) {
         L.myPlayer = {}, L.myPlayer.sid = e, L.myPlayer.place = p, console.log(L.myPlayer);
@@ -447,7 +447,7 @@
             this.leaderboard = new Map;
         }, Leaderboardmanager;
     }();
-    const U = function() {
+    const x = function() {
         function ObjectManager() {
             this.objects = new Map;
         }
@@ -471,7 +471,7 @@
             }));
         }, ObjectManager;
     }();
-    const x = function() {
+    const U = function() {
         function UTILS() {
             this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints, this.dist = UTILS.getDistanceBetweenTwoPoints, 
             this.distance = UTILS.getDistanceBetweenTwoPoints;
@@ -500,7 +500,7 @@
         function Game() {
             var t = e.call(this) || this;
             return t.teams = [], t.GamePlayerManager = new E, t.ActivePlayerManager = new E, 
-            t.LeaderboardManager = new I, t.GameObjectManager = new U, t.UTILS = new x, t.vars = {}, 
+            t.LeaderboardManager = new I, t.GameObjectManager = new x, t.UTILS = new U, t.vars = {}, 
             t.msgpack = {}, t.msgpack.decode = msgpack_decode, t.msgpack.encode = msgpack_encode, 
             t;
         }
