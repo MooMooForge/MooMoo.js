@@ -126,6 +126,16 @@ let inventory = MooMoo.myPlayer.inventory
     - `turret`
     - `spawnPad`
 
+- `MooMoo.UTILS` - returns an object of all utils
+
+```js
+let angle = MooMoo.UTILS.angle // returns the angle in radians between 2 points
+let distance = MooMoo.UTILS.distance // returns the distance between 2 points
+
+let a1 = angle(0, 0, 10, 10) // returns ~ 0.785
+let d1 = distance(0, 0, 10, 10) // returns ~ 14.143
+```
+
 #### 2.1 Functions
 
 - `MooMoo.sendPacket(packet)` - Sends a packet to the server
@@ -154,9 +164,9 @@ The angle takes a randian angle.
 
 - [x] Add a jsdelivr link
 - [x] Add place function
-- [ ] Add math helper:
+- [x] Add math helper:
     - [X] Distance between 2 points
-    - [ ] create radian angle from 2 points
+    - [x] create radian angle from 2 points
 - [ ] Equip / Unequip Hat
 - [ ] Equip / Unequip Acc
 - [x] add items
