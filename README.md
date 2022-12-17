@@ -157,7 +157,22 @@ place(inventory.mill)
 
 The angle takes a randian angle.
 
+- `MooMoo.CommandManager` - A command manager to manage commands by sending ingame messages.
 
+The command manager has a set prefix which is "/", but you can change it.
+
+```js
+let CommandManager = MooMoo.CommandManager
+
+CommandManager.registerCommand("test", (Command, args) => {
+    Command.reply("Hello World") // reply with a chat message
+
+    // do stuff with arguments
+
+    let firstArg = args[0]
+    console.log(firstArg)
+})
+```
 
 
 ## TODO
@@ -174,4 +189,4 @@ The angle takes a randian angle.
 - [ ] add bot manager
 - [ ] add bot functions
 - [ ] add bot events
-- [ ] add command handler (good, without the comman sending to the server)
+- [x] add command handler (good, without the comman sending to the server)
