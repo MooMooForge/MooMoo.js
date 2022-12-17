@@ -1,6 +1,6 @@
-import { MooMoo } from "../../../app";
-import chunk from "../../lib/_game/external/funcs/chunk";
-import GameObject from "../../lib/_game/types/GameObject";
+import { MooMoo } from "../../../../app";
+import chunk from "../../../lib/_game/external/funcs/chunk";
+import GameObject from "../../../lib/_game/types/GameObject";
 
 function loadGameObject(data: any) {
     let arr = chunk(data, 8);

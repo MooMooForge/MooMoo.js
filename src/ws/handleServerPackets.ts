@@ -2,17 +2,17 @@ import { MooMoo } from "../../app";
 import { array } from "../index";
 
 // packets
-import setInitData from "./packets/setInitData";
-import setUpGame from "./packets/setupGame";
-import addPlayer from "./packets/addPlayer";
-import removePlayer from "./packets/removePlayer";
-import updatePlayers from "./packets/updatePlayers";
-import updateLeaderboard from "./packets/updateLeaderboard";
-import loadGameObject from "./packets/loadGameObject";
-import killObject from "./packets/killObject";
-import killObjects from "./packets/killObjects";
+import setInitData from "./packets/server/setInitData";
+import setUpGame from "./packets/server/setupGame";
+import addPlayer from "./packets/server/addPlayer";
+import removePlayer from "./packets/server/removePlayer";
+import updatePlayers from "./packets/server/updatePlayers";
+import updateLeaderboard from "./packets/server/updateLeaderboard";
+import loadGameObject from "./packets/server/loadGameObject";
+import killObject from "./packets/server/killObject";
+import killObjects from "./packets/server/killObjects";
 
-export function handlePacket(packet: string, data: array) {
+export default function handleServerPackets(packet: string, data: array) {
     switch (packet) {
         case "id": // setInitData
             setInitData(data[0]);

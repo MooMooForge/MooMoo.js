@@ -1,7 +1,7 @@
-import chunk from "../../lib/_game/external/funcs/chunk";
-import { MooMoo } from "../../../app";
-import Player from "../../lib/_game/types/Player";
-import cacheItems from "../../lib/_game/external/funcs/cacheItems";
+import chunk from "../../../lib/_game/external/funcs/chunk";
+import { MooMoo } from "../../../../app";
+import Player from "../../../lib/_game/types/Player";
+import cacheItems from "../../../lib/_game/external/funcs/cacheItems";
 function updatePlayers(data: Array<any>) {
     let arr = chunk(data, 13);
 

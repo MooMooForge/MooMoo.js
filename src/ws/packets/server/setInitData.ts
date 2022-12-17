@@ -1,7 +1,7 @@
-import Alliance from "../../lib/_game/types/Alliance";
-import Player from "../../lib/_game/types/Player";
+import Alliance from "../../../lib/_game/types/Alliance";
+import Player from "../../../lib/_game/types/Player";
 
-import { MooMoo } from "../../../app";
+import { MooMoo } from "../../../../app";
 
 type teamObj = {
     teams: Array<any>

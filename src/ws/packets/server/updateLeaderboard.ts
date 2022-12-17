@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../app";
+import { MooMoo } from "../../../../app";
 
 function updateLeaderboard(data: Array<any>) {
     MooMoo.LeaderboardManager.updateLeaderboard(data);
