@@ -10,7 +10,7 @@
         o: (e, t) => Object.prototype.hasOwnProperty.call(e, t)
     };
     e.d({}, {
-        t: () => q
+        t: () => R
     });
     const t = function() {
         function EventEmitter() {
@@ -75,10 +75,10 @@
             throw console.debug("msgpack array:", e), new Error("Invalid byte value '" + n + "' at index " + (t - 1) + " in the MessagePack binary data (length " + e.length + "): Expecting a range of 0 to 255. This is not a byte array.");
         }
         function f(n) {
-            let r = 0, y = !0;
-            for (;n-- > 0; ) if (y) {
+            let r = 0, p = !0;
+            for (;n-- > 0; ) if (p) {
                 let n = e[t++];
-                r += 127 & n, 128 & n && (r -= 128), y = !1;
+                r += 127 & n, 128 & n && (r -= 128), p = !1;
             } else r *= 256, r += e[t++];
             return r;
         }
@@ -93,8 +93,8 @@
         }
         function a(n, r) {
             n < 0 && (n = o(r));
-            let y = e.subarray(t, t + n);
-            return t += n, y;
+            let p = e.subarray(t, t + n);
+            return t += n, p;
         }
         function l(e, t) {
             e < 0 && (e = o(t));
@@ -110,9 +110,9 @@
         }
         function d(n, r) {
             n < 0 && (n = o(r));
-            let y = t;
+            let p = t;
             return t += n, function(e, t, n) {
-                let r = t, y = "";
+                let r = t, p = "";
                 for (n += t; r < n; ) {
                     let t = e[r++];
                     if (t > 127) if (t > 191 && t < 224) {
@@ -126,17 +126,17 @@
                         if (r + 2 >= n) throw new Error("UTF-8 decode: incomplete 4-byte sequence");
                         t = (7 & t) << 18 | (63 & e[r++]) << 12 | (63 & e[r++]) << 6 | 63 & e[r++];
                     }
-                    if (t <= 65535) y += String.fromCharCode(t); else {
+                    if (t <= 65535) p += String.fromCharCode(t); else {
                         if (!(t <= 1114111)) throw new Error("UTF-8 decode: code point 0x" + t.toString(16) + " exceeds UTF-16 reach");
-                        t -= 65536, y += String.fromCharCode(t >> 10 | 55296), y += String.fromCharCode(1023 & t | 56320);
+                        t -= 65536, p += String.fromCharCode(t >> 10 | 55296), p += String.fromCharCode(1023 & t | 56320);
                     }
                 }
-                return y;
-            }(e, y, n);
+                return p;
+            }(e, p, n);
         }
         function w(e, n) {
             e < 0 && (e = o(n));
-            let r = o(1), y = a(e);
+            let r = o(1), p = a(e);
             return 255 === r ? function(e) {
                 if (4 === e.length) {
                     let t = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
@@ -153,15 +153,15 @@
                     return new Date(1e3 * r + n / 1e6);
                 }
                 throw new Error("Invalid data length for a date value.");
-            }(y) : {
+            }(p) : {
                 type: r,
-                data: y
+                data: p
             };
         }
     }, msgpack_encode = function(e) {
         const t = 4294967296;
-        let n, r, y = new Uint8Array(128), p = 0;
-        return a(e), y.subarray(0, p);
+        let n, r, p = new Uint8Array(128), m = 0;
+        return a(e), p.subarray(0, m);
         function a(e) {
             switch (typeof e) {
               case "undefined":
@@ -192,23 +192,23 @@
                             t = !1;
                             break;
                         }
-                        let r = 0, y = new Uint8Array(e.length * (t ? 1 : 4));
+                        let r = 0, p = new Uint8Array(e.length * (t ? 1 : 4));
                         for (let t = 0; t !== n; t++) {
-                            let p = e.charCodeAt(t);
-                            if (p < 128) y[r++] = p; else {
-                                if (p < 2048) y[r++] = p >> 6 | 192; else {
-                                    if (p > 55295 && p < 56320) {
+                            let m = e.charCodeAt(t);
+                            if (m < 128) p[r++] = m; else {
+                                if (m < 2048) p[r++] = m >> 6 | 192; else {
+                                    if (m > 55295 && m < 56320) {
                                         if (++t >= n) throw new Error("UTF-8 encode: incomplete surrogate pair");
-                                        let g = e.charCodeAt(t);
-                                        if (g < 56320 || g > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + g.toString(16) + " at index " + t + " out of range");
-                                        p = 65536 + ((1023 & p) << 10) + (1023 & g), y[r++] = p >> 18 | 240, y[r++] = p >> 12 & 63 | 128;
-                                    } else y[r++] = p >> 12 | 224;
-                                    y[r++] = p >> 6 & 63 | 128;
+                                        let y = e.charCodeAt(t);
+                                        if (y < 56320 || y > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + y.toString(16) + " at index " + t + " out of range");
+                                        m = 65536 + ((1023 & m) << 10) + (1023 & y), p[r++] = m >> 18 | 240, p[r++] = m >> 12 & 63 | 128;
+                                    } else p[r++] = m >> 12 | 224;
+                                    p[r++] = m >> 6 & 63 | 128;
                                 }
-                                y[r++] = 63 & p | 128;
+                                p[r++] = 63 & m | 128;
                             }
                         }
-                        return t ? y : y.subarray(0, r);
+                        return t ? p : p.subarray(0, r);
                     }(e), n = t.length;
                     n <= 31 ? s(160 + n) : c(n <= 255 ? [ 217, n ] : n <= 65535 ? [ 218, n >>> 8, n ] : [ 219, n >>> 24, n >>> 16, n >>> 8, n ]), 
                     c(t);
@@ -246,22 +246,22 @@
             for (let n = 0; n < t; n++) a(e[n]);
         }
         function s(e) {
-            if (y.length < p + 1) {
-                let e = 2 * y.length;
-                for (;e < p + 1; ) e *= 2;
+            if (p.length < m + 1) {
+                let e = 2 * p.length;
+                for (;e < m + 1; ) e *= 2;
                 let t = new Uint8Array(e);
-                t.set(y), y = t;
+                t.set(p), p = t;
             }
-            y[p] = e, p++;
+            p[m] = e, m++;
         }
         function c(e) {
-            if (y.length < p + e.length) {
-                let t = 2 * y.length;
-                for (;t < p + e.length; ) t *= 2;
+            if (p.length < m + e.length) {
+                let t = 2 * p.length;
+                for (;t < m + e.length; ) t *= 2;
                 let n = new Uint8Array(t);
-                n.set(y), y = n;
+                n.set(p), p = n;
             }
-            y.set(e, p), p += e.length;
+            p.set(e, m), m += e.length;
         }
         function u(e) {
             let n, r;
@@ -280,36 +280,381 @@
     const r = function Player(e) {
         this.sid = e;
     };
-    const y = function setInitData(e) {
-        for (var t = e.teams, y = 0; y < t.length; y++) {
-            var p = t[y], g = p.sid, h = p.owner, m = new n(new r(h), g);
-            q.teams.push(m);
+    const p = function setInitData(e) {
+        for (var t = e.teams, p = 0; p < t.length; p++) {
+            var m = t[p], y = m.sid, g = m.owner, h = new n(new r(g), y);
+            R.teams.push(h);
         }
     };
-    const p = function place(e, t) {
-        var n = q.myPlayer.weaponIndex;
-        q.sendPacket("5", e, t), q.sendPacket("c", 1, t), q.sendPacket("c", 0, t), q.sendPacket("5", n, !0);
+    const m = function place(e, t) {
+        var n = R.myPlayer.weaponIndex;
+        R.sendPacket("5", e, t), R.sendPacket("c", 1, t), R.sendPacket("c", 0, t), R.sendPacket("5", n, !0);
     };
-    const g = function chat(e) {
-        q.sendPacket("ch", e);
+    const y = function chat(e) {
+        R.sendPacket("ch", e);
     };
-    const h = function setupGame(e) {
-        q.myPlayer = {}, q.myPlayer.sid = e, q.myPlayer.place = p, q.myPlayer.chat = g;
+    const g = [ {
+        id: 45,
+        name: "Shame!",
+        dontSell: !0,
+        price: 0,
+        scale: 120,
+        desc: "hacks are for losers"
+    }, {
+        id: 51,
+        name: "Moo Cap",
+        price: 0,
+        scale: 120,
+        desc: "coolest mooer around"
+    }, {
+        id: 50,
+        name: "Apple Cap",
+        price: 0,
+        scale: 120,
+        desc: "apple farms remembers"
+    }, {
+        id: 28,
+        name: "Moo Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 29,
+        name: "Pig Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 30,
+        name: "Fluff Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 36,
+        name: "Pandou Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 37,
+        name: "Bear Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 38,
+        name: "Monkey Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 44,
+        name: "Polar Head",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 35,
+        name: "Fez Hat",
+        price: 0,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 42,
+        name: "Enigma Hat",
+        price: 0,
+        scale: 120,
+        desc: "join the enigma army"
+    }, {
+        id: 43,
+        name: "Blitz Hat",
+        price: 0,
+        scale: 120,
+        desc: "hey everybody i'm blitz"
+    }, {
+        id: 49,
+        name: "Bob XIII Hat",
+        price: 0,
+        scale: 120,
+        desc: "like and subscribe"
+    }, {
+        id: 57,
+        name: "Pumpkin",
+        price: 50,
+        scale: 120,
+        desc: "Spooooky"
+    }, {
+        id: 8,
+        name: "Bummle Hat",
+        price: 100,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 2,
+        name: "Straw Hat",
+        price: 500,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 15,
+        name: "Winter Cap",
+        price: 600,
+        scale: 120,
+        desc: "allows you to move at normal speed in snow",
+        coldM: 1
+    }, {
+        id: 5,
+        name: "Cowboy Hat",
+        price: 1e3,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 4,
+        name: "Ranger Hat",
+        price: 2e3,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 18,
+        name: "Explorer Hat",
+        price: 2e3,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 31,
+        name: "Flipper Hat",
+        price: 2500,
+        scale: 120,
+        desc: "have more control while in water",
+        watrImm: !0
+    }, {
+        id: 1,
+        name: "Marksman Cap",
+        price: 3e3,
+        scale: 120,
+        desc: "increases arrow speed and range",
+        aMlt: 1.3
+    }, {
+        id: 10,
+        name: "Bush Gear",
+        price: 3e3,
+        scale: 160,
+        desc: "allows you to disguise yourself as a bush"
+    }, {
+        id: 48,
+        name: "Halo",
+        price: 3e3,
+        scale: 120,
+        desc: "no effect"
+    }, {
+        id: 6,
+        name: "Soldier Helmet",
+        price: 4e3,
+        scale: 120,
+        desc: "reduces damage taken but slows movement",
+        spdMult: .94,
+        dmgMult: .75
+    }, {
+        id: 23,
+        name: "Anti Venom Gear",
+        price: 4e3,
+        scale: 120,
+        desc: "makes you immune to poison",
+        poisonRes: 1
+    }, {
+        id: 13,
+        name: "Medic Gear",
+        price: 5e3,
+        scale: 110,
+        desc: "slowly regenerates health over time",
+        healthRegen: 3
+    }, {
+        id: 9,
+        name: "Miners Helmet",
+        price: 5e3,
+        scale: 120,
+        desc: "earn 1 extra gold per resource",
+        extraGold: 1
+    }, {
+        id: 32,
+        name: "Musketeer Hat",
+        price: 5e3,
+        scale: 120,
+        desc: "reduces cost of projectiles",
+        projCost: .5
+    }, {
+        id: 7,
+        name: "Bull Helmet",
+        price: 6e3,
+        scale: 120,
+        desc: "increases damage done but drains health",
+        healthRegen: -5,
+        dmgMultO: 1.5,
+        spdMult: .96
+    }, {
+        id: 22,
+        name: "Emp Helmet",
+        price: 6e3,
+        scale: 120,
+        desc: "turrets won't attack but you move slower",
+        antiTurret: 1,
+        spdMult: .7
+    }, {
+        id: 12,
+        name: "Booster Hat",
+        price: 6e3,
+        scale: 120,
+        desc: "increases your movement speed",
+        spdMult: 1.16
+    }, {
+        id: 26,
+        name: "Barbarian Armor",
+        price: 8e3,
+        scale: 120,
+        desc: "knocks back enemies that attack you",
+        dmgK: .6
+    }, {
+        id: 21,
+        name: "Plague Mask",
+        price: 1e4,
+        scale: 120,
+        desc: "melee attacks deal poison damage",
+        poisonDmg: 5,
+        poisonTime: 6
+    }, {
+        id: 46,
+        name: "Bull Mask",
+        price: 1e4,
+        scale: 120,
+        desc: "bulls won't target you unless you attack them",
+        bullRepel: 1
+    }, {
+        id: 14,
+        name: "Windmill Hat",
+        topSprite: !0,
+        price: 1e4,
+        scale: 120,
+        desc: "generates points while worn",
+        pps: 1.5
+    }, {
+        id: 11,
+        name: "Spike Gear",
+        topSprite: !0,
+        price: 1e4,
+        scale: 120,
+        desc: "deal damage to players that damage you",
+        dmg: .45
+    }, {
+        id: 53,
+        name: "Turret Gear",
+        topSprite: !0,
+        price: 1e4,
+        scale: 120,
+        desc: "you become a walking turret",
+        turret: {
+            proj: 1,
+            range: 700,
+            rate: 2500
+        },
+        spdMult: .7
+    }, {
+        id: 20,
+        name: "Samurai Armor",
+        price: 12e3,
+        scale: 120,
+        desc: "increased attack speed and fire rate",
+        atkSpd: .78
+    }, {
+        id: 58,
+        name: "Dark Knight",
+        price: 12e3,
+        scale: 120,
+        desc: "restores health when you deal damage",
+        healD: .4
+    }, {
+        id: 27,
+        name: "Scavenger Gear",
+        price: 15e3,
+        scale: 120,
+        desc: "earn double points for each kill",
+        kScrM: 2
+    }, {
+        id: 40,
+        name: "Tank Gear",
+        price: 15e3,
+        scale: 120,
+        desc: "increased damage to buildings but slower movement",
+        spdMult: .3,
+        bDmg: 3.3
+    }, {
+        id: 52,
+        name: "Thief Gear",
+        price: 15e3,
+        scale: 120,
+        desc: "steal half of a players gold when you kill them",
+        goldSteal: .5
+    }, {
+        id: 55,
+        name: "Bloodthirster",
+        price: 2e4,
+        scale: 120,
+        desc: "Restore Health when dealing damage. And increased damage",
+        healD: .25,
+        dmgMultO: 1.2
+    }, {
+        id: 56,
+        name: "Assassin Gear",
+        price: 2e4,
+        scale: 120,
+        desc: "Go invisible when not moving. Can't eat. Increased speed",
+        noEat: !0,
+        spdMult: 1.1,
+        invisTimer: 1e3
+    } ];
+    const h = function equipHat(e) {
+        if ("number" == typeof e) !function equipHatById(e) {
+            var t = !1;
+            if (g.find((function(n) {
+                n.id == e && (t = !0, R.sendPacket("13c", 0, e, 0));
+            })), !t) try {
+                throw new Error("Error at equipHatById: Hat with id " + e + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }(e); else if ("string" == typeof e) !function equipHatByName(e) {
+            var t = !1;
+            if (g.find((function(n) {
+                n.name == e && (t = !0, R.sendPacket("13c", 0, n.id, 0));
+            })), !t) try {
+                throw new Error("Error at equipHatByName: Hat with name " + e + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }(e); else try {
+            throw new Error("Error at equipHat: hatData must be a number or string");
+        } catch (e) {
+            console.log(e);
+        }
     };
-    const m = function addPlayer(e, t) {
-        var n = q.GamePlayerManager.getPlayerBySid(e[1]);
-        n || ((n = new r(e[1])).name = e[2], n.id = e[0], q.GamePlayerManager.addPlayer(n)), 
-        q.debug("Player " + n.name + " has joined the game."), t && console.log("You are now in game!");
+    const b = function setupGame(e) {
+        R.myPlayer = {}, R.myPlayer.sid = e, R.myPlayer.place = m, R.myPlayer.chat = y, 
+        R.myPlayer.equipHat = h;
     };
-    const b = function removePlayer(e) {
-        q.GamePlayerManager.removePlayerById(e), q.debug("Player " + e + " has left the game.");
+    const P = function addPlayer(e, t) {
+        var n = R.GamePlayerManager.getPlayerBySid(e[1]);
+        n || ((n = new r(e[1])).name = e[2], n.id = e[0], R.GamePlayerManager.addPlayer(n)), 
+        R.debug("Player " + n.name + " has joined the game."), t && console.log("You are now in game!");
     };
-    const P = function chunk(e, t) {
+    const M = function removePlayer(e) {
+        R.GamePlayerManager.removePlayerById(e), R.debug("Player " + e + " has left the game.");
+    };
+    const v = function chunk(e, t) {
         for (var n = [], r = 0; r < e.length; r += t) n.push(e.slice(r, r + t));
         return n;
     };
-    const v = function cacheItems() {
-        q.myPlayer.inventory = {};
+    const k = function cacheItems() {
+        R.myPlayer.inventory = {};
         for (var e = [ {
             category: "primary",
             start: 0,
@@ -363,58 +708,58 @@
             start: 36,
             end: 37,
             subtract: !0
-        } ], t = 0; t < e.length; t++) for (var n = e[t], r = n.category, y = n.start, p = n.end, g = n.subtract, h = y; h < p; h++) {
-            var m = document.getElementById("actionBarItem".concat(h));
-            if (m && null !== m.offsetParent) {
-                q.myPlayer.inventory[r] = g ? h - 16 : h;
+        } ], t = 0; t < e.length; t++) for (var n = e[t], r = n.category, p = n.start, m = n.end, y = n.subtract, g = p; g < m; g++) {
+            var h = document.getElementById("actionBarItem".concat(g));
+            if (h && null !== h.offsetParent) {
+                R.myPlayer.inventory[r] = y ? g - 16 : g;
                 break;
             }
         }
     };
-    const M = function updatePlayers(e) {
-        var t = P(e, 13);
-        q.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
-            var t = q.GamePlayerManager.getPlayerBySid(e[0]);
+    const S = function updatePlayers(e) {
+        var t = v(e, 13);
+        R.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
+            var t = R.GamePlayerManager.getPlayerBySid(e[0]);
             t || (t = new r(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
             t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
             t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
-            q.ActivePlayerManager.addPlayer(t), t.sid === q.myPlayer.sid && Object.assign(q.myPlayer, t);
-        })), v();
+            R.ActivePlayerManager.addPlayer(t), t.sid === R.myPlayer.sid && Object.assign(R.myPlayer, t);
+        })), k();
     };
     const j = function updateLeaderboard(e) {
-        q.LeaderboardManager.updateLeaderboard(e);
+        R.LeaderboardManager.updateLeaderboard(e);
     };
-    const k = function GameObject(e) {
+    const E = function GameObject(e) {
         this.sid = e;
     };
     const O = function loadGameObject(e) {
-        P(e, 8).forEach((function(e) {
-            var t = q.GameObjectManager.getGameObjectBySid(e[0]);
-            t || (t = new k(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
-            t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], q.GameObjectManager.addObject(t);
+        v(e, 8).forEach((function(e) {
+            var t = R.GameObjectManager.getGameObjectBySid(e[0]);
+            t || (t = new E(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
+            t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], R.GameObjectManager.addObject(t);
         }));
     };
-    const S = function killObject(e) {
-        q.GameObjectManager.removeObjectBySid(e);
+    const A = function killObject(e) {
+        R.GameObjectManager.removeObjectBySid(e);
     };
-    const A = function killObjects(e) {
-        q.GameObjectManager.removeObjectsByOwnerSid(e);
+    const I = function killObjects(e) {
+        R.GameObjectManager.removeObjectsByOwnerSid(e);
     };
-    const E = function sendChat(e) {
-        var t = q.CommandManager, n = t.prefix;
+    const B = function sendChat(e) {
+        var t = R.CommandManager, n = t.prefix;
         if (e.startsWith(n)) {
-            var r = t.commands, y = e.split(" ")[0].slice(n.length), p = e.split(" ").slice(1), g = r[y];
-            return !g || (g.run(g, p), !1);
+            var r = t.commands, p = e.split(" ")[0].slice(n.length), m = e.split(" ").slice(1), y = r[p];
+            return !y || (y.run(y, m), !1);
         }
         return !0;
     };
-    const I = function handleClientPackets(e, t) {
+    const x = function handleClientPackets(e, t) {
         var n = !0;
-        if ("ch" === e) n = E(t[0]);
+        if ("ch" === e) n = B(t[0]);
         return n;
     };
-    var x = !1;
-    const U = function() {
+    var H = !1;
+    const G = function() {
         function PlayerManager() {
             this.players = [];
         }
@@ -447,13 +792,13 @@
             this.leaderboard = new Map;
         }
         return Leaderboardmanager.prototype.updateLeaderboard = function(e) {
-            var t = this, n = P(e, 3);
+            var t = this, n = v(e, 3);
             e.length;
             n.forEach((function(e, n) {
-                var y = q.GamePlayerManager.getPlayerBySid(e[0]);
-                y || ((y = new r(e[0])).sid = e[0], y.name = e[1], q.GamePlayerManager.addPlayer(y)), 
+                var p = R.GamePlayerManager.getPlayerBySid(e[0]);
+                p || ((p = new r(e[0])).sid = e[0], p.name = e[1], R.GamePlayerManager.addPlayer(p)), 
                 t.leaderboard.set(n + 1, {
-                    player: y,
+                    player: p,
                     sid: e[0],
                     name: e[1],
                     score: e[2]
@@ -463,13 +808,13 @@
             this.leaderboard = new Map;
         }, Leaderboardmanager;
     }();
-    const B = function() {
+    const C = function() {
         function ObjectManager() {
             this.objects = new Map;
         }
         return ObjectManager.prototype.addObject = function(e) {
-            var t = q.GameObjectManager.getGameObjectBySid(e.sid);
-            t || (t = new k(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
+            var t = R.GameObjectManager.getGameObjectBySid(e.sid);
+            t || (t = new E(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
             t.sid = e.sid, this.objects.set(e.sid, t);
         }, ObjectManager.prototype.getGameObjectBySid = function(e) {
             return this.objects.get(e);
@@ -487,12 +832,12 @@
             }));
         }, ObjectManager;
     }();
-    const C = function() {
+    const U = function() {
         function Command(e, t) {
             this.name = e, this.run = t;
         }
         return Command.prototype.reply = function(e) {
-            q.myPlayer.chat(e);
+            R.myPlayer.chat(e);
         }, Command;
     }();
     const L = function() {
@@ -502,13 +847,13 @@
         return CommandManager.prototype.setPrefix = function(e) {
             this.prefix = e;
         }, CommandManager.prototype.registerCommand = function(e, t) {
-            var n = new C(e, t);
+            var n = new U(e, t);
             this.commands[e] = n;
         }, CommandManager.prototype.unregisterCommand = function(e) {
             delete this.commands[e];
         }, CommandManager;
     }();
-    const G = function() {
+    const _ = function() {
         function UTILS() {
             this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints, this.dist = UTILS.getDistanceBetweenTwoPoints, 
             this.distance = UTILS.getDistanceBetweenTwoPoints, this.atan2 = UTILS.atan2, this.angle = UTILS.atan2;
@@ -519,28 +864,28 @@
             return Math.atan2(r - t, n - e);
         }, UTILS;
     }();
-    var _, F = (_ = function(e, t) {
-        return _ = Object.setPrototypeOf || {
+    var D, F = (D = function(e, t) {
+        return D = Object.setPrototypeOf || {
             __proto__: []
         } instanceof Array && function(e, t) {
             e.__proto__ = t;
         } || function(e, t) {
             for (var n in t) Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n]);
-        }, _(e, t);
+        }, D(e, t);
     }, function(e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Class extends value " + String(t) + " is not a constructor or null");
         function __() {
             this.constructor = e;
         }
-        _(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
+        D(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
         new __);
     });
-    const D = function(e) {
+    const q = function(e) {
         function Game() {
             var t = e.call(this) || this;
-            return t.teams = [], t.GamePlayerManager = new U, t.ActivePlayerManager = new U, 
-            t.LeaderboardManager = new T, t.GameObjectManager = new B, t.CommandManager = new L, 
-            t.UTILS = new G, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
+            return t.teams = [], t.GamePlayerManager = new G, t.ActivePlayerManager = new G, 
+            t.LeaderboardManager = new T, t.GameObjectManager = new C, t.CommandManager = new L, 
+            t.UTILS = new _, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
             t.msgpack.encode = msgpack_encode, t;
         }
         return F(Game, e), Game.prototype.debug = function(e) {
@@ -550,16 +895,16 @@
     !function hookWS() {
         WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
             apply: function(e, t, n) {
-                if (q.ws = t, q.sendPacket = function(e) {
+                if (R.ws = t, R.sendPacket = function(e) {
                     var t = Array.prototype.slice.call(arguments, 1), n = msgpack_encode([ e, t ]);
-                    q.ws.send(n);
-                }, 1 !== q.ws.readyState) return !0;
-                if (x || (x = !0, q.ws.addEventListener("message", (function(e) {
+                    R.ws.send(n);
+                }, 1 !== R.ws.readyState) return !0;
+                if (H || (H = !0, R.ws.addEventListener("message", (function(e) {
                     var t = e.data, n = msgpack_decode(t);
                     !function handleServerPackets(e, t) {
                         switch (e) {
                           case "id":
-                            y(t[0]);
+                            p(t[0]);
                             break;
 
                           case "d":
@@ -592,19 +937,19 @@
                             break;
 
                           case "1":
-                            h(t[0]);
-                            break;
-
-                          case "2":
-                            m(t[0], t[1]);
-                            break;
-
-                          case "4":
                             b(t[0]);
                             break;
 
-                          case "33":
+                          case "2":
+                            P(t[0], t[1]);
+                            break;
+
+                          case "4":
                             M(t[0]);
+                            break;
+
+                          case "33":
+                            S(t[0]);
                             break;
 
                           case "5":
@@ -616,33 +961,33 @@
                             break;
 
                           case "12":
-                            S(t[0]);
+                            A(t[0]);
                             break;
 
                           case "13":
-                            A(t[0]);
+                            I(t[0]);
                             break;
 
                           default:
                             console.log("Unknown packet: " + e);
                         }
-                        q.emit("packet", {
+                        R.emit("packet", {
                             packet: e,
                             data: t
                         });
                     }(n[0], n[1].slice(0));
                 }))), n && n[0]) {
-                    var r = msgpack_decode(n[0]), p = r[0], g = r[1].slice(0);
-                    if (!I(p, g)) return !0;
+                    var r = msgpack_decode(n[0]), m = r[0], y = r[1].slice(0);
+                    if (!x(m, y)) return !0;
                 }
                 return Reflect.apply(e, t, n);
             }
         });
     }();
-    var q = new D;
+    var R = new q;
     Object.defineProperty(Function.prototype, 69, {
         get: function() {
-            return "MooMooJS_beta" === this.name ? q : null;
+            return "MooMooJS_beta" === this.name ? R : null;
         }
     });
 })();

@@ -3,6 +3,7 @@ import encode from "../lib/_game/external/funcs/msgpack/encode.js";
 
 import handleServerPackets from "./handleServerPackets";
 import handleClientPackets from "./handleClientPackets";
+
 import { MooMoo } from "../../app";
 
 let _onmessage: boolean = false;

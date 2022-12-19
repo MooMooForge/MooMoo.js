@@ -28,6 +28,7 @@ class ObjectManager {
     getGameObjectBySid(sid: number) {
         return this.objects.get(sid);
     }
+    
     getObjectsByOwnerSid(sid: number) {
         let objs: Array<any> = [];
 
