@@ -155,6 +155,31 @@ let inventory = MooMoo.myPlayer.inventory
 place(inventory.mill)
 ```
 
+- Hat / Accessory functions:
+    - `equipHat(id / name)` - Equips a hat
+    - `equipAccessory(id / name)` - Equips an accessory
+    - `buyHat(id / name)` - Buys a hat
+    - `buyAccessory(id / name)` - Buys an accessory
+    - `unequipHat()` - Unequips the hat
+    - `unequipAccessory()` - Unequips the accessory
+
+```js
+let equipHat = MooMoo.myPlayer.equipHat
+let equipAccessory = MooMoo.myPlayer.equipAccessory
+let buyHat = MooMoo.myPlayer.buyHat
+let buyAccessory = MooMoo.myPlayer.buyAccessory
+let unequipHat = MooMoo.myPlayer.unequipHat
+let unequipAccessory = MooMoo.myPlayer.unequipAccessory
+
+equipHat("Moo Cap");
+equipAccessory("Monkey Tail");
+buyHat("Tank Gear");
+buyAccessory("Monkey Tail");
+
+unequipHat();
+unequipAccessory();
+```
+
 The angle takes a randian angle.
 
 - `MooMoo.CommandManager` - A command manager to manage commands by sending ingame messages.
@@ -182,8 +207,8 @@ CommandManager.registerCommand("test", (Command, args) => {
 - [x] Add math helper:
     - [X] Distance between 2 points
     - [x] create radian angle from 2 points
-- [ ] Equip / Unequip Hat
-- [ ] Equip / Unequip Acc
+- [x] Equip / Unequip Hat
+- [x] Equip / Unequip Acc
 - [x] add items
 - [ ] add bot class
 - [ ] add bot manager
