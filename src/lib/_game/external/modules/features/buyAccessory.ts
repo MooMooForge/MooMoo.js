@@ -7,7 +7,7 @@ function equipAccessoryById(id: number) {
     accessories.find((accessory: any) => {
         if (accessory.id == id) {
             accessoryexists = true;
-            MooMoo.sendPacket("13c", 0, id, 1)
+            MooMoo.sendPacket("13c", 1, id, 1)
         }
     })
     if (!accessoryexists) {
@@ -24,7 +24,7 @@ function equipAccessoryByName(name: string) {
     accessories.find((accessory: any) => {
         if (accessory.name == name) {
             accessoryexists = true;
-            MooMoo.sendPacket("13c", 0, accessory.id, 1)
+            MooMoo.sendPacket("13c", 1, accessory.id, 1)
         }
     })
     if (!accessoryexists) {
