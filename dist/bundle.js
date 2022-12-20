@@ -878,11 +878,11 @@
     const x = function removePlayer(e) {
         X.GamePlayerManager.removePlayerById(e), X.debug("Player " + e + " has left the game.");
     };
-    const O = function chunk(e, t) {
+    const B = function chunk(e, t) {
         for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
         return r;
     };
-    const B = function cacheItems() {
+    const O = function cacheItems() {
         X.myPlayer.inventory = {};
         for (var e = [ {
             category: "primary",
@@ -946,14 +946,14 @@
         }
     };
     const j = function updatePlayers(e) {
-        var t = O(e, 13);
+        var t = B(e, 13);
         X.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
             var t = X.GamePlayerManager.getPlayerBySid(e[0]);
             t || (t = new n(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
             t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
             t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
             X.ActivePlayerManager.addPlayer(t), t.sid === X.myPlayer.sid && Object.assign(X.myPlayer, t);
-        })), B();
+        })), O();
     };
     const I = function updateLeaderboard(e) {
         X.LeaderboardManager.updateLeaderboard(e);
@@ -962,7 +962,7 @@
         this.sid = e;
     };
     const C = function loadGameObject(e) {
-        O(e, 8).forEach((function(e) {
+        B(e, 8).forEach((function(e) {
             var t = X.GameObjectManager.getGameObjectBySid(e[0]);
             t || (t = new H(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
             t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], X.GameObjectManager.addObject(t);
@@ -1012,6 +1012,11 @@
             return this.players.find((function(t) {
                 return t.id === e;
             }));
+        }, PlayerManager.prototype.getPlayerByName = function(e) {
+            var t = this.players.filter((function(t) {
+                return t.name === e;
+            }));
+            return t.length > 1 ? t : t[0];
         }, PlayerManager.prototype.clearPlayers = function() {
             this.players = [];
         }, PlayerManager;
@@ -1021,7 +1026,7 @@
             this.leaderboard = new Map;
         }
         return Leaderboardmanager.prototype.updateLeaderboard = function(e) {
-            var t = this, r = O(e, 3);
+            var t = this, r = B(e, 3);
             e.length;
             r.forEach((function(e, r) {
                 var p = X.GamePlayerManager.getPlayerBySid(e[0]);

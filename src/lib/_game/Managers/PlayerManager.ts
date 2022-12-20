@@ -32,6 +32,13 @@ class PlayerManager {
         return this.players.find(player => player.id === id);
     }
 
+    getPlayerByName(name: string) {
+        let players = this.players.filter(player => player.name === name);
+        if (players.length > 1) {
+            return players;
+        } else return players[0];
+    }
+
     clearPlayers() {
         this.players = [];
     }

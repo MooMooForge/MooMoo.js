@@ -1,75 +1,10 @@
 # MooMoo.js - A powerful and easy to use MooMoo API
 
-## Installation
-
-You can either use it as a greasyfork import or as an external userscript.
-
-### Greasyfork
-you can follow the instructions [here](https://greasyfork.org/en/scripts/456235-moomoo-js)
-
-### External
-
-1. Install Tampermonkey or Greasemonkey
-
-You can grab it from greasyfork and paste it into your userscript manager.
-
-or require this:
-https://cdn.jsdelivr.net/gh/NuroC/MooMoo.js/dist/bundle.js
 
 ## Usage
 
-### 1. Installing it and getting started
-
-I've set an Function prototype checking for a specific name, so you can freely just add this short peace to your code and you're ready to go.
-
-```js
-const MooMoo = (function MooMooJS_beta() {})[69]
-```
-
-This will set the MooMoo variable to the MooMoo API.
-
-I will show below how to use it.
-
-### 1 Event Listeners
-
-- `packet` - Fired when a packet is received
-
-This event is run when a packet is received. It contains the raw packet data as an object. You can use this the following way:
-
-```js
-MooMoo.on("packet", (obj) => {
-    let packet = obj.packet;
-    let packetData = obj.data;
-    // Do stuff with the packet
-})
-```
-
-- `debug` - Fired when a debug message is sent
-
-This event is run when any sort of debug message is sent from the api. This is usually for developing purposes. You can use this the following way:
-
-```js
-MooMoo.on("debug", message => {
-    // Do stuff with the message
-})
-```
-
 ### 2. Data and Information
 
-- `MooMoo.ws` - The websocket connection
-
-Returns the WebSocket class, including the URL, `readyState`, or anything that is on the WS class.
-
-- `MooMoo.teams` - An Array of Alliances that are currently in the game (needs to be updated)
-- `MooMoo.myPlayer` - returns an Object of your current player, including x, y, hats, and other information.
-- `MooMoo.ActivePlayerManager` - returns an Instance of the ActivePlayermanager class. This class contains all players, which are currently on your screen.
-
-this class has the following usabillities:
-```js
-MooMoo.ActivePlayerManager.players // returns an array of all players on your screen
-MooMoo.ActivePlayerManager.getPlayerBySid(id) // returns the player with the given sid
-MooMoo.ActivePlayerManager.getPlayerById(team) // returns an array of all players with the given id
-```
 
 - `MooMoo.GamePlayerManager` - returns an Instance of the GamePlayerManager class. This class contains all players, which are currently in the game.
 
@@ -107,24 +42,7 @@ MooMoo.ws.send(packet) // sends the packet to the server
 ```
 works the same for decoding.
 
-- `MooMoo.myPlayer.inventory` - returns an array of all item ids in your "inventory"
-
-```js
-let inventory = MooMoo.myPlayer.inventory
-```
-
-- It has the following properties:
-    - `primary`
-    - `secondary`
-    - `food`
-    - `wall`
-    - `spike`
-    - `mill`
-    - `mine`
-    - `boostPad`
-    - `trap`
-    - `turret`
-    - `spawnPad`
+`
 
 - `MooMoo.UTILS` - returns an object of all utils
 
@@ -135,70 +53,6 @@ let distance = MooMoo.UTILS.distance // returns the distance between 2 points
 let a1 = angle(0, 0, 10, 10) // returns ~ 0.785
 let d1 = distance(0, 0, 10, 10) // returns ~ 14.143
 ```
-
-#### 2.1 Functions
-
-- `MooMoo.sendPacket(packet)` - Sends a packet to the server
-
-Usage: `(packetType, ...data)`
-```js
-MooMoo.sendPacket("ch", "Hello World")`
-```
-
-- `MooMoo.myPlayer.place(iteM)` - Places an item on the map
-
-Usage: `(item, angle)`
-```js
-let place = MooMoo.myPlayer.place
-let inventory = MooMoo.myPlayer.inventory
-
-place(inventory.mill)
-```
-
-- Hat / Accessory functions:
-    - `equipHat(id / name)` - Equips a hat
-    - `equipAccessory(id / name)` - Equips an accessory
-    - `buyHat(id / name)` - Buys a hat
-    - `buyAccessory(id / name)` - Buys an accessory
-    - `unequipHat()` - Unequips the hat
-    - `unequipAccessory()` - Unequips the accessory
-
-```js
-let equipHat = MooMoo.myPlayer.equipHat
-let equipAccessory = MooMoo.myPlayer.equipAccessory
-let buyHat = MooMoo.myPlayer.buyHat
-let buyAccessory = MooMoo.myPlayer.buyAccessory
-let unequipHat = MooMoo.myPlayer.unequipHat
-let unequipAccessory = MooMoo.myPlayer.unequipAccessory
-
-equipHat("Moo Cap");
-equipAccessory("Monkey Tail");
-buyHat("Tank Gear");
-buyAccessory("Monkey Tail");
-
-unequipHat();
-unequipAccessory();
-```
-
-The angle takes a randian angle.
-
-- `MooMoo.CommandManager` - A command manager to manage commands by sending ingame messages.
-
-The command manager has a set prefix which is "/", but you can change it.
-
-```js
-let CommandManager = MooMoo.CommandManager
-
-CommandManager.registerCommand("test", (Command, args) => {
-    Command.reply("Hello World") // reply with a chat message
-
-    // do stuff with arguments
-
-    let firstArg = args[0]
-    console.log(firstArg)
-})
-```
-
 
 ## TODO
 
