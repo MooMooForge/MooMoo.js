@@ -10,7 +10,7 @@
         o: (e, t) => Object.prototype.hasOwnProperty.call(e, t)
     };
     e.d({}, {
-        t: () => X
+        t: () => U
     });
     const t = function() {
         function EventEmitter() {
@@ -268,32 +268,21 @@
             e >= 0 ? (r = e / t, n = e % t) : (e++, r = Math.abs(e) / t, n = Math.abs(e) % t, 
             r = ~r, n = ~n), c([ r >>> 24, r >>> 16, r >>> 8, r, n >>> 24, n >>> 16, n >>> 8, n ]);
         }
-    };
-    const r = function() {
+    }, r = function() {
         function Alliance(e, t) {
             this.Leader = e, this.Name = t;
         }
         return Alliance.prototype.setAliancePlayers = function(e) {
             this.Members = e;
         }, Alliance;
-    }();
-    const n = function Player(e) {
+    }(), n = function Player(e) {
         this.sid = e;
-    };
-    const p = function setInitData(e) {
-        for (var t = e.teams, p = 0; p < t.length; p++) {
-            var y = t[p], m = y.sid, h = y.owner, g = new r(new n(h), m);
-            X.teams.push(g);
-        }
-    };
-    const y = function place(e, t) {
-        var r = X.myPlayer.weaponIndex;
-        X.sendPacket("5", e, t), X.sendPacket("c", 1, t), X.sendPacket("c", 0, t), X.sendPacket("5", r, !0);
-    };
-    const m = function chat(e) {
-        X.sendPacket("ch", e);
-    };
-    const h = [ {
+    }, p = function place(e, t) {
+        var r = U.myPlayer.weaponIndex;
+        U.sendPacket("5", e, t), U.sendPacket("c", 1, t), U.sendPacket("c", 0, t), U.sendPacket("5", r, !0);
+    }, y = function chat(e) {
+        U.sendPacket("ch", e);
+    }, m = [ {
         id: 45,
         name: "Shame!",
         dontSell: !0,
@@ -611,12 +600,11 @@
         noEat: !0,
         spdMult: 1.1,
         invisTimer: 1e3
-    } ];
-    const g = function equipHat(e) {
+    } ], h = function equipHat(e) {
         if ("number" == typeof e) !function equipHatById(e) {
             var t = !1;
-            if (h.find((function(r) {
-                r.id == e && (t = !0, X.sendPacket("13c", 0, e, 0));
+            if (m.find((function(r) {
+                r.id == e && (t = !0, U.sendPacket("13c", 0, e, 0));
             })), !t) try {
                 throw new Error("Error at equipHatById: Hat with id " + e + " does not exist");
             } catch (e) {
@@ -624,8 +612,8 @@
             }
         }(e); else if ("string" == typeof e) !function equipHatByName(e) {
             var t = !1;
-            if (h.find((function(r) {
-                r.name == e && (t = !0, X.sendPacket("13c", 0, r.id, 0));
+            if (m.find((function(r) {
+                r.name == e && (t = !0, U.sendPacket("13c", 0, r.id, 0));
             })), !t) try {
                 throw new Error("Error at equipHatByName: Hat with name " + e + " does not exist");
             } catch (e) {
@@ -636,8 +624,7 @@
         } catch (e) {
             console.log(e);
         }
-    };
-    const b = [ {
+    }, g = [ {
         id: 12,
         name: "Snowball",
         price: 1e3,
@@ -783,12 +770,11 @@
         xOff: 26,
         desc: "deal damage to players that damage you",
         dmg: .25
-    } ];
-    const P = function equipAccessory(e) {
+    } ], b = function equipAccessory(e) {
         if ("number" == typeof e) !function equipAccessoryById(e) {
             var t = !1;
-            if (b.find((function(r) {
-                r.id == e && (t = !0, X.sendPacket("13c", 0, e, 1));
+            if (g.find((function(r) {
+                r.id == e && (t = !0, U.sendPacket("13c", 0, e, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
             } catch (e) {
@@ -796,8 +782,8 @@
             }
         }(e); else if ("string" == typeof e) !function equipAccessoryByName(e) {
             var t = !1;
-            if (b.find((function(r) {
-                r.name == e && (t = !0, X.sendPacket("13c", 0, r.id, 1));
+            if (g.find((function(r) {
+                r.name == e && (t = !0, U.sendPacket("13c", 0, r.id, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
             } catch (e) {
@@ -808,18 +794,15 @@
         } catch (e) {
             console.log(e);
         }
-    };
-    const v = function unequipHat() {
-        X.sendPacket("13c", 0, 0, 0);
-    };
-    const k = function unequipAccessory() {
-        X.sendPacket("13c", 0, 0, 1);
-    };
-    const M = function buyHat(e) {
+    }, P = function unequipHat() {
+        U.sendPacket("13c", 0, 0, 0);
+    }, v = function unequipAccessory() {
+        U.sendPacket("13c", 0, 0, 1);
+    }, k = function buyHat(e) {
         if ("number" == typeof e) !function buyHatById(e) {
             var t = !1;
-            if (h.find((function(r) {
-                r.id == e && (t = !0, X.sendPacket("13c", 1, e, 0));
+            if (m.find((function(r) {
+                r.id == e && (t = !0, U.sendPacket("13c", 1, e, 0));
             })), !t) try {
                 throw new Error("Error at buyHatById: Hat with id " + e + " does not exist");
             } catch (e) {
@@ -827,8 +810,8 @@
             }
         }(e); else if ("string" == typeof e) !function buyHatByName(e) {
             var t = !1;
-            if (h.find((function(r) {
-                r.name == e && (t = !0, X.sendPacket("13c", 1, r.id, 0));
+            if (m.find((function(r) {
+                r.name == e && (t = !0, U.sendPacket("13c", 1, r.id, 0));
             })), !t) try {
                 throw new Error("Error at buyHatByName: Hat with name " + e + " does not exist");
             } catch (e) {
@@ -839,12 +822,11 @@
         } catch (e) {
             console.log(e);
         }
-    };
-    const A = function buyAccessory_equipAccessory(e) {
+    }, M = function buyAccessory_equipAccessory(e) {
         if ("number" == typeof e) !function buyAccessory_equipAccessoryById(e) {
             var t = !1;
-            if (b.find((function(r) {
-                r.id == e && (t = !0, X.sendPacket("13c", 1, e, 1));
+            if (g.find((function(r) {
+                r.id == e && (t = !0, U.sendPacket("13c", 1, e, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
             } catch (e) {
@@ -852,8 +834,8 @@
             }
         }(e); else if ("string" == typeof e) !function buyAccessory_equipAccessoryByName(e) {
             var t = !1;
-            if (b.find((function(r) {
-                r.name == e && (t = !0, X.sendPacket("13c", 1, r.id, 1));
+            if (g.find((function(r) {
+                r.name == e && (t = !0, U.sendPacket("13c", 1, r.id, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
             } catch (e) {
@@ -864,131 +846,14 @@
         } catch (e) {
             console.log(e);
         }
-    };
-    const E = function setupGame(e) {
-        X.myPlayer = {}, X.myPlayer.sid = e, X.myPlayer.place = y, X.myPlayer.chat = m, 
-        X.myPlayer.equipHat = g, X.myPlayer.equipAccessory = P, X.myPlayer.unequipHat = v, 
-        X.myPlayer.unequipAccessory = k, X.myPlayer.buyHat = M, X.myPlayer.buyAccessory = A;
-    };
-    const S = function addPlayer(e, t) {
-        var r = X.GamePlayerManager.getPlayerBySid(e[1]);
-        r || ((r = new n(e[1])).name = e[2], r.id = e[0], X.GamePlayerManager.addPlayer(r)), 
-        X.debug("Player " + r.name + " has joined the game."), t && console.log("You are now in game!");
-    };
-    const x = function removePlayer(e) {
-        X.GamePlayerManager.removePlayerById(e), X.debug("Player " + e + " has left the game.");
-    };
-    const B = function chunk(e, t) {
+    }, A = function chunk(e, t) {
         for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
         return r;
-    };
-    const O = function cacheItems() {
-        X.myPlayer.inventory = {};
-        for (var e = [ {
-            category: "primary",
-            start: 0,
-            end: 9
-        }, {
-            category: "secondary",
-            start: 9,
-            end: 16
-        }, {
-            category: "food",
-            start: 16,
-            end: 19,
-            subtract: !0
-        }, {
-            category: "wall",
-            start: 19,
-            end: 22,
-            subtract: !0
-        }, {
-            category: "spike",
-            start: 22,
-            end: 26,
-            subtract: !0
-        }, {
-            category: "mill",
-            start: 26,
-            end: 29,
-            subtract: !0
-        }, {
-            category: "mine",
-            start: 29,
-            end: 31,
-            subtract: !0
-        }, {
-            category: "boostPad",
-            start: 31,
-            end: 33,
-            subtract: !0
-        }, {
-            category: "trap",
-            start: 31,
-            end: 33,
-            subtract: !0
-        }, {
-            category: "turret",
-            start: 33,
-            end: 36,
-            subtract: !0
-        }, {
-            category: "spawnPad",
-            start: 36,
-            end: 37,
-            subtract: !0
-        } ], t = 0; t < e.length; t++) for (var r = e[t], n = r.category, p = r.start, y = r.end, m = r.subtract, h = p; h < y; h++) {
-            var g = document.getElementById("actionBarItem".concat(h));
-            if (g && null !== g.offsetParent) {
-                X.myPlayer.inventory[n] = m ? h - 16 : h;
-                break;
-            }
-        }
-    };
-    const j = function updatePlayers(e) {
-        var t = B(e, 13);
-        X.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
-            var t = X.GamePlayerManager.getPlayerBySid(e[0]);
-            t || (t = new n(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
-            t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
-            t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
-            X.ActivePlayerManager.addPlayer(t), t.sid === X.myPlayer.sid && Object.assign(X.myPlayer, t);
-        })), O();
-    };
-    const I = function updateLeaderboard(e) {
-        X.LeaderboardManager.updateLeaderboard(e);
-    };
-    const H = function GameObject(e) {
+    }, E = function GameObject(e) {
         this.sid = e;
     };
-    const C = function loadGameObject(e) {
-        B(e, 8).forEach((function(e) {
-            var t = X.GameObjectManager.getGameObjectBySid(e[0]);
-            t || (t = new H(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
-            t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], X.GameObjectManager.addObject(t);
-        }));
-    };
-    const T = function killObject(e) {
-        X.GameObjectManager.removeObjectBySid(e);
-    };
-    const G = function killObjects(e) {
-        X.GameObjectManager.removeObjectsByOwnerSid(e);
-    };
-    const U = function sendChat(e) {
-        var t = X.CommandManager, r = t.prefix;
-        if (e.startsWith(r)) {
-            var n = t.commands, p = e.split(" ")[0].slice(r.length), y = e.split(" ").slice(1), m = n[p];
-            return !m || (m.run(m, y), !1);
-        }
-        return !0;
-    };
-    const q = function handleClientPackets(e, t) {
-        var r = !0;
-        if ("ch" === e) r = U(t[0]);
-        return r;
-    };
-    var D = !1;
-    const L = function() {
+    var S = !1;
+    const x = function() {
         function PlayerManager() {
             this.players = [];
         }
@@ -1020,17 +885,15 @@
         }, PlayerManager.prototype.clearPlayers = function() {
             this.players = [];
         }, PlayerManager;
-    }();
-    const _ = function() {
+    }(), B = function() {
         function Leaderboardmanager() {
             this.leaderboard = new Map;
         }
         return Leaderboardmanager.prototype.updateLeaderboard = function(e) {
-            var t = this, r = B(e, 3);
-            e.length;
-            r.forEach((function(e, r) {
-                var p = X.GamePlayerManager.getPlayerBySid(e[0]);
-                p || ((p = new n(e[0])).sid = e[0], p.name = e[1], X.GamePlayerManager.addPlayer(p)), 
+            var t = this, r = A(e, 3);
+            e.length, r.forEach((function(e, r) {
+                var p = U.GamePlayerManager.getPlayerBySid(e[0]);
+                p || ((p = new n(e[0])).sid = e[0], p.name = e[1], U.GamePlayerManager.addPlayer(p)), 
                 t.leaderboard.set(r + 1, {
                     player: p,
                     sid: e[0],
@@ -1041,14 +904,13 @@
         }, Leaderboardmanager.prototype.clearLeaderboard = function() {
             this.leaderboard = new Map;
         }, Leaderboardmanager;
-    }();
-    const F = function() {
+    }(), O = function() {
         function ObjectManager() {
             this.objects = new Map;
         }
         return ObjectManager.prototype.addObject = function(e) {
-            var t = X.GameObjectManager.getGameObjectBySid(e.sid);
-            t || (t = new H(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
+            var t = U.GameObjectManager.getGameObjectBySid(e.sid);
+            t || (t = new E(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
             t.sid = e.sid, this.objects.set(e.sid, t);
         }, ObjectManager.prototype.getGameObjectBySid = function(e) {
             return this.objects.get(e);
@@ -1065,29 +927,26 @@
                 r.ownerSid == e && t.objects.delete(r.sid);
             }));
         }, ObjectManager;
-    }();
-    const W = function() {
+    }(), j = function() {
         function Command(e, t) {
             this.name = e, this.run = t;
         }
         return Command.prototype.reply = function(e) {
-            X.myPlayer.chat(e);
+            U.myPlayer.chat(e);
         }, Command;
-    }();
-    const N = function() {
+    }(), I = function() {
         function CommandManager() {
             this.commands = {}, this.prefix = "/";
         }
         return CommandManager.prototype.setPrefix = function(e) {
             this.prefix = e;
         }, CommandManager.prototype.registerCommand = function(e, t) {
-            var r = new W(e, t);
+            var r = new j(e, t);
             this.commands[e] = r;
         }, CommandManager.prototype.unregisterCommand = function(e) {
             delete this.commands[e];
         }, CommandManager;
-    }();
-    const R = function() {
+    }(), H = function() {
         function UTILS() {
             this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints, this.dist = UTILS.getDistanceBetweenTwoPoints, 
             this.distance = UTILS.getDistanceBetweenTwoPoints, this.atan2 = UTILS.atan2, this.angle = UTILS.atan2;
@@ -1098,47 +957,52 @@
             return Math.atan2(n - t, r - e);
         }, UTILS;
     }();
-    var z, V = (z = function(e, t) {
-        return z = Object.setPrototypeOf || {
+    var C, T = (C = function(e, t) {
+        return C = Object.setPrototypeOf || {
             __proto__: []
         } instanceof Array && function(e, t) {
             e.__proto__ = t;
         } || function(e, t) {
             for (var r in t) Object.prototype.hasOwnProperty.call(t, r) && (e[r] = t[r]);
-        }, z(e, t);
+        }, C(e, t);
     }, function(e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Class extends value " + String(t) + " is not a constructor or null");
         function __() {
             this.constructor = e;
         }
-        z(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
+        C(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
         new __);
     });
-    const K = function(e) {
+    const G = function(e) {
         function Game() {
             var t = e.call(this) || this;
-            return t.teams = [], t.GamePlayerManager = new L, t.ActivePlayerManager = new L, 
-            t.LeaderboardManager = new _, t.GameObjectManager = new F, t.CommandManager = new N, 
-            t.UTILS = new R, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
+            return t.teams = [], t.GamePlayerManager = new x, t.ActivePlayerManager = new x, 
+            t.LeaderboardManager = new B, t.GameObjectManager = new O, t.CommandManager = new I, 
+            t.UTILS = new H, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
             t.msgpack.encode = msgpack_encode, t;
         }
-        return V(Game, e), Game.prototype.debug = function(e) {
+        return T(Game, e), Game.prototype.debug = function(e) {
             this.emit("debug", e);
         }, Game;
     }(t);
     !function hookWS() {
         WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
-            apply: function(e, t, r) {
-                if (X.ws = t, X.sendPacket = function(e) {
+            apply: function(e, t, m) {
+                if (U.ws = t, U.sendPacket = function(e) {
                     var t = Array.prototype.slice.call(arguments, 1), r = msgpack_encode([ e, t ]);
-                    X.ws.send(r);
-                }, 1 !== X.ws.readyState) return !0;
-                if (D || (D = !0, X.ws.addEventListener("message", (function(e) {
-                    var t = e.data, r = msgpack_decode(t);
+                    U.ws.send(r);
+                }, 1 !== U.ws.readyState) return !0;
+                if (S || (S = !0, U.ws.addEventListener("message", (function(e) {
+                    var t = e.data, m = msgpack_decode(t);
                     !function handleServerPackets(e, t) {
                         switch (e) {
                           case "id":
-                            p(t[0]);
+                            !function setInitData(e) {
+                                for (var t = e.teams, p = 0; p < t.length; p++) {
+                                    var y = t[p], m = y.sid, h = y.owner, g = new r(new n(h), m);
+                                    U.teams.push(g);
+                                }
+                            }(t[0]);
                             break;
 
                           case "d":
@@ -1171,57 +1035,160 @@
                             break;
 
                           case "1":
-                            E(t[0]);
+                            !function setupGame(e) {
+                                U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = p, U.myPlayer.chat = y, 
+                                U.myPlayer.equipHat = h, U.myPlayer.equipAccessory = b, U.myPlayer.unequipHat = P, 
+                                U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = k, U.myPlayer.buyAccessory = M;
+                            }(t[0]);
                             break;
 
                           case "2":
-                            S(t[0], t[1]);
+                            !function addPlayer(e, t) {
+                                var r = U.GamePlayerManager.getPlayerBySid(e[1]);
+                                r || ((r = new n(e[1])).name = e[2], r.id = e[0], U.GamePlayerManager.addPlayer(r)), 
+                                U.debug("Player " + r.name + " has joined the game."), t && console.log("You are now in game!");
+                            }(t[0], t[1]);
                             break;
 
                           case "4":
-                            x(t[0]);
+                            !function removePlayer(e) {
+                                U.GamePlayerManager.removePlayerById(e), U.debug("Player " + e + " has left the game.");
+                            }(t[0]);
                             break;
 
                           case "33":
-                            j(t[0]);
+                            !function updatePlayers(e) {
+                                var t = A(e, 13);
+                                U.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
+                                    var t = U.GamePlayerManager.getPlayerBySid(e[0]);
+                                    t || (t = new n(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
+                                    t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
+                                    t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
+                                    U.ActivePlayerManager.addPlayer(t), t.sid === U.myPlayer.sid && Object.assign(U.myPlayer, t);
+                                })), function cacheItems() {
+                                    U.myPlayer.inventory = {};
+                                    for (var e = [ {
+                                        category: "primary",
+                                        start: 0,
+                                        end: 9
+                                    }, {
+                                        category: "secondary",
+                                        start: 9,
+                                        end: 16
+                                    }, {
+                                        category: "food",
+                                        start: 16,
+                                        end: 19,
+                                        subtract: !0
+                                    }, {
+                                        category: "wall",
+                                        start: 19,
+                                        end: 22,
+                                        subtract: !0
+                                    }, {
+                                        category: "spike",
+                                        start: 22,
+                                        end: 26,
+                                        subtract: !0
+                                    }, {
+                                        category: "mill",
+                                        start: 26,
+                                        end: 29,
+                                        subtract: !0
+                                    }, {
+                                        category: "mine",
+                                        start: 29,
+                                        end: 31,
+                                        subtract: !0
+                                    }, {
+                                        category: "boostPad",
+                                        start: 31,
+                                        end: 33,
+                                        subtract: !0
+                                    }, {
+                                        category: "trap",
+                                        start: 31,
+                                        end: 33,
+                                        subtract: !0
+                                    }, {
+                                        category: "turret",
+                                        start: 33,
+                                        end: 36,
+                                        subtract: !0
+                                    }, {
+                                        category: "spawnPad",
+                                        start: 36,
+                                        end: 37,
+                                        subtract: !0
+                                    } ], t = 0; t < e.length; t++) for (var r = e[t], n = r.category, p = r.start, y = r.end, m = r.subtract, h = p; h < y; h++) {
+                                        var g = document.getElementById("actionBarItem".concat(h));
+                                        if (g && null !== g.offsetParent) {
+                                            U.myPlayer.inventory[n] = m ? h - 16 : h;
+                                            break;
+                                        }
+                                    }
+                                }();
+                            }(t[0]);
                             break;
 
                           case "5":
-                            I(t[0]);
+                            !function updateLeaderboard(e) {
+                                U.LeaderboardManager.updateLeaderboard(e);
+                            }(t[0]);
                             break;
 
                           case "6":
-                            C(t[0]);
+                            !function loadGameObject(e) {
+                                A(e, 8).forEach((function(e) {
+                                    var t = U.GameObjectManager.getGameObjectBySid(e[0]);
+                                    t || (t = new E(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
+                                    t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], U.GameObjectManager.addObject(t);
+                                }));
+                            }(t[0]);
                             break;
 
                           case "12":
-                            T(t[0]);
+                            !function killObject(e) {
+                                U.GameObjectManager.removeObjectBySid(e);
+                            }(t[0]);
                             break;
 
                           case "13":
-                            G(t[0]);
+                            !function killObjects(e) {
+                                U.GameObjectManager.removeObjectsByOwnerSid(e);
+                            }(t[0]);
                             break;
 
                           default:
                             console.log("Unknown packet: " + e);
                         }
-                        X.emit("packet", {
+                        U.emit("packet", {
                             packet: e,
                             data: t
                         });
-                    }(r[0], r[1].slice(0));
-                }))), r && r[0]) {
-                    var n = msgpack_decode(r[0]), y = n[0], m = n[1].slice(0);
-                    if (!q(y, m)) return !0;
+                    }(m[0], m[1].slice(0));
+                }))), m && m[0]) {
+                    var g = msgpack_decode(m[0]);
+                    if (!function handleClientPackets(e, t) {
+                        var r = !0;
+                        return "ch" === e && (r = function sendChat(e) {
+                            var t = U.CommandManager, r = t.prefix;
+                            if (e.startsWith(r)) {
+                                var n = t.commands, p = e.split(" ")[0].slice(r.length), y = e.split(" ").slice(1), m = n[p];
+                                return !m || (m.run(m, y), !1);
+                            }
+                            return !0;
+                        }(t[0])), r;
+                    }(g[0], g[1].slice(0))) return !0;
                 }
-                return Reflect.apply(e, t, r);
+                return Reflect.apply(e, t, m);
             }
         });
     }();
-    var X = new K;
+    var U = new G;
     Object.defineProperty(Function.prototype, 69, {
         get: function() {
-            return "MooMooJS_beta" === this.name ? X : null;
+            return "MooMooJS_beta" === this.name ? U : null;
         }
     });
 })();
