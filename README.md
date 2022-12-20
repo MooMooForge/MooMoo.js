@@ -3,7 +3,7 @@
 
 ## Usage
 
-There is an active documentation about MooMoo.js at [https]
+There is an active documentation about MooMoo.js at https://nuroc.github.io/MooMoo.js/
 
 ## TODO
 
