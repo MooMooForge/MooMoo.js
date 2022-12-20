@@ -20,6 +20,8 @@ module.exports = {
                 keep_fnames: true,
                 compress: {
                     reduce_funcs: true,
+                    passes: 20,
+                    reduce_vars: true
                 },
                 output: {
                     beautify: true,
