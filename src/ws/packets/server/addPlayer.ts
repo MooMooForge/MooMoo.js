@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../app";
+import { MooMoo } from "../../../app";
 import Player from "../../../lib/_game/types/Player";
 
 function addPlayer (data : Array<any>, isYou: boolean) {

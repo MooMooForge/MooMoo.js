@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../../../app";
+import { MooMoo } from "../../../../../app";
 
 import hats from "../../../../storage/hats";
 

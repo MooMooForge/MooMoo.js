@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../app";
+import { MooMoo } from "../../../app";
 
 function removePlayer(id: string) {
     MooMoo.GamePlayerManager.removePlayerById(id);

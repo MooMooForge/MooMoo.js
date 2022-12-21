@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../app"
+import { MooMoo } from "../../../app"
 
 import place from "../../../lib/_game/external/modules/features/place";
 import chat from "../../../lib/_game/external/modules/features/chat";

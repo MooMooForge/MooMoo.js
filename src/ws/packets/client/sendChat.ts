@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../app"
+import { MooMoo } from "../../../app"
 
 function sendChat (message: string) {
     let commandManager = MooMoo.CommandManager;

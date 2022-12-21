@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../app";
+import { MooMoo } from "../../../app";
 
 function killObjects(ownerSid: number) {
     MooMoo.GameObjectManager.removeObjectsByOwnerSid(ownerSid);

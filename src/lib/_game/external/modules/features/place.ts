@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../../../app";
+import { MooMoo } from "../../../../../app";
 
 function place (id: Number, angle: Number) {
     let weapon = MooMoo.myPlayer.weaponIndex

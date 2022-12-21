@@ -1,4 +1,4 @@
-import Game from "./src/index";
+import Game from "./main/index";
 
 export const MooMoo = new Game();
 
