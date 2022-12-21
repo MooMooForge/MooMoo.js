@@ -1,10 +1,9 @@
-<center>
+<div style="text-align: center;">
+  <img src="https://img.shields.io/github/stars/NuroC/MooMoo.js" alt="GitHub stars">
+  <img src="https://img.shields.io/github/release/NuroC/MooMoo.js" alt="GitHub version">
+  <img src="https://img.shields.io/github/commits-since/NuroC/MooMoo.js/latest" alt="GitHub commits">
+</div>
 
-[![GitHub stars](https://img.shields.io/github/stars/NuroC/MooMoo.js)](https://github.com/NuroC/MooMoo.js/stargazers)
-[![GitHub version](https://img.shields.io/github/release/NuroC/MooMoo.js)](https://github.com/NuroC/MooMoo.js)
-[![GitHub commits](https://img.shields.io/github/commits-since/NuroC/MooMoo.js/latest)](https://github.com/NuroC/MooMoo.js/commits/master)
-
-</center>
 
 # MooMoo.js - A powerful and easy to use MooMoo API
 
