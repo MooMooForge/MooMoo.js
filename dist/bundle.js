@@ -849,11 +849,11 @@
     }, A = function chunk(e, t) {
         for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
         return r;
-    }, E = function GameObject(e) {
+    }, S = function GameObject(e) {
         this.sid = e;
     };
-    var S = !1;
-    const x = function() {
+    var E = !1;
+    const B = function() {
         function PlayerManager() {
             this.players = [];
         }
@@ -885,7 +885,7 @@
         }, PlayerManager.prototype.clearPlayers = function() {
             this.players = [];
         }, PlayerManager;
-    }(), B = function() {
+    }(), x = function() {
         function Leaderboardmanager() {
             this.leaderboard = new Map;
         }
@@ -910,7 +910,7 @@
         }
         return ObjectManager.prototype.addObject = function(e) {
             var t = U.GameObjectManager.getGameObjectBySid(e.sid);
-            t || (t = new E(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
+            t || (t = new S(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
             t.sid = e.sid, this.objects.set(e.sid, t);
         }, ObjectManager.prototype.getGameObjectBySid = function(e) {
             return this.objects.get(e);
@@ -934,7 +934,7 @@
         return Command.prototype.reply = function(e) {
             U.myPlayer.chat(e);
         }, Command;
-    }(), I = function() {
+    }(), H = function() {
         function CommandManager() {
             this.commands = {}, this.prefix = "/";
         }
@@ -946,7 +946,7 @@
         }, CommandManager.prototype.unregisterCommand = function(e) {
             delete this.commands[e];
         }, CommandManager;
-    }(), H = function() {
+    }(), I = function() {
         function UTILS() {
             this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints, this.dist = UTILS.getDistanceBetweenTwoPoints, 
             this.distance = UTILS.getDistanceBetweenTwoPoints, this.atan2 = UTILS.atan2, this.angle = UTILS.atan2;
@@ -976,9 +976,9 @@
     const G = function(e) {
         function Game() {
             var t = e.call(this) || this;
-            return t.teams = [], t.GamePlayerManager = new x, t.ActivePlayerManager = new x, 
-            t.LeaderboardManager = new B, t.GameObjectManager = new O, t.CommandManager = new I, 
-            t.UTILS = new H, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
+            return t.teams = [], t.GamePlayerManager = new B, t.ActivePlayerManager = new B, 
+            t.LeaderboardManager = new x, t.GameObjectManager = new O, t.CommandManager = new H, 
+            t.UTILS = new I, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
             t.msgpack.encode = msgpack_encode, t;
         }
         return T(Game, e), Game.prototype.debug = function(e) {
@@ -992,7 +992,7 @@
                     var t = Array.prototype.slice.call(arguments, 1), r = msgpack_encode([ e, t ]);
                     U.ws.send(r);
                 }, 1 !== U.ws.readyState) return !0;
-                if (S || (S = !0, U.ws.addEventListener("message", (function(e) {
+                if (E || (E = !0, U.ws.addEventListener("message", (function(e) {
                     var t = e.data, m = msgpack_decode(t);
                     !function handleServerPackets(e, t) {
                         switch (e) {
@@ -1012,7 +1012,6 @@
                           case "8":
                           case "sp":
                           case "9":
-                          case "h":
                           case "11":
                           case "14":
                           case "15":
@@ -1141,10 +1140,18 @@
                             !function loadGameObject(e) {
                                 A(e, 8).forEach((function(e) {
                                     var t = U.GameObjectManager.getGameObjectBySid(e[0]);
-                                    t || (t = new E(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
+                                    t || (t = new S(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
                                     t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], U.GameObjectManager.addObject(t);
                                 }));
                             }(t[0]);
+                            break;
+
+                          case "h":
+                            console.log(t), function updateHealth(e, t) {
+                                console.debug("Updating health of player with sid " + e + " to " + t);
+                                var r = U.GamePlayerManager.getPlayerBySid(e);
+                                r && (r.health = t);
+                            }(t[0], t[1]);
                             break;
 
                           case "12":

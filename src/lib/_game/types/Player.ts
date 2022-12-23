@@ -13,6 +13,7 @@ class Player {
     skinIndex: number;
     tailIndex: number;
     iconIndex: number;
+    health: number;
     zIndex: any; // idek what that is lmfaoo
 
     constructor(sid: number) {
