@@ -25,6 +25,8 @@ class Player {
             food: 0,
             points: 0,
             kills: 0
+
+            
         };
     }
 }
