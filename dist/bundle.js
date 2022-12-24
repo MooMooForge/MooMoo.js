@@ -75,10 +75,10 @@
             throw console.debug("msgpack array:", e), new Error("Invalid byte value '" + r + "' at index " + (t - 1) + " in the MessagePack binary data (length " + e.length + "): Expecting a range of 0 to 255. This is not a byte array.");
         }
         function f(r) {
-            let n = 0, p = !0;
-            for (;r-- > 0; ) if (p) {
+            let n = 0, y = !0;
+            for (;r-- > 0; ) if (y) {
                 let r = e[t++];
-                n += 127 & r, 128 & r && (n -= 128), p = !1;
+                n += 127 & r, 128 & r && (n -= 128), y = !1;
             } else n *= 256, n += e[t++];
             return n;
         }
@@ -93,8 +93,8 @@
         }
         function a(r, n) {
             r < 0 && (r = o(n));
-            let p = e.subarray(t, t + r);
-            return t += r, p;
+            let y = e.subarray(t, t + r);
+            return t += r, y;
         }
         function l(e, t) {
             e < 0 && (e = o(t));
@@ -110,9 +110,9 @@
         }
         function d(r, n) {
             r < 0 && (r = o(n));
-            let p = t;
+            let y = t;
             return t += r, function(e, t, r) {
-                let n = t, p = "";
+                let n = t, y = "";
                 for (r += t; n < r; ) {
                     let t = e[n++];
                     if (t > 127) if (t > 191 && t < 224) {
@@ -126,17 +126,17 @@
                         if (n + 2 >= r) throw new Error("UTF-8 decode: incomplete 4-byte sequence");
                         t = (7 & t) << 18 | (63 & e[n++]) << 12 | (63 & e[n++]) << 6 | 63 & e[n++];
                     }
-                    if (t <= 65535) p += String.fromCharCode(t); else {
+                    if (t <= 65535) y += String.fromCharCode(t); else {
                         if (!(t <= 1114111)) throw new Error("UTF-8 decode: code point 0x" + t.toString(16) + " exceeds UTF-16 reach");
-                        t -= 65536, p += String.fromCharCode(t >> 10 | 55296), p += String.fromCharCode(1023 & t | 56320);
+                        t -= 65536, y += String.fromCharCode(t >> 10 | 55296), y += String.fromCharCode(1023 & t | 56320);
                     }
                 }
-                return p;
-            }(e, p, r);
+                return y;
+            }(e, y, r);
         }
         function w(e, r) {
             e < 0 && (e = o(r));
-            let n = o(1), p = a(e);
+            let n = o(1), y = a(e);
             return 255 === n ? function(e) {
                 if (4 === e.length) {
                     let t = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
@@ -153,15 +153,15 @@
                     return new Date(1e3 * n + r / 1e6);
                 }
                 throw new Error("Invalid data length for a date value.");
-            }(p) : {
+            }(y) : {
                 type: n,
-                data: p
+                data: y
             };
         }
     }, msgpack_encode = function(e) {
         const t = 4294967296;
-        let r, n, p = new Uint8Array(128), y = 0;
-        return a(e), p.subarray(0, y);
+        let r, n, y = new Uint8Array(128), p = 0;
+        return a(e), y.subarray(0, p);
         function a(e) {
             switch (typeof e) {
               case "undefined":
@@ -192,23 +192,23 @@
                             t = !1;
                             break;
                         }
-                        let n = 0, p = new Uint8Array(e.length * (t ? 1 : 4));
+                        let n = 0, y = new Uint8Array(e.length * (t ? 1 : 4));
                         for (let t = 0; t !== r; t++) {
-                            let y = e.charCodeAt(t);
-                            if (y < 128) p[n++] = y; else {
-                                if (y < 2048) p[n++] = y >> 6 | 192; else {
-                                    if (y > 55295 && y < 56320) {
+                            let p = e.charCodeAt(t);
+                            if (p < 128) y[n++] = p; else {
+                                if (p < 2048) y[n++] = p >> 6 | 192; else {
+                                    if (p > 55295 && p < 56320) {
                                         if (++t >= r) throw new Error("UTF-8 encode: incomplete surrogate pair");
                                         let m = e.charCodeAt(t);
                                         if (m < 56320 || m > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + m.toString(16) + " at index " + t + " out of range");
-                                        y = 65536 + ((1023 & y) << 10) + (1023 & m), p[n++] = y >> 18 | 240, p[n++] = y >> 12 & 63 | 128;
-                                    } else p[n++] = y >> 12 | 224;
-                                    p[n++] = y >> 6 & 63 | 128;
+                                        p = 65536 + ((1023 & p) << 10) + (1023 & m), y[n++] = p >> 18 | 240, y[n++] = p >> 12 & 63 | 128;
+                                    } else y[n++] = p >> 12 | 224;
+                                    y[n++] = p >> 6 & 63 | 128;
                                 }
-                                p[n++] = 63 & y | 128;
+                                y[n++] = 63 & p | 128;
                             }
                         }
-                        return t ? p : p.subarray(0, n);
+                        return t ? y : y.subarray(0, n);
                     }(e), r = t.length;
                     r <= 31 ? s(160 + r) : c(r <= 255 ? [ 217, r ] : r <= 65535 ? [ 218, r >>> 8, r ] : [ 219, r >>> 24, r >>> 16, r >>> 8, r ]), 
                     c(t);
@@ -246,22 +246,22 @@
             for (let r = 0; r < t; r++) a(e[r]);
         }
         function s(e) {
-            if (p.length < y + 1) {
-                let e = 2 * p.length;
-                for (;e < y + 1; ) e *= 2;
+            if (y.length < p + 1) {
+                let e = 2 * y.length;
+                for (;e < p + 1; ) e *= 2;
                 let t = new Uint8Array(e);
-                t.set(p), p = t;
+                t.set(y), y = t;
             }
-            p[y] = e, y++;
+            y[p] = e, p++;
         }
         function c(e) {
-            if (p.length < y + e.length) {
-                let t = 2 * p.length;
-                for (;t < y + e.length; ) t *= 2;
+            if (y.length < p + e.length) {
+                let t = 2 * y.length;
+                for (;t < p + e.length; ) t *= 2;
                 let r = new Uint8Array(t);
-                r.set(p), p = r;
+                r.set(y), y = r;
             }
-            p.set(e, y), y += e.length;
+            y.set(e, p), p += e.length;
         }
         function u(e) {
             let r, n;
@@ -276,11 +276,17 @@
             this.Members = e;
         }, Alliance;
     }(), n = function Player(e) {
-        this.sid = e;
-    }, p = function place(e, t) {
+        this.sid = e, this.resources = {
+            wood: 0,
+            stone: 0,
+            food: 0,
+            points: 0,
+            kills: 0
+        };
+    }, y = function place(e, t) {
         var r = U.myPlayer.weaponIndex;
         U.sendPacket("5", e, t), U.sendPacket("c", 1, t), U.sendPacket("c", 0, t), U.sendPacket("5", r, !0);
-    }, y = function chat(e) {
+    }, p = function chat(e) {
         U.sendPacket("ch", e);
     }, m = [ {
         id: 45,
@@ -892,10 +898,10 @@
         return Leaderboardmanager.prototype.updateLeaderboard = function(e) {
             var t = this, r = A(e, 3);
             e.length, r.forEach((function(e, r) {
-                var p = U.GamePlayerManager.getPlayerBySid(e[0]);
-                p || ((p = new n(e[0])).sid = e[0], p.name = e[1], U.GamePlayerManager.addPlayer(p)), 
+                var y = U.GamePlayerManager.getPlayerBySid(e[0]);
+                y || ((y = new n(e[0])).sid = e[0], y.name = e[1], U.GamePlayerManager.addPlayer(y)), 
                 t.leaderboard.set(r + 1, {
-                    player: p,
+                    player: y,
                     sid: e[0],
                     name: e[1],
                     score: e[2]
@@ -998,8 +1004,8 @@
                         switch (e) {
                           case "id":
                             !function setInitData(e) {
-                                for (var t = e.teams, p = 0; p < t.length; p++) {
-                                    var y = t[p], m = y.sid, h = y.owner, g = new r(new n(h), m);
+                                for (var t = e.teams, y = 0; y < t.length; y++) {
+                                    var p = t[y], m = p.sid, h = p.owner, g = new r(new n(h), m);
                                     U.teams.push(g);
                                 }
                             }(t[0]);
@@ -1011,7 +1017,6 @@
                           case "7":
                           case "8":
                           case "sp":
-                          case "9":
                           case "11":
                           case "14":
                           case "15":
@@ -1035,7 +1040,7 @@
 
                           case "1":
                             !function setupGame(e) {
-                                U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = p, U.myPlayer.chat = y, 
+                                U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = y, U.myPlayer.chat = p, 
                                 U.myPlayer.equipHat = h, U.myPlayer.equipAccessory = b, U.myPlayer.unequipHat = P, 
                                 U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = k, U.myPlayer.buyAccessory = M;
                             }(t[0]);
@@ -1119,7 +1124,7 @@
                                         start: 36,
                                         end: 37,
                                         subtract: !0
-                                    } ], t = 0; t < e.length; t++) for (var r = e[t], n = r.category, p = r.start, y = r.end, m = r.subtract, h = p; h < y; h++) {
+                                    } ], t = 0; t < e.length; t++) for (var r = e[t], n = r.category, y = r.start, p = r.end, m = r.subtract, h = y; h < p; h++) {
                                         var g = document.getElementById("actionBarItem".concat(h));
                                         if (g && null !== g.offsetParent) {
                                             U.myPlayer.inventory[n] = m ? h - 16 : h;
@@ -1146,8 +1151,15 @@
                             }(t[0]);
                             break;
 
+                          case "9":
+                            !function updatePlayerValue(e, t) {
+                                var r = U.myPlayer.resources;
+                                r[e] = t, U.myPlayer.resources = r, console.log(U.myPlayer.resources);
+                            }(t[0], t[1]);
+                            break;
+
                           case "h":
-                            console.log(t), function updateHealth(e, t) {
+                            !function updateHealth(e, t) {
                                 console.debug("Updating health of player with sid " + e + " to " + t);
                                 var r = U.GamePlayerManager.getPlayerBySid(e);
                                 r && (r.health = t);
@@ -1181,8 +1193,8 @@
                         return "ch" === e && (r = function sendChat(e) {
                             var t = U.CommandManager, r = t.prefix;
                             if (e.startsWith(r)) {
-                                var n = t.commands, p = e.split(" ")[0].slice(r.length), y = e.split(" ").slice(1), m = n[p];
-                                return !m || (m.run(m, y), !1);
+                                var n = t.commands, y = e.split(" ")[0].slice(r.length), p = e.split(" ").slice(1), m = n[y];
+                                return !m || (m.run(m, p), !1);
                             }
                             return !0;
                         }(t[0])), r;

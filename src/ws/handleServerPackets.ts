@@ -12,6 +12,7 @@ import loadGameObject from "./packets/server/loadGameObject";
 import killObject from "./packets/server/killObject";
 import killObjects from "./packets/server/killObjects";
 import updateHealth from "./packets/server/updateHealth";
+import updatePlayerValue from "./packets/server/updatePlayerValue";
 
 export default function handleServerPackets(packet: string, data: array) {
     switch (packet) {
@@ -49,9 +50,9 @@ export default function handleServerPackets(packet: string, data: array) {
         case "sp": // shoot turret
             break;
         case "9": // update player value
+            updatePlayerValue(data[0], data[1]);
             break;
         case "h": // update health
-        console.log(data)
             updateHealth(data[0], data[1]);
             break;
         case "11": // kill player

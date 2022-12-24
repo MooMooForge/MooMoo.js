@@ -15,9 +15,17 @@ class Player {
     iconIndex: number;
     health: number;
     zIndex: any; // idek what that is lmfaoo
+    resources: any
 
     constructor(sid: number) {
         this.sid = sid;
+        this.resources = {
+            wood: 0,
+            stone: 0,
+            food: 0,
+            points: 0,
+            kills: 0
+        };
     }
 }
 
