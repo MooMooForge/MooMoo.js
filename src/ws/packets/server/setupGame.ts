@@ -30,6 +30,8 @@ function setupGame (sid: any) {
    MooMoo.myPlayer.buyAccessory = buyAccessory;
 
    MooMoo.vars.gameLoaded = true;
+
+   if(MooMoo.onGameLoad) MooMoo.onGameLoad();
 }
 
 

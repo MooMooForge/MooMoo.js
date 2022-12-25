@@ -1019,7 +1019,7 @@
                                 U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = y, U.myPlayer.chat = p, 
                                 U.myPlayer.equipHat = h, U.myPlayer.equipAccessory = b, U.myPlayer.unequipHat = P, 
                                 U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = M, U.myPlayer.buyAccessory = k, 
-                                U.vars.gameLoaded = !0;
+                                U.vars.gameLoaded = !0, U.onGameLoad && U.onGameLoad();
                             }(t[0]);
                             break;
 

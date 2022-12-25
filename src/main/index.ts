@@ -36,6 +36,9 @@ export default class Game extends EventEmitter {
     // lib vars
     vars: any = <any>{};
 
+    // funcs
+    onGameLoad: Function;
+
     // msgpack vars
     msgpack: any = <any>{};
     constructor() {
