@@ -43,6 +43,13 @@ class PlayerManager {
         this.players = [];
     }
 
+    updatePlayer(sid: number, data: Player) {
+        let player = this.getPlayerBySid(sid);
+        if (player) {
+            Object.assign(player, data);
+        }
+    }
+
 }
 
 export default PlayerManager;

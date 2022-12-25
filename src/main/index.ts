@@ -13,6 +13,8 @@ import UTILS from "../lib/_game/Managers/UTILS";
 export type array = Array<any>;
 export type MessageEvent = Event
 
+import { MooMoo } from "../app";
+
 export default class Game extends EventEmitter {
     // websocket
     ws: WebSocket;
@@ -38,6 +40,7 @@ export default class Game extends EventEmitter {
 
     // funcs
     onGameLoad: Function;
+    onPositionUpdate: Function;
 
     // msgpack vars
     msgpack: any = <any>{};
@@ -48,10 +51,11 @@ export default class Game extends EventEmitter {
 
         this.vars.gameLoaded = false;
     }
-    debug(message : any) {
+    debug(message: any) {
         this.emit("debug", message);
     }
 }
+
 
 hookWS();
 

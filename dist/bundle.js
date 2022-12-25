@@ -1,167 +1,191 @@
 (() => {
     "use strict";
-    var e = {
-        d: (t, r) => {
-            for (var n in r) e.o(r, n) && !e.o(t, n) && Object.defineProperty(t, n, {
-                enumerable: !0,
-                get: r[n]
-            });
-        },
-        o: (e, t) => Object.prototype.hasOwnProperty.call(e, t)
-    };
-    e.d({}, {
-        t: () => U
+    var __webpack_require__ = {};
+    (() => {
+        __webpack_require__.d = (exports, definition) => {
+            for (var key in definition) {
+                if (__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+                    Object.defineProperty(exports, key, {
+                        enumerable: true,
+                        get: definition[key]
+                    });
+                }
+            }
+        };
+    })();
+    (() => {
+        __webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
+    })();
+    var __webpack_exports__ = {};
+    __webpack_require__.d(__webpack_exports__, {
+        t: () => MooMoo
     });
-    const t = function() {
+    var EventEmitter = function() {
         function EventEmitter() {
             this._listeners = {};
         }
-        return EventEmitter.prototype.on = function(e, t) {
-            this._listeners[e] || (this._listeners[e] = []), this._listeners[e].push(t);
-        }, EventEmitter.prototype.emit = function(e) {
-            for (var t = [], r = 1; r < arguments.length; r++) t[r - 1] = arguments[r];
-            this._listeners[e] && this._listeners[e].forEach((function(e) {
-                return e.apply(void 0, t);
-            }));
-        }, EventEmitter.prototype.addEventListener = function(e, t) {
-            this.on(e, t);
-        }, EventEmitter;
-    }(), msgpack_decode = function(e) {
+        EventEmitter.prototype.on = function(event, listener) {
+            if (!this._listeners[event]) {
+                this._listeners[event] = [];
+            }
+            this._listeners[event].push(listener);
+        };
+        EventEmitter.prototype.emit = function(event) {
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            if (this._listeners[event]) {
+                this._listeners[event].forEach((function(listener) {
+                    return listener.apply(void 0, args);
+                }));
+            }
+        };
+        EventEmitter.prototype.addEventListener = function(event, listener) {
+            this.on(event, listener);
+        };
+        return EventEmitter;
+    }();
+    const funcs_EventEmitter = EventEmitter;
+    const decode = function(r) {
+        const e = 4294967296;
         let t = 0;
-        if (e instanceof ArrayBuffer && (e = new Uint8Array(e)), "object" != typeof e || void 0 === e.length) throw new Error("Invalid argument type: Expected a byte array (Array or Uint8Array) to deserialize.");
-        if (!e.length) throw new Error("Invalid argument: The byte array to deserialize is empty.");
-        e instanceof Uint8Array || (e = new Uint8Array(e));
-        let r = i();
-        return e.length, r;
+        if (r instanceof ArrayBuffer && (r = new Uint8Array(r)), "object" != typeof r || void 0 === r.length) throw new Error("Invalid argument type: Expected a byte array (Array or Uint8Array) to deserialize.");
+        if (!r.length) throw new Error("Invalid argument: The byte array to deserialize is empty.");
+        r instanceof Uint8Array || (r = new Uint8Array(r));
+        let n = i();
+        return r.length, n;
         function i() {
-            const r = e[t++];
-            if (r >= 0 && r <= 127) return r;
-            if (r >= 128 && r <= 143) return l(r - 128);
-            if (r >= 144 && r <= 159) return c(r - 144);
-            if (r >= 160 && r <= 191) return d(r - 160);
-            if (192 === r) return null;
-            if (193 === r) throw new Error("Invalid byte code 0xc1 found.");
-            if (194 === r) return !1;
-            if (195 === r) return !0;
-            if (196 === r) return a(-1, 1);
-            if (197 === r) return a(-1, 2);
-            if (198 === r) return a(-1, 4);
-            if (199 === r) return w(-1, 1);
-            if (200 === r) return w(-1, 2);
-            if (201 === r) return w(-1, 4);
-            if (202 === r) return u(4);
-            if (203 === r) return u(8);
-            if (204 === r) return o(1);
-            if (205 === r) return o(2);
-            if (206 === r) return o(4);
-            if (207 === r) return o(8);
-            if (208 === r) return f(1);
-            if (209 === r) return f(2);
-            if (210 === r) return f(4);
-            if (211 === r) return f(8);
-            if (212 === r) return w(1);
-            if (213 === r) return w(2);
-            if (214 === r) return w(4);
-            if (215 === r) return w(8);
-            if (216 === r) return w(16);
-            if (217 === r) return d(-1, 1);
-            if (218 === r) return d(-1, 2);
-            if (219 === r) return d(-1, 4);
-            if (220 === r) return c(-1, 2);
-            if (221 === r) return c(-1, 4);
-            if (222 === r) return l(-1, 2);
-            if (223 === r) return l(-1, 4);
-            if (r >= 224 && r <= 255) return r - 256;
-            throw new Error("Invalid byte value '" + r + "' at index " + (t - 1) + " in the MessagePack binary data (length " + e.length + "): Expecting a range of 0 to 255. This is not a byte array.");
+            const e = r[t++];
+            if (e >= 0 && e <= 127) return e;
+            if (e >= 128 && e <= 143) return l(e - 128);
+            if (e >= 144 && e <= 159) return c(e - 144);
+            if (e >= 160 && e <= 191) return d(e - 160);
+            if (192 === e) return null;
+            if (193 === e) throw new Error("Invalid byte code 0xc1 found.");
+            if (194 === e) return !1;
+            if (195 === e) return !0;
+            if (196 === e) return a(-1, 1);
+            if (197 === e) return a(-1, 2);
+            if (198 === e) return a(-1, 4);
+            if (199 === e) return w(-1, 1);
+            if (200 === e) return w(-1, 2);
+            if (201 === e) return w(-1, 4);
+            if (202 === e) return u(4);
+            if (203 === e) return u(8);
+            if (204 === e) return o(1);
+            if (205 === e) return o(2);
+            if (206 === e) return o(4);
+            if (207 === e) return o(8);
+            if (208 === e) return f(1);
+            if (209 === e) return f(2);
+            if (210 === e) return f(4);
+            if (211 === e) return f(8);
+            if (212 === e) return w(1);
+            if (213 === e) return w(2);
+            if (214 === e) return w(4);
+            if (215 === e) return w(8);
+            if (216 === e) return w(16);
+            if (217 === e) return d(-1, 1);
+            if (218 === e) return d(-1, 2);
+            if (219 === e) return d(-1, 4);
+            if (220 === e) return c(-1, 2);
+            if (221 === e) return c(-1, 4);
+            if (222 === e) return l(-1, 2);
+            if (223 === e) return l(-1, 4);
+            if (e >= 224 && e <= 255) return e - 256;
+            throw console.debug("msgpack array:", r), new Error("Invalid byte value '" + e + "' at index " + (t - 1) + " in the MessagePack binary data (length " + r.length + "): Expecting a range of 0 to 255. This is not a byte array.");
         }
-        function f(r) {
-            let n = 0, y = !0;
-            for (;r-- > 0; ) if (y) {
-                let r = e[t++];
-                n += 127 & r, 128 & r && (n -= 128), y = !1;
-            } else n *= 256, n += e[t++];
+        function f(e) {
+            let n = 0, i = !0;
+            for (;e-- > 0; ) if (i) {
+                let e = r[t++];
+                n += 127 & e, 128 & e && (n -= 128), i = !1;
+            } else n *= 256, n += r[t++];
             return n;
         }
-        function o(r) {
+        function o(e) {
             let n = 0;
-            for (;r-- > 0; ) n *= 256, n += e[t++];
+            for (;e-- > 0; ) n *= 256, n += r[t++];
             return n;
         }
-        function u(r) {
-            let n = new DataView(e.buffer, t, r);
-            return t += r, 4 === r ? n.getFloat32(0, !1) : 8 === r ? n.getFloat64(0, !1) : void 0;
+        function u(e) {
+            let n = new DataView(r.buffer, t, e);
+            return t += e, 4 === e ? n.getFloat32(0, !1) : 8 === e ? n.getFloat64(0, !1) : void 0;
         }
-        function a(r, n) {
-            r < 0 && (r = o(n));
-            let y = e.subarray(t, t + r);
-            return t += r, y;
+        function a(e, n) {
+            e < 0 && (e = o(n));
+            let i = r.subarray(t, t + e);
+            return t += e, i;
         }
-        function l(e, t) {
-            e < 0 && (e = o(t));
-            let r = {};
-            for (;e-- > 0; ) r[i()] = i();
-            return r;
+        function l(r, e) {
+            r < 0 && (r = o(e));
+            let t = {};
+            for (;r-- > 0; ) t[i()] = i();
+            return t;
         }
-        function c(e, t) {
-            e < 0 && (e = o(t));
-            let r = [];
-            for (;e-- > 0; ) r.push(i());
-            return r;
+        function c(r, e) {
+            r < 0 && (r = o(e));
+            let t = [];
+            for (;r-- > 0; ) t.push(i());
+            return t;
         }
-        function d(r, n) {
-            r < 0 && (r = o(n));
-            let y = t;
-            return t += r, function(e, t, r) {
-                let n = t, y = "";
-                for (r += t; n < r; ) {
-                    let t = e[n++];
-                    if (t > 127) if (t > 191 && t < 224) {
-                        if (n >= r) throw new Error("UTF-8 decode: incomplete 2-byte sequence");
-                        t = (31 & t) << 6 | 63 & e[n++];
-                    } else if (t > 223 && t < 240) {
-                        if (n + 1 >= r) throw new Error("UTF-8 decode: incomplete 3-byte sequence");
-                        t = (15 & t) << 12 | (63 & e[n++]) << 6 | 63 & e[n++];
+        function d(e, n) {
+            e < 0 && (e = o(n));
+            let i = t;
+            return t += e, function(r, e, t) {
+                let n = e, i = "";
+                for (t += e; n < t; ) {
+                    let e = r[n++];
+                    if (e > 127) if (e > 191 && e < 224) {
+                        if (n >= t) throw new Error("UTF-8 decode: incomplete 2-byte sequence");
+                        e = (31 & e) << 6 | 63 & r[n++];
+                    } else if (e > 223 && e < 240) {
+                        if (n + 1 >= t) throw new Error("UTF-8 decode: incomplete 3-byte sequence");
+                        e = (15 & e) << 12 | (63 & r[n++]) << 6 | 63 & r[n++];
                     } else {
-                        if (!(t > 239 && t < 248)) throw new Error("UTF-8 decode: unknown multibyte start 0x" + t.toString(16) + " at index " + (n - 1));
-                        if (n + 2 >= r) throw new Error("UTF-8 decode: incomplete 4-byte sequence");
-                        t = (7 & t) << 18 | (63 & e[n++]) << 12 | (63 & e[n++]) << 6 | 63 & e[n++];
+                        if (!(e > 239 && e < 248)) throw new Error("UTF-8 decode: unknown multibyte start 0x" + e.toString(16) + " at index " + (n - 1));
+                        if (n + 2 >= t) throw new Error("UTF-8 decode: incomplete 4-byte sequence");
+                        e = (7 & e) << 18 | (63 & r[n++]) << 12 | (63 & r[n++]) << 6 | 63 & r[n++];
                     }
-                    if (t <= 65535) y += String.fromCharCode(t); else {
-                        if (!(t <= 1114111)) throw new Error("UTF-8 decode: code point 0x" + t.toString(16) + " exceeds UTF-16 reach");
-                        t -= 65536, y += String.fromCharCode(t >> 10 | 55296), y += String.fromCharCode(1023 & t | 56320);
+                    if (e <= 65535) i += String.fromCharCode(e); else {
+                        if (!(e <= 1114111)) throw new Error("UTF-8 decode: code point 0x" + e.toString(16) + " exceeds UTF-16 reach");
+                        e -= 65536, i += String.fromCharCode(e >> 10 | 55296), i += String.fromCharCode(1023 & e | 56320);
                     }
                 }
-                return y;
-            }(e, y, r);
+                return i;
+            }(r, i, e);
         }
-        function w(e, r) {
-            e < 0 && (e = o(r));
-            let n = o(1), y = a(e);
-            return 255 === n ? function(e) {
-                if (4 === e.length) {
-                    let t = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
-                    return new Date(1e3 * t);
+        function w(r, n) {
+            r < 0 && (r = o(n));
+            let i = o(1), u = a(r);
+            return 255 === i ? function(r) {
+                if (4 === r.length) {
+                    let e = (r[0] << 24 >>> 0) + (r[1] << 16 >>> 0) + (r[2] << 8 >>> 0) + r[3];
+                    return new Date(1e3 * e);
                 }
-                if (8 === e.length) {
-                    let t = (e[0] << 22 >>> 0) + (e[1] << 14 >>> 0) + (e[2] << 6 >>> 0) + (e[3] >>> 2), r = 4294967296 * (3 & e[3]) + (e[4] << 24 >>> 0) + (e[5] << 16 >>> 0) + (e[6] << 8 >>> 0) + e[7];
-                    return new Date(1e3 * r + t / 1e6);
+                if (8 === r.length) {
+                    let t = (r[0] << 22 >>> 0) + (r[1] << 14 >>> 0) + (r[2] << 6 >>> 0) + (r[3] >>> 2), n = (3 & r[3]) * e + (r[4] << 24 >>> 0) + (r[5] << 16 >>> 0) + (r[6] << 8 >>> 0) + r[7];
+                    return new Date(1e3 * n + t / 1e6);
                 }
-                if (12 === e.length) {
-                    let r = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
+                if (12 === r.length) {
+                    let e = (r[0] << 24 >>> 0) + (r[1] << 16 >>> 0) + (r[2] << 8 >>> 0) + r[3];
                     t -= 8;
                     let n = f(8);
-                    return new Date(1e3 * n + r / 1e6);
+                    return new Date(1e3 * n + e / 1e6);
                 }
                 throw new Error("Invalid data length for a date value.");
-            }(y) : {
-                type: n,
-                data: y
+            }(u) : {
+                type: i,
+                data: u
             };
         }
-    }, msgpack_encode = function(e) {
+    };
+    const msgpack_decode = decode;
+    const encode = function(e) {
         const t = 4294967296;
-        let r, n, y = new Uint8Array(128), p = 0;
-        return a(e), y.subarray(0, p);
+        let n, r, i = new Uint8Array(128), l = 0;
+        return a(e), i.subarray(0, l);
         function a(e) {
             switch (typeof e) {
               case "undefined":
@@ -177,53 +201,53 @@
               case "number":
                 !function(e) {
                     if (isFinite(e) && Math.floor(e) === e) if (e >= 0 && e <= 127) s(e); else if (e < 0 && e >= -32) s(e); else if (e > 0 && e <= 255) c([ 204, e ]); else if (e >= -128 && e <= 127) c([ 208, e ]); else if (e > 0 && e <= 65535) c([ 205, e >>> 8, e ]); else if (e >= -32768 && e <= 32767) c([ 209, e >>> 8, e ]); else if (e > 0 && e <= 4294967295) c([ 206, e >>> 24, e >>> 16, e >>> 8, e ]); else if (e >= -2147483648 && e <= 2147483647) c([ 210, e >>> 24, e >>> 16, e >>> 8, e ]); else if (e > 0 && e <= 0x10000000000000000) {
-                        let r = e / t, n = e % t;
-                        c([ 211, r >>> 24, r >>> 16, r >>> 8, r, n >>> 24, n >>> 16, n >>> 8, n ]);
-                    } else e >= -0x8000000000000000 && e <= 0x8000000000000000 ? (s(211), u(e)) : c(e < 0 ? [ 211, 128, 0, 0, 0, 0, 0, 0, 0 ] : [ 207, 255, 255, 255, 255, 255, 255, 255, 255 ]); else n || (r = new ArrayBuffer(8), 
-                    n = new DataView(r)), n.setFloat64(0, e), s(203), c(new Uint8Array(r));
+                        let n = e / t, r = e % t;
+                        c([ 211, n >>> 24, n >>> 16, n >>> 8, n, r >>> 24, r >>> 16, r >>> 8, r ]);
+                    } else e >= -0x8000000000000000 && e <= 0x8000000000000000 ? (s(211), u(e)) : c(e < 0 ? [ 211, 128, 0, 0, 0, 0, 0, 0, 0 ] : [ 207, 255, 255, 255, 255, 255, 255, 255, 255 ]); else r || (n = new ArrayBuffer(8), 
+                    r = new DataView(n)), r.setFloat64(0, e), s(203), c(new Uint8Array(n));
                 }(e);
                 break;
 
               case "string":
                 !function(e) {
                     let t = function(e) {
-                        let t = !0, r = e.length;
-                        for (let n = 0; n < r; n++) if (e.charCodeAt(n) > 127) {
+                        let t = !0, n = e.length;
+                        for (let r = 0; r < n; r++) if (e.charCodeAt(r) > 127) {
                             t = !1;
                             break;
                         }
-                        let n = 0, y = new Uint8Array(e.length * (t ? 1 : 4));
-                        for (let t = 0; t !== r; t++) {
-                            let p = e.charCodeAt(t);
-                            if (p < 128) y[n++] = p; else {
-                                if (p < 2048) y[n++] = p >> 6 | 192; else {
-                                    if (p > 55295 && p < 56320) {
-                                        if (++t >= r) throw new Error("UTF-8 encode: incomplete surrogate pair");
-                                        let m = e.charCodeAt(t);
-                                        if (m < 56320 || m > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + m.toString(16) + " at index " + t + " out of range");
-                                        p = 65536 + ((1023 & p) << 10) + (1023 & m), y[n++] = p >> 18 | 240, y[n++] = p >> 12 & 63 | 128;
-                                    } else y[n++] = p >> 12 | 224;
-                                    y[n++] = p >> 6 & 63 | 128;
+                        let r = 0, i = new Uint8Array(e.length * (t ? 1 : 4));
+                        for (let t = 0; t !== n; t++) {
+                            let l = e.charCodeAt(t);
+                            if (l < 128) i[r++] = l; else {
+                                if (l < 2048) i[r++] = l >> 6 | 192; else {
+                                    if (l > 55295 && l < 56320) {
+                                        if (++t >= n) throw new Error("UTF-8 encode: incomplete surrogate pair");
+                                        let a = e.charCodeAt(t);
+                                        if (a < 56320 || a > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + a.toString(16) + " at index " + t + " out of range");
+                                        l = 65536 + ((1023 & l) << 10) + (1023 & a), i[r++] = l >> 18 | 240, i[r++] = l >> 12 & 63 | 128;
+                                    } else i[r++] = l >> 12 | 224;
+                                    i[r++] = l >> 6 & 63 | 128;
                                 }
-                                y[n++] = 63 & p | 128;
+                                i[r++] = 63 & l | 128;
                             }
                         }
-                        return t ? y : y.subarray(0, n);
-                    }(e), r = t.length;
-                    r <= 31 ? s(160 + r) : c(r <= 255 ? [ 217, r ] : r <= 65535 ? [ 218, r >>> 8, r ] : [ 219, r >>> 24, r >>> 16, r >>> 8, r ]), 
+                        return t ? i : i.subarray(0, r);
+                    }(e), n = t.length;
+                    n <= 31 ? s(160 + n) : c(n <= 255 ? [ 217, n ] : n <= 65535 ? [ 218, n >>> 8, n ] : [ 219, n >>> 24, n >>> 16, n >>> 8, n ]), 
                     c(t);
                 }(e);
                 break;
 
               case "object":
                 null === e ? o() : e instanceof Date ? function(e) {
-                    let r = e.getTime() / 1e3;
-                    if (0 === e.getMilliseconds() && r >= 0 && r < 4294967296) c([ 214, 255, r >>> 24, r >>> 16, r >>> 8, r ]); else if (r >= 0 && r < 17179869184) {
-                        let n = 1e6 * e.getMilliseconds();
-                        c([ 215, 255, n >>> 22, n >>> 14, n >>> 6, n << 2 >>> 0 | r / t, r >>> 24, r >>> 16, r >>> 8, r ]);
+                    let n = e.getTime() / 1e3;
+                    if (0 === e.getMilliseconds() && n >= 0 && n < 4294967296) c([ 214, 255, n >>> 24, n >>> 16, n >>> 8, n ]); else if (n >= 0 && n < 17179869184) {
+                        let r = 1e6 * e.getMilliseconds();
+                        c([ 215, 255, r >>> 22, r >>> 14, r >>> 6, r << 2 >>> 0 | n / t, n >>> 24, n >>> 16, n >>> 8, n ]);
                     } else {
                         let t = 1e6 * e.getMilliseconds();
-                        c([ 199, 12, 255, t >>> 24, t >>> 16, t >>> 8, t ]), u(r);
+                        c([ 199, 12, 255, t >>> 24, t >>> 16, t >>> 8, t ]), u(n);
                     }
                 }(e) : Array.isArray(e) ? f(e) : e instanceof Uint8Array || e instanceof Uint8ClampedArray ? function(e) {
                     let t = e.length;
@@ -231,7 +255,7 @@
                     c(e);
                 }(e) : e instanceof Int8Array || e instanceof Int16Array || e instanceof Uint16Array || e instanceof Int32Array || e instanceof Uint32Array || e instanceof Float32Array || e instanceof Float64Array ? f(e) : function(e) {
                     let t = 0;
-                    for (let r in e) t++;
+                    for (let n in e) t++;
                     t <= 15 ? s(128 + t) : c(t <= 65535 ? [ 222, t >>> 8, t ] : [ 223, t >>> 24, t >>> 16, t >>> 8, t ]);
                     for (let t in e) a(t), a(e[t]);
                 }(e);
@@ -243,55 +267,85 @@
         function f(e) {
             let t = e.length;
             t <= 15 ? s(144 + t) : c(t <= 65535 ? [ 220, t >>> 8, t ] : [ 221, t >>> 24, t >>> 16, t >>> 8, t ]);
-            for (let r = 0; r < t; r++) a(e[r]);
+            for (let n = 0; n < t; n++) a(e[n]);
         }
         function s(e) {
-            if (y.length < p + 1) {
-                let e = 2 * y.length;
-                for (;e < p + 1; ) e *= 2;
+            if (i.length < l + 1) {
+                let e = 2 * i.length;
+                for (;e < l + 1; ) e *= 2;
                 let t = new Uint8Array(e);
-                t.set(y), y = t;
+                t.set(i), i = t;
             }
-            y[p] = e, p++;
+            i[l] = e, l++;
         }
         function c(e) {
-            if (y.length < p + e.length) {
-                let t = 2 * y.length;
-                for (;t < p + e.length; ) t *= 2;
-                let r = new Uint8Array(t);
-                r.set(y), y = r;
+            if (i.length < l + e.length) {
+                let t = 2 * i.length;
+                for (;t < l + e.length; ) t *= 2;
+                let n = new Uint8Array(t);
+                n.set(i), i = n;
             }
-            y.set(e, p), p += e.length;
+            i.set(e, l), l += e.length;
         }
         function u(e) {
-            let r, n;
-            e >= 0 ? (r = e / t, n = e % t) : (e++, r = Math.abs(e) / t, n = Math.abs(e) % t, 
-            r = ~r, n = ~n), c([ r >>> 24, r >>> 16, r >>> 8, r, n >>> 24, n >>> 16, n >>> 8, n ]);
+            let n, r;
+            e >= 0 ? (n = e / t, r = e % t) : (e++, n = Math.abs(e) / t, r = Math.abs(e) % t, 
+            n = ~n, r = ~r), c([ n >>> 24, n >>> 16, n >>> 8, n, r >>> 24, r >>> 16, r >>> 8, r ]);
         }
-    }, r = function() {
-        function Alliance(e, t) {
-            this.Leader = e, this.Name = t;
+    };
+    const msgpack_encode = encode;
+    var Alliance = function() {
+        function Alliance(leader, name) {
+            this.Leader = leader;
+            this.Name = name;
         }
-        return Alliance.prototype.setAliancePlayers = function(e) {
-            this.Members = e;
-        }, Alliance;
-    }(), n = function Player(e) {
-        this.sid = e, this.resources = {
-            wood: 0,
-            stone: 0,
-            food: 0,
-            points: 0,
-            kills: 0
+        Alliance.prototype.setAliancePlayers = function(players) {
+            this.Members = players;
         };
-    }, y = function place(e, t) {
-        var r = U.myPlayer.weaponIndex;
-        U.sendPacket("5", e, t), U.sendPacket("c", 1, t), U.sendPacket("c", 0, t), U.sendPacket("5", r, !0);
-    }, p = function chat(e) {
-        U.sendPacket("ch", e);
-    }, m = [ {
+        return Alliance;
+    }();
+    const types_Alliance = Alliance;
+    var Player = function() {
+        function Player(sid) {
+            this.sid = sid;
+            this.resources = {
+                wood: 0,
+                stone: 0,
+                food: 0,
+                points: 0,
+                kills: 0
+            };
+        }
+        return Player;
+    }();
+    const types_Player = Player;
+    function setInitData(data) {
+        var teams = data.teams;
+        for (var i = 0; i < teams.length; i++) {
+            var team = teams[i];
+            var name_1 = team.sid;
+            var owner = team.owner;
+            var alliance = new types_Alliance(new types_Player(owner), name_1);
+            MooMoo.teams.push(alliance);
+        }
+    }
+    const server_setInitData = setInitData;
+    function place(id, angle) {
+        var weapon = MooMoo.myPlayer.weaponIndex;
+        MooMoo.sendPacket("5", id, angle);
+        MooMoo.sendPacket("c", 1, angle);
+        MooMoo.sendPacket("c", 0, angle);
+        MooMoo.sendPacket("5", weapon, true);
+    }
+    const features_place = place;
+    function chat(message) {
+        MooMoo.sendPacket("ch", message);
+    }
+    const features_chat = chat;
+    var hats = [ {
         id: 45,
         name: "Shame!",
-        dontSell: !0,
+        dontSell: true,
         price: 0,
         scale: 120,
         desc: "hacks are for losers"
@@ -422,7 +476,7 @@
         price: 2500,
         scale: 120,
         desc: "have more control while in water",
-        watrImm: !0
+        watrImm: true
     }, {
         id: 1,
         name: "Marksman Cap",
@@ -527,7 +581,7 @@
     }, {
         id: 14,
         name: "Windmill Hat",
-        topSprite: !0,
+        topSprite: true,
         price: 1e4,
         scale: 120,
         desc: "generates points while worn",
@@ -535,7 +589,7 @@
     }, {
         id: 11,
         name: "Spike Gear",
-        topSprite: !0,
+        topSprite: true,
         price: 1e4,
         scale: 120,
         desc: "deal damage to players that damage you",
@@ -543,7 +597,7 @@
     }, {
         id: 53,
         name: "Turret Gear",
-        topSprite: !0,
+        topSprite: true,
         price: 1e4,
         scale: 120,
         desc: "you become a walking turret",
@@ -603,28 +657,58 @@
         price: 2e4,
         scale: 120,
         desc: "Go invisible when not moving. Can't eat. Increased speed",
-        noEat: !0,
+        noEat: true,
         spdMult: 1.1,
         invisTimer: 1e3
-    } ], h = function equipHat(e) {
-        if ("number" == typeof e) !function equipHatById(e) {
-            var t = !1;
-            if (m.find((function(r) {
-                r.id == e && (t = !0, U.sendPacket("13c", 0, e, 0));
-            })), !t) try {
-                throw new Error("Error at equipHatById: Hat with id " + e + " does not exist");
-            } catch (e) {}
-        }(e); else if ("string" == typeof e) !function equipHatByName(e) {
-            var t = !1;
-            if (m.find((function(r) {
-                r.name == e && (t = !0, U.sendPacket("13c", 0, r.id, 0));
-            })), !t) try {
-                throw new Error("Error at equipHatByName: Hat with name " + e + " does not exist");
-            } catch (e) {}
-        }(e); else try {
-            throw new Error("Error at equipHat: hatData must be a number or string");
-        } catch (e) {}
-    }, g = [ {
+    } ];
+    const storage_hats = hats;
+    function equipHatById(id) {
+        var hatexists = false;
+        storage_hats.find((function(hat) {
+            if (hat.id == id) {
+                hatexists = true;
+                MooMoo.sendPacket("13c", 0, id, 0);
+            }
+        }));
+        if (!hatexists) {
+            try {
+                throw new Error("Error at equipHatById: Hat with id " + id + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function equipHatByName(name) {
+        var hatexists = false;
+        storage_hats.find((function(hat) {
+            if (hat.name == name) {
+                hatexists = true;
+                MooMoo.sendPacket("13c", 0, hat.id, 0);
+            }
+        }));
+        if (!hatexists) {
+            try {
+                throw new Error("Error at equipHatByName: Hat with name " + name + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function equipHat(hatData) {
+        if (typeof hatData == "number") {
+            equipHatById(hatData);
+        } else if (typeof hatData == "string") {
+            equipHatByName(hatData);
+        } else {
+            try {
+                throw new Error("Error at equipHat: hatData must be a number or string");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    const features_equipHat = equipHat;
+    var accessories = [ {
         id: 12,
         name: "Snowball",
         price: 1e3,
@@ -734,7 +818,7 @@
         name: "Sawblade",
         price: 12e3,
         scale: 90,
-        spin: !0,
+        spin: true,
         xOff: 0,
         desc: "deal damage to players that damage you",
         dmg: .15
@@ -770,416 +854,779 @@
         xOff: 26,
         desc: "deal damage to players that damage you",
         dmg: .25
-    } ], b = function equipAccessory(e) {
-        if ("number" == typeof e) !function equipAccessoryById(e) {
-            var t = !1;
-            if (g.find((function(r) {
-                r.id == e && (t = !0, U.sendPacket("13c", 0, e, 1));
-            })), !t) try {
-                throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
-            } catch (e) {}
-        }(e); else if ("string" == typeof e) !function equipAccessoryByName(e) {
-            var t = !1;
-            if (g.find((function(r) {
-                r.name == e && (t = !0, U.sendPacket("13c", 0, r.id, 1));
-            })), !t) try {
-                throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
-            } catch (e) {}
-        }(e); else try {
-            throw new Error("Error at equipAccessory: accessoryData must be a number or string");
-        } catch (e) {}
-    }, P = function unequipHat() {
-        U.sendPacket("13c", 0, 0, 0);
-    }, v = function unequipAccessory() {
-        U.sendPacket("13c", 0, 0, 1);
-    }, M = function buyHat(e) {
-        if ("number" == typeof e) !function buyHatById(e) {
-            var t = !1;
-            if (m.find((function(r) {
-                r.id == e && (t = !0, U.sendPacket("13c", 1, e, 0));
-            })), !t) try {
-                throw new Error("Error at buyHatById: Hat with id " + e + " does not exist");
-            } catch (e) {}
-        }(e); else if ("string" == typeof e) !function buyHatByName(e) {
-            var t = !1;
-            if (m.find((function(r) {
-                r.name == e && (t = !0, U.sendPacket("13c", 1, r.id, 0));
-            })), !t) try {
-                throw new Error("Error at buyHatByName: Hat with name " + e + " does not exist");
-            } catch (e) {}
-        }(e); else try {
-            throw new Error("Error at buyHat: hatData must be a number or string");
-        } catch (e) {}
-    }, k = function buyAccessory_equipAccessory(e) {
-        if ("number" == typeof e) !function buyAccessory_equipAccessoryById(e) {
-            var t = !1;
-            if (g.find((function(r) {
-                r.id == e && (t = !0, U.sendPacket("13c", 1, e, 1));
-            })), !t) try {
-                throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
-            } catch (e) {}
-        }(e); else if ("string" == typeof e) !function buyAccessory_equipAccessoryByName(e) {
-            var t = !1;
-            if (g.find((function(r) {
-                r.name == e && (t = !0, U.sendPacket("13c", 1, r.id, 1));
-            })), !t) try {
-                throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
-            } catch (e) {}
-        }(e); else try {
-            throw new Error("Error at equipAccessory: accessoryData must be a number or string");
-        } catch (e) {}
-    }, A = function chunk(e, t) {
-        for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
-        return r;
-    }, S = function GameObject(e) {
-        this.sid = e;
-    };
-    var E = !1;
-    const B = function() {
+    } ];
+    const storage_accessories = accessories;
+    function equipAccessoryById(id) {
+        var accessoryexists = false;
+        storage_accessories.find((function(accessory) {
+            if (accessory.id == id) {
+                accessoryexists = true;
+                MooMoo.sendPacket("13c", 0, id, 1);
+            }
+        }));
+        if (!accessoryexists) {
+            try {
+                throw new Error("Error at equipAccessoryById: Accessory with id " + id + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function equipAccessoryByName(name) {
+        var accessoryexists = false;
+        storage_accessories.find((function(accessory) {
+            if (accessory.name == name) {
+                accessoryexists = true;
+                MooMoo.sendPacket("13c", 0, accessory.id, 1);
+            }
+        }));
+        if (!accessoryexists) {
+            try {
+                throw new Error("Error at equipAccessoryByName: Accessory with name " + name + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function equipAccessory(accessoryData) {
+        if (typeof accessoryData == "number") {
+            equipAccessoryById(accessoryData);
+        } else if (typeof accessoryData == "string") {
+            equipAccessoryByName(accessoryData);
+        } else {
+            try {
+                throw new Error("Error at equipAccessory: accessoryData must be a number or string");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    const features_equipAccessory = equipAccessory;
+    function unequipHat() {
+        MooMoo.sendPacket("13c", 0, 0, 0);
+    }
+    const features_unequipHat = unequipHat;
+    function unequipAccessory() {
+        MooMoo.sendPacket("13c", 0, 0, 1);
+    }
+    const features_unequipAccessory = unequipAccessory;
+    function buyHatById(id) {
+        var hatexists = false;
+        storage_hats.find((function(hat) {
+            if (hat.id == id) {
+                hatexists = true;
+                MooMoo.sendPacket("13c", 1, id, 0);
+            }
+        }));
+        if (!hatexists) {
+            try {
+                throw new Error("Error at buyHatById: Hat with id " + id + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function buyHatByName(name) {
+        var hatexists = false;
+        storage_hats.find((function(hat) {
+            if (hat.name == name) {
+                hatexists = true;
+                MooMoo.sendPacket("13c", 1, hat.id, 0);
+            }
+        }));
+        if (!hatexists) {
+            try {
+                throw new Error("Error at buyHatByName: Hat with name " + name + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function buyHat(hatData) {
+        if (typeof hatData == "number") {
+            buyHatById(hatData);
+        } else if (typeof hatData == "string") {
+            buyHatByName(hatData);
+        } else {
+            try {
+                throw new Error("Error at buyHat: hatData must be a number or string");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    const features_buyHat = buyHat;
+    function buyAccessory_equipAccessoryById(id) {
+        var accessoryexists = false;
+        storage_accessories.find((function(accessory) {
+            if (accessory.id == id) {
+                accessoryexists = true;
+                MooMoo.sendPacket("13c", 1, id, 1);
+            }
+        }));
+        if (!accessoryexists) {
+            try {
+                throw new Error("Error at equipAccessoryById: Accessory with id " + id + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function buyAccessory_equipAccessoryByName(name) {
+        var accessoryexists = false;
+        storage_accessories.find((function(accessory) {
+            if (accessory.name == name) {
+                accessoryexists = true;
+                MooMoo.sendPacket("13c", 1, accessory.id, 1);
+            }
+        }));
+        if (!accessoryexists) {
+            try {
+                throw new Error("Error at equipAccessoryByName: Accessory with name " + name + " does not exist");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    function buyAccessory_equipAccessory(accessoryData) {
+        if (typeof accessoryData == "number") {
+            buyAccessory_equipAccessoryById(accessoryData);
+        } else if (typeof accessoryData == "string") {
+            buyAccessory_equipAccessoryByName(accessoryData);
+        } else {
+            try {
+                throw new Error("Error at equipAccessory: accessoryData must be a number or string");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    const buyAccessory = buyAccessory_equipAccessory;
+    function setupGame(sid) {
+        MooMoo.myPlayer = {};
+        MooMoo.myPlayer.sid = sid;
+        MooMoo.myPlayer.place = features_place;
+        MooMoo.myPlayer.chat = features_chat;
+        MooMoo.myPlayer.equipHat = features_equipHat;
+        MooMoo.myPlayer.equipAccessory = features_equipAccessory;
+        MooMoo.myPlayer.unequipHat = features_unequipHat;
+        MooMoo.myPlayer.unequipAccessory = features_unequipAccessory;
+        MooMoo.myPlayer.buyHat = features_buyHat;
+        MooMoo.myPlayer.buyAccessory = buyAccessory;
+        MooMoo.vars.gameLoaded = true;
+        if (MooMoo.onGameLoad) MooMoo.onGameLoad();
+    }
+    const server_setupGame = setupGame;
+    function addPlayer(data, isYou) {
+        var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(data[1]);
+        if (!tmpPlayer) {
+            tmpPlayer = new types_Player(data[1]);
+            tmpPlayer.name = data[2];
+            tmpPlayer.id = data[0];
+            MooMoo.GamePlayerManager.addPlayer(tmpPlayer);
+        }
+        MooMoo.debug("Player " + tmpPlayer.name + " has joined the game.");
+        if (isYou) {
+            console.log("You are now in game!");
+        }
+    }
+    const server_addPlayer = addPlayer;
+    function removePlayer(id) {
+        MooMoo.GamePlayerManager.removePlayerById(id);
+        MooMoo.debug("Player " + id + " has left the game.");
+    }
+    const server_removePlayer = removePlayer;
+    function chunk(arr, size) {
+        var chunks = [];
+        for (var i = 0; i < arr.length; i += size) {
+            chunks.push(arr.slice(i, i + size));
+        }
+        return chunks;
+    }
+    const funcs_chunk = chunk;
+    function cacheItems() {
+        MooMoo.myPlayer.inventory = {};
+        var inventoryCategories = [ {
+            category: "primary",
+            start: 0,
+            end: 9
+        }, {
+            category: "secondary",
+            start: 9,
+            end: 16
+        }, {
+            category: "food",
+            start: 16,
+            end: 19,
+            subtract: true
+        }, {
+            category: "wall",
+            start: 19,
+            end: 22,
+            subtract: true
+        }, {
+            category: "spike",
+            start: 22,
+            end: 26,
+            subtract: true
+        }, {
+            category: "mill",
+            start: 26,
+            end: 29,
+            subtract: true
+        }, {
+            category: "mine",
+            start: 29,
+            end: 31,
+            subtract: true
+        }, {
+            category: "boostPad",
+            start: 31,
+            end: 33,
+            subtract: true
+        }, {
+            category: "trap",
+            start: 31,
+            end: 33,
+            subtract: true
+        }, {
+            category: "turret",
+            start: 33,
+            end: 36,
+            subtract: true
+        }, {
+            category: "spawnPad",
+            start: 36,
+            end: 37,
+            subtract: true
+        } ];
+        for (var i = 0; i < inventoryCategories.length; i++) {
+            var _a = inventoryCategories[i], category = _a.category, start = _a.start, end = _a.end, subtract = _a.subtract;
+            for (var j = start; j < end; j++) {
+                var element = document.getElementById("actionBarItem".concat(j));
+                if (element && element.offsetParent !== null) {
+                    MooMoo.myPlayer.inventory[category] = subtract ? j - 16 : j;
+                    break;
+                }
+            }
+        }
+    }
+    const funcs_cacheItems = cacheItems;
+    var GameObject = function() {
+        function GameObject(sid) {
+            this.sid = sid;
+        }
+        return GameObject;
+    }();
+    const types_GameObject = GameObject;
+    function updatePlayers(data) {
+        var arr = funcs_chunk(data, 13);
+        MooMoo.ActivePlayerManager.clearPlayers();
+        arr.forEach((function(playerData) {
+            var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(playerData[0]);
+            if (!tmpPlayer) {
+                tmpPlayer = new types_Player(playerData[0]);
+            }
+            tmpPlayer.sid = playerData[0];
+            tmpPlayer.x = playerData[1];
+            tmpPlayer.y = playerData[2];
+            tmpPlayer.dir = playerData[3];
+            tmpPlayer.buildIndex = playerData[4];
+            tmpPlayer.weaponIndex = playerData[5];
+            tmpPlayer.weaponVariant = playerData[6];
+            tmpPlayer.team = playerData[7];
+            tmpPlayer.isLeader = playerData[8];
+            tmpPlayer.skinIndex = playerData[9];
+            tmpPlayer.tailIndex = playerData[10];
+            tmpPlayer.iconIndex = playerData[11];
+            tmpPlayer.zIndex = playerData[12];
+            MooMoo.ActivePlayerManager.addPlayer(tmpPlayer);
+            if (tmpPlayer.sid === MooMoo.myPlayer.sid) {
+                Object.assign(MooMoo.myPlayer, tmpPlayer);
+            }
+        }));
+        funcs_cacheItems();
+    }
+    function updateHookPosition(data) {
+        if (this instanceof types_Player || this instanceof types_GameObject || this.isAI || !this.id) {} else {
+            var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(this.sid);
+            if (tmpPlayer) {
+                tmpPlayer.x = data;
+                tmpPlayer.y = this.y;
+                MooMoo.onPositionUpdate(tmpPlayer);
+            }
+            MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
+        }
+    }
+    const server_updatePlayers = updatePlayers;
+    function updateLeaderboard(data) {
+        MooMoo.LeaderboardManager.updateLeaderboard(data);
+    }
+    const server_updateLeaderboard = updateLeaderboard;
+    function loadGameObject(data) {
+        var arr = funcs_chunk(data, 8);
+        arr.forEach((function(obj) {
+            var tmpObj = MooMoo.GameObjectManager.getGameObjectBySid(obj[0]);
+            if (!tmpObj) {
+                tmpObj = new types_GameObject(obj[0]);
+            }
+            tmpObj.x = obj[1];
+            tmpObj.y = obj[2];
+            tmpObj.ownerSid = obj[3];
+            tmpObj.type = obj[4];
+            tmpObj.sid = obj[0];
+            tmpObj.dir = obj[5];
+            tmpObj.scale = obj[6];
+            tmpObj.idk = obj[7];
+            MooMoo.GameObjectManager.addObject(tmpObj);
+        }));
+    }
+    const server_loadGameObject = loadGameObject;
+    function killObject(sid) {
+        MooMoo.GameObjectManager.removeObjectBySid(sid);
+    }
+    const server_killObject = killObject;
+    function killObjects(ownerSid) {
+        MooMoo.GameObjectManager.removeObjectsByOwnerSid(ownerSid);
+    }
+    const server_killObjects = killObjects;
+    function updateHealth(sid, value) {
+        console.debug("Updating health of player with sid " + sid + " to " + value);
+        var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(sid);
+        if (tmpPlayer) {
+            tmpPlayer.health = value;
+        }
+    }
+    const server_updateHealth = updateHealth;
+    function updatePlayerValue(id, value) {
+        var player = MooMoo.myPlayer.resources;
+        player[id] = value;
+        MooMoo.myPlayer.resources = player;
+        console.log(MooMoo.myPlayer.resources);
+    }
+    const server_updatePlayerValue = updatePlayerValue;
+    function handleServerPackets(packet, data) {
+        switch (packet) {
+          case "id":
+            server_setInitData(data[0]);
+            break;
+
+          case "d":
+            break;
+
+          case "1":
+            server_setupGame(data[0]);
+            break;
+
+          case "2":
+            server_addPlayer(data[0], data[1]);
+            break;
+
+          case "4":
+            server_removePlayer(data[0]);
+            break;
+
+          case "33":
+            server_updatePlayers(data[0]);
+            break;
+
+          case "5":
+            server_updateLeaderboard(data[0]);
+            break;
+
+          case "6":
+            server_loadGameObject(data[0]);
+            break;
+
+          case "a":
+            break;
+
+          case "aa":
+            break;
+
+          case "7":
+            break;
+
+          case "8":
+            break;
+
+          case "sp":
+            break;
+
+          case "9":
+            server_updatePlayerValue(data[0], data[1]);
+            break;
+
+          case "h":
+            server_updateHealth(data[0], data[1]);
+            break;
+
+          case "11":
+            break;
+
+          case "12":
+            server_killObject(data[0]);
+            break;
+
+          case "13":
+            server_killObjects(data[0]);
+            break;
+
+          case "14":
+            break;
+
+          case "15":
+            break;
+
+          case "16":
+            break;
+
+          case "17":
+            break;
+
+          case "18":
+            break;
+
+          case "19":
+            break;
+
+          case "20":
+            break;
+
+          case "ac":
+            break;
+
+          case "ad":
+            break;
+
+          case "an":
+            break;
+
+          case "st":
+            break;
+
+          case "sa":
+            break;
+
+          case "us":
+            break;
+
+          case "ch":
+            break;
+
+          case "mm":
+            break;
+
+          case "t":
+            break;
+
+          case "p":
+            break;
+
+          case "pp":
+            break;
+
+          default:
+            console.log("Unknown packet: " + packet);
+        }
+        MooMoo.emit("packet", {
+            packet,
+            data
+        });
+    }
+    function sendChat(message) {
+        var commandManager = MooMoo.CommandManager;
+        var prefix = commandManager.prefix;
+        if (message.startsWith(prefix)) {
+            var commands = commandManager.commands;
+            var command = message.split(" ")[0].slice(prefix.length);
+            var args = message.split(" ").slice(1);
+            var Command = commands[command];
+            if (Command) {
+                Command.run(Command, args);
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
+    const client_sendChat = sendChat;
+    function handleClientPackets(packet, data) {
+        var doSend = true;
+        switch (packet) {
+          case "ch":
+            {
+                doSend = client_sendChat(data[0]);
+            }
+        }
+        return doSend;
+    }
+    const ws_handleClientPackets = handleClientPackets;
+    var _onmessage = false;
+    function hookWS() {
+        WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
+            apply: function(target, thisArg, args) {
+                MooMoo.ws = thisArg;
+                MooMoo.sendPacket = function(type) {
+                    var data = Array.prototype.slice.call(arguments, 1);
+                    var binary = msgpack_encode([ type, data ]);
+                    MooMoo.ws.send(binary);
+                };
+                if (MooMoo.ws.readyState !== 1) return true;
+                if (!_onmessage) {
+                    _onmessage = true;
+                    MooMoo.ws.addEventListener("message", (function(e) {
+                        var data = e.data;
+                        var decoded = msgpack_decode(data);
+                        var packet = decoded[0], packetData = decoded[1].slice(0);
+                        handleServerPackets(packet, packetData);
+                    }));
+                }
+                if (args && args[0]) {
+                    var decoded = msgpack_decode(args[0]);
+                    var packet = decoded[0], packetData = decoded[1].slice(0);
+                    var doSend = ws_handleClientPackets(packet, packetData);
+                    if (!doSend) return true;
+                }
+                return Reflect.apply(target, thisArg, args);
+            }
+        });
+    }
+    var PlayerManager = function() {
         function PlayerManager() {
             this.players = [];
         }
-        return PlayerManager.prototype.addPlayer = function(e) {
-            this.players.push(e);
-        }, PlayerManager.prototype.removePlayer = function(e) {
-            this.players.splice(this.players.indexOf(e), 1);
-        }, PlayerManager.prototype.removePlayerBySid = function(e) {
-            this.players.splice(this.players.findIndex((function(t) {
-                return t.sid === e;
+        PlayerManager.prototype.addPlayer = function(player) {
+            this.players.push(player);
+        };
+        PlayerManager.prototype.removePlayer = function(player) {
+            this.players.splice(this.players.indexOf(player), 1);
+        };
+        PlayerManager.prototype.removePlayerBySid = function(sid) {
+            this.players.splice(this.players.findIndex((function(player) {
+                return player.sid === sid;
             })), 1);
-        }, PlayerManager.prototype.removePlayerById = function(e) {
-            this.players.splice(this.players.findIndex((function(t) {
-                return t.id === e;
+        };
+        PlayerManager.prototype.removePlayerById = function(id) {
+            this.players.splice(this.players.findIndex((function(player) {
+                return player.id === id;
             })), 1);
-        }, PlayerManager.prototype.getPlayerBySid = function(e) {
-            return this.players.find((function(t) {
-                return t.sid === e;
+        };
+        PlayerManager.prototype.getPlayerBySid = function(sid) {
+            return this.players.find((function(player) {
+                return player.sid === sid;
             }));
-        }, PlayerManager.prototype.getPlayerById = function(e) {
-            return this.players.find((function(t) {
-                return t.id === e;
+        };
+        PlayerManager.prototype.getPlayerById = function(id) {
+            return this.players.find((function(player) {
+                return player.id === id;
             }));
-        }, PlayerManager.prototype.getPlayerByName = function(e) {
-            var t = this.players.filter((function(t) {
-                return t.name === e;
+        };
+        PlayerManager.prototype.getPlayerByName = function(name) {
+            var players = this.players.filter((function(player) {
+                return player.name === name;
             }));
-            return t.length > 1 ? t : t[0];
-        }, PlayerManager.prototype.clearPlayers = function() {
+            if (players.length > 1) {
+                return players;
+            } else return players[0];
+        };
+        PlayerManager.prototype.clearPlayers = function() {
             this.players = [];
-        }, PlayerManager;
-    }(), x = function() {
+        };
+        PlayerManager.prototype.updatePlayer = function(sid, data) {
+            var player = this.getPlayerBySid(sid);
+            if (player) {
+                Object.assign(player, data);
+            }
+        };
+        return PlayerManager;
+    }();
+    const Managers_PlayerManager = PlayerManager;
+    var Leaderboardmanager = function() {
         function Leaderboardmanager() {
             this.leaderboard = new Map;
         }
-        return Leaderboardmanager.prototype.updateLeaderboard = function(e) {
-            var t = this, r = A(e, 3);
-            e.length, r.forEach((function(e, r) {
-                var y = U.GamePlayerManager.getPlayerBySid(e[0]);
-                y || ((y = new n(e[0])).sid = e[0], y.name = e[1], U.GamePlayerManager.addPlayer(y)), 
-                t.leaderboard.set(r + 1, {
-                    player: y,
-                    sid: e[0],
-                    name: e[1],
-                    score: e[2]
+        Leaderboardmanager.prototype.updateLeaderboard = function(data) {
+            var _this = this;
+            var arr = funcs_chunk(data, 3);
+            var players = data.length / 3;
+            arr.forEach((function(playerData, index) {
+                var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(playerData[0]);
+                if (!tmpPlayer) {
+                    tmpPlayer = new types_Player(playerData[0]);
+                    tmpPlayer.sid = playerData[0];
+                    tmpPlayer.name = playerData[1];
+                    MooMoo.GamePlayerManager.addPlayer(tmpPlayer);
+                }
+                _this.leaderboard.set(index + 1, {
+                    player: tmpPlayer,
+                    sid: playerData[0],
+                    name: playerData[1],
+                    score: playerData[2]
                 });
             }));
-        }, Leaderboardmanager.prototype.clearLeaderboard = function() {
+        };
+        Leaderboardmanager.prototype.clearLeaderboard = function() {
             this.leaderboard = new Map;
-        }, Leaderboardmanager;
-    }(), O = function() {
+        };
+        return Leaderboardmanager;
+    }();
+    const LeaderboardManager = Leaderboardmanager;
+    var ObjectManager = function() {
         function ObjectManager() {
             this.objects = new Map;
         }
-        return ObjectManager.prototype.addObject = function(e) {
-            var t = U.GameObjectManager.getGameObjectBySid(e.sid);
-            t || (t = new S(e.sid)), t.x = e.x, t.y = e.y, t.ownerSid = e.ownerSid, t.type = e.type, 
-            t.sid = e.sid, this.objects.set(e.sid, t);
-        }, ObjectManager.prototype.getGameObjectBySid = function(e) {
-            return this.objects.get(e);
-        }, ObjectManager.prototype.getObjectsByOwnerSid = function(e) {
-            var t = [];
-            return this.objects.forEach((function(r) {
-                r.ownerSid == e && t.push(r);
-            })), t;
-        }, ObjectManager.prototype.removeObjectBySid = function(e) {
-            this.objects.delete(e);
-        }, ObjectManager.prototype.removeObjectsByOwnerSid = function(e) {
-            var t = this;
-            this.objects.forEach((function(r) {
-                r.ownerSid == e && t.objects.delete(r.sid);
-            }));
-        }, ObjectManager;
-    }(), j = function() {
-        function Command(e, t) {
-            this.name = e, this.run = t;
-        }
-        return Command.prototype.reply = function(e) {
-            U.myPlayer.chat(e);
-        }, Command;
-    }(), H = function() {
-        function CommandManager() {
-            this.commands = {}, this.prefix = "/";
-        }
-        return CommandManager.prototype.setPrefix = function(e) {
-            this.prefix = e;
-        }, CommandManager.prototype.registerCommand = function(e, t) {
-            var r = new j(e, t);
-            this.commands[e] = r;
-        }, CommandManager.prototype.unregisterCommand = function(e) {
-            delete this.commands[e];
-        }, CommandManager;
-    }(), I = function() {
-        function UTILS() {
-            this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints, this.dist = UTILS.getDistanceBetweenTwoPoints, 
-            this.distance = UTILS.getDistanceBetweenTwoPoints, this.atan2 = UTILS.atan2, this.angle = UTILS.atan2;
-        }
-        return UTILS.getDistanceBetweenTwoPoints = function(e, t, r, n) {
-            return Math.sqrt(Math.pow(r - e, 2) + Math.pow(n - t, 2));
-        }, UTILS.atan2 = function(e, t, r, n) {
-            return Math.atan2(n - t, r - e);
-        }, UTILS;
-    }();
-    var C, T = (C = function(e, t) {
-        return C = Object.setPrototypeOf || {
-            __proto__: []
-        } instanceof Array && function(e, t) {
-            e.__proto__ = t;
-        } || function(e, t) {
-            for (var r in t) Object.prototype.hasOwnProperty.call(t, r) && (e[r] = t[r]);
-        }, C(e, t);
-    }, function(e, t) {
-        if ("function" != typeof t && null !== t) throw new TypeError("Class extends value " + String(t) + " is not a constructor or null");
-        function __() {
-            this.constructor = e;
-        }
-        C(e, t), e.prototype = null === t ? Object.create(t) : (__.prototype = t.prototype, 
-        new __);
-    });
-    const G = function(e) {
-        function Game() {
-            var t = e.call(this) || this;
-            return t.teams = [], t.GamePlayerManager = new B, t.ActivePlayerManager = new B, 
-            t.LeaderboardManager = new x, t.GameObjectManager = new O, t.CommandManager = new H, 
-            t.UTILS = new I, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
-            t.msgpack.encode = msgpack_encode, t.vars.gameLoaded = !1, t;
-        }
-        return T(Game, e), Game.prototype.debug = function(e) {
-            this.emit("debug", e);
-        }, Game;
-    }(t);
-    !function hookWS() {
-        WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
-            apply: function(e, t, m) {
-                if (U.ws = t, U.sendPacket = function(e) {
-                    var t = Array.prototype.slice.call(arguments, 1), r = msgpack_encode([ e, t ]);
-                    U.ws.send(r);
-                }, 1 !== U.ws.readyState) return !0;
-                if (E || (E = !0, U.ws.addEventListener("message", (function(e) {
-                    var t = e.data, m = msgpack_decode(t);
-                    !function handleServerPackets(e, t) {
-                        switch (e) {
-                          case "id":
-                            !function setInitData(e) {
-                                for (var t = e.teams, y = 0; y < t.length; y++) {
-                                    var p = t[y], m = p.sid, h = p.owner, g = new r(new n(h), m);
-                                    U.teams.push(g);
-                                }
-                            }(t[0]);
-                            break;
-
-                          case "d":
-                          case "a":
-                          case "aa":
-                          case "7":
-                          case "8":
-                          case "sp":
-                          case "11":
-                          case "14":
-                          case "15":
-                          case "16":
-                          case "17":
-                          case "18":
-                          case "19":
-                          case "20":
-                          case "ac":
-                          case "ad":
-                          case "an":
-                          case "st":
-                          case "sa":
-                          case "us":
-                          case "ch":
-                          case "mm":
-                          case "t":
-                          case "p":
-                          case "pp":
-                            break;
-
-                          case "1":
-                            !function setupGame(e) {
-                                U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = y, U.myPlayer.chat = p, 
-                                U.myPlayer.equipHat = h, U.myPlayer.equipAccessory = b, U.myPlayer.unequipHat = P, 
-                                U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = M, U.myPlayer.buyAccessory = k, 
-                                U.vars.gameLoaded = !0, U.onGameLoad && U.onGameLoad();
-                            }(t[0]);
-                            break;
-
-                          case "2":
-                            !function addPlayer(e, t) {
-                                var r = U.GamePlayerManager.getPlayerBySid(e[1]);
-                                r || ((r = new n(e[1])).name = e[2], r.id = e[0], U.GamePlayerManager.addPlayer(r)), 
-                                U.debug("Player " + r.name + " has joined the game.");
-                            }(t[0], t[1]);
-                            break;
-
-                          case "4":
-                            !function removePlayer(e) {
-                                U.GamePlayerManager.removePlayerById(e), U.debug("Player " + e + " has left the game.");
-                            }(t[0]);
-                            break;
-
-                          case "33":
-                            !function updatePlayers(e) {
-                                var t = A(e, 13);
-                                U.ActivePlayerManager.clearPlayers(), t.forEach((function(e) {
-                                    var t = U.GamePlayerManager.getPlayerBySid(e[0]);
-                                    t || (t = new n(e[0])), t.sid = e[0], t.x = e[1], t.y = e[2], t.dir = e[3], t.buildIndex = e[4], 
-                                    t.weaponIndex = e[5], t.weaponVariant = e[6], t.team = e[7], t.isLeader = e[8], 
-                                    t.skinIndex = e[9], t.tailIndex = e[10], t.iconIndex = e[11], t.zIndex = e[12], 
-                                    U.ActivePlayerManager.addPlayer(t), t.sid === U.myPlayer.sid && Object.assign(U.myPlayer, t);
-                                })), function cacheItems() {
-                                    U.myPlayer.inventory = {};
-                                    for (var e = [ {
-                                        category: "primary",
-                                        start: 0,
-                                        end: 9
-                                    }, {
-                                        category: "secondary",
-                                        start: 9,
-                                        end: 16
-                                    }, {
-                                        category: "food",
-                                        start: 16,
-                                        end: 19,
-                                        subtract: !0
-                                    }, {
-                                        category: "wall",
-                                        start: 19,
-                                        end: 22,
-                                        subtract: !0
-                                    }, {
-                                        category: "spike",
-                                        start: 22,
-                                        end: 26,
-                                        subtract: !0
-                                    }, {
-                                        category: "mill",
-                                        start: 26,
-                                        end: 29,
-                                        subtract: !0
-                                    }, {
-                                        category: "mine",
-                                        start: 29,
-                                        end: 31,
-                                        subtract: !0
-                                    }, {
-                                        category: "boostPad",
-                                        start: 31,
-                                        end: 33,
-                                        subtract: !0
-                                    }, {
-                                        category: "trap",
-                                        start: 31,
-                                        end: 33,
-                                        subtract: !0
-                                    }, {
-                                        category: "turret",
-                                        start: 33,
-                                        end: 36,
-                                        subtract: !0
-                                    }, {
-                                        category: "spawnPad",
-                                        start: 36,
-                                        end: 37,
-                                        subtract: !0
-                                    } ], t = 0; t < e.length; t++) for (var r = e[t], n = r.category, y = r.start, p = r.end, m = r.subtract, h = y; h < p; h++) {
-                                        var g = document.getElementById("actionBarItem".concat(h));
-                                        if (g && null !== g.offsetParent) {
-                                            U.myPlayer.inventory[n] = m ? h - 16 : h;
-                                            break;
-                                        }
-                                    }
-                                }();
-                            }(t[0]);
-                            break;
-
-                          case "5":
-                            !function updateLeaderboard(e) {
-                                U.LeaderboardManager.updateLeaderboard(e);
-                            }(t[0]);
-                            break;
-
-                          case "6":
-                            !function loadGameObject(e) {
-                                A(e, 8).forEach((function(e) {
-                                    var t = U.GameObjectManager.getGameObjectBySid(e[0]);
-                                    t || (t = new S(e[0])), t.x = e[1], t.y = e[2], t.ownerSid = e[3], t.type = e[4], 
-                                    t.sid = e[0], t.dir = e[5], t.scale = e[6], t.idk = e[7], U.GameObjectManager.addObject(t);
-                                }));
-                            }(t[0]);
-                            break;
-
-                          case "9":
-                            !function updatePlayerValue(e, t) {
-                                var r = U.myPlayer.resources;
-                                r[e] = t, U.myPlayer.resources = r;
-                            }(t[0], t[1]);
-                            break;
-
-                          case "h":
-                            !function updateHealth(e, t) {
-                                var r = U.GamePlayerManager.getPlayerBySid(e);
-                                r && (r.health = t);
-                            }(t[0], t[1]);
-                            break;
-
-                          case "12":
-                            !function killObject(e) {
-                                U.GameObjectManager.removeObjectBySid(e);
-                            }(t[0]);
-                            break;
-
-                          case "13":
-                            !function killObjects(e) {
-                                U.GameObjectManager.removeObjectsByOwnerSid(e);
-                            }(t[0]);
-                        }
-                        U.emit("packet", {
-                            packet: e,
-                            data: t
-                        });
-                    }(m[0], m[1].slice(0));
-                }))), m && m[0]) {
-                    var g = msgpack_decode(m[0]);
-                    if (!function handleClientPackets(e, t) {
-                        var r = !0;
-                        return "ch" === e && (r = function sendChat(e) {
-                            var t = U.CommandManager, r = t.prefix;
-                            if (e.startsWith(r)) {
-                                var n = t.commands, y = e.split(" ")[0].slice(r.length), p = e.split(" ").slice(1), m = n[y];
-                                return !m || (m.run(m, p), !1);
-                            }
-                            return !0;
-                        }(t[0])), r;
-                    }(g[0], g[1].slice(0))) return !0;
-                }
-                return Reflect.apply(e, t, m);
+        ObjectManager.prototype.addObject = function(obj) {
+            var tmpObj = MooMoo.GameObjectManager.getGameObjectBySid(obj.sid);
+            if (!tmpObj) {
+                tmpObj = new types_GameObject(obj.sid);
             }
-        });
+            tmpObj.x = obj.x;
+            tmpObj.y = obj.y;
+            tmpObj.ownerSid = obj.ownerSid;
+            tmpObj.type = obj.type;
+            tmpObj.sid = obj.sid;
+            this.objects.set(obj.sid, tmpObj);
+        };
+        ObjectManager.prototype.getGameObjectBySid = function(sid) {
+            return this.objects.get(sid);
+        };
+        ObjectManager.prototype.getObjectsByOwnerSid = function(sid) {
+            var objs = [];
+            this.objects.forEach((function(obj) {
+                if (obj.ownerSid == sid) {
+                    objs.push(obj);
+                }
+            }));
+            return objs;
+        };
+        ObjectManager.prototype.removeObjectBySid = function(sid) {
+            this.objects.delete(sid);
+        };
+        ObjectManager.prototype.removeObjectsByOwnerSid = function(sid) {
+            var _this = this;
+            this.objects.forEach((function(obj) {
+                if (obj.ownerSid == sid) {
+                    _this.objects.delete(obj.sid);
+                }
+            }));
+        };
+        return ObjectManager;
     }();
-    var U = new G;
+    const Managers_ObjectManager = ObjectManager;
+    var Command = function() {
+        function Command(name, run) {
+            this.name = name;
+            this.run = run;
+        }
+        Command.prototype.reply = function(message) {
+            MooMoo.myPlayer.chat(message);
+        };
+        return Command;
+    }();
+    const types_Command = Command;
+    var CommandManager = function() {
+        function CommandManager() {
+            this.commands = {};
+            this.prefix = "/";
+        }
+        CommandManager.prototype.setPrefix = function(prefix) {
+            this.prefix = prefix;
+        };
+        CommandManager.prototype.registerCommand = function(name, run) {
+            var command = new types_Command(name, run);
+            this.commands[name] = command;
+        };
+        CommandManager.prototype.unregisterCommand = function(name) {
+            delete this.commands[name];
+        };
+        return CommandManager;
+    }();
+    const commandManager = CommandManager;
+    var UTILS = function() {
+        function UTILS() {
+            this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints;
+            this.dist = UTILS.getDistanceBetweenTwoPoints;
+            this.distance = UTILS.getDistanceBetweenTwoPoints;
+            this.atan2 = UTILS.atan2;
+            this.angle = UTILS.atan2;
+        }
+        UTILS.getDistanceBetweenTwoPoints = function(x1, y1, x2, y2) {
+            return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        };
+        UTILS.atan2 = function(x1, y1, x2, y2) {
+            return Math.atan2(y2 - y1, x2 - x1);
+        };
+        return UTILS;
+    }();
+    const Managers_UTILS = UTILS;
+    var __extends = undefined && undefined.__extends || function() {
+        var extendStatics = function(d, b) {
+            extendStatics = Object.setPrototypeOf || {
+                __proto__: []
+            } instanceof Array && function(d, b) {
+                d.__proto__ = b;
+            } || function(d, b) {
+                for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+            };
+            return extendStatics(d, b);
+        };
+        return function(d, b) {
+            if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+            extendStatics(d, b);
+            function __() {
+                this.constructor = d;
+            }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __);
+        };
+    }();
+    var Game = function(_super) {
+        __extends(Game, _super);
+        function Game() {
+            var _this = _super.call(this) || this;
+            _this.teams = [];
+            _this.GamePlayerManager = new Managers_PlayerManager;
+            _this.ActivePlayerManager = new Managers_PlayerManager;
+            _this.LeaderboardManager = new LeaderboardManager;
+            _this.GameObjectManager = new Managers_ObjectManager;
+            _this.CommandManager = new commandManager;
+            _this.UTILS = new Managers_UTILS;
+            _this.vars = {};
+            _this.msgpack = {};
+            _this.msgpack.decode = msgpack_decode;
+            _this.msgpack.encode = msgpack_encode;
+            _this.vars.gameLoaded = false;
+            return _this;
+        }
+        Game.prototype.debug = function(message) {
+            this.emit("debug", message);
+        };
+        return Game;
+    }(funcs_EventEmitter);
+    const main = Game;
+    hookWS();
+    var MooMoo = new main;
+    var sym = Symbol();
+    Object.defineProperty(Object.prototype, "x", {
+        set: function(data) {
+            this[sym] = data;
+            updateHookPosition.call(this, data);
+        },
+        get: function() {
+            return this[sym];
+        }
+    });
     Object.defineProperty(Function.prototype, 69, {
         get: function() {
-            return "MooMooJS_beta" === this.name ? U : null;
+            switch (this.name) {
+              case "MooMooJS_beta":
+                return MooMoo;
+
+              default:
+                return null;
+            }
         }
     });
 })();

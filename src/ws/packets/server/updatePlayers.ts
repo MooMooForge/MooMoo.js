@@ -1,7 +1,11 @@
 import chunk from "../../../lib/_game/external/funcs/chunk";
-import { MooMoo } from "../../../app";
-import Player from "../../../lib/_game/types/Player";
 import cacheItems from "../../../lib/_game/external/funcs/cacheItems";
+
+import { MooMoo } from "../../../app";
+
+import Player from "../../../lib/_game/types/Player";
+import GameObject from "../../../lib/_game/types/GameObject";
+
 function updatePlayers(data: Array<any>) {
     let arr = chunk(data, 13);
 
@@ -35,6 +39,22 @@ function updatePlayers(data: Array<any>) {
     });
     
     cacheItems();
+}
+
+export function updateHookPosition(data: any) {
+    if (this instanceof Player || this instanceof GameObject || this.isAI || !this.id) {
+        //
+    } else {
+        let tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(this.sid);
+        if (tmpPlayer) {
+            tmpPlayer.x = data;
+            tmpPlayer.y = this.y;
+            MooMoo.onPositionUpdate(tmpPlayer);
+        }
+
+        MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
+
+    }
 }
 
 export default updatePlayers;
