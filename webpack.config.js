@@ -13,24 +13,19 @@ module.exports = {
         clean: true,
     },
     optimization: {
-        minimize: true,
-        minimizer: [new TerserWebpackPlugin({
-            terserOptions: {
-                keep_classnames: true,
-                keep_fnames: true,
-                compress: {
-                    reduce_funcs: true,
-                    drop_console: true,
-                    passes: 20,
-                    reduce_vars: true
-                },
-                output: {
-                    beautify: true,
-                    comments: false,
-                },
-                ecma: 2020,
-            }
-        })],
+        minimizer: [
+            new TerserWebpackPlugin({
+                terserOptions: {
+                    compress: false,
+                    mangle: false,
+                    parse: false,
+                    output: false,
+                    format: {
+                        beautify: true,
+                    }
+                }
+            })
+        ]
     },
     module: {
         rules: [
