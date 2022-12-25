@@ -28,6 +28,8 @@ function setupGame (sid: any) {
 
    MooMoo.myPlayer.buyHat = buyHat;
    MooMoo.myPlayer.buyAccessory = buyAccessory;
+
+   MooMoo.vars.gameLoaded = true;
 }
 
 

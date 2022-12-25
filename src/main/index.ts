@@ -27,7 +27,6 @@ export default class Game extends EventEmitter {
     LeaderboardManager: Leaderboardmanager = new Leaderboardmanager();
     GameObjectManager: ObjectManager = new ObjectManager();
     CommandManager: CommandManager = new CommandManager();
-
     // UTILS
     UTILS: UTILS = new UTILS();
 
@@ -43,6 +42,8 @@ export default class Game extends EventEmitter {
         super();
         this.msgpack.decode = decode;
         this.msgpack.encode = encode;
+
+        this.vars.gameLoaded = false;
     }
     debug(message : any) {
         this.emit("debug", message);

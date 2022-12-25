@@ -985,7 +985,7 @@
             return t.teams = [], t.GamePlayerManager = new B, t.ActivePlayerManager = new B, 
             t.LeaderboardManager = new x, t.GameObjectManager = new O, t.CommandManager = new H, 
             t.UTILS = new I, t.vars = {}, t.msgpack = {}, t.msgpack.decode = msgpack_decode, 
-            t.msgpack.encode = msgpack_encode, t;
+            t.msgpack.encode = msgpack_encode, t.vars.gameLoaded = !1, t;
         }
         return T(Game, e), Game.prototype.debug = function(e) {
             this.emit("debug", e);
@@ -1042,7 +1042,8 @@
                             !function setupGame(e) {
                                 U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = y, U.myPlayer.chat = p, 
                                 U.myPlayer.equipHat = h, U.myPlayer.equipAccessory = b, U.myPlayer.unequipHat = P, 
-                                U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = k, U.myPlayer.buyAccessory = M;
+                                U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = k, U.myPlayer.buyAccessory = M, 
+                                U.vars.gameLoaded = !0;
                             }(t[0]);
                             break;
 
