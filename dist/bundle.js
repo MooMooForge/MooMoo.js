@@ -72,7 +72,7 @@
             if (222 === r) return l(-1, 2);
             if (223 === r) return l(-1, 4);
             if (r >= 224 && r <= 255) return r - 256;
-            throw console.debug("msgpack array:", e), new Error("Invalid byte value '" + r + "' at index " + (t - 1) + " in the MessagePack binary data (length " + e.length + "): Expecting a range of 0 to 255. This is not a byte array.");
+            throw new Error("Invalid byte value '" + r + "' at index " + (t - 1) + " in the MessagePack binary data (length " + e.length + "): Expecting a range of 0 to 255. This is not a byte array.");
         }
         function f(r) {
             let n = 0, y = !0;
@@ -613,23 +613,17 @@
                 r.id == e && (t = !0, U.sendPacket("13c", 0, e, 0));
             })), !t) try {
                 throw new Error("Error at equipHatById: Hat with id " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else if ("string" == typeof e) !function equipHatByName(e) {
             var t = !1;
             if (m.find((function(r) {
                 r.name == e && (t = !0, U.sendPacket("13c", 0, r.id, 0));
             })), !t) try {
                 throw new Error("Error at equipHatByName: Hat with name " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else try {
             throw new Error("Error at equipHat: hatData must be a number or string");
-        } catch (e) {
-            console.log(e);
-        }
+        } catch (e) {}
     }, g = [ {
         id: 12,
         name: "Snowball",
@@ -783,75 +777,57 @@
                 r.id == e && (t = !0, U.sendPacket("13c", 0, e, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else if ("string" == typeof e) !function equipAccessoryByName(e) {
             var t = !1;
             if (g.find((function(r) {
                 r.name == e && (t = !0, U.sendPacket("13c", 0, r.id, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else try {
             throw new Error("Error at equipAccessory: accessoryData must be a number or string");
-        } catch (e) {
-            console.log(e);
-        }
+        } catch (e) {}
     }, P = function unequipHat() {
         U.sendPacket("13c", 0, 0, 0);
     }, v = function unequipAccessory() {
         U.sendPacket("13c", 0, 0, 1);
-    }, k = function buyHat(e) {
+    }, M = function buyHat(e) {
         if ("number" == typeof e) !function buyHatById(e) {
             var t = !1;
             if (m.find((function(r) {
                 r.id == e && (t = !0, U.sendPacket("13c", 1, e, 0));
             })), !t) try {
                 throw new Error("Error at buyHatById: Hat with id " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else if ("string" == typeof e) !function buyHatByName(e) {
             var t = !1;
             if (m.find((function(r) {
                 r.name == e && (t = !0, U.sendPacket("13c", 1, r.id, 0));
             })), !t) try {
                 throw new Error("Error at buyHatByName: Hat with name " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else try {
             throw new Error("Error at buyHat: hatData must be a number or string");
-        } catch (e) {
-            console.log(e);
-        }
-    }, M = function buyAccessory_equipAccessory(e) {
+        } catch (e) {}
+    }, k = function buyAccessory_equipAccessory(e) {
         if ("number" == typeof e) !function buyAccessory_equipAccessoryById(e) {
             var t = !1;
             if (g.find((function(r) {
                 r.id == e && (t = !0, U.sendPacket("13c", 1, e, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else if ("string" == typeof e) !function buyAccessory_equipAccessoryByName(e) {
             var t = !1;
             if (g.find((function(r) {
                 r.name == e && (t = !0, U.sendPacket("13c", 1, r.id, 1));
             })), !t) try {
                 throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e) {}
         }(e); else try {
             throw new Error("Error at equipAccessory: accessoryData must be a number or string");
-        } catch (e) {
-            console.log(e);
-        }
+        } catch (e) {}
     }, A = function chunk(e, t) {
         for (var r = [], n = 0; n < e.length; n += t) r.push(e.slice(n, n + t));
         return r;
@@ -1042,7 +1018,7 @@
                             !function setupGame(e) {
                                 U.myPlayer = {}, U.myPlayer.sid = e, U.myPlayer.place = y, U.myPlayer.chat = p, 
                                 U.myPlayer.equipHat = h, U.myPlayer.equipAccessory = b, U.myPlayer.unequipHat = P, 
-                                U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = k, U.myPlayer.buyAccessory = M, 
+                                U.myPlayer.unequipAccessory = v, U.myPlayer.buyHat = M, U.myPlayer.buyAccessory = k, 
                                 U.vars.gameLoaded = !0;
                             }(t[0]);
                             break;
@@ -1051,7 +1027,7 @@
                             !function addPlayer(e, t) {
                                 var r = U.GamePlayerManager.getPlayerBySid(e[1]);
                                 r || ((r = new n(e[1])).name = e[2], r.id = e[0], U.GamePlayerManager.addPlayer(r)), 
-                                U.debug("Player " + r.name + " has joined the game."), t && console.log("You are now in game!");
+                                U.debug("Player " + r.name + " has joined the game.");
                             }(t[0], t[1]);
                             break;
 
@@ -1155,13 +1131,12 @@
                           case "9":
                             !function updatePlayerValue(e, t) {
                                 var r = U.myPlayer.resources;
-                                r[e] = t, U.myPlayer.resources = r, console.log(U.myPlayer.resources);
+                                r[e] = t, U.myPlayer.resources = r;
                             }(t[0], t[1]);
                             break;
 
                           case "h":
                             !function updateHealth(e, t) {
-                                console.debug("Updating health of player with sid " + e + " to " + t);
                                 var r = U.GamePlayerManager.getPlayerBySid(e);
                                 r && (r.health = t);
                             }(t[0], t[1]);
@@ -1177,10 +1152,6 @@
                             !function killObjects(e) {
                                 U.GameObjectManager.removeObjectsByOwnerSid(e);
                             }(t[0]);
-                            break;
-
-                          default:
-                            console.log("Unknown packet: " + e);
                         }
                         U.emit("packet", {
                             packet: e,
