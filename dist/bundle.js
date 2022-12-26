@@ -1153,7 +1153,9 @@
             if (tmpPlayer) {
                 tmpPlayer.x = data;
                 tmpPlayer.y = this.y;
-                MooMoo.onPositionUpdate(tmpPlayer);
+                if (MooMoo.onPositionUpdate) {
+                    MooMoo.onPositionUpdate(tmpPlayer);
+                }
             }
             MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
         }

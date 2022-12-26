@@ -33,11 +33,11 @@ function updatePlayers(data: Array<any>) {
 
         MooMoo.ActivePlayerManager.addPlayer(tmpPlayer);
 
-        if(tmpPlayer.sid === MooMoo.myPlayer.sid) {
+        if (tmpPlayer.sid === MooMoo.myPlayer.sid) {
             Object.assign(MooMoo.myPlayer, tmpPlayer);
         }
     });
-    
+
     cacheItems();
 }
 
@@ -49,7 +49,9 @@ export function updateHookPosition(data: any) {
         if (tmpPlayer) {
             tmpPlayer.x = data;
             tmpPlayer.y = this.y;
-            MooMoo.onPositionUpdate(tmpPlayer);
+            if (MooMoo.onPositionUpdate) {
+                MooMoo.onPositionUpdate(tmpPlayer);
+            }
         }
 
         MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
