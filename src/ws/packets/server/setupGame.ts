@@ -32,6 +32,7 @@ function setupGame (sid: any) {
    MooMoo.vars.gameLoaded = true;
 
    if(MooMoo.onGameLoad) MooMoo.onGameLoad();
+   MooMoo.emit("gameLoad");
 }
 
 

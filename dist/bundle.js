@@ -1015,6 +1015,7 @@
         MooMoo.myPlayer.buyAccessory = buyAccessory;
         MooMoo.vars.gameLoaded = true;
         if (MooMoo.onGameLoad) MooMoo.onGameLoad();
+        MooMoo.emit("gameLoad");
     }
     const server_setupGame = setupGame;
     function addPlayer(data, isYou) {
@@ -1126,10 +1127,10 @@
             var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(playerData[0]);
             if (!tmpPlayer) {
                 tmpPlayer = new types_Player(playerData[0]);
+                tmpPlayer.x = playerData[1];
+                tmpPlayer.y = playerData[2];
             }
             tmpPlayer.sid = playerData[0];
-            tmpPlayer.x = playerData[1];
-            tmpPlayer.y = playerData[2];
             tmpPlayer.dir = playerData[3];
             tmpPlayer.buildIndex = playerData[4];
             tmpPlayer.weaponIndex = playerData[5];
@@ -1204,7 +1205,6 @@
         var player = MooMoo.myPlayer.resources;
         player[id] = value;
         MooMoo.myPlayer.resources = player;
-        console.log(MooMoo.myPlayer.resources);
     }
     const server_updatePlayerValue = updatePlayerValue;
     function handleServerPackets(packet, data) {
@@ -1609,17 +1609,76 @@
     }(funcs_EventEmitter);
     const main = Game;
     hookWS();
-    var MooMoo = new main;
-    var sym = Symbol();
-    Object.defineProperty(Object.prototype, "x", {
-        set: function(data) {
-            this[sym] = data;
-            updateHookPosition.call(this, data);
-        },
-        get: function() {
-            return this[sym];
+    var delta = 0;
+    var now = Date.now();
+    var lastupdate = Date.now();
+    function initRendering() {
+        MooMoo.vars.camX = 0;
+        MooMoo.vars.camY = 0;
+        MooMoo.vars.offsetX = 0;
+        MooMoo.vars.offsetY = 0;
+        MooMoo.vars.maxScreenWidth = 1920;
+        MooMoo.vars.maxScreenHeight = 1080;
+        MooMoo.vars.canvas = null;
+        MooMoo.vars.ctx = null;
+        MooMoo.addEventListener("gameLoad", (function() {
+            MooMoo.vars.canvas = document.getElementsByTagName("canvas")[1];
+            MooMoo.vars.ctx = MooMoo.vars.canvas.getContext("2d");
+            MooMoo.emit("renderingInit", {
+                canvas: MooMoo.vars.canvas,
+                ctx: MooMoo.vars.ctx
+            });
+        }));
+        function doUpdate() {
+            now = Date.now();
+            delta = now - lastupdate;
+            lastupdate = now;
+            requestAnimationFrame(doUpdate);
         }
-    });
+        doUpdate();
+        Object.defineProperty(Object.prototype, "y", {
+            get: function() {
+                return this._y;
+            },
+            set: function(data) {
+                if (MooMoo.myPlayer && this.id == MooMoo.myPlayer.id) {
+                    MooMoo.vars.playerx = this.x;
+                    MooMoo.vars.playery = this.y;
+                    MooMoo.vars.offsetX = MooMoo.vars.camX - MooMoo.vars.maxScreenWidth / 2;
+                    MooMoo.vars.offsetY = MooMoo.vars.camY - MooMoo.vars.maxScreenHeight / 2;
+                    MooMoo.emit("updateOffsets", MooMoo.vars.offsetX, MooMoo.vars.offsetY);
+                }
+                this._y = data;
+            }
+        });
+        function tick() {
+            if (MooMoo.myPlayer) {
+                var player = {
+                    x: MooMoo.vars.playerx,
+                    y: MooMoo.vars.playery
+                };
+                var tmpDist = Math.sqrt(Math.pow(player.x - MooMoo.vars.camX, 2) + Math.pow(player.y - MooMoo.vars.camY, 2));
+                var tmpDir = Math.atan2(player.y - MooMoo.vars.camY, player.x - MooMoo.vars.camX);
+                var camSpeed = Math.min(tmpDist * .01 * delta, tmpDist);
+                if (tmpDist > .05) {
+                    MooMoo.vars.camX += Math.cos(tmpDir) * camSpeed;
+                    MooMoo.vars.camY += Math.sin(tmpDir) * camSpeed;
+                } else {
+                    MooMoo.vars.camX = player.x;
+                    MooMoo.vars.camY = player.y;
+                }
+            }
+        }
+        CanvasRenderingContext2D.prototype.clearRect = new Proxy(CanvasRenderingContext2D.prototype.clearRect, {
+            apply: function(target, thisArg, argumentsList) {
+                target.apply(thisArg, argumentsList);
+                tick();
+                MooMoo.emit("renderTick", MooMoo.vars.offsetX, MooMoo.vars.offsetY);
+            }
+        });
+    }
+    const rendering_initRendering = initRendering;
+    var MooMoo = new main;
     Object.defineProperty(Function.prototype, 69, {
         get: function() {
             switch (this.name) {
@@ -1631,4 +1690,15 @@
             }
         }
     });
+    var sym = Symbol();
+    Object.defineProperty(Object.prototype, "x", {
+        set: function(data) {
+            this[sym] = data;
+            updateHookPosition.call(this, data);
+        },
+        get: function() {
+            return this[sym];
+        }
+    });
+    rendering_initRendering();
 })();

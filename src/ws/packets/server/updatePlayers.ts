@@ -16,10 +16,10 @@ function updatePlayers(data: Array<any>) {
 
         if (!tmpPlayer) {
             tmpPlayer = new Player(playerData[0]);
+            tmpPlayer.x = playerData[1];
+            tmpPlayer.y = playerData[2];
         }
         tmpPlayer.sid = playerData[0];
-        tmpPlayer.x = playerData[1];
-        tmpPlayer.y = playerData[2];
         tmpPlayer.dir = playerData[3];
         tmpPlayer.buildIndex = playerData[4];
         tmpPlayer.weaponIndex = playerData[5];
