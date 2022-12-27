@@ -1366,10 +1366,20 @@
         return doSend;
     }
     const ws_handleClientPackets = handleClientPackets;
+    var __spreadArray = undefined && undefined.__spreadArray || function(to, from, pack) {
+        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+            if (ar || !(i in from)) {
+                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                ar[i] = from[i];
+            }
+        }
+        return to.concat(ar || Array.prototype.slice.call(from));
+    };
     var _onmessage = false;
     function hookWS() {
         WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
             apply: function(target, thisArg, args) {
+                var _a;
                 MooMoo.ws = thisArg;
                 MooMoo.sendPacket = function(type) {
                     var data = Array.prototype.slice.call(arguments, 1);
@@ -1389,6 +1399,10 @@
                 if (args && args[0]) {
                     var decoded = msgpack_decode(args[0]);
                     var packet = decoded[0], packetData = decoded[1].slice(0);
+                    if (MooMoo.onClientPacket) {
+                        _a = MooMoo.onClientPacket(packet, packetData) || [ packet, __spreadArray([], packetData, true) ], 
+                        packet = _a[0], packetData = _a[1].slice(0);
+                    }
                     var doSend = ws_handleClientPackets(packet, packetData);
                     if (!doSend) return true;
                 }
@@ -1589,6 +1603,7 @@
         function Game() {
             var _this = _super.call(this) || this;
             _this.teams = [];
+            _this.statistics = {};
             _this.GamePlayerManager = new Managers_PlayerManager;
             _this.ActivePlayerManager = new Managers_PlayerManager;
             _this.LeaderboardManager = new LeaderboardManager;
@@ -1607,7 +1622,7 @@
         };
         return Game;
     }(funcs_EventEmitter);
-    const main = Game;
+    const src = Game;
     hookWS();
     var delta = 0;
     var now = Date.now();
@@ -1678,7 +1693,7 @@
         });
     }
     const rendering_initRendering = initRendering;
-    var MooMoo = new main;
+    var MooMoo = new src;
     Object.defineProperty(Function.prototype, 69, {
         get: function() {
             switch (this.name) {

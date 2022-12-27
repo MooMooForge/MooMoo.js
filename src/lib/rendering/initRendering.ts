@@ -1,4 +1,4 @@
-import { MooMoo } from "../../app";
+import { MooMoo } from "../../../app";
 
 var delta = 0;
 var now = Date.now();

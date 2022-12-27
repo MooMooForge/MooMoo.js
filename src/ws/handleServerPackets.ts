@@ -1,5 +1,5 @@
-import { MooMoo } from "../app";
-import { array } from "../main/index";
+import { MooMoo } from "../../app";
+import { array } from "../index";
 
 // packets
 import setInitData from "./packets/server/setInitData";

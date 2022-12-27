@@ -1,7 +1,7 @@
 import chunk from "../../../lib/_game/external/funcs/chunk";
 import cacheItems from "../../../lib/_game/external/funcs/cacheItems";
 
-import { MooMoo } from "../../../app";
+import { MooMoo } from "../../../../app";
 
 import Player from "../../../lib/_game/types/Player";
 import GameObject from "../../../lib/_game/types/GameObject";

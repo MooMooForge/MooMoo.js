@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../../../app";
+import { MooMoo } from "../../../../../../app";
 
 function unequipAccessory() {
     MooMoo.sendPacket("13c", 0, 0, 1);

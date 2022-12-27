@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../app";
+import { MooMoo } from "../../../../app";
 
 function updatePlayerValue(id: any, value: any) {
     let player = MooMoo.myPlayer.resources;

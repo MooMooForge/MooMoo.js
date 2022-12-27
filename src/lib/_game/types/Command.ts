@@ -1,4 +1,4 @@
-import { MooMoo } from "../../../app";
+import { MooMoo } from "../../../../app";
 
 class Command {
     public name: string;

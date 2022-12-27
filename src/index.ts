@@ -1,14 +1,14 @@
-import EventEmitter from "../lib/_game/external/funcs/EventEmitter";
-import hookWS from "../ws/hookWS";
-import PlayerManager from "../lib/_game/Managers/PlayerManager";
-import Leaderboardmanager from "../lib/_game/Managers/LeaderboardManager";
-import ObjectManager from "../lib/_game/Managers/ObjectManager";
-import CommandManager from "../lib/_game/Managers/commandManager";
+import EventEmitter from "./lib/_game/external/funcs/EventEmitter";
+import hookWS from "./ws/hookWS";
+import PlayerManager from "./lib/_game/Managers/PlayerManager";
+import Leaderboardmanager from "./lib/_game/Managers/LeaderboardManager";
+import ObjectManager from "./lib/_game/Managers/ObjectManager";
+import CommandManager from "./lib/_game/Managers/commandManager";
 
-import decode from "../lib/_game/external/funcs/msgpack/decode.js";
-import encode from "../lib/_game/external/funcs/msgpack/encode.js";
+import decode from "./lib/_game/external/funcs/msgpack/decode.js";
+import encode from "./lib/_game/external/funcs/msgpack/encode.js";
 
-import UTILS from "../lib/_game/Managers/UTILS";
+import UTILS from "./lib/_game/Managers/UTILS";
 
 export type array = Array<any>;
 export type MessageEvent = Event
@@ -22,6 +22,7 @@ export default class Game extends EventEmitter {
     // idk random variables
     teams: any = [];
     myPlayer: any
+    statistics: any = <any>{};
 
     // managers
     GamePlayerManager: PlayerManager = new PlayerManager();
@@ -29,6 +30,7 @@ export default class Game extends EventEmitter {
     LeaderboardManager: Leaderboardmanager = new Leaderboardmanager();
     GameObjectManager: ObjectManager = new ObjectManager();
     CommandManager: CommandManager = new CommandManager();
+
     // UTILS
     UTILS: UTILS = new UTILS();
 
@@ -41,6 +43,7 @@ export default class Game extends EventEmitter {
     // funcs
     onGameLoad: Function;
     onPositionUpdate: Function;
+    onClientPacket: Function;
 
     // msgpack vars
     msgpack: any = <any>{};

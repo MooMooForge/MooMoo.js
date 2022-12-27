@@ -1,5 +1,5 @@
 import chunk from "../external/funcs/chunk";
-import { MooMoo } from "../../../app";
+import { MooMoo } from "../../../../app";
 import Player from "../types/Player";
 
 class Leaderboardmanager {

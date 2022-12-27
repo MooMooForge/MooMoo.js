@@ -1,7 +1,7 @@
-import Game from "./main/index";
+import Game from "./src/index";
 
-import { updateHookPosition } from "./ws/packets/server/updatePlayers";
-import initRendering from "./lib/rendering/initRendering";
+import { updateHookPosition } from "./src/ws/packets/server/updatePlayers";
+import initRendering from "./src/lib/rendering/initRendering";
 
 export const MooMoo = new Game();
 
