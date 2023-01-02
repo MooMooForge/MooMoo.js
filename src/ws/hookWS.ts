@@ -30,16 +30,6 @@ export default function hookWS() {
                     handleServerPackets(packet, packetData);
                 })
             }
-            if (args && args[0]) {
-                let decoded = decode(args[0]);
-                let [packet, [...packetData]] = decoded;
-                if(MooMoo.onClientPacket) {
-                    [packet, [...packetData]] = MooMoo.onClientPacket(packet, packetData) || [packet, [...packetData]];
-                }
-                let doSend = handleClientPackets(packet, packetData);
-                
-                if (!doSend) return true;
-            }
             return Reflect.apply(target, thisArg, args);
         }
     });

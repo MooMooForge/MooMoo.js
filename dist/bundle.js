@@ -1173,14 +1173,14 @@
             if (!tmpObj) {
                 tmpObj = new types_GameObject(obj[0]);
             }
+            tmpObj.sid = obj[0];
             tmpObj.x = obj[1];
             tmpObj.y = obj[2];
-            tmpObj.ownerSid = obj[3];
-            tmpObj.type = obj[4];
-            tmpObj.sid = obj[0];
-            tmpObj.dir = obj[5];
-            tmpObj.scale = obj[6];
-            tmpObj.idk = obj[7];
+            tmpObj.dir = obj[3];
+            tmpObj.scale = obj[4];
+            tmpObj.idk = obj[5];
+            tmpObj.type = obj[6];
+            tmpObj.ownerSid = obj[7];
             MooMoo.GameObjectManager.addObject(tmpObj);
         }));
     }
@@ -1336,50 +1336,10 @@
             data
         });
     }
-    function sendChat(message) {
-        var commandManager = MooMoo.CommandManager;
-        var prefix = commandManager.prefix;
-        if (message.startsWith(prefix)) {
-            var commands = commandManager.commands;
-            var command = message.split(" ")[0].slice(prefix.length);
-            var args = message.split(" ").slice(1);
-            var Command = commands[command];
-            if (Command) {
-                Command.run(Command, args);
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return true;
-        }
-    }
-    const client_sendChat = sendChat;
-    function handleClientPackets(packet, data) {
-        var doSend = true;
-        switch (packet) {
-          case "ch":
-            {
-                doSend = client_sendChat(data[0]);
-            }
-        }
-        return doSend;
-    }
-    const ws_handleClientPackets = handleClientPackets;
-    var __spreadArray = undefined && undefined.__spreadArray || function(to, from, pack) {
-        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-            if (ar || !(i in from)) {
-                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-                ar[i] = from[i];
-            }
-        }
-        return to.concat(ar || Array.prototype.slice.call(from));
-    };
     var _onmessage = false;
     function hookWS() {
         WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
             apply: function(target, thisArg, args) {
-                var _a;
                 MooMoo.ws = thisArg;
                 MooMoo.sendPacket = function(type) {
                     var data = Array.prototype.slice.call(arguments, 1);
@@ -1395,16 +1355,6 @@
                         var packet = decoded[0], packetData = decoded[1].slice(0);
                         handleServerPackets(packet, packetData);
                     }));
-                }
-                if (args && args[0]) {
-                    var decoded = msgpack_decode(args[0]);
-                    var packet = decoded[0], packetData = decoded[1].slice(0);
-                    if (MooMoo.onClientPacket) {
-                        _a = MooMoo.onClientPacket(packet, packetData) || [ packet, __spreadArray([], packetData, true) ], 
-                        packet = _a[0], packetData = _a[1].slice(0);
-                    }
-                    var doSend = ws_handleClientPackets(packet, packetData);
-                    if (!doSend) return true;
                 }
                 return Reflect.apply(target, thisArg, args);
             }
