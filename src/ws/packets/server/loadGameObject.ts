@@ -15,10 +15,9 @@ function loadGameObject(data: any) {
         tmpObj.y = obj[2];
         tmpObj.dir = obj[3];
         tmpObj.scale = obj[4];
-        tmpObj.idk = obj[5];
-        tmpObj.type = obj[6];
+        tmpObj.type = obj[5];
+        tmpObj.id = obj[6];
         tmpObj.ownerSid = obj[7];
-
         MooMoo.GameObjectManager.addObject(tmpObj);
     })
 }
