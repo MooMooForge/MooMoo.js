@@ -332,7 +332,7 @@
     const server_setInitData = setInitData;
     function place(id, angle) {
         var weapon = MooMoo.myPlayer.weaponIndex;
-        MooMoo.sendPacket("5", id, angle);
+        MooMoo.sendPacket("5", id, false);
         MooMoo.sendPacket("c", 1, angle);
         MooMoo.sendPacket("c", 0, angle);
         MooMoo.sendPacket("5", weapon, true);
