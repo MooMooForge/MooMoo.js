@@ -1,7 +1,9 @@
 import { MooMoo } from "../../../../app";
 import Player from "../../../lib/_game/types/Player";
 
-function addPlayer (data : Array<any>, isYou: boolean) {
+function addPlayer (dta: any) {
+    let data = dta[0];
+    let isYou = dta[1];
     let tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(data[1]);
     if (!tmpPlayer) {
         tmpPlayer = new Player(data[1])
@@ -15,6 +17,9 @@ function addPlayer (data : Array<any>, isYou: boolean) {
     if (isYou) {
         console.log("You are now in game!");
     }
+    MooMoo.emit("addPlayer", dta);
+    MooMoo.emit("addplayer", dta);
+    MooMoo.emit("2", dta)
 }
 
 export default addPlayer;

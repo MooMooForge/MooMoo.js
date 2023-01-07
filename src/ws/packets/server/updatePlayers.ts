@@ -6,7 +6,8 @@ import { MooMoo } from "../../../../app";
 import Player from "../../../lib/_game/types/Player";
 import GameObject from "../../../lib/_game/types/GameObject";
 
-function updatePlayers(data: Array<any>) {
+function updatePlayers(raw: Array<any>) {
+    let data = raw[0];
     let arr = chunk(data, 13);
 
     MooMoo.ActivePlayerManager.clearPlayers();
@@ -37,6 +38,10 @@ function updatePlayers(data: Array<any>) {
             Object.assign(MooMoo.myPlayer, tmpPlayer);
         }
     });
+
+    MooMoo.emit("updatePlayers", data);
+    MooMoo.emit("updateplayers", data);
+    MooMoo.emit("33", data);
 
     cacheItems();
 }

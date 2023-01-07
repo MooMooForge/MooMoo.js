@@ -7,7 +7,8 @@ type teamObj = {
     teams: Array<any>
 }
 
-function setInitData(data: teamObj) {
+function setInitData(raw: Array<teamObj>) {
+    let data = raw[0];
     let teams = data.teams;
     for (let i = 0; i < teams.length; i++) {
         let team = teams[i];

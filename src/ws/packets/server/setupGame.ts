@@ -12,7 +12,8 @@ import unequipAccessory from "../../../lib/_game/external/modules/features/unequ
 import buyHat from "../../../lib/_game/external/modules/features/buyHat";
 import buyAccessory from "../../../lib/_game/external/modules/features/buyAccessory";
 
-function setupGame (sid: any) {
+function setupGame (data: Array<1>) {
+   let sid = data[0];
    MooMoo.myPlayer = {};
    MooMoo.myPlayer.sid = sid;
    
@@ -33,6 +34,10 @@ function setupGame (sid: any) {
 
    if(MooMoo.onGameLoad) MooMoo.onGameLoad();
    MooMoo.emit("gameLoad");
+
+   MooMoo.emit("setupGame", data);
+   MooMoo.emit("setupgame", data);
+   MooMoo.emit("1", data);
 }
 
 

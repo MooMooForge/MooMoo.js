@@ -319,7 +319,8 @@
         return Player;
     }();
     const types_Player = Player;
-    function setInitData(data) {
+    function setInitData(raw) {
+        var data = raw[0];
         var teams = data.teams;
         for (var i = 0; i < teams.length; i++) {
             var team = teams[i];
@@ -1002,7 +1003,8 @@
         }
     }
     const buyAccessory = buyAccessory_equipAccessory;
-    function setupGame(sid) {
+    function setupGame(data) {
+        var sid = data[0];
         MooMoo.myPlayer = {};
         MooMoo.myPlayer.sid = sid;
         MooMoo.myPlayer.place = features_place;
@@ -1016,9 +1018,14 @@
         MooMoo.vars.gameLoaded = true;
         if (MooMoo.onGameLoad) MooMoo.onGameLoad();
         MooMoo.emit("gameLoad");
+        MooMoo.emit("setupGame", data);
+        MooMoo.emit("setupgame", data);
+        MooMoo.emit("1", data);
     }
     const server_setupGame = setupGame;
-    function addPlayer(data, isYou) {
+    function addPlayer(dta) {
+        var data = dta[0];
+        var isYou = dta[1];
         var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(data[1]);
         if (!tmpPlayer) {
             tmpPlayer = new types_Player(data[1]);
@@ -1030,11 +1037,18 @@
         if (isYou) {
             console.log("You are now in game!");
         }
+        MooMoo.emit("addPlayer", dta);
+        MooMoo.emit("addplayer", dta);
+        MooMoo.emit("2", dta);
     }
     const server_addPlayer = addPlayer;
-    function removePlayer(id) {
+    function removePlayer(data) {
+        var id = data[0];
         MooMoo.GamePlayerManager.removePlayerById(id);
         MooMoo.debug("Player " + id + " has left the game.");
+        MooMoo.emit("removePlayer", data);
+        MooMoo.emit("removeplayer", data);
+        MooMoo.emit("4", data);
     }
     const server_removePlayer = removePlayer;
     function chunk(arr, size) {
@@ -1120,7 +1134,8 @@
         return GameObject;
     }();
     const types_GameObject = GameObject;
-    function updatePlayers(data) {
+    function updatePlayers(raw) {
+        var data = raw[0];
         var arr = funcs_chunk(data, 13);
         MooMoo.ActivePlayerManager.clearPlayers();
         arr.forEach((function(playerData) {
@@ -1146,6 +1161,9 @@
                 Object.assign(MooMoo.myPlayer, tmpPlayer);
             }
         }));
+        MooMoo.emit("updatePlayers", data);
+        MooMoo.emit("updateplayers", data);
+        MooMoo.emit("33", data);
         funcs_cacheItems();
     }
     function updateHookPosition(data) {
@@ -1163,10 +1181,15 @@
     }
     const server_updatePlayers = updatePlayers;
     function updateLeaderboard(data) {
-        MooMoo.LeaderboardManager.updateLeaderboard(data);
+        var leaderboarddata = data[0];
+        MooMoo.LeaderboardManager.updateLeaderboard(leaderboarddata);
+        MooMoo.emit("updateLeaderboard", data);
+        MooMoo.emit("updateleaderboard", data);
+        MooMoo.emit("5", data);
     }
     const server_updateLeaderboard = updateLeaderboard;
-    function loadGameObject(data) {
+    function loadGameObject(raw) {
+        var data = raw[0];
         var arr = funcs_chunk(data, 8);
         arr.forEach((function(obj) {
             var tmpObj = MooMoo.GameObjectManager.getGameObjectBySid(obj[0]);
@@ -1183,90 +1206,270 @@
             tmpObj.ownerSid = obj[7];
             MooMoo.GameObjectManager.addObject(tmpObj);
         }));
+        MooMoo.emit("loadGameObject", raw);
+        MooMoo.emit("loadgameobject", raw);
+        MooMoo.emit("6", raw);
     }
     const server_loadGameObject = loadGameObject;
-    function killObject(sid) {
+    function killObject(data) {
+        var sid = data[0];
         MooMoo.GameObjectManager.removeObjectBySid(sid);
+        MooMoo.emit("killObject", data);
+        MooMoo.emit("killobject", data);
+        MooMoo.emit("12", sid);
     }
     const server_killObject = killObject;
-    function killObjects(ownerSid) {
+    function killObjects(data) {
+        var ownerSid = data[0];
         MooMoo.GameObjectManager.removeObjectsByOwnerSid(ownerSid);
+        MooMoo.emit("killObjects", data);
+        MooMoo.emit("killobjects", data);
+        MooMoo.emit("13", data);
     }
     const server_killObjects = killObjects;
-    function updateHealth(sid, value) {
+    function updateHealth(data) {
+        var sid = data[0];
+        var value = data[1];
         var tmpPlayer = MooMoo.GamePlayerManager.getPlayerBySid(sid);
         if (tmpPlayer) {
             tmpPlayer.health = value;
         }
+        MooMoo.emit("updateHealth", data);
+        MooMoo.emit("updatehealth", data);
+        MooMoo.emit("h", data);
     }
     const server_updateHealth = updateHealth;
-    function updatePlayerValue(id, value) {
+    function updatePlayerValue(data) {
+        var id = data[0];
+        var value = data[1];
         var player = MooMoo.myPlayer.resources;
         player[id] = value;
         MooMoo.myPlayer.resources = player;
+        MooMoo.emit("updatePlayerValue", data);
+        MooMoo.emit("updateplayervalue", data);
+        MooMoo.emit("9", data);
     }
     const server_updatePlayerValue = updatePlayerValue;
+    function loadAI(data) {
+        if (data) {
+            var animals = funcs_chunk(data, 7);
+            MooMoo.emit("loadAI", data);
+            MooMoo.emit("loadAi", data);
+            MooMoo.emit("loadaI", data);
+            MooMoo.emit("a", data);
+        }
+    }
+    const server_loadAI = loadAI;
+    function animeAI(data) {
+        var sid = data[0];
+        MooMoo.emit("animateAI", data);
+        MooMoo.emit("animateAi", data);
+        MooMoo.emit("animateai", data);
+        MooMoo.emit("aa", sid);
+    }
+    const animateAI = animeAI;
+    function gatherAnimation(data) {
+        MooMoo.emit("gatherAnimation", data);
+        MooMoo.emit("gatheranimation", data);
+    }
+    const server_gatherAnimation = gatherAnimation;
+    function disconnect() {
+        MooMoo.emit("disconnect", MooMoo.ws);
+    }
+    const server_disconnect = disconnect;
+    function wiggleGameObject(data) {
+        MooMoo.emit("wiggleGameObject", data);
+        MooMoo.emit("wigglegameobject", data);
+        MooMoo.emit("8", data);
+    }
+    const server_wiggleGameObject = wiggleGameObject;
+    function shootTurret(data) {
+        MooMoo.emit("shootTurret", data);
+        MooMoo.emit("shootturret", data);
+        MooMoo.emit("sp", data);
+    }
+    const server_shootTurret = shootTurret;
+    function killPlayer(data) {
+        MooMoo.emit("killPlayer", data);
+        MooMoo.emit("killplayer", data);
+        MooMoo.emit("11", data);
+    }
+    const server_killPlayer = killPlayer;
+    function updateItemCounts(data) {
+        MooMoo.emit("updateItemCounts", data);
+        MooMoo.emit("updateitemcounts", data);
+        MooMoo.emit("14", data);
+    }
+    const server_updateItemCounts = updateItemCounts;
+    function updateAge(data) {
+        MooMoo.emit("updateAge", data);
+        MooMoo.emit("updateage", data);
+        MooMoo.emit("15", data);
+    }
+    const server_updateAge = updateAge;
+    function updateUpgrades(data) {
+        MooMoo.emit("updateUpgrades", data);
+        MooMoo.emit("updateupgrades", data);
+        MooMoo.emit("16", data);
+    }
+    const server_updateUpgrades = updateUpgrades;
+    function updateItems(data) {
+        MooMoo.emit("updateItems", data);
+        MooMoo.emit("updateitems", data);
+        MooMoo.emit("17", data);
+    }
+    const server_updateItems = updateItems;
+    function addProjectile(data) {
+        MooMoo.emit("addProjectile", data);
+        MooMoo.emit("addprojectile", data);
+        MooMoo.emit("18", data);
+    }
+    const server_addProjectile = addProjectile;
+    function remProjectile(data) {
+        MooMoo.emit("remProjectile", data);
+        MooMoo.emit("remprojectile", data);
+        MooMoo.emit("19", data);
+    }
+    const server_remProjectile = remProjectile;
+    function serverShutdownNotice(data) {
+        MooMoo.emit("serverShutdownNotice", data);
+        MooMoo.emit("servershutdownnotice", data);
+        MooMoo.emit("20", data);
+    }
+    const server_serverShutdownNotice = serverShutdownNotice;
+    function addAlliance(data) {
+        MooMoo.emit("addAlliance", data);
+        MooMoo.emit("addalliance", data);
+        MooMoo.emit("ac", data);
+    }
+    const server_addAlliance = addAlliance;
+    function deleteAlliance(data) {
+        MooMoo.emit("deleteAlliance", data);
+        MooMoo.emit("deletealliance", data);
+    }
+    const server_deleteAlliance = deleteAlliance;
+    function allianceNotification(data) {
+        MooMoo.emit("allianceNotification", data);
+        MooMoo.emit("alliancenotification", data);
+        MooMoo.emit("an", data);
+    }
+    const server_allianceNotification = allianceNotification;
+    function setPlayerTeam(data) {
+        MooMoo.emit("setPlayerTeam", data);
+        MooMoo.emit("setplayerteam", data);
+        MooMoo.emit("st", data);
+    }
+    const server_setPlayerTeam = setPlayerTeam;
+    function setAlliancePlayers(data) {
+        MooMoo.emit("setAlliancePlayers", data);
+        MooMoo.emit("setallianceplayers", data);
+        MooMoo.emit("sa", data);
+    }
+    const server_setAlliancePlayers = setAlliancePlayers;
+    function updateStoreItems(data) {
+        MooMoo.emit("updateStoreItems", data);
+        MooMoo.emit("updatestoreitems", data);
+        MooMoo.emit("us", data);
+    }
+    const server_updateStoreItems = updateStoreItems;
+    function receiveChat(data) {
+        MooMoo.emit("receiveChat", data);
+        MooMoo.emit("receivechat", data);
+        MooMoo.emit("ch", data);
+    }
+    const server_receiveChat = receiveChat;
+    function updateMinimap(data) {
+        MooMoo.emit("updateMinimap", data);
+        MooMoo.emit("updateminimap", data);
+        MooMoo.emit("mm", data);
+    }
+    const server_updateMinimap = updateMinimap;
+    function showText(data) {
+        MooMoo.emit("showText", data);
+        MooMoo.emit("showtext", data);
+        MooMoo.emit("t", data);
+    }
+    const server_showText = showText;
+    function pingMap(data) {
+        MooMoo.emit("pingMap", data);
+        MooMoo.emit("pingmap", data);
+        MooMoo.emit("p", data);
+    }
+    const server_pingMap = pingMap;
+    function pingSocketResponse(data) {
+        MooMoo.emit("pingSocketResponse", data);
+        MooMoo.emit("pingsocketresponse", data);
+        MooMoo.emit("pp", data);
+    }
+    const server_pingSocketResponse = pingSocketResponse;
     function handleServerPackets(packet, data) {
         switch (packet) {
           case "id":
-            server_setInitData(data[0]);
+            server_setInitData(data);
             break;
 
           case "d":
+            server_disconnect();
             break;
 
           case "1":
-            server_setupGame(data[0]);
+            server_setupGame(data);
             break;
 
           case "2":
-            server_addPlayer(data[0], data[1]);
+            server_addPlayer(data);
             break;
 
           case "4":
-            server_removePlayer(data[0]);
+            server_removePlayer(data);
             break;
 
           case "33":
-            server_updatePlayers(data[0]);
+            server_updatePlayers(data);
             break;
 
           case "5":
-            server_updateLeaderboard(data[0]);
+            server_updateLeaderboard(data);
             break;
 
           case "6":
-            server_loadGameObject(data[0]);
+            server_loadGameObject(data);
             break;
 
           case "a":
+            server_loadAI(data[0]);
             break;
 
           case "aa":
+            animateAI(data);
             break;
 
           case "7":
+            server_gatherAnimation(data);
             break;
 
           case "8":
+            server_wiggleGameObject(data);
             break;
 
           case "sp":
+            server_shootTurret(data);
             break;
 
           case "9":
-            server_updatePlayerValue(data[0], data[1]);
+            server_updatePlayerValue(data);
             break;
 
           case "h":
-            server_updateHealth(data[0], data[1]);
+            server_updateHealth(data);
             break;
 
           case "11":
+            server_killPlayer(data);
             break;
 
           case "12":
-            server_killObject(data[0]);
+            server_killObject(data);
             break;
 
           case "13":
@@ -1274,57 +1477,75 @@
             break;
 
           case "14":
+            server_updateItemCounts(data);
             break;
 
           case "15":
+            server_updateAge(data);
             break;
 
           case "16":
+            server_updateUpgrades(data);
             break;
 
           case "17":
+            server_updateItems(data);
             break;
 
           case "18":
+            server_addProjectile(data);
             break;
 
           case "19":
+            server_remProjectile(data);
             break;
 
           case "20":
+            server_serverShutdownNotice(data);
             break;
 
           case "ac":
+            server_addAlliance(data);
             break;
 
           case "ad":
+            server_deleteAlliance(data);
             break;
 
           case "an":
+            server_allianceNotification(data);
             break;
 
           case "st":
+            server_setPlayerTeam(data);
             break;
 
           case "sa":
+            server_setAlliancePlayers(data);
             break;
 
           case "us":
+            server_updateStoreItems(data);
             break;
 
           case "ch":
+            server_receiveChat(data);
             break;
 
           case "mm":
+            server_updateMinimap(data);
             break;
 
           case "t":
+            server_showText(data);
             break;
 
           case "p":
+            server_pingMap(data);
             break;
 
           case "pp":
+            server_pingSocketResponse(data);
             break;
 
           default:
