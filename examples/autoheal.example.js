@@ -12,8 +12,8 @@
 MooMoo.addEventListener("updatehealth", (data) => {
     let sid = data[0]
     let health = data[1]
+    
     // https://nuroc.github.io/MooMoo.js/Player#accessing-player-data-and-information
-
     if (MooMoo.myPlayer.sid === sid && health < 100) {
 
         // https://nuroc.github.io/MooMoo.js/Player#accessing-player-data-and-information
