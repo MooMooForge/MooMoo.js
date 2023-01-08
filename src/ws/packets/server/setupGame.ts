@@ -32,12 +32,17 @@ function setupGame (data: Array<1>) {
 
    MooMoo.vars.gameLoaded = true;
 
-   if(MooMoo.onGameLoad) MooMoo.onGameLoad();
    MooMoo.emit("gameLoad");
 
    MooMoo.emit("setupGame", data);
    MooMoo.emit("setupgame", data);
    MooMoo.emit("1", data);
+
+   let didInit = MooMoo.didInit;
+   if (!didInit) {
+      if(MooMoo.onGameLoad) MooMoo.onGameLoad();
+      MooMoo.didInit = true;
+   }
 }
 
 

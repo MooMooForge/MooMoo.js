@@ -23,6 +23,7 @@ export default class Game extends EventEmitter {
     teams: any = [];
     myPlayer: any
     statistics: any = <any>{};
+    DidInit: boolean = false;
 
     // managers
     GamePlayerManager: PlayerManager = new PlayerManager();

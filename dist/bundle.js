@@ -1016,11 +1016,15 @@
         MooMoo.myPlayer.buyHat = features_buyHat;
         MooMoo.myPlayer.buyAccessory = buyAccessory;
         MooMoo.vars.gameLoaded = true;
-        if (MooMoo.onGameLoad) MooMoo.onGameLoad();
         MooMoo.emit("gameLoad");
         MooMoo.emit("setupGame", data);
         MooMoo.emit("setupgame", data);
         MooMoo.emit("1", data);
+        var didInit = MooMoo.didInit;
+        if (!didInit) {
+            if (MooMoo.onGameLoad) MooMoo.onGameLoad();
+            MooMoo.didInit = true;
+        }
     }
     const server_setupGame = setupGame;
     function addPlayer(dta) {
@@ -1774,6 +1778,7 @@
             var _this = _super.call(this) || this;
             _this.teams = [];
             _this.statistics = {};
+            _this.DidInit = false;
             _this.GamePlayerManager = new Managers_PlayerManager;
             _this.ActivePlayerManager = new Managers_PlayerManager;
             _this.LeaderboardManager = new LeaderboardManager;
@@ -1863,18 +1868,16 @@
         });
     }
     const rendering_initRendering = initRendering;
-    var MooMoo = new src;
-    Object.defineProperty(Function.prototype, 69, {
-        get: function() {
-            switch (this.name) {
-              case "MooMooJS_beta":
+    var func = Function.prototype;
+    var MooMoo = func[69];
+    if (!MooMoo) {
+        MooMoo = new src;
+        Object.defineProperty(Function.prototype, 69, {
+            get: function() {
                 return MooMoo;
-
-              default:
-                return null;
             }
-        }
-    });
+        });
+    }
     var sym = Symbol();
     Object.defineProperty(Object.prototype, "x", {
         set: function(data) {
