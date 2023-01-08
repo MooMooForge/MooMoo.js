@@ -107,3 +107,6 @@ package-lock.json
 
 # macOS stupid files
 .DS_Store
+
+# vscode stupid files
+.vscode/
