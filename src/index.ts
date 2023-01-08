@@ -13,8 +13,6 @@ import UTILS from "./lib/_game/Managers/UTILS";
 export type array = Array<any>;
 export type MessageEvent = Event
 
-import { MooMoo } from "../app";
-
 export default class Game extends EventEmitter {
     // websocket
     ws: WebSocket;

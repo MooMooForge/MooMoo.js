@@ -8,6 +8,9 @@
 // @run-at       document-start
 // ==/UserScript==
 
+// https://nuroc.github.io/MooMoo.js/#installing-and-getting-started
+const MooMoo = (function MooMooJS_beta() {})[69]
+
 // https://github.com/NuroC/moomoo-in-depth/tree/main/protocol/server#updatehealth
 MooMoo.addEventListener("updatehealth", (data) => {
     let sid = data[0]
