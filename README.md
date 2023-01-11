@@ -14,10 +14,6 @@ There is an active documentation about MooMoo.js at https://nuroc.github.io/MooM
 
 ## TODO
 
-- [ ] add bot class
-- [ ] add bot manager
-- [ ] add bot functions
-- [ ] add bot events
 - [ ] fix alliances (not updating)
 
 
