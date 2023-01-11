@@ -8,7 +8,7 @@
             var func = Function.prototype;
             var MooMoo = func[69];
             if (!MooMoo) {
-                var Game = __webpack_require__(160).Z;
+                var Game = __webpack_require__(806).Z;
                 var updateHookPosition_1 = __webpack_require__(804).W;
                 var initRendering = __webpack_require__(919).Z;
                 MooMoo = new Game;
@@ -30,7 +30,7 @@
                 initRendering();
             }
         },
-        160: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+        806: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
             __webpack_require__.d(__webpack_exports__, {
                 Z: () => src
             });
@@ -345,6 +345,14 @@
                 app.t.sendPacket("ch", message);
             }
             const features_chat = chat;
+            function hit(angle) {
+                if (angle === void 0) {
+                    angle = null;
+                }
+                app.t.sendPacket("c", 1, angle);
+                app.t.sendPacket("c", 0, angle);
+            }
+            const features_hit = hit;
             var hats = [ {
                 id: 45,
                 name: "Shame!",
@@ -1011,6 +1019,7 @@
                 app.t.myPlayer.sid = sid;
                 app.t.myPlayer.place = features_place;
                 app.t.myPlayer.chat = features_chat;
+                app.t.myPlayer.hit = features_hit;
                 app.t.myPlayer.equipHat = features_equipHat;
                 app.t.myPlayer.equipAccessory = features_equipAccessory;
                 app.t.myPlayer.unequipHat = features_unequipHat;

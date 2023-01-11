@@ -2,6 +2,7 @@ import { MooMoo } from "../../../../app"
 
 import place from "../../../lib/_game/external/modules/features/place";
 import chat from "../../../lib/_game/external/modules/features/chat";
+import hit from "../../../lib/_game/external/modules/features/hit";
 
 import equipHat from "../../../lib/_game/external/modules/features/equipHat";
 import equipAccessory from "../../../lib/_game/external/modules/features/equipAccessory";
@@ -20,6 +21,7 @@ function setupGame (data: Array<1>) {
    // set player functions (features)
    MooMoo.myPlayer.place = place;
    MooMoo.myPlayer.chat = chat;
+   MooMoo.myPlayer.hit = hit;
 
    MooMoo.myPlayer.equipHat = equipHat;
    MooMoo.myPlayer.equipAccessory = equipAccessory;
