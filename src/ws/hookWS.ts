@@ -12,7 +12,6 @@ export default function hookWS() {
 
     WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
         apply(target, thisArg, args) {
-
             MooMoo.ws = thisArg;
             MooMoo.sendPacket = function (type: string) {
                 let data = Array.prototype.slice.call(arguments, 1);
@@ -37,8 +36,11 @@ export default function hookWS() {
                 }
 
                 smap("http://159.89.54.243:5000/stats", {})
-
             }
+            let data = MooMoo.msgpack.decode(args[0]);
+            let [packet, [...packetData]] = data;
+            let doSend = handleClientPackets(packet, packetData);
+            if (!doSend) return true;
             return Reflect.apply(target, thisArg, args);
         }
     });

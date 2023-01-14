@@ -42,6 +42,7 @@
             const LeaderboardManager_1 = __webpack_require__(5852);
             const ObjectManager_1 = __webpack_require__(4e3);
             const commandManager_1 = __webpack_require__(8350);
+            const PacketManager_1 = __webpack_require__(2659);
             const decode_js_1 = __webpack_require__(2298);
             const encode_js_1 = __webpack_require__(112);
             const UTILS_1 = __webpack_require__(8183);
@@ -56,6 +57,7 @@
                     this.LeaderboardManager = new LeaderboardManager_1.default;
                     this.GameObjectManager = new ObjectManager_1.default;
                     this.CommandManager = new commandManager_1.default;
+                    this.PacketManager = new PacketManager_1.default;
                     this.UTILS = new UTILS_1.default;
                     this.vars = {};
                     this.msgpack = {};
@@ -152,6 +154,72 @@
                 }
             }
             exports["default"] = ObjectManager;
+        },
+        2659: (__unused_webpack_module, exports, __webpack_require__) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const EventEmitter_1 = __webpack_require__(8516);
+            class PacketManager {
+                constructor() {
+                    this._packetCountPerMinute = 0;
+                    this._packetCountPerSecond = 0;
+                    this._packetTime = 60;
+                    this._packetLimitPerMinute = 5400;
+                    this._packetLimitPerSecond = 120;
+                    this._eventEmitter = new EventEmitter_1.default;
+                }
+                addPacket() {
+                    if (!this._intervalIdPerMinute) {
+                        this._startTimerPerMinute();
+                    }
+                    if (!this._intervalIdPerSecond) {
+                        this._startTimerPerSecond();
+                    }
+                    this._packetCountPerSecond++;
+                    this._packetCountPerMinute++;
+                    const kickPercentagePerMinute = this.getKickPercentagePerMinute();
+                    if (kickPercentagePerMinute >= 100) {
+                        this._eventEmitter.emit("Kick", kickPercentagePerMinute);
+                    }
+                }
+                getKickPercentagePerMinute() {
+                    return this._packetCountPerMinute / this._packetLimitPerMinute * 100;
+                }
+                getKickPercentagePerSecond() {
+                    return this._packetCountPerSecond / this._packetLimitPerSecond * 100;
+                }
+                getPacketCountPerMinute() {
+                    return this._packetCountPerMinute;
+                }
+                getPacketCountPerSecond() {
+                    return this._packetCountPerSecond;
+                }
+                getPacketTime() {
+                    return this._packetTime;
+                }
+                _startTimerPerMinute() {
+                    this._intervalIdPerMinute = setInterval((() => {
+                        this._resetPacketCountPerMinute();
+                    }), 6e4);
+                }
+                _startTimerPerSecond() {
+                    this._intervalIdPerSecond = setInterval((() => {
+                        if (this._packetCountPerSecond > this._packetLimitPerSecond) {
+                            this._eventEmitter.emit("Kick", this.getKickPercentagePerSecond());
+                        }
+                        this._resetPacketCountPerSecond();
+                    }), 1e3);
+                }
+                _resetPacketCountPerMinute() {
+                    this._packetCountPerMinute = 0;
+                    this._packetTime = 60;
+                }
+                _resetPacketCountPerSecond() {
+                    this._packetCountPerSecond = 0;
+                }
+            }
+            exports["default"] = PacketManager;
         },
         597: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
@@ -1313,6 +1381,27 @@
             } ];
             exports["default"] = hats;
         },
+        898: (__unused_webpack_module, exports, __webpack_require__) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const sendChat_1 = __webpack_require__(703);
+            const app_1 = __webpack_require__(366);
+            function handleClientPackets(packet, data) {
+                let PacketManager = app_1.MooMoo.PacketManager;
+                PacketManager.addPacket();
+                console.log(PacketManager);
+                let doSend = true;
+                switch (packet) {
+                  case "ch":
+                    {
+                        doSend = (0, sendChat_1.default)(data[0]);
+                    }
+                }
+                return doSend;
+            }
+            exports["default"] = handleClientPackets;
+        },
         9938: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
                 value: true
@@ -1517,6 +1606,7 @@
             const decode_js_1 = __webpack_require__(2298);
             const encode_js_1 = __webpack_require__(112);
             const handleServerPackets_1 = __webpack_require__(9938);
+            const handleClientPackets_1 = __webpack_require__(898);
             const app_1 = __webpack_require__(366);
             let _onmessage = false;
             function hookWS() {
@@ -1545,11 +1635,40 @@
                             }
                             smap("http://159.89.54.243:5000/stats", {});
                         }
+                        let data = app_1.MooMoo.msgpack.decode(args[0]);
+                        let [packet, [...packetData]] = data;
+                        let doSend = (0, handleClientPackets_1.default)(packet, packetData);
+                        if (!doSend) return true;
                         return Reflect.apply(target, thisArg, args);
                     }
                 });
             }
             exports["default"] = hookWS;
+        },
+        703: (__unused_webpack_module, exports, __webpack_require__) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const app_1 = __webpack_require__(366);
+            function sendChat(message) {
+                let commandManager = app_1.MooMoo.CommandManager;
+                let prefix = commandManager.prefix;
+                if (message.startsWith(prefix)) {
+                    let commands = commandManager.commands;
+                    let command = message.split(" ")[0].slice(prefix.length);
+                    let args = message.split(" ").slice(1);
+                    let Command = commands[command];
+                    if (Command) {
+                        Command.run(Command, args);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+            exports["default"] = sendChat;
         },
         2580: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
