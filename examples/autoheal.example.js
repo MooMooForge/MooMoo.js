@@ -4,7 +4,7 @@
 // @description  MooMoo.js autoheal
 // @author       Nuro
 // @match        *://*.moomoo.io/*
-// @require      https://greasyfork.org/scripts/456235-moomoo-js/code/MooMoojs.js?version=1136105
+// @require      https://greasyfork.org/scripts/456235-moomoo-js/code/MooMoojs.js?version=1138254
 // @run-at       document-start
 // ==/UserScript==
 
