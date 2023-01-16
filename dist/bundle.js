@@ -157,10 +157,11 @@
             }
             exports["default"] = ObjectManager;
         },
-        4190: (__unused_webpack_module, exports) => {
+        4190: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
+            const hookWS_1 = __webpack_require__(550);
             class PacketInterceptor {
                 constructor() {
                     this.clientCallbacks = new Map;
@@ -195,6 +196,9 @@
                         packet = callback(packet) || packet;
                     }
                     return packet;
+                }
+                getOriginalServerCallback() {
+                    return hookWS_1.onmessagecallback;
                 }
             }
             exports["default"] = PacketInterceptor;
@@ -1673,11 +1677,13 @@
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
+            exports.onmessagecallback = void 0;
             const encode_js_1 = __webpack_require__(112);
             const handleServerPackets_1 = __webpack_require__(9938);
             const handleClientPackets_1 = __webpack_require__(898);
             const app_1 = __webpack_require__(366);
             let _onmessage = false;
+            exports.onmessagecallback = null;
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
                     apply(target, thisArg, args) {
@@ -1708,11 +1714,10 @@
                         return Reflect.apply(target, thisArg, args);
                     }
                 });
-                let onmessagecallback = null;
                 let onmessagesetter = Object.getOwnPropertyDescriptor(WebSocket.prototype, "onmessage").set;
                 Object.defineProperty(WebSocket.prototype, "onmessage", {
                     set: function(callback) {
-                        onmessagecallback = callback;
+                        exports.onmessagecallback = callback;
                         onmessagesetter.call(this, (function(event) {
                             return __awaiter(this, void 0, void 0, (function*() {
                                 let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
@@ -1721,7 +1726,7 @@
                                 let decoded = app_1.MooMoo.msgpack.decode(new Uint8Array(event.data));
                                 let [packet, [...packetData]] = decoded;
                                 (0, handleServerPackets_1.default)(packet, packetData);
-                                onmessagecallback(event);
+                                (0, exports.onmessagecallback)(event);
                             }));
                         }));
                     }

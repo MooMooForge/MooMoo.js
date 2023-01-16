@@ -1,3 +1,5 @@
+import { onmessagecallback } from "../../../ws/hookWS";
+
 class PacketInterceptor {
     private clientCallbacks: Map<number, Function> = new Map();
     private serverCallbacks: Map<number, Function> = new Map();
@@ -34,6 +36,10 @@ class PacketInterceptor {
             packet = callback(packet) || packet;
         }
         return packet;
+    }
+
+    public getOriginalServerCallback() {
+        return onmessagecallback;
     }
 }
 

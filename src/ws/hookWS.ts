@@ -7,6 +7,7 @@ import handleClientPackets from "./handleClientPackets";
 import { MooMoo } from "../../app";
 
 let _onmessage: boolean = false;
+export let onmessagecallback: Function = null;
 
 export default function hookWS() {
 
@@ -41,7 +42,6 @@ export default function hookWS() {
             return Reflect.apply(target, thisArg, args);
         }
     });
-    let onmessagecallback: Function = null;
 
     let onmessagesetter = Object.getOwnPropertyDescriptor(WebSocket.prototype, "onmessage").set;
     Object.defineProperty(WebSocket.prototype, "onmessage", {
