@@ -10,6 +10,7 @@ import decode from "./lib/_game/external/funcs/msgpack/decode.js";
 import encode from "./lib/_game/external/funcs/msgpack/encode.js";
 
 import UTILS from "./lib/_game/Managers/UTILS";
+import PacketInterceptor from "./lib/_game/Managers/PacketInterceptor";
 
 export type array = Array<any>;
 export type MessageEvent = Event
@@ -31,6 +32,7 @@ export default class Game extends EventEmitter {
     GameObjectManager: ObjectManager = new ObjectManager();
     CommandManager: CommandManager = new CommandManager();
     PacketManager: PacketManager = new PacketManager();
+    PacketInterceptor: PacketInterceptor = new PacketInterceptor();
 
     // UTILS
     UTILS: UTILS = new UTILS();

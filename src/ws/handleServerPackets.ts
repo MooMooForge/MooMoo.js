@@ -38,6 +38,7 @@ import updateMinimap from "./packets/server/updateMinimap";
 import showText from "./packets/server/showText";
 import pingMap from "./packets/server/pingMap";
 import pingSocketResponse from "./packets/server/pingSocketResponse";
+import PacketManager from "../lib/_game/Managers/PacketManager";
 
 export default function handleServerPackets(packet: string, data: array) {
     switch (packet) {

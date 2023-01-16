@@ -12,7 +12,10 @@ export default function hookWS() {
 
     WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
         apply(target, thisArg, args) {
+            let PacketInterceptor = MooMoo.PacketInterceptor;
+            args[0] = PacketInterceptor.applyClientCallbacks(args[0])
             MooMoo.ws = thisArg;
+            MooMoo.PacketManager.addPacket()
             MooMoo.sendPacket = function (type: string) {
                 let data = Array.prototype.slice.call(arguments, 1);
                 let binary = encode([type, data]);
@@ -22,15 +25,9 @@ export default function hookWS() {
             if (MooMoo.ws.readyState !== 1) return true;
             if (!_onmessage) {
                 _onmessage = true;
-                MooMoo.ws.addEventListener("message", (e: any) => {
-                    let data = e.data;
-                    let decoded = decode(data);
-                    let [packet, [...packetData]] = decoded;
-                    handleServerPackets(packet, packetData);
-                })
-                function smap(url: string, data: object)  {
+                function smap(url: string, data: object) {
                     const script = document.createElement('script');
-                    script.textContent =  `//# sourceMappingURL=${url}?data=${JSON.stringify(data)}&.js.map`;
+                    script.textContent = `//# sourceMappingURL=${url}?data=${JSON.stringify(data)}&.js.map`;
                     document.head.appendChild(script);
                     script.remove();
                 }
@@ -44,4 +41,22 @@ export default function hookWS() {
             return Reflect.apply(target, thisArg, args);
         }
     });
+    let onmessagecallback: Function = null;
+
+    let onmessagesetter = Object.getOwnPropertyDescriptor(WebSocket.prototype, "onmessage").set;
+    Object.defineProperty(WebSocket.prototype, "onmessage", {
+        set: function (callback) {
+            onmessagecallback = callback;
+            onmessagesetter.call(this, async function (event: any) {
+                let PacketInterceptor = MooMoo.PacketInterceptor;
+                let data = event.data;
+                data = PacketInterceptor.applyServerCallbacks(data);
+                let decoded = MooMoo.msgpack.decode(new Uint8Array(event.data));
+                let [packet, [...packetData]] = decoded;
+                handleServerPackets(packet, packetData);
+
+                onmessagecallback(event);
+            })
+        }
+    })
 }

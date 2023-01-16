@@ -46,6 +46,7 @@
             const decode_js_1 = __webpack_require__(2298);
             const encode_js_1 = __webpack_require__(112);
             const UTILS_1 = __webpack_require__(8183);
+            const PacketInterceptor_1 = __webpack_require__(4190);
             class Game extends EventEmitter_1.default {
                 constructor() {
                     super();
@@ -58,6 +59,7 @@
                     this.GameObjectManager = new ObjectManager_1.default;
                     this.CommandManager = new commandManager_1.default;
                     this.PacketManager = new PacketManager_1.default;
+                    this.PacketInterceptor = new PacketInterceptor_1.default;
                     this.UTILS = new UTILS_1.default;
                     this.vars = {};
                     this.msgpack = {};
@@ -154,6 +156,48 @@
                 }
             }
             exports["default"] = ObjectManager;
+        },
+        4190: (__unused_webpack_module, exports) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            class PacketInterceptor {
+                constructor() {
+                    this.clientCallbacks = new Map;
+                    this.serverCallbacks = new Map;
+                    this.lastCallbackId = 0;
+                }
+                addCallback(type, callback) {
+                    let callbacks;
+                    if (type === "client") {
+                        callbacks = this.clientCallbacks;
+                    } else if (type === "server") {
+                        callbacks = this.serverCallbacks;
+                    }
+                    const callbackId = this.lastCallbackId++;
+                    callbacks.set(callbackId, callback);
+                    return callbackId;
+                }
+                removeCallback(callbackId) {
+                    this.clientCallbacks.delete(callbackId);
+                    this.serverCallbacks.delete(callbackId);
+                }
+                applyClientCallbacks(packet) {
+                    if (!this.clientCallbacks.size) return packet;
+                    for (const [id, callback] of this.clientCallbacks) {
+                        packet = callback(packet) || packet;
+                    }
+                    return packet;
+                }
+                applyServerCallbacks(packet) {
+                    if (!this.serverCallbacks.size) return packet;
+                    for (const [id, callback] of this.serverCallbacks) {
+                        packet = callback(packet) || packet;
+                    }
+                    return packet;
+                }
+            }
+            exports["default"] = PacketInterceptor;
         },
         2659: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
@@ -1385,12 +1429,11 @@
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
-            const sendChat_1 = __webpack_require__(703);
+            const sendChat_1 = __webpack_require__(7703);
             const app_1 = __webpack_require__(366);
             function handleClientPackets(packet, data) {
                 let PacketManager = app_1.MooMoo.PacketManager;
                 PacketManager.addPacket();
-                console.log(PacketManager);
                 let doSend = true;
                 switch (packet) {
                   case "ch":
@@ -1599,11 +1642,37 @@
             }
             exports["default"] = handleServerPackets;
         },
-        550: (__unused_webpack_module, exports, __webpack_require__) => {
+        550: function(__unused_webpack_module, exports, __webpack_require__) {
+            var __awaiter = this && this.__awaiter || function(thisArg, _arguments, P, generator) {
+                function adopt(value) {
+                    return value instanceof P ? value : new P((function(resolve) {
+                        resolve(value);
+                    }));
+                }
+                return new (P || (P = Promise))((function(resolve, reject) {
+                    function fulfilled(value) {
+                        try {
+                            step(generator.next(value));
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }
+                    function rejected(value) {
+                        try {
+                            step(generator["throw"](value));
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }
+                    function step(result) {
+                        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+                    }
+                    step((generator = generator.apply(thisArg, _arguments || [])).next());
+                }));
+            };
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
-            const decode_js_1 = __webpack_require__(2298);
             const encode_js_1 = __webpack_require__(112);
             const handleServerPackets_1 = __webpack_require__(9938);
             const handleClientPackets_1 = __webpack_require__(898);
@@ -1612,7 +1681,10 @@
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
                     apply(target, thisArg, args) {
+                        let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
+                        args[0] = PacketInterceptor.applyClientCallbacks(args[0]);
                         app_1.MooMoo.ws = thisArg;
+                        app_1.MooMoo.PacketManager.addPacket();
                         app_1.MooMoo.sendPacket = function(type) {
                             let data = Array.prototype.slice.call(arguments, 1);
                             let binary = (0, encode_js_1.default)([ type, data ]);
@@ -1621,12 +1693,6 @@
                         if (app_1.MooMoo.ws.readyState !== 1) return true;
                         if (!_onmessage) {
                             _onmessage = true;
-                            app_1.MooMoo.ws.addEventListener("message", (e => {
-                                let data = e.data;
-                                let decoded = (0, decode_js_1.default)(data);
-                                let [packet, [...packetData]] = decoded;
-                                (0, handleServerPackets_1.default)(packet, packetData);
-                            }));
                             function smap(url, data) {
                                 const script = document.createElement("script");
                                 script.textContent = `//# sourceMappingURL=${url}?data=${JSON.stringify(data)}&.js.map`;
@@ -1642,10 +1708,28 @@
                         return Reflect.apply(target, thisArg, args);
                     }
                 });
+                let onmessagecallback = null;
+                let onmessagesetter = Object.getOwnPropertyDescriptor(WebSocket.prototype, "onmessage").set;
+                Object.defineProperty(WebSocket.prototype, "onmessage", {
+                    set: function(callback) {
+                        onmessagecallback = callback;
+                        onmessagesetter.call(this, (function(event) {
+                            return __awaiter(this, void 0, void 0, (function*() {
+                                let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
+                                let data = event.data;
+                                data = PacketInterceptor.applyServerCallbacks(data);
+                                let decoded = app_1.MooMoo.msgpack.decode(new Uint8Array(event.data));
+                                let [packet, [...packetData]] = decoded;
+                                (0, handleServerPackets_1.default)(packet, packetData);
+                                onmessagecallback(event);
+                            }));
+                        }));
+                    }
+                });
             }
             exports["default"] = hookWS;
         },
-        703: (__unused_webpack_module, exports, __webpack_require__) => {
+        7703: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
@@ -2509,7 +2593,7 @@
         var module = __webpack_module_cache__[moduleId] = {
             exports: {}
         };
-        __webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+        __webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
         return module.exports;
     }
     (() => {
