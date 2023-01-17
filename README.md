@@ -1,8 +1,16 @@
-<div style="display: flex; justify-content: center;">
-  <img src="https://img.shields.io/github/stars/NuroC/MooMoo.js" alt="GitHub stars">
-  <img src="https://img.shields.io/github/release/NuroC/MooMoo.js" alt="GitHub version">
-  <img src="https://img.shields.io/github/commits-since/NuroC/MooMoo.js/latest" alt="GitHub commits">
+<div align="center">
+	<br />
+	<p>
+		<a><img src="https://media.discordapp.net/attachments/1064186640735674398/1064956931241955408/Screenshot__3_-removebg-preview.png" width="546" alt="MooMoo.js" /></a>
+	</p>
+	<br />
+	<p>
+		<a><img src="https://img.shields.io/github/stars/NuroC/MooMoo.js" alt="Github Stars" /></a>
+		<a ><img src="https://img.shields.io/github/release/NuroC/MooMoo.js" alt="Releases" /></a>
+        <a ><img src="https://img.shields.io/github/commits-since/NuroC/MooMoo.js/latest"></a>
+	</p>
 </div>
+
 
 
 # MooMoo.js API
