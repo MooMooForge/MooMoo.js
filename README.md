@@ -1,14 +1,14 @@
 <div align="center">
-	<br />
-	<p>
-		<a><img src="https://media.discordapp.net/attachments/1064186640735674398/1064956931241955408/Screenshot__3_-removebg-preview.png" width="546" alt="MooMoo.js" /></a>
-	</p>
-	<br />
-	<p>
-		<a><img src="https://img.shields.io/github/stars/NuroC/MooMoo.js" alt="Github Stars" /></a>
-		<a ><img src="https://img.shields.io/github/release/NuroC/MooMoo.js" alt="Releases" /></a>
-        <a ><img src="https://img.shields.io/github/commits-since/NuroC/MooMoo.js/latest"></a>
-	</p>
+   <br />
+   <p>
+      <a><img src="https://media.discordapp.net/attachments/1064186640735674398/1064956931241955408/Screenshot__3_-removebg-preview.png" width="546" alt="MooMoo.js" /></a>
+   </p>
+   <br />
+   <p>
+      <a><img src="https://img.shields.io/github/stars/NuroC/MooMoo.js" alt="Github Stars" /></a>
+      <a ><img src="https://img.shields.io/github/release/NuroC/MooMoo.js" alt="Releases" /></a>
+      <a ><img src="https://img.shields.io/github/commits-since/NuroC/MooMoo.js/latest"></a>
+   </p>
 </div>
 
 
