@@ -1,7 +1,7 @@
 <div align="center">
    <br />
    <p>
-      <a><img src="https://media.discordapp.net/attachments/1064186640735674398/1064956931241955408/Screenshot__3_-removebg-preview.png" width="546" alt="MooMoo.js" /></a>
+      <a><img src="https://media.discordapp.net/attachments/1064186640735674398/1064966817900142692/Screenshot__4_-removebg-preview.png" width="546" alt="MooMoo.js" /></a>
    </p>
    <br />
    <p>
