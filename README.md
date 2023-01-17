@@ -3,7 +3,6 @@
    <p>
       <a><img src="https://media.discordapp.net/attachments/1064186640735674398/1064967192216608768/Screenshot__5_-removebg-preview.png" width="546" alt="MooMoo.js" /></a>
    </p>
-   <br />
    <p>
       <a><img src="https://img.shields.io/github/stars/NuroC/MooMoo.js" alt="Github Stars" /></a>
       <a ><img src="https://img.shields.io/github/release/NuroC/MooMoo.js" alt="Releases" /></a>
