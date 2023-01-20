@@ -5,6 +5,7 @@ interface Bot {
     name: string;
     skin: string;
     spawnRes: boolean;
+    ws: WebSocket;
 }
 
 class Bot {
@@ -13,6 +14,11 @@ class Bot {
         this.name = name;
         this.skin = skin;
         this.spawnRes = spawnRes;
+        this.ws = null;
+    }
+
+    public async connect() {
+        
     }
 }
 
