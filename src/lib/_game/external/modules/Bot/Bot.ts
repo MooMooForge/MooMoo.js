@@ -1,9 +1,19 @@
-class Bot {
-    private adress : any;
-    private ws: WebSocket;
+import Server from "./types/Server/Server";
 
-    constructor(adress : any) {
-        this.adress = adress;
-        this.ws = new WebSocket(adress);
+interface Bot {
+    server: Server;
+    name: string;
+    skin: string;
+    spawnRes: boolean;
+}
+
+class Bot {
+    constructor(server: Server, name: string, skin: string, spawnRes: boolean) {
+        this.server = server;
+        this.name = name;
+        this.skin = skin;
+        this.spawnRes = spawnRes;
     }
 }
+
+export default Bot;
