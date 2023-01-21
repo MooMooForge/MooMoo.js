@@ -1,10 +1,14 @@
-import Server from "./types/Server/Server";
 import EventEmitter from "../../funcs/EventEmitter";
+
+interface Server {
+    // ...
+}
 
 interface Bot {
     name: string;
     skin: number;
     moofoll: boolean;
+    id: number;
     join(server: Server): void;
     spawn(): void;
     chat(message: string): void;
