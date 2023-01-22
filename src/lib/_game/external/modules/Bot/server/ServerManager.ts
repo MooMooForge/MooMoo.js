@@ -18,7 +18,6 @@ class ServerManager implements IServerManager {
     ip: string = "";
     players: number = 0;
     wsurl: string = "";
-
     private static _instance: ServerManager | undefined;
 
     private constructor() {}
@@ -35,9 +34,8 @@ class ServerManager implements IServerManager {
     }
 
     public getCurrentServer(): Server | undefined {
-        let server: Server | undefined;
-        // ...
-        return server;
+        let currentServer = new Server(this.region, this.index);
+        return currentServer;
     }
 
     private calculateServer(): void {
@@ -57,4 +55,13 @@ class ServerManager implements IServerManager {
         }
         return { region: null, index: null };
     }
+
+    public static parseServer(str: string): { region: number, index: number } {
+        let parts = str.split(':');
+        let region = parseInt(parts[0], 10);
+        let index = parseInt(parts[1], 10);
+        return { region: region, index: index};
+    }
 }
+
+export default ServerManager;

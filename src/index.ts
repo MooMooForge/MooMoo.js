@@ -5,6 +5,8 @@ import Leaderboardmanager from "./lib/_game/Managers/LeaderboardManager";
 import ObjectManager from "./lib/_game/Managers/ObjectManager";
 import CommandManager from "./lib/_game/Managers/commandManager";
 import PacketManager from "./lib/_game/Managers/PacketManager";
+import BotManager from "./lib/_game/external/modules/Bot/BotManager";
+import ServerManager from "./lib/_game/external/modules/Bot/server/ServerManager";
 
 import decode from "./lib/_game/external/funcs/msgpack/decode.js";
 import encode from "./lib/_game/external/funcs/msgpack/encode.js";
@@ -20,8 +22,8 @@ export default class Game extends EventEmitter {
     ws: WebSocket;
 
     // idk random variables
-    teams: any = [];
-    myPlayer: any
+    teams: [] = [];
+    myPlayer: any = <any>{};
     statistics: any = <any>{};
     DidInit: boolean = false;
 
@@ -34,6 +36,9 @@ export default class Game extends EventEmitter {
     PacketManager: PacketManager = new PacketManager();
     PacketInterceptor: PacketInterceptor = new PacketInterceptor();
 
+    // bot stuff
+    BotManager: BotManager = BotManager.instance;
+    
     // UTILS
     UTILS: UTILS = new UTILS();
 
@@ -61,6 +66,5 @@ export default class Game extends EventEmitter {
         this.emit("debug", message);
     }
 }
-
 
 hookWS();

@@ -43,6 +43,7 @@
             const ObjectManager_1 = __webpack_require__(4e3);
             const commandManager_1 = __webpack_require__(8350);
             const PacketManager_1 = __webpack_require__(2659);
+            const BotManager_1 = __webpack_require__(484);
             const decode_js_1 = __webpack_require__(2298);
             const encode_js_1 = __webpack_require__(112);
             const UTILS_1 = __webpack_require__(8183);
@@ -51,6 +52,7 @@
                 constructor() {
                     super();
                     this.teams = [];
+                    this.myPlayer = {};
                     this.statistics = {};
                     this.DidInit = false;
                     this.GamePlayerManager = new PlayerManager_1.default;
@@ -60,6 +62,7 @@
                     this.CommandManager = new commandManager_1.default;
                     this.PacketManager = new PacketManager_1.default;
                     this.PacketInterceptor = new PacketInterceptor_1.default;
+                    this.BotManager = BotManager_1.default.instance;
                     this.UTILS = new UTILS_1.default;
                     this.vars = {};
                     this.msgpack = {};
@@ -450,6 +453,12 @@
                     }
                     this._listeners[event].push(listener);
                 }
+                once(event, listener) {
+                    this.on(event, (function g(...args) {
+                        this.off(event, g);
+                        listener(...args);
+                    }));
+                }
                 emit(event, ...args) {
                     if (this._listeners[event]) {
                         this._listeners[event].forEach((listener => listener(...args)));
@@ -547,6 +556,251 @@
                 return chunks;
             }
             exports["default"] = chunk;
+        },
+        9127: function(__unused_webpack_module, exports, __webpack_require__) {
+            var __awaiter = this && this.__awaiter || function(thisArg, _arguments, P, generator) {
+                function adopt(value) {
+                    return value instanceof P ? value : new P((function(resolve) {
+                        resolve(value);
+                    }));
+                }
+                return new (P || (P = Promise))((function(resolve, reject) {
+                    function fulfilled(value) {
+                        try {
+                            step(generator.next(value));
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }
+                    function rejected(value) {
+                        try {
+                            step(generator["throw"](value));
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }
+                    function step(result) {
+                        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+                    }
+                    step((generator = generator.apply(thisArg, _arguments || [])).next());
+                }));
+            };
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const EventEmitter_1 = __webpack_require__(8516);
+            const ServerManager_1 = __webpack_require__(455);
+            const Server_1 = __webpack_require__(292);
+            class Bot extends EventEmitter_1.default {
+                constructor(configurable = false, options) {
+                    super();
+                    if (!configurable) {
+                        this.name = "Bot";
+                        this.skin = 0;
+                        this.moofoll = false;
+                    } else {
+                        this.name = options.name;
+                        this.skin = options.skin;
+                        this.moofoll = options.moofoll;
+                    }
+                }
+                generateToken() {
+                    return __awaiter(this, void 0, void 0, (function*() {
+                        try {
+                            const token = yield window.grecaptcha.execute("6LevKusUAAAAAAFknhlV8sPtXAk5Z5dGP5T2FYIZ", {
+                                action: "homepage"
+                            });
+                            return token;
+                        } catch (error) {
+                            throw error;
+                        }
+                    }));
+                }
+                join(server) {
+                    return __awaiter(this, void 0, void 0, (function*() {
+                        switch (typeof server) {
+                          case "string":
+                            {
+                                let {region, index} = ServerManager_1.default.parseServer(server);
+                                let targetserver = new Server_1.default(region, index);
+                                this.recaptchaToken = yield this.generateToken();
+                                targetserver.joinServer(this);
+                                break;
+                            }
+
+                          case "object":
+                            {
+                                if (Array.isArray(server)) {
+                                    let [region, index] = server;
+                                    let targetserver = new Server_1.default(region, index);
+                                    this.recaptchaToken = yield this.generateToken();
+                                    targetserver.joinServer(this);
+                                } else {
+                                    let {region, index} = server;
+                                    let targetserver = new Server_1.default(region, index);
+                                    this.recaptchaToken = yield this.generateToken();
+                                    targetserver.joinServer(this);
+                                }
+                                break;
+                            }
+                        }
+                    }));
+                }
+                spawn() {}
+                chat(message) {}
+            }
+            exports["default"] = Bot;
+        },
+        484: (__unused_webpack_module, exports, __webpack_require__) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const Bot_1 = __webpack_require__(9127);
+            class BotManager {
+                constructor() {
+                    this._bots = new Map;
+                    this._botIdCounter = 0;
+                    this.Bot = Bot_1.default;
+                }
+                static get instance() {
+                    if (!BotManager._instance) {
+                        BotManager._instance = new BotManager;
+                    }
+                    return BotManager._instance;
+                }
+                addBot(bot) {
+                    const botId = this._botIdCounter++;
+                    bot.id = botId;
+                    this._bots.set(botId, bot);
+                    return botId;
+                }
+                removeBot(botId) {
+                    this._bots.delete(botId);
+                }
+                getBot(botId) {
+                    return this._bots.get(botId);
+                }
+            }
+            exports["default"] = BotManager;
+        },
+        292: (__unused_webpack_module, exports, __webpack_require__) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const ServerManager_1 = __webpack_require__(455);
+            class Server {
+                constructor(region, index) {
+                    this._region = region;
+                    this._index = index;
+                    this.parseServerData();
+                }
+                get region() {
+                    return this._region;
+                }
+                set region(value) {
+                    this._region = value;
+                }
+                get index() {
+                    return this._index;
+                }
+                set index(value) {
+                    this._index = value;
+                }
+                parseServerData() {
+                    let region = "vultr:" + this._region.toString();
+                    let servers = window.vultr.servers;
+                    let targetServer;
+                    for (let i = 0; i < servers.length; i++) {
+                        let currentServer = servers[i];
+                        if (currentServer.region === region && currentServer.index === this._index) {
+                            targetServer = currentServer;
+                            break;
+                        }
+                    }
+                    if (!targetServer) {
+                        console.log("Server not found");
+                        return;
+                    }
+                    this.name = targetServer.region + ":" + targetServer.index;
+                    this.ip = targetServer.ip;
+                }
+                getWebSocketUrl(token) {
+                    if (this.ip && token) {
+                        return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=" + this._index + "&token=" + token;
+                    } else {
+                        let server = ServerManager_1.default.instance.getCurrentServer();
+                        if (server) {
+                            return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=" + server.index + "&token=" + token;
+                        }
+                    }
+                }
+                joinServer(instance) {
+                    console.log("Joining server " + this.name + "...");
+                    console.log("Error: Server.joinServer() is not implemented yet.");
+                }
+            }
+            exports["default"] = Server;
+        },
+        455: (__unused_webpack_module, exports, __webpack_require__) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            const Server_1 = __webpack_require__(292);
+            class ServerManager {
+                constructor() {
+                    this.index = 0;
+                    this.region = 0;
+                    this.name = "";
+                    this.ip = "";
+                    this.players = 0;
+                    this.wsurl = "";
+                }
+                static get instance() {
+                    if (!ServerManager._instance) {
+                        ServerManager._instance = new ServerManager;
+                    }
+                    return ServerManager._instance;
+                }
+                initalize() {
+                    this.calculateServer();
+                }
+                getCurrentServer() {
+                    let currentServer = new Server_1.default(this.region, this.index);
+                    return currentServer;
+                }
+                calculateServer() {
+                    let urlData = this.extractRegionAndIndex();
+                    if (urlData.region && urlData.index) {
+                        this.region = urlData.region;
+                        this.index = urlData.index;
+                    }
+                }
+                extractRegionAndIndex() {
+                    const match = window.location.href.match(/server=(\d+):(\d+)/);
+                    if (match) {
+                        const region = parseInt(match[1], 10);
+                        const index = parseInt(match[2], 10);
+                        return {
+                            region,
+                            index
+                        };
+                    }
+                    return {
+                        region: null,
+                        index: null
+                    };
+                }
+                static parseServer(str) {
+                    let parts = str.split(":");
+                    let region = parseInt(parts[0], 10);
+                    let index = parseInt(parts[1], 10);
+                    return {
+                        region,
+                        index
+                    };
+                }
+            }
+            exports["default"] = ServerManager;
         },
         8106: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
@@ -1490,8 +1744,17 @@
             const showText_1 = __webpack_require__(5718);
             const pingMap_1 = __webpack_require__(8530);
             const pingSocketResponse_1 = __webpack_require__(1887);
+            const ServerManager_1 = __webpack_require__(455);
             function handleServerPackets(packet, data) {
                 switch (packet) {
+                  case "io-init":
+                    {
+                        app_1.MooMoo.PacketManager.addPacket();
+                        app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
+                        app_1.MooMoo.ServerManager.initalize();
+                        break;
+                    }
+
                   case "id":
                     (0, setInitData_1.default)(data);
                     break;

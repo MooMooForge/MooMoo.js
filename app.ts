@@ -1,4 +1,3 @@
-
 let func: any = Function.prototype;
 
 export let MooMoo = func[69];

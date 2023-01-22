@@ -1,10 +1,12 @@
+import ServerManager from "./ServerManager";
+import Bot from "../Bot";
+
 interface IServer {
     region: number;
     index: number;
     name: string;
     ip: string;
 }
-
 
 class Server implements IServer {
     private _region: number;
@@ -47,8 +49,24 @@ class Server implements IServer {
             console.log("Server not found");
             return;
         }
-        this.name = targetServer.scheme;
+        this.name = targetServer.region + ":" + targetServer.index;
         this.ip = targetServer.ip;
+    }
+
+    public getWebSocketUrl(token: string): string {
+        if (this.ip && token) {
+            return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=" + this._index + "&token=" + token;
+        } else {
+            let server = ServerManager.instance.getCurrentServer();
+            if (server) {
+                return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=" + server.index + "&token=" + token;
+            }
+        }
+    }
+
+    public joinServer(instance: Bot) {
+        console.log("Joining server " + this.name + "...");
+        console.log("Error: Server.joinServer() is not implemented yet.");
     }
 }
 

@@ -5,6 +5,8 @@ class BotManager {
     private _bots: Map<number, Bot> = new Map<number, Bot>();
     private _botIdCounter = 0;
 
+    public Bot = Bot;
+
     private constructor() {}
 
     public static get instance(): BotManager {
