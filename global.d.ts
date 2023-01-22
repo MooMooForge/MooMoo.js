@@ -11,6 +11,11 @@ interface IVultr {
     }>;
 }
 
+interface IRecaptchaExecute {
+    execute(token: string, action: { action: string }): Promise<string>;
+}
+
 interface Window {
     readonly vultr: IVultr;
+    readonly grecaptcha: IRecaptchaExecute
 }
