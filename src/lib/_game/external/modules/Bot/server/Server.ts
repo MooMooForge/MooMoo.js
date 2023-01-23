@@ -76,6 +76,10 @@ class Server implements IServer {
             let data = new Uint8Array(event.data);
             let encoded = MooMoo.msgpack.decode(data);
             let [packet, [...packetData]] = encoded;
+            instance.emit("packet", {
+                packet: packet,
+                data: packetData
+            })
             if (packet == "io-init") {
                 instance.onConnect(this);
             }
