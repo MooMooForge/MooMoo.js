@@ -1,5 +1,6 @@
 import ServerManager from "./ServerManager";
 import Bot from "../Bot";
+import { MooMoo } from "../../../../../../../app";
 
 interface IServer {
     region: number;
@@ -55,18 +56,30 @@ class Server implements IServer {
 
     public getWebSocketUrl(token: string): string {
         if (this.ip && token) {
-            return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=" + this._index + "&token=" + token;
+            return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=0&token=" + token;
         } else {
             let server = ServerManager.instance.getCurrentServer();
             if (server) {
-                return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=" + server.index + "&token=" + token;
+                return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=0&token=" + token;
             }
         }
     }
 
     public joinServer(instance: Bot) {
-        console.log("Joining server " + this.name + "...");
-        console.log("Error: Server.joinServer() is not implemented yet.");
+        let wsURL = this.getWebSocketUrl(instance.recaptchaToken);
+        const ws = new WebSocket(wsURL);
+        ws.binaryType = "arraybuffer";
+        ws.onopen = () => {
+            instance.ws = ws;
+        }
+        ws.addEventListener("message", (event) => {
+            let data = new Uint8Array(event.data);
+            let encoded = MooMoo.msgpack.decode(data);
+            let [packet, [...packetData]] = encoded;
+            if (packet == "io-init") {
+                instance.onConnect(this);
+            }
+        });
     }
 }
 

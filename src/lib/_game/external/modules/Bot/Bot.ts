@@ -1,12 +1,13 @@
 import EventEmitter from "../../funcs/EventEmitter";
 import ServerManager from "./server/ServerManager";
 import Server from "./server/Server";
-
+import { MooMoo } from "../../../../../../app";
 
 class Bot extends EventEmitter {
     name: string;
     skin: number;
     moofoll: boolean;
+    connected: boolean = false;
     id: number;
     ws: WebSocket | undefined;
     recaptchaToken: string | undefined;
@@ -53,17 +54,27 @@ class Bot extends EventEmitter {
                     let targetserver = new Server(region, index);
                     this.recaptchaToken = await this.generateToken();
                     targetserver.joinServer(this);
-                    
                 }
                 break;
             }
         }
     }
     spawn() {
-        // ...
+        this.ws.send(
+            MooMoo.msgpack.encode(["sp", [{
+                name: this.name,
+                skin: this.skin,
+                moofoll: this.moofoll
+            }]])
+        )
     }
-    chat(message: string) {
-        // ...
+    onConnect(server: Server) {
+        this.emit("connected", server);
+        this.connected = true;
+    }
+    sendPacket(packet: string) {
+        let data = Array.prototype.slice.call(arguments, 1);
+        this.ws.send(MooMoo.msgpack.encode([packet, data]));
     }
 }
 

@@ -589,11 +589,13 @@
                 value: true
             });
             const EventEmitter_1 = __webpack_require__(8516);
-            const ServerManager_1 = __webpack_require__(455);
-            const Server_1 = __webpack_require__(292);
+            const ServerManager_1 = __webpack_require__(4455);
+            const Server_1 = __webpack_require__(3292);
+            const app_1 = __webpack_require__(366);
             class Bot extends EventEmitter_1.default {
                 constructor(configurable = false, options) {
                     super();
+                    this.connected = false;
                     if (!configurable) {
                         this.name = "Bot";
                         this.skin = 0;
@@ -646,8 +648,21 @@
                         }
                     }));
                 }
-                spawn() {}
-                chat(message) {}
+                spawn() {
+                    this.ws.send(app_1.MooMoo.msgpack.encode([ "sp", [ {
+                        name: this.name,
+                        skin: this.skin,
+                        moofoll: this.moofoll
+                    } ] ]));
+                }
+                onConnect(server) {
+                    this.emit("connected", server);
+                    this.connected = true;
+                }
+                sendPacket(packet) {
+                    let data = Array.prototype.slice.call(arguments, 1);
+                    this.ws.send(app_1.MooMoo.msgpack.encode([ packet, data ]));
+                }
             }
             exports["default"] = Bot;
         },
@@ -683,11 +698,12 @@
             }
             exports["default"] = BotManager;
         },
-        292: (__unused_webpack_module, exports, __webpack_require__) => {
+        3292: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
-            const ServerManager_1 = __webpack_require__(455);
+            const ServerManager_1 = __webpack_require__(4455);
+            const app_1 = __webpack_require__(366);
             class Server {
                 constructor(region, index) {
                     this._region = region;
@@ -726,26 +742,38 @@
                 }
                 getWebSocketUrl(token) {
                     if (this.ip && token) {
-                        return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=" + this._index + "&token=" + token;
+                        return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=0&token=" + token;
                     } else {
                         let server = ServerManager_1.default.instance.getCurrentServer();
                         if (server) {
-                            return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=" + server.index + "&token=" + token;
+                            return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=0&token=" + token;
                         }
                     }
                 }
                 joinServer(instance) {
-                    console.log("Joining server " + this.name + "...");
-                    console.log("Error: Server.joinServer() is not implemented yet.");
+                    let wsURL = this.getWebSocketUrl(instance.recaptchaToken);
+                    const ws = new WebSocket(wsURL);
+                    ws.binaryType = "arraybuffer";
+                    ws.onopen = () => {
+                        instance.ws = ws;
+                    };
+                    ws.addEventListener("message", (event => {
+                        let data = new Uint8Array(event.data);
+                        let encoded = app_1.MooMoo.msgpack.decode(data);
+                        let [packet, [...packetData]] = encoded;
+                        if (packet == "io-init") {
+                            instance.onConnect(this);
+                        }
+                    }));
                 }
             }
             exports["default"] = Server;
         },
-        455: (__unused_webpack_module, exports, __webpack_require__) => {
+        4455: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
                 value: true
             });
-            const Server_1 = __webpack_require__(292);
+            const Server_1 = __webpack_require__(3292);
             class ServerManager {
                 constructor() {
                     this.index = 0;
@@ -1744,7 +1772,7 @@
             const showText_1 = __webpack_require__(5718);
             const pingMap_1 = __webpack_require__(8530);
             const pingSocketResponse_1 = __webpack_require__(1887);
-            const ServerManager_1 = __webpack_require__(455);
+            const ServerManager_1 = __webpack_require__(4455);
             function handleServerPackets(packet, data) {
                 switch (packet) {
                   case "io-init":
