@@ -1,6 +1,7 @@
 import ServerManager from "./ServerManager";
 import Bot from "../Bot";
 import { MooMoo } from "../../../../../../../app";
+import chunk from "../../../funcs/chunk";
 
 interface IServer {
     region: number;
@@ -82,6 +83,21 @@ class Server implements IServer {
             })
             if (packet == "io-init") {
                 instance.onConnect(this);
+            }
+            if (packet == "2") {
+                console.log(packetData)
+                if (!instance.gameID) {
+                    instance.gameID = packetData[0][1]
+                }
+            }
+            if (packet =="33") {
+                let players = chunk(packetData[0], 13)
+                players.forEach((player) => {
+                    if (player[0] == instance.gameID) {
+                        instance.x = player[1];
+                        instance.y = player[2];
+                    }
+                })
             }
         });
     }

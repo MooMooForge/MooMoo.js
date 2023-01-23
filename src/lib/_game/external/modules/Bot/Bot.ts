@@ -11,6 +11,10 @@ class Bot extends EventEmitter {
     id: number;
     ws: WebSocket | undefined;
     recaptchaToken: string | undefined;
+    gameID: number;
+
+    x: number;
+    y: number;
 
     constructor(configurable: boolean = false, options: { name: string, skin: number | undefined, moofoll: boolean | undefined }) {
         super();
@@ -23,6 +27,8 @@ class Bot extends EventEmitter {
             this.skin = options.skin;
             this.moofoll = options.moofoll;
         }
+
+        this.gameID = null;
     }
 
     private async generateToken(): Promise<string> {

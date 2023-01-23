@@ -605,6 +605,7 @@
                         this.skin = options.skin;
                         this.moofoll = options.moofoll;
                     }
+                    this.gameID = null;
                 }
                 generateToken() {
                     return __awaiter(this, void 0, void 0, (function*() {
@@ -704,6 +705,7 @@
             });
             const ServerManager_1 = __webpack_require__(4455);
             const app_1 = __webpack_require__(366);
+            const chunk_1 = __webpack_require__(627);
             class Server {
                 constructor(region, index) {
                     this._region = region;
@@ -761,8 +763,27 @@
                         let data = new Uint8Array(event.data);
                         let encoded = app_1.MooMoo.msgpack.decode(data);
                         let [packet, [...packetData]] = encoded;
+                        instance.emit("packet", {
+                            packet,
+                            data: packetData
+                        });
                         if (packet == "io-init") {
                             instance.onConnect(this);
+                        }
+                        if (packet == "2") {
+                            console.log(packetData);
+                            if (!instance.gameID) {
+                                instance.gameID = packetData[0][1];
+                            }
+                        }
+                        if (packet == "33") {
+                            let players = (0, chunk_1.default)(packetData[0], 13);
+                            players.forEach((player => {
+                                if (player[0] == instance.gameID) {
+                                    instance.x = player[1];
+                                    instance.y = player[2];
+                                }
+                            }));
                         }
                     }));
                 }
