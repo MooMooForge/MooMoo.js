@@ -5,7 +5,7 @@
 // @author       Nuro
 // @match        *://*.moomoo.io/*
 // @require      https://greasyfork.org/scripts/456235-moomoo-js/code/MooMoojs.js?version=1138254
-// @run-at       document-start
+// @run-at       document-end
 // ==/UserScript==
 
 // https://nuroc.github.io/MooMoo.js/#installing-and-getting-started
