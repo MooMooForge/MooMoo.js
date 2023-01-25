@@ -43,8 +43,9 @@ export default function hookWS() {
                 let [packet, [...packetData]] = data;
                 let doSend = handleClientPackets(packet, packetData);
                 if (!doSend) return true;
-                return Reflect.apply(target, thisArg, args);
             }
+            return Reflect.apply(target, thisArg, args);
+
         }
     });
 
