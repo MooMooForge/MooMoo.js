@@ -26,7 +26,6 @@ class PacketManager {
         this._packetCountPerSecond++;
         this._packetCountPerMinute++;
         const kickPercentagePerMinute = this.getKickPercentagePerMinute();
-        console.log(this)
         if (kickPercentagePerMinute >= 100) {
             this._eventEmitter.emit("Kick", kickPercentagePerMinute);
         }
