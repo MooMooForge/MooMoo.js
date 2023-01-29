@@ -39,5 +39,5 @@ Event system: The API allows developers to listen to events, such as player deat
 MooMoo.js can be easily used in a Tampermonkey script. You can find the most recent version at [Greasyfork](https://greasyfork.org/en/scripts/456235-moomoo-js).
 
 ## Documentation
-The MooMoo.js API is fully documented on the [official website.](https://nuroc.github.io/MooMoo.js/) It provides a detailed explanation of all the available features, as well as code examples to help developers get started.
+The MooMoo.js API is fully documented on the [official website.](https://moomooforge.github.io/MooMoo.js/) It provides a detailed explanation of all the available features, as well as code examples to help developers get started.
 
