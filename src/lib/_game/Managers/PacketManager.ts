@@ -17,16 +17,16 @@ class PacketManager {
         this._eventEmitter = new EventEmitter();
     }
 
+    public initialize(): void {
+        this._startTimerPerMinute();
+        this._startTimerPerSecond();
+    }
+
     public addPacket(): void {
-        if (!this._intervalIdPerMinute) {
-            this._startTimerPerMinute();
-        }
-        if (!this._intervalIdPerSecond) {
-            this._startTimerPerSecond();
-        }
         this._packetCountPerSecond++;
         this._packetCountPerMinute++;
         const kickPercentagePerMinute = this.getKickPercentagePerMinute();
+        console.log(this)
         if (kickPercentagePerMinute >= 100) {
             this._eventEmitter.emit("Kick", kickPercentagePerMinute);
         }

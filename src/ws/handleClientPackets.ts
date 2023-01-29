@@ -4,7 +4,7 @@ import { MooMoo } from "../../app";
 function handleClientPackets (packet: string, data: Array<any>) {
     let PacketManager = MooMoo.PacketManager;
     PacketManager.addPacket();
-
+    console.log(packet)
     let doSend: boolean = true;
     switch (packet) {
         case "ch": {

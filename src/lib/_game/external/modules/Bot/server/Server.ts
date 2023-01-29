@@ -85,7 +85,6 @@ class Server implements IServer {
                 instance.onConnect(this);
             }
             if (packet == "2") {
-                console.log(packetData)
                 if (!instance.gameID) {
                     instance.gameID = packetData[0][1]
                 }

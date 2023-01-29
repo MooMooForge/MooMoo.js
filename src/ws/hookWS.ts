@@ -15,8 +15,6 @@ export default function hookWS() {
 
     WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
         apply(target, thisArg, args) {
-            if (!injected) {
-                injected = true;
                 let PacketInterceptor = MooMoo.PacketInterceptor;
                 args[0] = PacketInterceptor.applyClientCallbacks(args[0])
                 MooMoo.ws = thisArg;
@@ -25,7 +23,7 @@ export default function hookWS() {
                     let data = Array.prototype.slice.call(arguments, 1);
                     let binary = encode([type, data]);
 
-                    MooMoo.ws.send(binary);
+                    thisArg.send(binary)
                 }
                 if (MooMoo.ws.readyState !== 1) return true;
                 if (!_onmessage) {
@@ -43,7 +41,6 @@ export default function hookWS() {
                 let [packet, [...packetData]] = data;
                 let doSend = handleClientPackets(packet, packetData);
                 if (!doSend) return true;
-            }
             return Reflect.apply(target, thisArg, args);
 
         }
