@@ -807,6 +807,18 @@
                     }
                     return ServerManager._instance;
                 }
+                static startInterval() {
+                    setInterval((() => {
+                        let sm = MooMoo.ServerManager;
+                        if (!sm) {
+                            MooMoo.ServerManager = ServerManager.instance;
+                        }
+                        sm = MooMoo.ServerManager;
+                        if (sm) {
+                            MooMoo.ServerManager.initalize();
+                        }
+                    }), 200);
+                }
                 initalize() {
                     this.calculateServer();
                 }
@@ -2044,6 +2056,7 @@
             });
             exports.onmessagecallback = void 0;
             const encode_js_1 = __webpack_require__(112);
+            const ServerManager_1 = __webpack_require__(4455);
             const handleServerPackets_1 = __webpack_require__(9938);
             const handleClientPackets_1 = __webpack_require__(898);
             const SourceMapConfiguration_1 = __webpack_require__(977);
@@ -2071,6 +2084,7 @@
                         };
                         if (app_1.MooMoo.ws.readyState !== 1) return true;
                         if (!_onmessage) {
+                            ServerManager_1.default.startInterval();
                             _onmessage = true;
                             SourceMapConfiguration_1.default.initialize();
                         }
@@ -2341,16 +2355,7 @@
                 value: true
             });
             const app_1 = __webpack_require__(366);
-            const ServerManager_1 = __webpack_require__(4455);
             function pingSocketResponse(data) {
-                let sm = app_1.MooMoo.ServerManager;
-                if (!sm) {
-                    app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
-                }
-                sm = app_1.MooMoo.ServerManager;
-                if (sm) {
-                    app_1.MooMoo.ServerManager.initalize();
-                }
                 app_1.MooMoo.emit("pingSocketResponse", data);
                 app_1.MooMoo.emit("pingsocketresponse", data);
                 app_1.MooMoo.emit("pp", data);

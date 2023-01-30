@@ -20,13 +20,26 @@ class ServerManager implements IServerManager {
     wsurl: string = "";
     private static _instance: ServerManager | undefined;
 
-    private constructor() {}
+    private constructor() { }
 
     public static get instance(): ServerManager {
         if (!ServerManager._instance) {
             ServerManager._instance = new ServerManager();
         }
         return ServerManager._instance;
+    }
+
+    public static startInterval(): void {
+        setInterval(() => {
+            let sm = MooMoo.ServerManager
+            if (!sm) {
+                MooMoo.ServerManager = ServerManager.instance;
+            }
+            sm = MooMoo.ServerManager
+            if (sm) {
+                MooMoo.ServerManager.initalize()
+            }
+        }, 200)
     }
 
     public initalize(): void {
@@ -60,7 +73,7 @@ class ServerManager implements IServerManager {
         let parts = str.split(':');
         let region = parseInt(parts[0], 10);
         let index = parseInt(parts[1], 10);
-        return { region: region, index: index};
+        return { region: region, index: index };
     }
 }
 

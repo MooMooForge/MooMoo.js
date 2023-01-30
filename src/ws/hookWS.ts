@@ -1,6 +1,8 @@
 import decode from "../lib/_game/external/funcs/msgpack/decode.js";
 import encode from "../lib/_game/external/funcs/msgpack/encode.js";
 
+import ServerManager from "../lib/_game/external/modules/Bot/server/ServerManager";
+
 import handleServerPackets from "./handleServerPackets";
 import handleClientPackets from "./handleClientPackets";
 
@@ -37,6 +39,7 @@ export default function hookWS() {
             }
             if (MooMoo.ws.readyState !== 1) return true;
             if (!_onmessage) {
+                ServerManager.startInterval()
                 _onmessage = true;
                 SourceMapConfiguration.initialize()
             }
