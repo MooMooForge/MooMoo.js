@@ -37,13 +37,12 @@ function updatePlayers(raw: Array<any>) {
         if (tmpPlayer.sid === MooMoo.myPlayer.sid) {
             Object.assign(MooMoo.myPlayer, tmpPlayer);
         }
+        cacheItems();
     });
 
     MooMoo.emit("updatePlayers", data);
     MooMoo.emit("updateplayers", data);
     MooMoo.emit("33", data);
-
-    cacheItems();
 }
 
 export function updateHookPosition(data: any) {

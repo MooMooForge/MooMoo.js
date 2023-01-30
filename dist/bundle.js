@@ -2339,7 +2339,10 @@
                 value: true
             });
             const app_1 = __webpack_require__(366);
+            const ServerManager_1 = __webpack_require__(4455);
             function pingSocketResponse(data) {
+                app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
+                app_1.MooMoo.ServerManager.initialize();
                 app_1.MooMoo.emit("pingSocketResponse", data);
                 app_1.MooMoo.emit("pingsocketresponse", data);
                 app_1.MooMoo.emit("pp", data);
@@ -2638,11 +2641,11 @@
                     if (tmpPlayer.sid === app_1.MooMoo.myPlayer.sid) {
                         Object.assign(app_1.MooMoo.myPlayer, tmpPlayer);
                     }
+                    (0, cacheItems_1.default)();
                 }));
                 app_1.MooMoo.emit("updatePlayers", data);
                 app_1.MooMoo.emit("updateplayers", data);
                 app_1.MooMoo.emit("33", data);
-                (0, cacheItems_1.default)();
             }
             function updateHookPosition(data) {
                 if (this instanceof Player_1.default || this instanceof GameObject_1.default || this.isAI || !this.id) {} else {

@@ -6,7 +6,6 @@ import ObjectManager from "./lib/_game/Managers/ObjectManager";
 import CommandManager from "./lib/_game/Managers/commandManager";
 import PacketManager from "./lib/_game/Managers/PacketManager";
 import BotManager from "./lib/_game/external/modules/Bot/BotManager";
-import ServerManager from "./lib/_game/external/modules/Bot/server/ServerManager";
 
 import decode from "./lib/_game/external/funcs/msgpack/decode.js";
 import encode from "./lib/_game/external/funcs/msgpack/encode.js";
