@@ -33,7 +33,7 @@ class PacketInterceptor {
     public applyServerCallbacks(packet: any) {
         if(!this.serverCallbacks.size) return packet;
         for (const [id, callback] of this.serverCallbacks) {
-            packet = callback(packet) || packet;
+            packet = callback(packet)
         }
         return packet;
     }

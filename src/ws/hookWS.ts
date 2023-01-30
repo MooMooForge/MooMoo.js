@@ -57,12 +57,13 @@ export default function hookWS() {
             onmessagesetter.call(this, async function (event: any) {
                 let PacketInterceptor = MooMoo.PacketInterceptor;
                 let data = event.data;
-                data = PacketInterceptor.applyServerCallbacks(data);
-                let decoded = MooMoo.msgpack.decode(new Uint8Array(event.data));
+                data = PacketInterceptor.applyServerCallbacks(data)
+                let decoded = MooMoo.msgpack.decode(new Uint8Array(data));
                 let [packet, [...packetData]] = decoded;
                 handleServerPackets(packet, packetData);
-
-                onmessagecallback(event);
+                onmessagecallback({
+                    data: data
+                });
             })
         }
     })

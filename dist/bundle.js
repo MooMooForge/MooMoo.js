@@ -196,7 +196,7 @@
                 applyServerCallbacks(packet) {
                     if (!this.serverCallbacks.size) return packet;
                     for (const [id, callback] of this.serverCallbacks) {
-                        packet = callback(packet) || packet;
+                        packet = callback(packet);
                     }
                     return packet;
                 }
@@ -2090,10 +2090,12 @@
                                 let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
                                 let data = event.data;
                                 data = PacketInterceptor.applyServerCallbacks(data);
-                                let decoded = app_1.MooMoo.msgpack.decode(new Uint8Array(event.data));
+                                let decoded = app_1.MooMoo.msgpack.decode(new Uint8Array(data));
                                 let [packet, [...packetData]] = decoded;
                                 (0, handleServerPackets_1.default)(packet, packetData);
-                                (0, exports.onmessagecallback)(event);
+                                (0, exports.onmessagecallback)({
+                                    data
+                                });
                             }));
                         }));
                     }
