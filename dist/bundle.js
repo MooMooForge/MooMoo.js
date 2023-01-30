@@ -2343,8 +2343,14 @@
             const app_1 = __webpack_require__(366);
             const ServerManager_1 = __webpack_require__(4455);
             function pingSocketResponse(data) {
-                app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
-                app_1.MooMoo.ServerManager.initialize();
+                let sm = app_1.MooMoo.ServerManager;
+                if (!sm) {
+                    app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
+                }
+                sm = app_1.MooMoo.ServerManager;
+                if (sm) {
+                    app_1.MooMoo.ServerManager.initalize();
+                }
                 app_1.MooMoo.emit("pingSocketResponse", data);
                 app_1.MooMoo.emit("pingsocketresponse", data);
                 app_1.MooMoo.emit("pp", data);
