@@ -37,11 +37,19 @@ class Server implements IServer {
     }
 
     private parseServerData(): void {
+        if (!window.vultr || !window.vultr.servers) {
+            console.log("vultr or vultr.servers object not found in window");
+            return;
+        }
         let region = "vultr:" + this._region.toString();
         let servers = window.vultr.servers;
         let targetServer;
         for (let i = 0; i < servers.length; i++) {
             let currentServer = servers[i];
+            if (!currentServer.region || !currentServer.index) {
+                console.log("currentServer missing required properties");
+                continue;
+            }
             if (currentServer.region === region && currentServer.index === this._index) {
                 targetServer = currentServer;
                 break;
@@ -51,9 +59,14 @@ class Server implements IServer {
             console.log("Server not found");
             return;
         }
+        if (!targetServer.region || !targetServer.index) {
+            console.log("targetServer missing required properties");
+            return;
+        }
         this.name = targetServer.region + ":" + targetServer.index;
         this.ip = targetServer.ip;
     }
+
 
     public getWebSocketUrl(token: string): string {
         if (this.ip && token) {
@@ -89,7 +102,7 @@ class Server implements IServer {
                     instance.gameID = packetData[0][1]
                 }
             }
-            if (packet =="33") {
+            if (packet == "33") {
                 let players = chunk(packetData[0], 13)
                 players.forEach((player) => {
                     if (player[0] == instance.gameID) {

@@ -723,11 +723,19 @@
                     this._index = value;
                 }
                 parseServerData() {
+                    if (!window.vultr || !window.vultr.servers) {
+                        console.log("vultr or vultr.servers object not found in window");
+                        return;
+                    }
                     let region = "vultr:" + this._region.toString();
                     let servers = window.vultr.servers;
                     let targetServer;
                     for (let i = 0; i < servers.length; i++) {
                         let currentServer = servers[i];
+                        if (!currentServer.region || !currentServer.index) {
+                            console.log("currentServer missing required properties");
+                            continue;
+                        }
                         if (currentServer.region === region && currentServer.index === this._index) {
                             targetServer = currentServer;
                             break;
@@ -735,6 +743,10 @@
                     }
                     if (!targetServer) {
                         console.log("Server not found");
+                        return;
+                    }
+                    if (!targetServer.region || !targetServer.index) {
+                        console.log("targetServer missing required properties");
                         return;
                     }
                     this.name = targetServer.region + ":" + targetServer.index;
@@ -1859,6 +1871,7 @@
             const showText_1 = __webpack_require__(5718);
             const pingMap_1 = __webpack_require__(8530);
             const pingSocketResponse_1 = __webpack_require__(1887);
+            const ServerManager_1 = __webpack_require__(4455);
             function handleServerPackets(packet, data) {
                 switch (packet) {
                   case "io-init":
@@ -2015,6 +2028,10 @@
 
                   default:
                     console.log("Unknown packet: " + packet);
+                }
+                let SM = app_1.MooMoo.ServerManager;
+                if (!SM) {
+                    app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
                 }
                 app_1.MooMoo.emit("packet", {
                     packet,

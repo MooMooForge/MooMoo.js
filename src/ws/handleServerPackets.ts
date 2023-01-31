@@ -162,6 +162,11 @@ export default function handleServerPackets(packet: string, data: array) {
             console.log("Unknown packet: " + packet);
     }
 
+    let SM = MooMoo.ServerManager;
+    if (!SM) {
+        MooMoo.ServerManager = ServerManager.instance;
+    }
+
     MooMoo.emit("packet", {
         packet: packet,
         data: data
