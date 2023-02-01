@@ -9,15 +9,17 @@ module.exports = {
     entry: './app.ts',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-        clean: true,
+        path: path.resolve(__dirname, 'dist')
     },
     optimization: {
         minimizer: [
             new TerserWebpackPlugin({
                 terserOptions: {
                     compress: false,
-                    mangle: false,
+                    mangle: {
+                        keep_classnames: true,
+                        keep_fnames: true
+                    },
                     parse: false,
                     output: false,
                     format: {
