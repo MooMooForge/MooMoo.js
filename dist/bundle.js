@@ -804,6 +804,7 @@
                 value: true
             });
             const Server_1 = __webpack_require__(3292);
+            const app_1 = __webpack_require__(366);
             class ServerManager {
                 constructor() {
                     this.index = 0;
@@ -821,13 +822,13 @@
                 }
                 static startInterval() {
                     setInterval((() => {
-                        let sm = MooMoo.ServerManager;
+                        let sm = app_1.MooMoo.ServerManager;
                         if (!sm) {
-                            MooMoo.ServerManager = ServerManager.instance;
+                            app_1.MooMoo.ServerManager = ServerManager.instance;
                         }
-                        sm = MooMoo.ServerManager;
+                        sm = app_1.MooMoo.ServerManager;
                         if (sm) {
-                            MooMoo.ServerManager.initalize();
+                            app_1.MooMoo.ServerManager.initalize();
                         }
                     }), 200);
                 }
