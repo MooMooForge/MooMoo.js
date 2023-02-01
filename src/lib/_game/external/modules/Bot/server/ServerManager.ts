@@ -1,4 +1,5 @@
 import Server from "./Server";
+import { MooMoo } from "../../../../../../../app";
 
 interface IServerManager {
     currentServer: Server | undefined;
