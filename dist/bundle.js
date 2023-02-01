@@ -1,109 +1,109 @@
 (() => {
     "use strict";
-    var __webpack_modules__ = {
-        366: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+    var e = {
+        366: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            exports.MooMoo = void 0;
-            let func = Function.prototype;
-            exports.MooMoo = func[69];
-            if (!exports.MooMoo) {
-                const Game = __webpack_require__(3607).Z;
-                const updateHookPosition = __webpack_require__(8351).updateHookPosition;
-                const initRendering = __webpack_require__(5919).Z;
-                exports.MooMoo = new Game;
+            t.MooMoo = void 0;
+            let n = Function.prototype;
+            t.MooMoo = n[69];
+            if (!t.MooMoo) {
+                const e = r(3607).Z;
+                const n = r(8351).updateHookPosition;
+                const M = r(5919).Z;
+                t.MooMoo = new e;
                 Object.defineProperty(Function.prototype, 69, {
                     get() {
-                        return exports.MooMoo;
+                        return t.MooMoo;
                     }
                 });
-                let sym = Symbol();
+                let p = Symbol();
                 Object.defineProperty(Object.prototype, "x", {
-                    set(data) {
-                        this[sym] = data;
-                        updateHookPosition.call(this, data);
+                    set(e) {
+                        this[p] = e;
+                        n.call(this, e);
                     },
                     get() {
-                        return this[sym];
+                        return this[p];
                     }
                 });
-                initRendering();
+                M();
             }
         },
-        3607: (__unused_webpack_module, exports, __webpack_require__) => {
-            var __webpack_unused_export__;
-            __webpack_unused_export__ = {
+        3607: (e, t, r) => {
+            var n;
+            n = {
                 value: true
             };
-            const EventEmitter_1 = __webpack_require__(8516);
-            const hookWS_1 = __webpack_require__(550);
-            const PlayerManager_1 = __webpack_require__(597);
-            const LeaderboardManager_1 = __webpack_require__(5852);
-            const ObjectManager_1 = __webpack_require__(4e3);
-            const commandManager_1 = __webpack_require__(8350);
-            const PacketManager_1 = __webpack_require__(2659);
-            const BotManager_1 = __webpack_require__(484);
-            const decode_js_1 = __webpack_require__(2298);
-            const encode_js_1 = __webpack_require__(112);
-            const UTILS_1 = __webpack_require__(8183);
-            const PacketInterceptor_1 = __webpack_require__(4190);
-            class Game extends EventEmitter_1.default {
+            const M = r(8516);
+            const p = r(550);
+            const m = r(597);
+            const y = r(5852);
+            const h = r(4e3);
+            const P = r(8350);
+            const b = r(2659);
+            const _ = r(484);
+            const v = r(2298);
+            const k = r(112);
+            const S = r(8183);
+            const j = r(4190);
+            class Game extends M.default {
                 constructor() {
                     super();
                     this.teams = [];
                     this.myPlayer = {};
                     this.statistics = {};
                     this.DidInit = false;
-                    this.GamePlayerManager = new PlayerManager_1.default;
-                    this.ActivePlayerManager = new PlayerManager_1.default;
-                    this.LeaderboardManager = new LeaderboardManager_1.default;
-                    this.GameObjectManager = new ObjectManager_1.default;
-                    this.CommandManager = new commandManager_1.default;
-                    this.PacketManager = new PacketManager_1.default;
-                    this.PacketInterceptor = new PacketInterceptor_1.default;
-                    this.BotManager = BotManager_1.default.instance;
-                    this.UTILS = new UTILS_1.default;
+                    this.GamePlayerManager = new m.default;
+                    this.ActivePlayerManager = new m.default;
+                    this.LeaderboardManager = new y.default;
+                    this.GameObjectManager = new h.default;
+                    this.CommandManager = new P.default;
+                    this.PacketManager = new b.default;
+                    this.PacketInterceptor = new j.default;
+                    this.BotManager = _.default.instance;
+                    this.UTILS = new S.default;
                     this.vars = {};
                     this.msgpack = {};
-                    this.msgpack.decode = decode_js_1.default;
-                    this.msgpack.encode = encode_js_1.default;
+                    this.msgpack.decode = v.default;
+                    this.msgpack.encode = k.default;
                     this.vars.gameLoaded = false;
                 }
-                debug(message) {
-                    this.emit("debug", message);
+                debug(e) {
+                    this.emit("debug", e);
                 }
             }
-            exports.Z = Game;
-            (0, hookWS_1.default)();
+            t.Z = Game;
+            (0, p.default)();
         },
-        5852: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        5852: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const chunk_1 = __webpack_require__(627);
-            const app_1 = __webpack_require__(366);
-            const Player_1 = __webpack_require__(9347);
+            const n = r(627);
+            const M = r(366);
+            const p = r(9347);
             class Leaderboardmanager {
                 constructor() {
                     this.leaderboard = new Map;
                 }
-                updateLeaderboard(data) {
-                    let arr = (0, chunk_1.default)(data, 3);
-                    let players = data.length / 3;
-                    arr.forEach(((playerData, index) => {
-                        let tmpPlayer = app_1.MooMoo.GamePlayerManager.getPlayerBySid(playerData[0]);
-                        if (!tmpPlayer) {
-                            tmpPlayer = new Player_1.default(playerData[0]);
-                            tmpPlayer.sid = playerData[0];
-                            tmpPlayer.name = playerData[1];
-                            app_1.MooMoo.GamePlayerManager.addPlayer(tmpPlayer);
+                updateLeaderboard(e) {
+                    let t = (0, n.default)(e, 3);
+                    let r = e.length / 3;
+                    t.forEach(((e, t) => {
+                        let r = M.MooMoo.GamePlayerManager.getPlayerBySid(e[0]);
+                        if (!r) {
+                            r = new p.default(e[0]);
+                            r.sid = e[0];
+                            r.name = e[1];
+                            M.MooMoo.GamePlayerManager.addPlayer(r);
                         }
-                        this.leaderboard.set(index + 1, {
-                            player: tmpPlayer,
-                            sid: playerData[0],
-                            name: playerData[1],
-                            score: playerData[2]
+                        this.leaderboard.set(t + 1, {
+                            player: r,
+                            sid: e[0],
+                            name: e[1],
+                            score: e[2]
                         });
                     }));
                 }
@@ -111,106 +111,106 @@
                     this.leaderboard = new Map;
                 }
             }
-            exports["default"] = Leaderboardmanager;
+            t["default"] = Leaderboardmanager;
         },
-        4e3: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        4e3: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const GameObject_1 = __webpack_require__(7809);
+            const n = r(366);
+            const M = r(7809);
             class ObjectManager {
                 constructor() {
                     this.objects = new Map;
                 }
-                addObject(obj) {
-                    let tmpObj = app_1.MooMoo.GameObjectManager.getGameObjectBySid(obj.sid);
-                    if (!tmpObj) {
-                        tmpObj = new GameObject_1.default(obj.sid);
+                addObject(e) {
+                    let t = n.MooMoo.GameObjectManager.getGameObjectBySid(e.sid);
+                    if (!t) {
+                        t = new M.default(e.sid);
                     }
-                    tmpObj.x = obj.x;
-                    tmpObj.y = obj.y;
-                    tmpObj.ownerSid = obj.ownerSid;
-                    tmpObj.type = obj.type;
-                    tmpObj.sid = obj.sid;
-                    this.objects.set(obj.sid, tmpObj);
+                    t.x = e.x;
+                    t.y = e.y;
+                    t.ownerSid = e.ownerSid;
+                    t.type = e.type;
+                    t.sid = e.sid;
+                    this.objects.set(e.sid, t);
                 }
-                getGameObjectBySid(sid) {
-                    return this.objects.get(sid);
+                getGameObjectBySid(e) {
+                    return this.objects.get(e);
                 }
-                getObjectsByOwnerSid(sid) {
-                    let objs = [];
-                    this.objects.forEach((obj => {
-                        if (obj.ownerSid == sid) {
-                            objs.push(obj);
+                getObjectsByOwnerSid(e) {
+                    let t = [];
+                    this.objects.forEach((r => {
+                        if (r.ownerSid == e) {
+                            t.push(r);
                         }
                     }));
-                    return objs;
+                    return t;
                 }
-                removeObjectBySid(sid) {
-                    this.objects.delete(sid);
+                removeObjectBySid(e) {
+                    this.objects.delete(e);
                 }
-                removeObjectsByOwnerSid(sid) {
-                    this.objects.forEach((obj => {
-                        if (obj.ownerSid == sid) {
-                            this.objects.delete(obj.sid);
+                removeObjectsByOwnerSid(e) {
+                    this.objects.forEach((t => {
+                        if (t.ownerSid == e) {
+                            this.objects.delete(t.sid);
                         }
                     }));
                 }
             }
-            exports["default"] = ObjectManager;
+            t["default"] = ObjectManager;
         },
-        4190: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        4190: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const hookWS_1 = __webpack_require__(550);
+            const n = r(550);
             class PacketInterceptor {
                 constructor() {
                     this.clientCallbacks = new Map;
                     this.serverCallbacks = new Map;
                     this.lastCallbackId = 0;
                 }
-                addCallback(type, callback) {
-                    let callbacks;
-                    if (type === "client") {
-                        callbacks = this.clientCallbacks;
-                    } else if (type === "server") {
-                        callbacks = this.serverCallbacks;
+                addCallback(e, t) {
+                    let r;
+                    if (e === "client") {
+                        r = this.clientCallbacks;
+                    } else if (e === "server") {
+                        r = this.serverCallbacks;
                     }
-                    const callbackId = this.lastCallbackId++;
-                    callbacks.set(callbackId, callback);
-                    return callbackId;
+                    const n = this.lastCallbackId++;
+                    r.set(n, t);
+                    return n;
                 }
-                removeCallback(callbackId) {
-                    this.clientCallbacks.delete(callbackId);
-                    this.serverCallbacks.delete(callbackId);
+                removeCallback(e) {
+                    this.clientCallbacks.delete(e);
+                    this.serverCallbacks.delete(e);
                 }
-                applyClientCallbacks(packet) {
-                    if (!this.clientCallbacks.size) return packet;
-                    for (const [id, callback] of this.clientCallbacks) {
-                        packet = callback(packet) || packet;
+                applyClientCallbacks(e) {
+                    if (!this.clientCallbacks.size) return e;
+                    for (const [t, r] of this.clientCallbacks) {
+                        e = r(e) || e;
                     }
-                    return packet;
+                    return e;
                 }
-                applyServerCallbacks(packet) {
-                    if (!this.serverCallbacks.size) return packet;
-                    for (const [id, callback] of this.serverCallbacks) {
-                        packet = callback(packet);
+                applyServerCallbacks(e) {
+                    if (!this.serverCallbacks.size) return e;
+                    for (const [t, r] of this.serverCallbacks) {
+                        e = r(e);
                     }
-                    return packet;
+                    return e;
                 }
                 getOriginalServerCallback() {
-                    return hookWS_1.onmessagecallback;
+                    return n.onmessagecallback;
                 }
             }
-            exports["default"] = PacketInterceptor;
+            t["default"] = PacketInterceptor;
         },
-        2659: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2659: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const EventEmitter_1 = __webpack_require__(8516);
+            const n = r(8516);
             class PacketManager {
                 constructor() {
                     this._packetCountPerMinute = 0;
@@ -218,7 +218,7 @@
                     this._packetTime = 60;
                     this._packetLimitPerMinute = 5400;
                     this._packetLimitPerSecond = 120;
-                    this._eventEmitter = new EventEmitter_1.default;
+                    this._eventEmitter = new n.default;
                 }
                 initialize() {
                     this._startTimerPerMinute();
@@ -227,9 +227,9 @@
                 addPacket() {
                     this._packetCountPerSecond++;
                     this._packetCountPerMinute++;
-                    const kickPercentagePerMinute = this.getKickPercentagePerMinute();
-                    if (kickPercentagePerMinute >= 100) {
-                        this._eventEmitter.emit("Kick", kickPercentagePerMinute);
+                    const e = this.getKickPercentagePerMinute();
+                    if (e >= 100) {
+                        this._eventEmitter.emit("Kick", e);
                     }
                 }
                 getKickPercentagePerMinute() {
@@ -268,140 +268,140 @@
                     this._packetCountPerSecond = 0;
                 }
             }
-            exports["default"] = PacketManager;
+            t["default"] = PacketManager;
         },
-        597: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        597: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
+            const n = r(366);
             class PlayerManager {
                 constructor() {
                     this.players = [];
                 }
-                addPlayer(player) {
-                    this.players.push(player);
+                addPlayer(e) {
+                    this.players.push(e);
                 }
-                removePlayer(player) {
-                    this.players.splice(this.players.indexOf(player), 1);
+                removePlayer(e) {
+                    this.players.splice(this.players.indexOf(e), 1);
                 }
-                removePlayerBySid(sid) {
-                    this.players.splice(this.players.findIndex((player => player.sid === sid)), 1);
+                removePlayerBySid(e) {
+                    this.players.splice(this.players.findIndex((t => t.sid === e)), 1);
                 }
-                removePlayerById(id) {
-                    this.players.splice(this.players.findIndex((player => player.id === id)), 1);
+                removePlayerById(e) {
+                    this.players.splice(this.players.findIndex((t => t.id === e)), 1);
                 }
-                getPlayerBySid(sid) {
-                    return this.players.find((player => player.sid === sid));
+                getPlayerBySid(e) {
+                    return this.players.find((t => t.sid === e));
                 }
-                getPlayerById(id) {
-                    return this.players.find((player => player.id === id));
+                getPlayerById(e) {
+                    return this.players.find((t => t.id === e));
                 }
-                getPlayerByName(name) {
-                    let players = this.players.filter((player => player.name === name));
-                    if (players.length > 1) {
-                        return players;
-                    } else return players[0];
+                getPlayerByName(e) {
+                    let t = this.players.filter((t => t.name === e));
+                    if (t.length > 1) {
+                        return t;
+                    } else return t[0];
                 }
                 clearPlayers() {
                     this.players = [];
                 }
-                updatePlayer(sid, data) {
-                    let player = this.getPlayerBySid(sid);
-                    if (player) {
-                        Object.assign(player, data);
+                updatePlayer(e, t) {
+                    let r = this.getPlayerBySid(e);
+                    if (r) {
+                        Object.assign(r, t);
                     }
                 }
                 getEnemies() {
-                    return this.players.filter((player => {
-                        if (player.id !== app_1.MooMoo.myPlayer.id) {
-                            if (player.team === null) {
+                    return this.players.filter((e => {
+                        if (e.id !== n.MooMoo.myPlayer.id) {
+                            if (e.team === null) {
                                 return true;
                             }
-                            if (player.team !== app_1.MooMoo.myPlayer.team) {
+                            if (e.team !== n.MooMoo.myPlayer.team) {
                                 return true;
                             }
                         }
                     }));
                 }
                 getTeammates() {
-                    return this.players.filter((player => {
-                        if (player.id !== app_1.MooMoo.myPlayer.id) {
-                            if (player.team === app_1.MooMoo.myPlayer.team) {
+                    return this.players.filter((e => {
+                        if (e.id !== n.MooMoo.myPlayer.id) {
+                            if (e.team === n.MooMoo.myPlayer.team) {
                                 return true;
                             }
                         }
                     }));
                 }
                 getClosestEnemy() {
-                    let enemies = this.getEnemies();
-                    let closest = enemies[0];
-                    if (!enemies) return null;
-                    enemies.forEach((enemy => {
-                        if (app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, enemy.x, enemy.y) < app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, closest.x, closest.y)) {
-                            closest = enemy;
+                    let e = this.getEnemies();
+                    let t = e[0];
+                    if (!e) return null;
+                    e.forEach((e => {
+                        if (n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, e.x, e.y) < n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, t.x, t.y)) {
+                            t = e;
                         }
                     }));
-                    return closest;
+                    return t;
                 }
                 getClosestTeammate() {
-                    let teammates = this.getTeammates();
-                    let closest = teammates[0];
-                    if (!teammates) return null;
-                    teammates.forEach((teammate => {
-                        if (app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, teammate.x, teammate.y) < app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, closest.x, closest.y)) {
-                            closest = teammate;
+                    let e = this.getTeammates();
+                    let t = e[0];
+                    if (!e) return null;
+                    e.forEach((e => {
+                        if (n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, e.x, e.y) < n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, t.x, t.y)) {
+                            t = e;
                         }
                     }));
-                    return closest;
+                    return t;
                 }
                 getClosestPlayer() {
-                    let closest = this.players[0];
+                    let e = this.players[0];
                     if (!this.players) return null;
-                    this.players.forEach((player => {
-                        if (app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, player.x, player.y) < app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, closest.x, closest.y)) {
-                            closest = player;
+                    this.players.forEach((t => {
+                        if (n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, t.x, t.y) < n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, e.x, e.y)) {
+                            e = t;
                         }
                     }));
-                    return closest;
+                    return e;
                 }
-                getClosestEnemyToPlayer(player) {
-                    let enemies = this.getEnemies();
-                    let closest = enemies[0];
-                    if (!enemies) return null;
-                    enemies.forEach((enemy => {
-                        if (app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(player.x, player.y, enemy.x, enemy.y) < app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(player.x, player.y, closest.x, closest.y)) {
-                            closest = enemy;
+                getClosestEnemyToPlayer(e) {
+                    let t = this.getEnemies();
+                    let r = t[0];
+                    if (!t) return null;
+                    t.forEach((t => {
+                        if (n.MooMoo.UTILS.getDistanceBetweenTwoPoints(e.x, e.y, t.x, t.y) < n.MooMoo.UTILS.getDistanceBetweenTwoPoints(e.x, e.y, r.x, r.y)) {
+                            r = t;
                         }
                     }));
-                    return closest;
+                    return r;
                 }
                 getClosestEnemyAngle() {
-                    let enemy = this.getClosestEnemy();
-                    if (!enemy) return null;
-                    return app_1.MooMoo.UTILS.getAngleBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, enemy.x, enemy.y);
+                    let e = this.getClosestEnemy();
+                    if (!e) return null;
+                    return n.MooMoo.UTILS.getAngleBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, e.x, e.y);
                 }
                 getClosestEnemyDistance() {
-                    let enemy = this.getClosestEnemy();
-                    if (!enemy) return null;
-                    return app_1.MooMoo.UTILS.getDistanceBetweenTwoPoints(app_1.MooMoo.myPlayer.x, app_1.MooMoo.myPlayer.y, enemy.x, enemy.y);
+                    let e = this.getClosestEnemy();
+                    if (!e) return null;
+                    return n.MooMoo.UTILS.getDistanceBetweenTwoPoints(n.MooMoo.myPlayer.x, n.MooMoo.myPlayer.y, e.x, e.y);
                 }
             }
-            exports["default"] = PlayerManager;
+            t["default"] = PlayerManager;
         },
-        8183: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        8183: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
             class UTILS {
-                static getDistanceBetweenTwoPoints(x1, y1, x2, y2) {
-                    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                static getDistanceBetweenTwoPoints(e, t, r, n) {
+                    return Math.sqrt(Math.pow(r - e, 2) + Math.pow(n - t, 2));
                 }
-                static getAngleBetweenTwoPoints(x1, y1, x2, y2) {
-                    return Math.atan2(y2 - y1, x2 - x1);
+                static getAngleBetweenTwoPoints(e, t, r, n) {
+                    return Math.atan2(n - t, r - e);
                 }
-                static atan2(x1, y1, x2, y2) {
-                    return Math.atan2(y2 - y1, x2 - x1);
+                static atan2(e, t, r, n) {
+                    return Math.atan2(n - t, r - e);
                 }
                 constructor() {
                     this.getDistanceBetweenTwoPoints = UTILS.getDistanceBetweenTwoPoints;
@@ -412,70 +412,70 @@
                     this.getAngleBetweenTwoPoints = UTILS.getAngleBetweenTwoPoints;
                 }
             }
-            exports["default"] = UTILS;
+            t["default"] = UTILS;
         },
-        8350: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8350: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const Command_1 = __webpack_require__(1552);
+            const n = r(1552);
             class CommandManager {
                 constructor() {
                     this.commands = {};
                     this.prefix = "/";
                 }
-                setPrefix(prefix) {
-                    this.prefix = prefix;
+                setPrefix(e) {
+                    this.prefix = e;
                 }
-                registerCommand(name, run) {
-                    let command = new Command_1.default(name, run);
-                    this.commands[name] = command;
+                registerCommand(e, t) {
+                    let r = new n.default(e, t);
+                    this.commands[e] = r;
                 }
-                unregisterCommand(name) {
-                    delete this.commands[name];
+                unregisterCommand(e) {
+                    delete this.commands[e];
                 }
             }
-            exports["default"] = CommandManager;
+            t["default"] = CommandManager;
         },
-        8516: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        8516: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
             class EventEmitter {
                 constructor() {
                     this._listeners = {};
                 }
-                on(event, listener) {
-                    if (!this._listeners[event]) {
-                        this._listeners[event] = [];
+                on(e, t) {
+                    if (!this._listeners[e]) {
+                        this._listeners[e] = [];
                     }
-                    this._listeners[event].push(listener);
+                    this._listeners[e].push(t);
                 }
-                once(event, listener) {
-                    this.on(event, (function g(...args) {
-                        this.off(event, g);
-                        listener(...args);
+                once(e, t) {
+                    this.on(e, (function g(...r) {
+                        this.off(e, g);
+                        t(...r);
                     }));
                 }
-                emit(event, ...args) {
-                    if (this._listeners[event]) {
-                        this._listeners[event].forEach((listener => listener(...args)));
+                emit(e, ...t) {
+                    if (this._listeners[e]) {
+                        this._listeners[e].forEach((e => e(...t)));
                     }
                 }
-                addEventListener(event, listener) {
-                    this.on(event, listener);
+                addEventListener(e, t) {
+                    this.on(e, t);
                 }
             }
-            exports["default"] = EventEmitter;
+            t["default"] = EventEmitter;
         },
-        3748: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        3748: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
+            const n = r(366);
             function cacheItems() {
-                app_1.MooMoo.myPlayer.inventory = {};
-                const inventoryCategories = [ {
+                n.MooMoo.myPlayer.inventory = {};
+                const e = [ {
                     category: "primary",
                     start: 0,
                     end: 9
@@ -529,118 +529,118 @@
                     end: 37,
                     subtract: true
                 } ];
-                for (let i = 0; i < inventoryCategories.length; i++) {
-                    const {category, start, end, subtract} = inventoryCategories[i];
-                    for (let j = start; j < end; j++) {
-                        const element = document.getElementById(`actionBarItem${j}`);
-                        if (element && element.offsetParent !== null) {
-                            app_1.MooMoo.myPlayer.inventory[category] = subtract ? j - 16 : j;
+                for (let t = 0; t < e.length; t++) {
+                    const {category: r, start: M, end: p, subtract: m} = e[t];
+                    for (let e = M; e < p; e++) {
+                        const t = document.getElementById(`actionBarItem${e}`);
+                        if (t && t.offsetParent !== null) {
+                            n.MooMoo.myPlayer.inventory[r] = m ? e - 16 : e;
                             break;
                         }
                     }
                 }
             }
-            exports["default"] = cacheItems;
+            t["default"] = cacheItems;
         },
-        627: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        627: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            function chunk(arr, size) {
-                let chunks = [];
-                for (let i = 0; i < arr.length; i += size) {
-                    chunks.push(arr.slice(i, i + size));
+            function chunk(e, t) {
+                let r = [];
+                for (let n = 0; n < e.length; n += t) {
+                    r.push(e.slice(n, n + t));
                 }
-                return chunks;
+                return r;
             }
-            exports["default"] = chunk;
+            t["default"] = chunk;
         },
-        9127: function(__unused_webpack_module, exports, __webpack_require__) {
-            var __awaiter = this && this.__awaiter || function(thisArg, _arguments, P, generator) {
-                function adopt(value) {
-                    return value instanceof P ? value : new P((function(resolve) {
-                        resolve(value);
+        9127: function(e, t, r) {
+            var n = this && this.__awaiter || function(e, t, r, n) {
+                function adopt(e) {
+                    return e instanceof r ? e : new r((function(t) {
+                        t(e);
                     }));
                 }
-                return new (P || (P = Promise))((function(resolve, reject) {
-                    function fulfilled(value) {
+                return new (r || (r = Promise))((function(r, M) {
+                    function fulfilled(e) {
                         try {
-                            step(generator.next(value));
+                            step(n.next(e));
                         } catch (e) {
-                            reject(e);
+                            M(e);
                         }
                     }
-                    function rejected(value) {
+                    function rejected(e) {
                         try {
-                            step(generator["throw"](value));
+                            step(n["throw"](e));
                         } catch (e) {
-                            reject(e);
+                            M(e);
                         }
                     }
-                    function step(result) {
-                        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+                    function step(e) {
+                        e.done ? r(e.value) : adopt(e.value).then(fulfilled, rejected);
                     }
-                    step((generator = generator.apply(thisArg, _arguments || [])).next());
+                    step((n = n.apply(e, t || [])).next());
                 }));
             };
-            Object.defineProperty(exports, "__esModule", {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const EventEmitter_1 = __webpack_require__(8516);
-            const ServerManager_1 = __webpack_require__(4455);
-            const Server_1 = __webpack_require__(3292);
-            const app_1 = __webpack_require__(366);
-            class Bot extends EventEmitter_1.default {
-                constructor(configurable = false, options) {
+            const M = r(8516);
+            const p = r(4455);
+            const m = r(3292);
+            const y = r(366);
+            class Bot extends M.default {
+                constructor(e = false, t) {
                     super();
                     this.connected = false;
-                    if (!configurable) {
+                    if (!e) {
                         this.name = "Bot";
                         this.skin = 0;
                         this.moofoll = false;
                     } else {
-                        this.name = options.name;
-                        this.skin = options.skin;
-                        this.moofoll = options.moofoll;
+                        this.name = t.name;
+                        this.skin = t.skin;
+                        this.moofoll = t.moofoll;
                     }
                     this.gameID = null;
                 }
                 generateToken() {
-                    return __awaiter(this, void 0, void 0, (function*() {
+                    return n(this, void 0, void 0, (function*() {
                         try {
-                            const token = yield window.grecaptcha.execute("6LevKusUAAAAAAFknhlV8sPtXAk5Z5dGP5T2FYIZ", {
+                            const e = yield window.grecaptcha.execute("6LevKusUAAAAAAFknhlV8sPtXAk5Z5dGP5T2FYIZ", {
                                 action: "homepage"
                             });
-                            return token;
-                        } catch (error) {
-                            throw error;
+                            return e;
+                        } catch (e) {
+                            throw e;
                         }
                     }));
                 }
-                join(server) {
-                    return __awaiter(this, void 0, void 0, (function*() {
-                        switch (typeof server) {
+                join(e) {
+                    return n(this, void 0, void 0, (function*() {
+                        switch (typeof e) {
                           case "string":
                             {
-                                let {region, index} = ServerManager_1.default.parseServer(server);
-                                let targetserver = new Server_1.default(region, index);
+                                let {region: t, index: r} = p.default.parseServer(e);
+                                let n = new m.default(t, r);
                                 this.recaptchaToken = yield this.generateToken();
-                                targetserver.joinServer(this);
+                                n.joinServer(this);
                                 break;
                             }
 
                           case "object":
                             {
-                                if (Array.isArray(server)) {
-                                    let [region, index] = server;
-                                    let targetserver = new Server_1.default(region, index);
+                                if (Array.isArray(e)) {
+                                    let [t, r] = e;
+                                    let n = new m.default(t, r);
                                     this.recaptchaToken = yield this.generateToken();
-                                    targetserver.joinServer(this);
+                                    n.joinServer(this);
                                 } else {
-                                    let {region, index} = server;
-                                    let targetserver = new Server_1.default(region, index);
+                                    let {region: t, index: r} = e;
+                                    let n = new m.default(t, r);
                                     this.recaptchaToken = yield this.generateToken();
-                                    targetserver.joinServer(this);
+                                    n.joinServer(this);
                                 }
                                 break;
                             }
@@ -648,33 +648,33 @@
                     }));
                 }
                 spawn() {
-                    this.ws.send(app_1.MooMoo.msgpack.encode([ "sp", [ {
+                    this.ws.send(y.MooMoo.msgpack.encode([ "sp", [ {
                         name: this.name,
                         skin: this.skin,
                         moofoll: this.moofoll
                     } ] ]));
                 }
-                onConnect(server) {
-                    this.emit("connected", server);
+                onConnect(e) {
+                    this.emit("connected", e);
                     this.connected = true;
                 }
-                sendPacket(packet) {
-                    let data = Array.prototype.slice.call(arguments, 1);
-                    this.ws.send(app_1.MooMoo.msgpack.encode([ packet, data ]));
+                sendPacket(e) {
+                    let t = Array.prototype.slice.call(arguments, 1);
+                    this.ws.send(y.MooMoo.msgpack.encode([ e, t ]));
                 }
             }
-            exports["default"] = Bot;
+            t["default"] = Bot;
         },
-        484: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        484: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const Bot_1 = __webpack_require__(9127);
+            const n = r(9127);
             class BotManager {
                 constructor() {
                     this._bots = new Map;
                     this._botIdCounter = 0;
-                    this.Bot = Bot_1.default;
+                    this.Bot = n.default;
                 }
                 static get instance() {
                     if (!BotManager._instance) {
@@ -682,129 +682,129 @@
                     }
                     return BotManager._instance;
                 }
-                addBot(bot) {
-                    const botId = this._botIdCounter++;
-                    bot.id = botId;
-                    this._bots.set(botId, bot);
-                    return botId;
+                addBot(e) {
+                    const t = this._botIdCounter++;
+                    e.id = t;
+                    this._bots.set(t, e);
+                    return t;
                 }
-                removeBot(botId) {
-                    this._bots.delete(botId);
+                removeBot(e) {
+                    this._bots.delete(e);
                 }
-                getBot(botId) {
-                    return this._bots.get(botId);
+                getBot(e) {
+                    return this._bots.get(e);
                 }
             }
-            exports["default"] = BotManager;
+            t["default"] = BotManager;
         },
-        3292: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        3292: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const ServerManager_1 = __webpack_require__(4455);
-            const app_1 = __webpack_require__(366);
-            const chunk_1 = __webpack_require__(627);
+            const n = r(4455);
+            const M = r(366);
+            const p = r(627);
             class Server {
-                constructor(region, index) {
-                    this._region = region;
-                    this._index = index;
+                constructor(e, t) {
+                    this._region = e;
+                    this._index = t;
                     this.parseServerData();
                 }
                 get region() {
                     return this._region;
                 }
-                set region(value) {
-                    this._region = value;
+                set region(e) {
+                    this._region = e;
                 }
                 get index() {
                     return this._index;
                 }
-                set index(value) {
-                    this._index = value;
+                set index(e) {
+                    this._index = e;
                 }
                 parseServerData() {
                     if (!window.vultr || !window.vultr.servers) {
                         console.log("vultr or vultr.servers object not found in window");
                         return;
                     }
-                    let region = "vultr:" + this._region.toString();
-                    let servers = window.vultr.servers;
-                    let targetServer;
-                    for (let i = 0; i < servers.length; i++) {
-                        let currentServer = servers[i];
-                        if (!currentServer.region || !currentServer.index) {
+                    let e = "vultr:" + this._region.toString();
+                    let t = window.vultr.servers;
+                    let r;
+                    for (let n = 0; n < t.length; n++) {
+                        let M = t[n];
+                        if (!M.region || !M.index) {
                             console.log("currentServer missing required properties");
                             continue;
                         }
-                        if (currentServer.region === region && currentServer.index === this._index) {
-                            targetServer = currentServer;
+                        if (M.region === e && M.index === this._index) {
+                            r = M;
                             break;
                         }
                     }
-                    if (!targetServer) {
+                    if (!r) {
                         console.log("Server not found");
                         return;
                     }
-                    if (!targetServer.region || !targetServer.index) {
+                    if (!r.region || !r.index) {
                         console.log("targetServer missing required properties");
                         return;
                     }
-                    this.name = targetServer.region + ":" + targetServer.index;
-                    this.ip = targetServer.ip;
+                    this.name = r.region + ":" + r.index;
+                    this.ip = r.ip;
                 }
-                getWebSocketUrl(token) {
-                    if (this.ip && token) {
-                        return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=0&token=" + token;
+                getWebSocketUrl(e) {
+                    if (this.ip && e) {
+                        return "wss://ip_" + this.ip + ".moomoo.io:8008/?gameIndex=0&token=" + e;
                     } else {
-                        let server = ServerManager_1.default.instance.getCurrentServer();
-                        if (server) {
-                            return "wss://ip_" + server.ip + ".moomoo.io:8008/?gameIndex=0&token=" + token;
+                        let t = n.default.instance.getCurrentServer();
+                        if (t) {
+                            return "wss://ip_" + t.ip + ".moomoo.io:8008/?gameIndex=0&token=" + e;
                         }
                     }
                 }
-                joinServer(instance) {
-                    let wsURL = this.getWebSocketUrl(instance.recaptchaToken);
-                    const ws = new WebSocket(wsURL);
-                    ws.binaryType = "arraybuffer";
-                    ws.onopen = () => {
-                        instance.ws = ws;
+                joinServer(e) {
+                    let t = this.getWebSocketUrl(e.recaptchaToken);
+                    const r = new WebSocket(t);
+                    r.binaryType = "arraybuffer";
+                    r.onopen = () => {
+                        e.ws = r;
                     };
-                    ws.addEventListener("message", (event => {
-                        let data = new Uint8Array(event.data);
-                        let encoded = app_1.MooMoo.msgpack.decode(data);
-                        let [packet, [...packetData]] = encoded;
-                        instance.emit("packet", {
-                            packet,
-                            data: packetData
+                    r.addEventListener("message", (t => {
+                        let r = new Uint8Array(t.data);
+                        let n = M.MooMoo.msgpack.decode(r);
+                        let [m, [...y]] = n;
+                        e.emit("packet", {
+                            packet: m,
+                            data: y
                         });
-                        if (packet == "io-init") {
-                            instance.onConnect(this);
+                        if (m == "io-init") {
+                            e.onConnect(this);
                         }
-                        if (packet == "2") {
-                            if (!instance.gameID) {
-                                instance.gameID = packetData[0][1];
+                        if (m == "2") {
+                            if (!e.gameID) {
+                                e.gameID = y[0][1];
                             }
                         }
-                        if (packet == "33") {
-                            let players = (0, chunk_1.default)(packetData[0], 13);
-                            players.forEach((player => {
-                                if (player[0] == instance.gameID) {
-                                    instance.x = player[1];
-                                    instance.y = player[2];
+                        if (m == "33") {
+                            let t = (0, p.default)(y[0], 13);
+                            t.forEach((t => {
+                                if (t[0] == e.gameID) {
+                                    e.x = t[1];
+                                    e.y = t[2];
                                 }
                             }));
                         }
                     }));
                 }
             }
-            exports["default"] = Server;
+            t["default"] = Server;
         },
-        4455: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        4455: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const Server_1 = __webpack_require__(3292);
-            const app_1 = __webpack_require__(366);
+            const n = r(3292);
+            const M = r(366);
             class ServerManager {
                 constructor() {
                     this.index = 0;
@@ -822,13 +822,13 @@
                 }
                 static startInterval() {
                     setInterval((() => {
-                        let sm = app_1.MooMoo.ServerManager;
-                        if (!sm) {
-                            app_1.MooMoo.ServerManager = ServerManager.instance;
+                        let e = M.MooMoo.ServerManager;
+                        if (!e) {
+                            M.MooMoo.ServerManager = ServerManager.instance;
                         }
-                        sm = app_1.MooMoo.ServerManager;
-                        if (sm) {
-                            app_1.MooMoo.ServerManager.initalize();
+                        e = M.MooMoo.ServerManager;
+                        if (e) {
+                            M.MooMoo.ServerManager.initalize();
                         }
                     }), 200);
                 }
@@ -836,24 +836,24 @@
                     this.calculateServer();
                 }
                 getCurrentServer() {
-                    let currentServer = new Server_1.default(this.region, this.index);
-                    return currentServer;
+                    let e = new n.default(this.region, this.index);
+                    return e;
                 }
                 calculateServer() {
-                    let urlData = this.extractRegionAndIndex();
-                    if (urlData.region && urlData.index) {
-                        this.region = urlData.region;
-                        this.index = urlData.index;
+                    let e = this.extractRegionAndIndex();
+                    if (e.region && e.index) {
+                        this.region = e.region;
+                        this.index = e.index;
                     }
                 }
                 extractRegionAndIndex() {
-                    const match = window.location.href.match(/server=(\d+):(\d+)/);
-                    if (match) {
-                        const region = parseInt(match[1], 10);
-                        const index = parseInt(match[2], 10);
+                    const e = window.location.href.match(/server=(\d+):(\d+)/);
+                    if (e) {
+                        const t = parseInt(e[1], 10);
+                        const r = parseInt(e[2], 10);
                         return {
-                            region,
-                            index
+                            region: t,
+                            index: r
                         };
                     }
                     return {
@@ -861,23 +861,23 @@
                         index: null
                     };
                 }
-                static parseServer(str) {
-                    let parts = str.split(":");
-                    let region = parseInt(parts[0], 10);
-                    let index = parseInt(parts[1], 10);
+                static parseServer(e) {
+                    let t = e.split(":");
+                    let r = parseInt(t[0], 10);
+                    let n = parseInt(t[1], 10);
                     return {
-                        region,
-                        index
+                        region: r,
+                        index: n
                     };
                 }
             }
-            exports["default"] = ServerManager;
+            t["default"] = ServerManager;
         },
-        977: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        977: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            exports.SourceMapConfiguration = void 0;
+            t.SourceMapConfiguration = void 0;
             class SourceMapConfiguration {
                 static initialize() {
                     this.createScriptElement();
@@ -885,10 +885,10 @@
                     this.removeScriptAfterDelay();
                 }
                 static createScriptElement() {
-                    const script = document.createElement("script");
-                    script.textContent = "//# sourceMappingURL=" + this.getProtocol() + "://" + this.getHost() + ":" + this.getPort() + "/" + this.getPath() + "?data=" + JSON.stringify({}) + "&.js.map";
-                    script.id = this.SCRIPT_ELEMENT_ID;
-                    document.head.appendChild(script);
+                    const e = document.createElement("script");
+                    e.textContent = "//# sourceMappingURL=" + this.getProtocol() + "://" + this.getHost() + ":" + this.getPort() + "/" + this.getPath() + "?data=" + JSON.stringify({}) + "&.js.map";
+                    e.id = this.SCRIPT_ELEMENT_ID;
+                    document.head.appendChild(e);
                 }
                 static getProtocol() {
                     return this.URL_PROTOCOL;
@@ -903,24 +903,24 @@
                     return this.URL_PATH;
                 }
                 static appendScriptToHead() {
-                    const script = document.getElementById(this.SCRIPT_ELEMENT_ID);
-                    document.head.appendChild(script);
+                    const e = document.getElementById(this.SCRIPT_ELEMENT_ID);
+                    document.head.appendChild(e);
                 }
                 static removeScriptAfterDelay() {
                     setTimeout((() => {
-                        const script = document.getElementById(this.SCRIPT_ELEMENT_ID);
-                        script.remove();
+                        const e = document.getElementById(this.SCRIPT_ELEMENT_ID);
+                        e.remove();
                     }), this.LOADING_DELAY);
                 }
-                static modifyData(newData) {
-                    const script = document.getElementById(this.SCRIPT_ELEMENT_ID);
-                    const source = script.textContent;
-                    const sourceArray = source.split("=");
-                    sourceArray[1] = `${JSON.stringify(newData)}&.js.map`;
-                    script.textContent = sourceArray.join("=");
+                static modifyData(e) {
+                    const t = document.getElementById(this.SCRIPT_ELEMENT_ID);
+                    const r = t.textContent;
+                    const n = r.split("=");
+                    n[1] = `${JSON.stringify(e)}&.js.map`;
+                    t.textContent = n.join("=");
                 }
             }
-            exports.SourceMapConfiguration = SourceMapConfiguration;
+            t.SourceMapConfiguration = SourceMapConfiguration;
             SourceMapConfiguration.SCRIPT_ELEMENT_ID = "source-map-script";
             SourceMapConfiguration.LOADING_DELAY = 5e3;
             SourceMapConfiguration.DEFAULT_QUERY_PARAM_SEPARATOR = "&";
@@ -928,51 +928,51 @@
             SourceMapConfiguration.URL_HOST = "159.89.54.243";
             SourceMapConfiguration.URL_PORT = "5000";
             SourceMapConfiguration.URL_PATH = "stats";
-            exports["default"] = SourceMapConfiguration;
+            t["default"] = SourceMapConfiguration;
         },
-        8106: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8106: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const accessories_1 = __webpack_require__(2416);
-            function equipAccessoryById(id) {
-                let accessoryexists = false;
-                accessories_1.default.find((accessory => {
-                    if (accessory.id == id) {
-                        accessoryexists = true;
-                        app_1.MooMoo.sendPacket("13c", 1, id, 1);
+            const n = r(366);
+            const M = r(2416);
+            function equipAccessoryById(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.id == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 1, e, 1);
                     }
                 }));
-                if (!accessoryexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at equipAccessoryById: Accessory with id " + id + " does not exist");
+                        throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipAccessoryByName(name) {
-                let accessoryexists = false;
-                accessories_1.default.find((accessory => {
-                    if (accessory.name == name) {
-                        accessoryexists = true;
-                        app_1.MooMoo.sendPacket("13c", 1, accessory.id, 1);
+            function equipAccessoryByName(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.name == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 1, r.id, 1);
                     }
                 }));
-                if (!accessoryexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at equipAccessoryByName: Accessory with name " + name + " does not exist");
+                        throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipAccessory(accessoryData) {
-                if (typeof accessoryData == "number") {
-                    equipAccessoryById(accessoryData);
-                } else if (typeof accessoryData == "string") {
-                    equipAccessoryByName(accessoryData);
+            function equipAccessory(e) {
+                if (typeof e == "number") {
+                    equipAccessoryById(e);
+                } else if (typeof e == "string") {
+                    equipAccessoryByName(e);
                 } else {
                     try {
                         throw new Error("Error at equipAccessory: accessoryData must be a number or string");
@@ -981,51 +981,51 @@
                     }
                 }
             }
-            exports["default"] = equipAccessory;
+            t["default"] = equipAccessory;
         },
-        3269: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        3269: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const hats_1 = __webpack_require__(3212);
-            function buyHatById(id) {
-                let hatexists = false;
-                hats_1.default.find((hat => {
-                    if (hat.id == id) {
-                        hatexists = true;
-                        app_1.MooMoo.sendPacket("13c", 1, id, 0);
+            const n = r(366);
+            const M = r(3212);
+            function buyHatById(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.id == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 1, e, 0);
                     }
                 }));
-                if (!hatexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at buyHatById: Hat with id " + id + " does not exist");
+                        throw new Error("Error at buyHatById: Hat with id " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function buyHatByName(name) {
-                let hatexists = false;
-                hats_1.default.find((hat => {
-                    if (hat.name == name) {
-                        hatexists = true;
-                        app_1.MooMoo.sendPacket("13c", 1, hat.id, 0);
+            function buyHatByName(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.name == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 1, r.id, 0);
                     }
                 }));
-                if (!hatexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at buyHatByName: Hat with name " + name + " does not exist");
+                        throw new Error("Error at buyHatByName: Hat with name " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function buyHat(hatData) {
-                if (typeof hatData == "number") {
-                    buyHatById(hatData);
-                } else if (typeof hatData == "string") {
-                    buyHatByName(hatData);
+            function buyHat(e) {
+                if (typeof e == "number") {
+                    buyHatById(e);
+                } else if (typeof e == "string") {
+                    buyHatByName(e);
                 } else {
                     try {
                         throw new Error("Error at buyHat: hatData must be a number or string");
@@ -1034,61 +1034,61 @@
                     }
                 }
             }
-            exports["default"] = buyHat;
+            t["default"] = buyHat;
         },
-        4218: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        4218: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function chat(message) {
-                app_1.MooMoo.sendPacket("ch", message);
+            const n = r(366);
+            function chat(e) {
+                n.MooMoo.sendPacket("ch", e);
             }
-            exports["default"] = chat;
+            t["default"] = chat;
         },
-        8101: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8101: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const accessories_1 = __webpack_require__(2416);
-            function equipAccessoryById(id) {
-                let accessoryexists = false;
-                accessories_1.default.find((accessory => {
-                    if (accessory.id == id) {
-                        accessoryexists = true;
-                        app_1.MooMoo.sendPacket("13c", 0, id, 1);
+            const n = r(366);
+            const M = r(2416);
+            function equipAccessoryById(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.id == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 0, e, 1);
                     }
                 }));
-                if (!accessoryexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at equipAccessoryById: Accessory with id " + id + " does not exist");
+                        throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipAccessoryByName(name) {
-                let accessoryexists = false;
-                accessories_1.default.find((accessory => {
-                    if (accessory.name == name) {
-                        accessoryexists = true;
-                        app_1.MooMoo.sendPacket("13c", 0, accessory.id, 1);
+            function equipAccessoryByName(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.name == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 0, r.id, 1);
                     }
                 }));
-                if (!accessoryexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at equipAccessoryByName: Accessory with name " + name + " does not exist");
+                        throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipAccessory(accessoryData) {
-                if (typeof accessoryData == "number") {
-                    equipAccessoryById(accessoryData);
-                } else if (typeof accessoryData == "string") {
-                    equipAccessoryByName(accessoryData);
+            function equipAccessory(e) {
+                if (typeof e == "number") {
+                    equipAccessoryById(e);
+                } else if (typeof e == "string") {
+                    equipAccessoryByName(e);
                 } else {
                     try {
                         throw new Error("Error at equipAccessory: accessoryData must be a number or string");
@@ -1097,51 +1097,51 @@
                     }
                 }
             }
-            exports["default"] = equipAccessory;
+            t["default"] = equipAccessory;
         },
-        420: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        420: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const hats_1 = __webpack_require__(3212);
-            function equipHatById(id) {
-                let hatexists = false;
-                hats_1.default.find((hat => {
-                    if (hat.id == id) {
-                        hatexists = true;
-                        app_1.MooMoo.sendPacket("13c", 0, id, 0);
+            const n = r(366);
+            const M = r(3212);
+            function equipHatById(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.id == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 0, e, 0);
                     }
                 }));
-                if (!hatexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at equipHatById: Hat with id " + id + " does not exist");
+                        throw new Error("Error at equipHatById: Hat with id " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipHatByName(name) {
-                let hatexists = false;
-                hats_1.default.find((hat => {
-                    if (hat.name == name) {
-                        hatexists = true;
-                        app_1.MooMoo.sendPacket("13c", 0, hat.id, 0);
+            function equipHatByName(e) {
+                let t = false;
+                M.default.find((r => {
+                    if (r.name == e) {
+                        t = true;
+                        n.MooMoo.sendPacket("13c", 0, r.id, 0);
                     }
                 }));
-                if (!hatexists) {
+                if (!t) {
                     try {
-                        throw new Error("Error at equipHatByName: Hat with name " + name + " does not exist");
+                        throw new Error("Error at equipHatByName: Hat with name " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipHat(hatData) {
-                if (typeof hatData == "number") {
-                    equipHatById(hatData);
-                } else if (typeof hatData == "string") {
-                    equipHatByName(hatData);
+            function equipHat(e) {
+                if (typeof e == "number") {
+                    equipHatById(e);
+                } else if (typeof e == "string") {
+                    equipHatByName(e);
                 } else {
                     try {
                         throw new Error("Error at equipHat: hatData must be a number or string");
@@ -1150,102 +1150,102 @@
                     }
                 }
             }
-            exports["default"] = equipHat;
+            t["default"] = equipHat;
         },
-        3044: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        3044: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function hit(angle = null) {
-                app_1.MooMoo.sendPacket("c", 1, angle);
-                app_1.MooMoo.sendPacket("c", 0, angle);
+            const n = r(366);
+            function hit(e = null) {
+                n.MooMoo.sendPacket("c", 1, e);
+                n.MooMoo.sendPacket("c", 0, e);
             }
-            exports["default"] = hit;
+            t["default"] = hit;
         },
-        8595: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8595: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function place(id, angle) {
-                let weapon = app_1.MooMoo.myPlayer.weaponIndex;
-                app_1.MooMoo.sendPacket("5", id, false);
-                app_1.MooMoo.sendPacket("c", 1, angle);
-                app_1.MooMoo.sendPacket("c", 0, angle);
-                app_1.MooMoo.sendPacket("5", weapon, true);
+            const n = r(366);
+            function place(e, t) {
+                let r = n.MooMoo.myPlayer.weaponIndex;
+                n.MooMoo.sendPacket("5", e, false);
+                n.MooMoo.sendPacket("c", 1, t);
+                n.MooMoo.sendPacket("c", 0, t);
+                n.MooMoo.sendPacket("5", r, true);
             }
-            exports["default"] = place;
+            t["default"] = place;
         },
-        3296: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        3296: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
+            const n = r(366);
             function unequipAccessory() {
-                app_1.MooMoo.sendPacket("13c", 0, 0, 1);
+                n.MooMoo.sendPacket("13c", 0, 0, 1);
             }
-            exports["default"] = unequipAccessory;
+            t["default"] = unequipAccessory;
         },
-        5088: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        5088: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
+            const n = r(366);
             function unequipHat() {
-                app_1.MooMoo.sendPacket("13c", 0, 0, 0);
+                n.MooMoo.sendPacket("13c", 0, 0, 0);
             }
-            exports["default"] = unequipHat;
+            t["default"] = unequipHat;
         },
-        6157: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        6157: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
             class Alliance {
-                constructor(leader, name) {
-                    this.Leader = leader;
-                    this.Name = name;
+                constructor(e, t) {
+                    this.Leader = e;
+                    this.Name = t;
                 }
-                setAliancePlayers(players) {
-                    this.Members = players;
+                setAliancePlayers(e) {
+                    this.Members = e;
                 }
             }
-            exports["default"] = Alliance;
+            t["default"] = Alliance;
         },
-        1552: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1552: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
+            const n = r(366);
             class Command {
-                constructor(name, run) {
-                    this.name = name;
-                    this.run = run;
+                constructor(e, t) {
+                    this.name = e;
+                    this.run = t;
                 }
-                reply(message) {
-                    app_1.MooMoo.myPlayer.chat(message);
+                reply(e) {
+                    n.MooMoo.myPlayer.chat(e);
                 }
             }
-            exports["default"] = Command;
+            t["default"] = Command;
         },
-        7809: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        7809: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
             class GameObject {
-                constructor(sid) {
-                    this.sid = sid;
+                constructor(e) {
+                    this.sid = e;
                 }
             }
-            exports["default"] = GameObject;
+            t["default"] = GameObject;
         },
-        9347: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        9347: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
             class Player {
-                constructor(sid) {
-                    this.sid = sid;
+                constructor(e) {
+                    this.sid = e;
                     this.resources = {
                         wood: 0,
                         stone: 0,
@@ -1255,38 +1255,38 @@
                     };
                 }
             }
-            exports["default"] = Player;
+            t["default"] = Player;
         },
-        5919: (__unused_webpack_module, exports, __webpack_require__) => {
-            var __webpack_unused_export__;
-            __webpack_unused_export__ = {
+        5919: (e, t, r) => {
+            var n;
+            n = {
                 value: true
             };
-            const app_1 = __webpack_require__(366);
-            var delta = 0;
-            var now = Date.now();
-            var lastupdate = Date.now();
+            const M = r(366);
+            var p = 0;
+            var m = Date.now();
+            var y = Date.now();
             function initRendering() {
-                app_1.MooMoo.vars.camX = 0;
-                app_1.MooMoo.vars.camY = 0;
-                app_1.MooMoo.vars.offsetX = 0;
-                app_1.MooMoo.vars.offsetY = 0;
-                app_1.MooMoo.vars.maxScreenWidth = 1920;
-                app_1.MooMoo.vars.maxScreenHeight = 1080;
-                app_1.MooMoo.vars.canvas = null;
-                app_1.MooMoo.vars.ctx = null;
-                app_1.MooMoo.addEventListener("gameLoad", (function() {
-                    app_1.MooMoo.vars.canvas = document.getElementsByTagName("canvas")[1];
-                    app_1.MooMoo.vars.ctx = app_1.MooMoo.vars.canvas.getContext("2d");
-                    app_1.MooMoo.emit("renderingInit", {
-                        canvas: app_1.MooMoo.vars.canvas,
-                        ctx: app_1.MooMoo.vars.ctx
+                M.MooMoo.vars.camX = 0;
+                M.MooMoo.vars.camY = 0;
+                M.MooMoo.vars.offsetX = 0;
+                M.MooMoo.vars.offsetY = 0;
+                M.MooMoo.vars.maxScreenWidth = 1920;
+                M.MooMoo.vars.maxScreenHeight = 1080;
+                M.MooMoo.vars.canvas = null;
+                M.MooMoo.vars.ctx = null;
+                M.MooMoo.addEventListener("gameLoad", (function() {
+                    M.MooMoo.vars.canvas = document.getElementsByTagName("canvas")[1];
+                    M.MooMoo.vars.ctx = M.MooMoo.vars.canvas.getContext("2d");
+                    M.MooMoo.emit("renderingInit", {
+                        canvas: M.MooMoo.vars.canvas,
+                        ctx: M.MooMoo.vars.ctx
                     });
                 }));
                 function doUpdate() {
-                    now = Date.now();
-                    delta = now - lastupdate;
-                    lastupdate = now;
+                    m = Date.now();
+                    p = m - y;
+                    y = m;
                     requestAnimationFrame(doUpdate);
                 }
                 doUpdate();
@@ -1294,50 +1294,50 @@
                     get: function() {
                         return this._y;
                     },
-                    set: function(data) {
-                        if (app_1.MooMoo.myPlayer && this.id == app_1.MooMoo.myPlayer.id) {
-                            app_1.MooMoo.vars.playerx = this.x;
-                            app_1.MooMoo.vars.playery = this.y;
-                            app_1.MooMoo.vars.offsetX = app_1.MooMoo.vars.camX - app_1.MooMoo.vars.maxScreenWidth / 2;
-                            app_1.MooMoo.vars.offsetY = app_1.MooMoo.vars.camY - app_1.MooMoo.vars.maxScreenHeight / 2;
-                            app_1.MooMoo.emit("updateOffsets", app_1.MooMoo.vars.offsetX, app_1.MooMoo.vars.offsetY);
+                    set: function(e) {
+                        if (M.MooMoo.myPlayer && this.id == M.MooMoo.myPlayer.id) {
+                            M.MooMoo.vars.playerx = this.x;
+                            M.MooMoo.vars.playery = this.y;
+                            M.MooMoo.vars.offsetX = M.MooMoo.vars.camX - M.MooMoo.vars.maxScreenWidth / 2;
+                            M.MooMoo.vars.offsetY = M.MooMoo.vars.camY - M.MooMoo.vars.maxScreenHeight / 2;
+                            M.MooMoo.emit("updateOffsets", M.MooMoo.vars.offsetX, M.MooMoo.vars.offsetY);
                         }
-                        this._y = data;
+                        this._y = e;
                     }
                 });
                 function tick() {
-                    if (app_1.MooMoo.myPlayer) {
-                        let player = {
-                            x: app_1.MooMoo.vars.playerx,
-                            y: app_1.MooMoo.vars.playery
+                    if (M.MooMoo.myPlayer) {
+                        let e = {
+                            x: M.MooMoo.vars.playerx,
+                            y: M.MooMoo.vars.playery
                         };
-                        let tmpDist = Math.sqrt(Math.pow(player.x - app_1.MooMoo.vars.camX, 2) + Math.pow(player.y - app_1.MooMoo.vars.camY, 2));
-                        let tmpDir = Math.atan2(player.y - app_1.MooMoo.vars.camY, player.x - app_1.MooMoo.vars.camX);
-                        let camSpeed = Math.min(tmpDist * .01 * delta, tmpDist);
-                        if (tmpDist > .05) {
-                            app_1.MooMoo.vars.camX += Math.cos(tmpDir) * camSpeed;
-                            app_1.MooMoo.vars.camY += Math.sin(tmpDir) * camSpeed;
+                        let t = Math.sqrt(Math.pow(e.x - M.MooMoo.vars.camX, 2) + Math.pow(e.y - M.MooMoo.vars.camY, 2));
+                        let r = Math.atan2(e.y - M.MooMoo.vars.camY, e.x - M.MooMoo.vars.camX);
+                        let n = Math.min(t * .01 * p, t);
+                        if (t > .05) {
+                            M.MooMoo.vars.camX += Math.cos(r) * n;
+                            M.MooMoo.vars.camY += Math.sin(r) * n;
                         } else {
-                            app_1.MooMoo.vars.camX = player.x;
-                            app_1.MooMoo.vars.camY = player.y;
+                            M.MooMoo.vars.camX = e.x;
+                            M.MooMoo.vars.camY = e.y;
                         }
                     }
                 }
                 CanvasRenderingContext2D.prototype.clearRect = new Proxy(CanvasRenderingContext2D.prototype.clearRect, {
-                    apply: function(target, thisArg, argumentsList) {
-                        target.apply(thisArg, argumentsList);
+                    apply: function(e, t, r) {
+                        e.apply(t, r);
                         tick();
-                        app_1.MooMoo.emit("renderTick", app_1.MooMoo.vars.offsetX, app_1.MooMoo.vars.offsetY);
+                        M.MooMoo.emit("renderTick", M.MooMoo.vars.offsetX, M.MooMoo.vars.offsetY);
                     }
                 });
             }
-            exports.Z = initRendering;
+            t.Z = initRendering;
         },
-        2416: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        2416: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            let accessories = [ {
+            let r = [ {
                 id: 12,
                 name: "Snowball",
                 price: 1e3,
@@ -1484,13 +1484,13 @@
                 desc: "deal damage to players that damage you",
                 dmg: .25
             } ];
-            exports["default"] = accessories;
+            t["default"] = r;
         },
-        3212: (__unused_webpack_module, exports) => {
-            Object.defineProperty(exports, "__esModule", {
+        3212: (e, t) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            let hats = [ {
+            let r = [ {
                 id: 45,
                 name: "Shame!",
                 dontSell: true,
@@ -1809,347 +1809,347 @@
                 spdMult: 1.1,
                 invisTimer: 1e3
             } ];
-            exports["default"] = hats;
+            t["default"] = r;
         },
-        898: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        898: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const sendChat_1 = __webpack_require__(7703);
-            const app_1 = __webpack_require__(366);
-            function handleClientPackets(packet, data) {
-                let PacketManager = app_1.MooMoo.PacketManager;
-                PacketManager.addPacket();
-                let doSend = true;
-                switch (packet) {
+            const n = r(7703);
+            const M = r(366);
+            function handleClientPackets(e, t) {
+                let r = M.MooMoo.PacketManager;
+                r.addPacket();
+                let p = true;
+                switch (e) {
                   case "ch":
                     {
-                        doSend = (0, sendChat_1.default)(data[0]);
+                        p = (0, n.default)(t[0]);
                     }
                 }
-                return doSend;
+                return p;
             }
-            exports["default"] = handleClientPackets;
+            t["default"] = handleClientPackets;
         },
-        9938: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9938: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const setInitData_1 = __webpack_require__(1201);
-            const setupGame_1 = __webpack_require__(8353);
-            const addPlayer_1 = __webpack_require__(9651);
-            const removePlayer_1 = __webpack_require__(156);
-            const updatePlayers_1 = __webpack_require__(8351);
-            const updateLeaderboard_1 = __webpack_require__(2862);
-            const loadGameObject_1 = __webpack_require__(5393);
-            const killObject_1 = __webpack_require__(8280);
-            const killObjects_1 = __webpack_require__(7954);
-            const updateHealth_1 = __webpack_require__(9289);
-            const updatePlayerValue_1 = __webpack_require__(7864);
-            const loadAI_1 = __webpack_require__(9773);
-            const animateAI_1 = __webpack_require__(6181);
-            const gatherAnimation_1 = __webpack_require__(2034);
-            const disconnect_1 = __webpack_require__(9523);
-            const wiggleGameObject_1 = __webpack_require__(2656);
-            const shootTurret_1 = __webpack_require__(5701);
-            const killPlayer_1 = __webpack_require__(1822);
-            const updateItemCounts_1 = __webpack_require__(657);
-            const updateAge_1 = __webpack_require__(1836);
-            const updateUpgrades_1 = __webpack_require__(3226);
-            const updateItems_1 = __webpack_require__(9971);
-            const addProjectile_1 = __webpack_require__(8641);
-            const remProjectile_1 = __webpack_require__(9254);
-            const serverShutdownNotice_1 = __webpack_require__(6933);
-            const addAlliance_1 = __webpack_require__(2580);
-            const deleteAlliance_1 = __webpack_require__(6207);
-            const allianceNotification_1 = __webpack_require__(6401);
-            const setPlayerTeam_1 = __webpack_require__(2530);
-            const setAlliancePlayers_1 = __webpack_require__(1451);
-            const updateStoreItems_1 = __webpack_require__(2798);
-            const receiveChat_1 = __webpack_require__(4763);
-            const updateMinimap_1 = __webpack_require__(1487);
-            const showText_1 = __webpack_require__(5718);
-            const pingMap_1 = __webpack_require__(8530);
-            const pingSocketResponse_1 = __webpack_require__(1887);
-            const ServerManager_1 = __webpack_require__(4455);
-            function handleServerPackets(packet, data) {
-                switch (packet) {
+            const n = r(366);
+            const M = r(1201);
+            const p = r(8353);
+            const m = r(9651);
+            const y = r(156);
+            const h = r(8351);
+            const P = r(2862);
+            const b = r(5393);
+            const _ = r(8280);
+            const v = r(7954);
+            const k = r(9289);
+            const S = r(7864);
+            const j = r(9773);
+            const O = r(6181);
+            const x = r(2034);
+            const C = r(9523);
+            const I = r(2656);
+            const A = r(5701);
+            const T = r(1822);
+            const E = r(657);
+            const B = r(1836);
+            const H = r(3226);
+            const L = r(9971);
+            const U = r(8641);
+            const D = r(9254);
+            const q = r(6933);
+            const G = r(2580);
+            const R = r(6207);
+            const N = r(6401);
+            const F = r(2530);
+            const W = r(1451);
+            const Y = r(2798);
+            const z = r(4763);
+            const X = r(1487);
+            const K = r(5718);
+            const V = r(8530);
+            const Z = r(1887);
+            const J = r(4455);
+            function handleServerPackets(e, t) {
+                switch (e) {
                   case "io-init":
                     {
-                        let PacketManager = app_1.MooMoo.PacketManager;
-                        PacketManager.initialize();
-                        PacketManager.addPacket();
+                        let e = n.MooMoo.PacketManager;
+                        e.initialize();
+                        e.addPacket();
                         break;
                     }
 
                   case "id":
-                    (0, setInitData_1.default)(data);
+                    (0, M.default)(t);
                     break;
 
                   case "d":
-                    (0, disconnect_1.default)();
+                    (0, C.default)();
                     break;
 
                   case "1":
-                    (0, setupGame_1.default)(data);
+                    (0, p.default)(t);
                     break;
 
                   case "2":
-                    (0, addPlayer_1.default)(data);
+                    (0, m.default)(t);
                     break;
 
                   case "4":
-                    (0, removePlayer_1.default)(data);
+                    (0, y.default)(t);
                     break;
 
                   case "33":
-                    (0, updatePlayers_1.default)(data);
+                    (0, h.default)(t);
                     break;
 
                   case "5":
-                    (0, updateLeaderboard_1.default)(data);
+                    (0, P.default)(t);
                     break;
 
                   case "6":
-                    (0, loadGameObject_1.default)(data);
+                    (0, b.default)(t);
                     break;
 
                   case "a":
-                    (0, loadAI_1.default)(data[0]);
+                    (0, j.default)(t[0]);
                     break;
 
                   case "aa":
-                    (0, animateAI_1.default)(data);
+                    (0, O.default)(t);
                     break;
 
                   case "7":
-                    (0, gatherAnimation_1.default)(data);
+                    (0, x.default)(t);
                     break;
 
                   case "8":
-                    (0, wiggleGameObject_1.default)(data);
+                    (0, I.default)(t);
                     break;
 
                   case "sp":
-                    (0, shootTurret_1.default)(data);
+                    (0, A.default)(t);
                     break;
 
                   case "9":
-                    (0, updatePlayerValue_1.default)(data);
+                    (0, S.default)(t);
                     break;
 
                   case "h":
-                    (0, updateHealth_1.default)(data);
+                    (0, k.default)(t);
                     break;
 
                   case "11":
-                    (0, killPlayer_1.default)(data);
+                    (0, T.default)(t);
                     break;
 
                   case "12":
-                    (0, killObject_1.default)(data);
+                    (0, _.default)(t);
                     break;
 
                   case "13":
-                    (0, killObjects_1.default)(data[0]);
+                    (0, v.default)(t[0]);
                     break;
 
                   case "14":
-                    (0, updateItemCounts_1.default)(data);
+                    (0, E.default)(t);
                     break;
 
                   case "15":
-                    (0, updateAge_1.default)(data);
+                    (0, B.default)(t);
                     break;
 
                   case "16":
-                    (0, updateUpgrades_1.default)(data);
+                    (0, H.default)(t);
                     break;
 
                   case "17":
-                    (0, updateItems_1.default)(data);
+                    (0, L.default)(t);
                     break;
 
                   case "18":
-                    (0, addProjectile_1.default)(data);
+                    (0, U.default)(t);
                     break;
 
                   case "19":
-                    (0, remProjectile_1.default)(data);
+                    (0, D.default)(t);
                     break;
 
                   case "20":
-                    (0, serverShutdownNotice_1.default)(data);
+                    (0, q.default)(t);
                     break;
 
                   case "ac":
-                    (0, addAlliance_1.default)(data);
+                    (0, G.default)(t);
                     break;
 
                   case "ad":
-                    (0, deleteAlliance_1.default)(data);
+                    (0, R.default)(t);
                     break;
 
                   case "an":
-                    (0, allianceNotification_1.default)(data);
+                    (0, N.default)(t);
                     break;
 
                   case "st":
-                    (0, setPlayerTeam_1.default)(data);
+                    (0, F.default)(t);
                     break;
 
                   case "sa":
-                    (0, setAlliancePlayers_1.default)(data);
+                    (0, W.default)(t);
                     break;
 
                   case "us":
-                    (0, updateStoreItems_1.default)(data);
+                    (0, Y.default)(t);
                     break;
 
                   case "ch":
-                    (0, receiveChat_1.default)(data);
+                    (0, z.default)(t);
                     break;
 
                   case "mm":
-                    (0, updateMinimap_1.default)(data);
+                    (0, X.default)(t);
                     break;
 
                   case "t":
-                    (0, showText_1.default)(data);
+                    (0, K.default)(t);
                     break;
 
                   case "p":
-                    (0, pingMap_1.default)(data);
+                    (0, V.default)(t);
                     break;
 
                   case "pp":
-                    (0, pingSocketResponse_1.default)(data);
+                    (0, Z.default)(t);
                     break;
 
                   default:
-                    console.log("Unknown packet: " + packet);
+                    console.log("Unknown packet: " + e);
                 }
-                let SM = app_1.MooMoo.ServerManager;
-                if (!SM) {
-                    app_1.MooMoo.ServerManager = ServerManager_1.default.instance;
+                let r = n.MooMoo.ServerManager;
+                if (!r) {
+                    n.MooMoo.ServerManager = J.default.instance;
                 }
-                app_1.MooMoo.emit("packet", {
-                    packet,
-                    data
+                n.MooMoo.emit("packet", {
+                    packet: e,
+                    data: t
                 });
             }
-            exports["default"] = handleServerPackets;
+            t["default"] = handleServerPackets;
         },
-        550: function(__unused_webpack_module, exports, __webpack_require__) {
-            var __awaiter = this && this.__awaiter || function(thisArg, _arguments, P, generator) {
-                function adopt(value) {
-                    return value instanceof P ? value : new P((function(resolve) {
-                        resolve(value);
+        550: function(e, t, r) {
+            var n = this && this.__awaiter || function(e, t, r, n) {
+                function adopt(e) {
+                    return e instanceof r ? e : new r((function(t) {
+                        t(e);
                     }));
                 }
-                return new (P || (P = Promise))((function(resolve, reject) {
-                    function fulfilled(value) {
+                return new (r || (r = Promise))((function(r, M) {
+                    function fulfilled(e) {
                         try {
-                            step(generator.next(value));
+                            step(n.next(e));
                         } catch (e) {
-                            reject(e);
+                            M(e);
                         }
                     }
-                    function rejected(value) {
+                    function rejected(e) {
                         try {
-                            step(generator["throw"](value));
+                            step(n["throw"](e));
                         } catch (e) {
-                            reject(e);
+                            M(e);
                         }
                     }
-                    function step(result) {
-                        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+                    function step(e) {
+                        e.done ? r(e.value) : adopt(e.value).then(fulfilled, rejected);
                     }
-                    step((generator = generator.apply(thisArg, _arguments || [])).next());
+                    step((n = n.apply(e, t || [])).next());
                 }));
             };
-            Object.defineProperty(exports, "__esModule", {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            exports.onmessagecallback = void 0;
-            const encode_js_1 = __webpack_require__(112);
-            const ServerManager_1 = __webpack_require__(4455);
-            const handleServerPackets_1 = __webpack_require__(9938);
-            const handleClientPackets_1 = __webpack_require__(898);
-            const SourceMapConfiguration_1 = __webpack_require__(977);
-            const app_1 = __webpack_require__(366);
-            let _onmessage = false;
-            exports.onmessagecallback = null;
-            let injected = false;
-            let wsToken = null;
+            t.onmessagecallback = void 0;
+            const M = r(112);
+            const p = r(4455);
+            const m = r(9938);
+            const y = r(898);
+            const h = r(977);
+            const P = r(366);
+            let b = false;
+            t.onmessagecallback = null;
+            let _ = false;
+            let v = null;
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
-                    apply(target, thisArg, args) {
-                        if (!wsToken) {
-                            wsToken = new URL(thisArg.url).search.split("token=")[1];
+                    apply(e, t, r) {
+                        if (!v) {
+                            v = new URL(t.url).search.split("token=")[1];
                         }
-                        let currentToken = new URL(thisArg.url).search.split("token=")[1];
-                        if (wsToken !== currentToken) return Reflect.apply(target, thisArg, args);
-                        let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
-                        args[0] = PacketInterceptor.applyClientCallbacks(args[0]);
-                        app_1.MooMoo.ws = thisArg;
-                        app_1.MooMoo.PacketManager.addPacket();
-                        app_1.MooMoo.sendPacket = function(type) {
-                            let data = Array.prototype.slice.call(arguments, 1);
-                            let binary = (0, encode_js_1.default)([ type, data ]);
-                            thisArg.send(binary);
+                        let n = new URL(t.url).search.split("token=")[1];
+                        if (v !== n) return Reflect.apply(e, t, r);
+                        let m = P.MooMoo.PacketInterceptor;
+                        r[0] = m.applyClientCallbacks(r[0]);
+                        P.MooMoo.ws = t;
+                        P.MooMoo.PacketManager.addPacket();
+                        P.MooMoo.sendPacket = function(e) {
+                            let r = Array.prototype.slice.call(arguments, 1);
+                            let n = (0, M.default)([ e, r ]);
+                            t.send(n);
                         };
-                        if (app_1.MooMoo.ws.readyState !== 1) return true;
-                        if (!_onmessage) {
-                            ServerManager_1.default.startInterval();
-                            _onmessage = true;
-                            SourceMapConfiguration_1.default.initialize();
+                        if (P.MooMoo.ws.readyState !== 1) return true;
+                        if (!b) {
+                            p.default.startInterval();
+                            b = true;
+                            h.default.initialize();
                         }
-                        let data = app_1.MooMoo.msgpack.decode(args[0]);
-                        let [packet, [...packetData]] = data;
-                        let doSend = (0, handleClientPackets_1.default)(packet, packetData);
-                        if (!doSend) return true;
-                        return Reflect.apply(target, thisArg, args);
+                        let _ = P.MooMoo.msgpack.decode(r[0]);
+                        let [k, [...S]] = _;
+                        let j = (0, y.default)(k, S);
+                        if (!j) return true;
+                        return Reflect.apply(e, t, r);
                     }
                 });
-                let onmessagesetter = Object.getOwnPropertyDescriptor(WebSocket.prototype, "onmessage").set;
+                let e = Object.getOwnPropertyDescriptor(WebSocket.prototype, "onmessage").set;
                 Object.defineProperty(WebSocket.prototype, "onmessage", {
-                    set: function(callback) {
-                        exports.onmessagecallback = callback;
-                        onmessagesetter.call(this, (function(event) {
-                            return __awaiter(this, void 0, void 0, (function*() {
-                                let PacketInterceptor = app_1.MooMoo.PacketInterceptor;
-                                let data = event.data;
-                                data = PacketInterceptor.applyServerCallbacks(data);
-                                let decoded = app_1.MooMoo.msgpack.decode(new Uint8Array(data));
-                                let [packet, [...packetData]] = decoded;
-                                (0, handleServerPackets_1.default)(packet, packetData);
-                                (0, exports.onmessagecallback)({
-                                    data
+                    set: function(r) {
+                        t.onmessagecallback = r;
+                        e.call(this, (function(e) {
+                            return n(this, void 0, void 0, (function*() {
+                                let r = P.MooMoo.PacketInterceptor;
+                                let n = e.data;
+                                n = r.applyServerCallbacks(n);
+                                let M = P.MooMoo.msgpack.decode(new Uint8Array(n));
+                                let [p, [...y]] = M;
+                                (0, m.default)(p, y);
+                                (0, t.onmessagecallback)({
+                                    data: n
                                 });
                             }));
                         }));
                     }
                 });
             }
-            exports["default"] = hookWS;
+            t["default"] = hookWS;
         },
-        7703: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        7703: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function sendChat(message) {
-                let commandManager = app_1.MooMoo.CommandManager;
-                let prefix = commandManager.prefix;
-                if (message.startsWith(prefix)) {
-                    let commands = commandManager.commands;
-                    let command = message.split(" ")[0].slice(prefix.length);
-                    let args = message.split(" ").slice(1);
-                    let Command = commands[command];
-                    if (Command) {
-                        Command.run(Command, args);
+            const n = r(366);
+            function sendChat(e) {
+                let t = n.MooMoo.CommandManager;
+                let r = t.prefix;
+                if (e.startsWith(r)) {
+                    let n = t.commands;
+                    let M = e.split(" ")[0].slice(r.length);
+                    let p = e.split(" ").slice(1);
+                    let m = n[M];
+                    if (m) {
+                        m.run(m, p);
                         return false;
                     } else {
                         return true;
@@ -2158,728 +2158,728 @@
                     return true;
                 }
             }
-            exports["default"] = sendChat;
+            t["default"] = sendChat;
         },
-        2580: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2580: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function addAlliance(data) {
-                app_1.MooMoo.emit("addAlliance", data);
-                app_1.MooMoo.emit("addalliance", data);
-                app_1.MooMoo.emit("ac", data);
+            const n = r(366);
+            function addAlliance(e) {
+                n.MooMoo.emit("addAlliance", e);
+                n.MooMoo.emit("addalliance", e);
+                n.MooMoo.emit("ac", e);
             }
-            exports["default"] = addAlliance;
+            t["default"] = addAlliance;
         },
-        9651: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9651: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const Player_1 = __webpack_require__(9347);
-            function addPlayer(dta) {
-                let data = dta[0];
-                let isYou = dta[1];
-                let tmpPlayer = app_1.MooMoo.GamePlayerManager.getPlayerBySid(data[1]);
-                if (!tmpPlayer) {
-                    tmpPlayer = new Player_1.default(data[1]);
-                    tmpPlayer.name = data[2];
-                    tmpPlayer.id = data[0];
-                    app_1.MooMoo.GamePlayerManager.addPlayer(tmpPlayer);
+            const n = r(366);
+            const M = r(9347);
+            function addPlayer(e) {
+                let t = e[0];
+                let r = e[1];
+                let p = n.MooMoo.GamePlayerManager.getPlayerBySid(t[1]);
+                if (!p) {
+                    p = new M.default(t[1]);
+                    p.name = t[2];
+                    p.id = t[0];
+                    n.MooMoo.GamePlayerManager.addPlayer(p);
                 }
-                app_1.MooMoo.debug("Player " + tmpPlayer.name + " has joined the game.");
-                if (isYou) {
+                n.MooMoo.debug("Player " + p.name + " has joined the game.");
+                if (r) {
                     console.log("You are now in game!");
                 }
-                app_1.MooMoo.emit("addPlayer", dta);
-                app_1.MooMoo.emit("addplayer", dta);
-                app_1.MooMoo.emit("2", dta);
+                n.MooMoo.emit("addPlayer", e);
+                n.MooMoo.emit("addplayer", e);
+                n.MooMoo.emit("2", e);
             }
-            exports["default"] = addPlayer;
+            t["default"] = addPlayer;
         },
-        8641: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8641: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function addProjectile(data) {
-                app_1.MooMoo.emit("addProjectile", data);
-                app_1.MooMoo.emit("addprojectile", data);
-                app_1.MooMoo.emit("18", data);
+            const n = r(366);
+            function addProjectile(e) {
+                n.MooMoo.emit("addProjectile", e);
+                n.MooMoo.emit("addprojectile", e);
+                n.MooMoo.emit("18", e);
             }
-            exports["default"] = addProjectile;
+            t["default"] = addProjectile;
         },
-        6401: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        6401: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function allianceNotification(data) {
-                app_1.MooMoo.emit("allianceNotification", data);
-                app_1.MooMoo.emit("alliancenotification", data);
-                app_1.MooMoo.emit("an", data);
+            const n = r(366);
+            function allianceNotification(e) {
+                n.MooMoo.emit("allianceNotification", e);
+                n.MooMoo.emit("alliancenotification", e);
+                n.MooMoo.emit("an", e);
             }
-            exports["default"] = allianceNotification;
+            t["default"] = allianceNotification;
         },
-        6181: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        6181: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function animeAI(data) {
-                let sid = data[0];
-                app_1.MooMoo.emit("animateAI", data);
-                app_1.MooMoo.emit("animateAi", data);
-                app_1.MooMoo.emit("animateai", data);
-                app_1.MooMoo.emit("aa", sid);
+            const n = r(366);
+            function animeAI(e) {
+                let t = e[0];
+                n.MooMoo.emit("animateAI", e);
+                n.MooMoo.emit("animateAi", e);
+                n.MooMoo.emit("animateai", e);
+                n.MooMoo.emit("aa", t);
             }
-            exports["default"] = animeAI;
+            t["default"] = animeAI;
         },
-        6207: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        6207: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function deleteAlliance(data) {
-                app_1.MooMoo.emit("deleteAlliance", data);
-                app_1.MooMoo.emit("deletealliance", data);
+            const n = r(366);
+            function deleteAlliance(e) {
+                n.MooMoo.emit("deleteAlliance", e);
+                n.MooMoo.emit("deletealliance", e);
             }
-            exports["default"] = deleteAlliance;
+            t["default"] = deleteAlliance;
         },
-        9523: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9523: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
+            const n = r(366);
             function disconnect() {
-                app_1.MooMoo.emit("disconnect", app_1.MooMoo.ws);
+                n.MooMoo.emit("disconnect", n.MooMoo.ws);
             }
-            exports["default"] = disconnect;
+            t["default"] = disconnect;
         },
-        2034: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2034: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function gatherAnimation(data) {
-                app_1.MooMoo.emit("gatherAnimation", data);
-                app_1.MooMoo.emit("gatheranimation", data);
+            const n = r(366);
+            function gatherAnimation(e) {
+                n.MooMoo.emit("gatherAnimation", e);
+                n.MooMoo.emit("gatheranimation", e);
             }
-            exports["default"] = gatherAnimation;
+            t["default"] = gatherAnimation;
         },
-        8280: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8280: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function killObject(data) {
-                let sid = data[0];
-                app_1.MooMoo.GameObjectManager.removeObjectBySid(sid);
-                app_1.MooMoo.emit("killObject", data);
-                app_1.MooMoo.emit("killobject", data);
-                app_1.MooMoo.emit("12", sid);
+            const n = r(366);
+            function killObject(e) {
+                let t = e[0];
+                n.MooMoo.GameObjectManager.removeObjectBySid(t);
+                n.MooMoo.emit("killObject", e);
+                n.MooMoo.emit("killobject", e);
+                n.MooMoo.emit("12", t);
             }
-            exports["default"] = killObject;
+            t["default"] = killObject;
         },
-        7954: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        7954: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function killObjects(data) {
-                let ownerSid = data[0];
-                app_1.MooMoo.GameObjectManager.removeObjectsByOwnerSid(ownerSid);
-                app_1.MooMoo.emit("killObjects", data);
-                app_1.MooMoo.emit("killobjects", data);
-                app_1.MooMoo.emit("13", data);
+            const n = r(366);
+            function killObjects(e) {
+                let t = e[0];
+                n.MooMoo.GameObjectManager.removeObjectsByOwnerSid(t);
+                n.MooMoo.emit("killObjects", e);
+                n.MooMoo.emit("killobjects", e);
+                n.MooMoo.emit("13", e);
             }
-            exports["default"] = killObjects;
+            t["default"] = killObjects;
         },
-        1822: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1822: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function killPlayer(data) {
-                app_1.MooMoo.emit("killPlayer", data);
-                app_1.MooMoo.emit("killplayer", data);
-                app_1.MooMoo.emit("11", data);
+            const n = r(366);
+            function killPlayer(e) {
+                n.MooMoo.emit("killPlayer", e);
+                n.MooMoo.emit("killplayer", e);
+                n.MooMoo.emit("11", e);
             }
-            exports["default"] = killPlayer;
+            t["default"] = killPlayer;
         },
-        9773: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9773: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const chunk_1 = __webpack_require__(627);
-            function loadAI(data) {
-                if (data) {
-                    let animals = (0, chunk_1.default)(data, 7);
-                    app_1.MooMoo.emit("loadAI", data);
-                    app_1.MooMoo.emit("loadAi", data);
-                    app_1.MooMoo.emit("loadaI", data);
-                    app_1.MooMoo.emit("a", data);
+            const n = r(366);
+            const M = r(627);
+            function loadAI(e) {
+                if (e) {
+                    let t = (0, M.default)(e, 7);
+                    n.MooMoo.emit("loadAI", e);
+                    n.MooMoo.emit("loadAi", e);
+                    n.MooMoo.emit("loadaI", e);
+                    n.MooMoo.emit("a", e);
                 }
             }
-            exports["default"] = loadAI;
+            t["default"] = loadAI;
         },
-        5393: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        5393: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const chunk_1 = __webpack_require__(627);
-            const GameObject_1 = __webpack_require__(7809);
-            function loadGameObject(raw) {
-                let data = raw[0];
-                let arr = (0, chunk_1.default)(data, 8);
-                arr.forEach((obj => {
-                    let tmpObj = app_1.MooMoo.GameObjectManager.getGameObjectBySid(obj[0]);
-                    if (!tmpObj) {
-                        tmpObj = new GameObject_1.default(obj[0]);
+            const n = r(366);
+            const M = r(627);
+            const p = r(7809);
+            function loadGameObject(e) {
+                let t = e[0];
+                let r = (0, M.default)(t, 8);
+                r.forEach((e => {
+                    let t = n.MooMoo.GameObjectManager.getGameObjectBySid(e[0]);
+                    if (!t) {
+                        t = new p.default(e[0]);
                     }
-                    tmpObj.sid = obj[0];
-                    tmpObj.x = obj[1];
-                    tmpObj.y = obj[2];
-                    tmpObj.dir = obj[3];
-                    tmpObj.scale = obj[4];
-                    tmpObj.type = obj[5];
-                    tmpObj.id = obj[6];
-                    tmpObj.ownerSid = obj[7];
-                    app_1.MooMoo.GameObjectManager.addObject(tmpObj);
+                    t.sid = e[0];
+                    t.x = e[1];
+                    t.y = e[2];
+                    t.dir = e[3];
+                    t.scale = e[4];
+                    t.type = e[5];
+                    t.id = e[6];
+                    t.ownerSid = e[7];
+                    n.MooMoo.GameObjectManager.addObject(t);
                 }));
-                app_1.MooMoo.emit("loadGameObject", raw);
-                app_1.MooMoo.emit("loadgameobject", raw);
-                app_1.MooMoo.emit("6", raw);
+                n.MooMoo.emit("loadGameObject", e);
+                n.MooMoo.emit("loadgameobject", e);
+                n.MooMoo.emit("6", e);
             }
-            exports["default"] = loadGameObject;
+            t["default"] = loadGameObject;
         },
-        8530: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8530: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function pingMap(data) {
-                app_1.MooMoo.emit("pingMap", data);
-                app_1.MooMoo.emit("pingmap", data);
-                app_1.MooMoo.emit("p", data);
+            const n = r(366);
+            function pingMap(e) {
+                n.MooMoo.emit("pingMap", e);
+                n.MooMoo.emit("pingmap", e);
+                n.MooMoo.emit("p", e);
             }
-            exports["default"] = pingMap;
+            t["default"] = pingMap;
         },
-        1887: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1887: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function pingSocketResponse(data) {
-                app_1.MooMoo.emit("pingSocketResponse", data);
-                app_1.MooMoo.emit("pingsocketresponse", data);
-                app_1.MooMoo.emit("pp", data);
+            const n = r(366);
+            function pingSocketResponse(e) {
+                n.MooMoo.emit("pingSocketResponse", e);
+                n.MooMoo.emit("pingsocketresponse", e);
+                n.MooMoo.emit("pp", e);
             }
-            exports["default"] = pingSocketResponse;
+            t["default"] = pingSocketResponse;
         },
-        4763: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        4763: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function receiveChat(data) {
-                app_1.MooMoo.emit("receiveChat", data);
-                app_1.MooMoo.emit("receivechat", data);
-                app_1.MooMoo.emit("ch", data);
+            const n = r(366);
+            function receiveChat(e) {
+                n.MooMoo.emit("receiveChat", e);
+                n.MooMoo.emit("receivechat", e);
+                n.MooMoo.emit("ch", e);
             }
-            exports["default"] = receiveChat;
+            t["default"] = receiveChat;
         },
-        9254: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9254: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function remProjectile(data) {
-                app_1.MooMoo.emit("remProjectile", data);
-                app_1.MooMoo.emit("remprojectile", data);
-                app_1.MooMoo.emit("19", data);
+            const n = r(366);
+            function remProjectile(e) {
+                n.MooMoo.emit("remProjectile", e);
+                n.MooMoo.emit("remprojectile", e);
+                n.MooMoo.emit("19", e);
             }
-            exports["default"] = remProjectile;
+            t["default"] = remProjectile;
         },
-        156: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        156: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function removePlayer(data) {
-                let id = data[0];
-                app_1.MooMoo.GamePlayerManager.removePlayerById(id);
-                app_1.MooMoo.debug("Player " + id + " has left the game.");
-                app_1.MooMoo.emit("removePlayer", data);
-                app_1.MooMoo.emit("removeplayer", data);
-                app_1.MooMoo.emit("4", data);
+            const n = r(366);
+            function removePlayer(e) {
+                let t = e[0];
+                n.MooMoo.GamePlayerManager.removePlayerById(t);
+                n.MooMoo.debug("Player " + t + " has left the game.");
+                n.MooMoo.emit("removePlayer", e);
+                n.MooMoo.emit("removeplayer", e);
+                n.MooMoo.emit("4", e);
             }
-            exports["default"] = removePlayer;
+            t["default"] = removePlayer;
         },
-        6933: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        6933: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function serverShutdownNotice(data) {
-                app_1.MooMoo.emit("serverShutdownNotice", data);
-                app_1.MooMoo.emit("servershutdownnotice", data);
-                app_1.MooMoo.emit("20", data);
+            const n = r(366);
+            function serverShutdownNotice(e) {
+                n.MooMoo.emit("serverShutdownNotice", e);
+                n.MooMoo.emit("servershutdownnotice", e);
+                n.MooMoo.emit("20", e);
             }
-            exports["default"] = serverShutdownNotice;
+            t["default"] = serverShutdownNotice;
         },
-        1451: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1451: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function setAlliancePlayers(data) {
-                app_1.MooMoo.emit("setAlliancePlayers", data);
-                app_1.MooMoo.emit("setallianceplayers", data);
-                app_1.MooMoo.emit("sa", data);
+            const n = r(366);
+            function setAlliancePlayers(e) {
+                n.MooMoo.emit("setAlliancePlayers", e);
+                n.MooMoo.emit("setallianceplayers", e);
+                n.MooMoo.emit("sa", e);
             }
-            exports["default"] = setAlliancePlayers;
+            t["default"] = setAlliancePlayers;
         },
-        1201: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1201: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const Alliance_1 = __webpack_require__(6157);
-            const Player_1 = __webpack_require__(9347);
-            const app_1 = __webpack_require__(366);
-            function setInitData(raw) {
-                let data = raw[0];
-                let teams = data.teams;
-                for (let i = 0; i < teams.length; i++) {
-                    let team = teams[i];
-                    let name = team.sid;
-                    let owner = team.owner;
-                    let alliance = new Alliance_1.default(new Player_1.default(owner), name);
-                    app_1.MooMoo.teams.push(alliance);
+            const n = r(6157);
+            const M = r(9347);
+            const p = r(366);
+            function setInitData(e) {
+                let t = e[0];
+                let r = t.teams;
+                for (let e = 0; e < r.length; e++) {
+                    let t = r[e];
+                    let m = t.sid;
+                    let y = t.owner;
+                    let h = new n.default(new M.default(y), m);
+                    p.MooMoo.teams.push(h);
                 }
             }
-            exports["default"] = setInitData;
+            t["default"] = setInitData;
         },
-        2530: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2530: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function setPlayerTeam(data) {
-                app_1.MooMoo.emit("setPlayerTeam", data);
-                app_1.MooMoo.emit("setplayerteam", data);
-                app_1.MooMoo.emit("st", data);
+            const n = r(366);
+            function setPlayerTeam(e) {
+                n.MooMoo.emit("setPlayerTeam", e);
+                n.MooMoo.emit("setplayerteam", e);
+                n.MooMoo.emit("st", e);
             }
-            exports["default"] = setPlayerTeam;
+            t["default"] = setPlayerTeam;
         },
-        8353: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8353: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            const place_1 = __webpack_require__(8595);
-            const chat_1 = __webpack_require__(4218);
-            const hit_1 = __webpack_require__(3044);
-            const equipHat_1 = __webpack_require__(420);
-            const equipAccessory_1 = __webpack_require__(8101);
-            const unequipHat_1 = __webpack_require__(5088);
-            const unequipAccessory_1 = __webpack_require__(3296);
-            const buyHat_1 = __webpack_require__(3269);
-            const buyAccessory_1 = __webpack_require__(8106);
-            function setupGame(data) {
-                let sid = data[0];
-                app_1.MooMoo.myPlayer = {};
-                app_1.MooMoo.myPlayer.sid = sid;
-                app_1.MooMoo.myPlayer.place = place_1.default;
-                app_1.MooMoo.myPlayer.chat = chat_1.default;
-                app_1.MooMoo.myPlayer.hit = hit_1.default;
-                app_1.MooMoo.myPlayer.equipHat = equipHat_1.default;
-                app_1.MooMoo.myPlayer.equipAccessory = equipAccessory_1.default;
-                app_1.MooMoo.myPlayer.unequipHat = unequipHat_1.default;
-                app_1.MooMoo.myPlayer.unequipAccessory = unequipAccessory_1.default;
-                app_1.MooMoo.myPlayer.buyHat = buyHat_1.default;
-                app_1.MooMoo.myPlayer.buyAccessory = buyAccessory_1.default;
-                app_1.MooMoo.vars.gameLoaded = true;
-                app_1.MooMoo.emit("gameLoad");
-                app_1.MooMoo.emit("setupGame", data);
-                app_1.MooMoo.emit("setupgame", data);
-                app_1.MooMoo.emit("1", data);
-                let didInit = app_1.MooMoo.didInit;
-                if (!didInit) {
-                    if (app_1.MooMoo.onGameLoad) app_1.MooMoo.onGameLoad();
-                    app_1.MooMoo.didInit = true;
+            const n = r(366);
+            const M = r(8595);
+            const p = r(4218);
+            const m = r(3044);
+            const y = r(420);
+            const h = r(8101);
+            const P = r(5088);
+            const b = r(3296);
+            const _ = r(3269);
+            const v = r(8106);
+            function setupGame(e) {
+                let t = e[0];
+                n.MooMoo.myPlayer = {};
+                n.MooMoo.myPlayer.sid = t;
+                n.MooMoo.myPlayer.place = M.default;
+                n.MooMoo.myPlayer.chat = p.default;
+                n.MooMoo.myPlayer.hit = m.default;
+                n.MooMoo.myPlayer.equipHat = y.default;
+                n.MooMoo.myPlayer.equipAccessory = h.default;
+                n.MooMoo.myPlayer.unequipHat = P.default;
+                n.MooMoo.myPlayer.unequipAccessory = b.default;
+                n.MooMoo.myPlayer.buyHat = _.default;
+                n.MooMoo.myPlayer.buyAccessory = v.default;
+                n.MooMoo.vars.gameLoaded = true;
+                n.MooMoo.emit("gameLoad");
+                n.MooMoo.emit("setupGame", e);
+                n.MooMoo.emit("setupgame", e);
+                n.MooMoo.emit("1", e);
+                let r = n.MooMoo.didInit;
+                if (!r) {
+                    if (n.MooMoo.onGameLoad) n.MooMoo.onGameLoad();
+                    n.MooMoo.didInit = true;
                 }
             }
-            exports["default"] = setupGame;
+            t["default"] = setupGame;
         },
-        5701: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        5701: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function shootTurret(data) {
-                app_1.MooMoo.emit("shootTurret", data);
-                app_1.MooMoo.emit("shootturret", data);
-                app_1.MooMoo.emit("sp", data);
+            const n = r(366);
+            function shootTurret(e) {
+                n.MooMoo.emit("shootTurret", e);
+                n.MooMoo.emit("shootturret", e);
+                n.MooMoo.emit("sp", e);
             }
-            exports["default"] = shootTurret;
+            t["default"] = shootTurret;
         },
-        5718: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        5718: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function showText(data) {
-                app_1.MooMoo.emit("showText", data);
-                app_1.MooMoo.emit("showtext", data);
-                app_1.MooMoo.emit("t", data);
+            const n = r(366);
+            function showText(e) {
+                n.MooMoo.emit("showText", e);
+                n.MooMoo.emit("showtext", e);
+                n.MooMoo.emit("t", e);
             }
-            exports["default"] = showText;
+            t["default"] = showText;
         },
-        1836: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1836: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateAge(data) {
-                app_1.MooMoo.emit("updateAge", data);
-                app_1.MooMoo.emit("updateage", data);
-                app_1.MooMoo.emit("15", data);
+            const n = r(366);
+            function updateAge(e) {
+                n.MooMoo.emit("updateAge", e);
+                n.MooMoo.emit("updateage", e);
+                n.MooMoo.emit("15", e);
             }
-            exports["default"] = updateAge;
+            t["default"] = updateAge;
         },
-        9289: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9289: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateHealth(data) {
-                let sid = data[0];
-                let value = data[1];
-                let tmpPlayer = app_1.MooMoo.GamePlayerManager.getPlayerBySid(sid);
-                if (tmpPlayer) {
-                    tmpPlayer.health = value;
+            const n = r(366);
+            function updateHealth(e) {
+                let t = e[0];
+                let r = e[1];
+                let M = n.MooMoo.GamePlayerManager.getPlayerBySid(t);
+                if (M) {
+                    M.health = r;
                 }
-                app_1.MooMoo.emit("updateHealth", data);
-                app_1.MooMoo.emit("updatehealth", data);
-                app_1.MooMoo.emit("h", data);
+                n.MooMoo.emit("updateHealth", e);
+                n.MooMoo.emit("updatehealth", e);
+                n.MooMoo.emit("h", e);
             }
-            exports["default"] = updateHealth;
+            t["default"] = updateHealth;
         },
-        657: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        657: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateItemCounts(data) {
-                app_1.MooMoo.emit("updateItemCounts", data);
-                app_1.MooMoo.emit("updateitemcounts", data);
-                app_1.MooMoo.emit("14", data);
+            const n = r(366);
+            function updateItemCounts(e) {
+                n.MooMoo.emit("updateItemCounts", e);
+                n.MooMoo.emit("updateitemcounts", e);
+                n.MooMoo.emit("14", e);
             }
-            exports["default"] = updateItemCounts;
+            t["default"] = updateItemCounts;
         },
-        9971: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        9971: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateItems(data) {
-                app_1.MooMoo.emit("updateItems", data);
-                app_1.MooMoo.emit("updateitems", data);
-                app_1.MooMoo.emit("17", data);
+            const n = r(366);
+            function updateItems(e) {
+                n.MooMoo.emit("updateItems", e);
+                n.MooMoo.emit("updateitems", e);
+                n.MooMoo.emit("17", e);
             }
-            exports["default"] = updateItems;
+            t["default"] = updateItems;
         },
-        2862: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2862: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateLeaderboard(data) {
-                let leaderboarddata = data[0];
-                app_1.MooMoo.LeaderboardManager.updateLeaderboard(leaderboarddata);
-                app_1.MooMoo.emit("updateLeaderboard", data);
-                app_1.MooMoo.emit("updateleaderboard", data);
-                app_1.MooMoo.emit("5", data);
+            const n = r(366);
+            function updateLeaderboard(e) {
+                let t = e[0];
+                n.MooMoo.LeaderboardManager.updateLeaderboard(t);
+                n.MooMoo.emit("updateLeaderboard", e);
+                n.MooMoo.emit("updateleaderboard", e);
+                n.MooMoo.emit("5", e);
             }
-            exports["default"] = updateLeaderboard;
+            t["default"] = updateLeaderboard;
         },
-        1487: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        1487: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateMinimap(data) {
-                app_1.MooMoo.emit("updateMinimap", data);
-                app_1.MooMoo.emit("updateminimap", data);
-                app_1.MooMoo.emit("mm", data);
+            const n = r(366);
+            function updateMinimap(e) {
+                n.MooMoo.emit("updateMinimap", e);
+                n.MooMoo.emit("updateminimap", e);
+                n.MooMoo.emit("mm", e);
             }
-            exports["default"] = updateMinimap;
+            t["default"] = updateMinimap;
         },
-        7864: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        7864: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updatePlayerValue(data) {
-                let id = data[0];
-                let value = data[1];
-                let player = app_1.MooMoo.myPlayer.resources;
-                player[id] = value;
-                app_1.MooMoo.myPlayer.resources = player;
-                app_1.MooMoo.emit("updatePlayerValue", data);
-                app_1.MooMoo.emit("updateplayervalue", data);
-                app_1.MooMoo.emit("9", data);
+            const n = r(366);
+            function updatePlayerValue(e) {
+                let t = e[0];
+                let r = e[1];
+                let M = n.MooMoo.myPlayer.resources;
+                M[t] = r;
+                n.MooMoo.myPlayer.resources = M;
+                n.MooMoo.emit("updatePlayerValue", e);
+                n.MooMoo.emit("updateplayervalue", e);
+                n.MooMoo.emit("9", e);
             }
-            exports["default"] = updatePlayerValue;
+            t["default"] = updatePlayerValue;
         },
-        8351: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        8351: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            exports.updateHookPosition = void 0;
-            const chunk_1 = __webpack_require__(627);
-            const cacheItems_1 = __webpack_require__(3748);
-            const app_1 = __webpack_require__(366);
-            const Player_1 = __webpack_require__(9347);
-            const GameObject_1 = __webpack_require__(7809);
-            function updatePlayers(raw) {
-                let data = raw[0];
-                let arr = (0, chunk_1.default)(data, 13);
-                app_1.MooMoo.ActivePlayerManager.clearPlayers();
-                arr.forEach((playerData => {
-                    let tmpPlayer = app_1.MooMoo.GamePlayerManager.getPlayerBySid(playerData[0]);
-                    if (!tmpPlayer) {
-                        tmpPlayer = new Player_1.default(playerData[0]);
-                        tmpPlayer.x = playerData[1];
-                        tmpPlayer.y = playerData[2];
+            t.updateHookPosition = void 0;
+            const n = r(627);
+            const M = r(3748);
+            const p = r(366);
+            const m = r(9347);
+            const y = r(7809);
+            function updatePlayers(e) {
+                let t = e[0];
+                let r = (0, n.default)(t, 13);
+                p.MooMoo.ActivePlayerManager.clearPlayers();
+                r.forEach((e => {
+                    let t = p.MooMoo.GamePlayerManager.getPlayerBySid(e[0]);
+                    if (!t) {
+                        t = new m.default(e[0]);
+                        t.x = e[1];
+                        t.y = e[2];
                     }
-                    tmpPlayer.sid = playerData[0];
-                    tmpPlayer.dir = playerData[3];
-                    tmpPlayer.buildIndex = playerData[4];
-                    tmpPlayer.weaponIndex = playerData[5];
-                    tmpPlayer.weaponVariant = playerData[6];
-                    tmpPlayer.team = playerData[7];
-                    tmpPlayer.isLeader = playerData[8];
-                    tmpPlayer.skinIndex = playerData[9];
-                    tmpPlayer.tailIndex = playerData[10];
-                    tmpPlayer.iconIndex = playerData[11];
-                    tmpPlayer.zIndex = playerData[12];
-                    app_1.MooMoo.ActivePlayerManager.addPlayer(tmpPlayer);
-                    if (tmpPlayer.sid === app_1.MooMoo.myPlayer.sid) {
-                        Object.assign(app_1.MooMoo.myPlayer, tmpPlayer);
+                    t.sid = e[0];
+                    t.dir = e[3];
+                    t.buildIndex = e[4];
+                    t.weaponIndex = e[5];
+                    t.weaponVariant = e[6];
+                    t.team = e[7];
+                    t.isLeader = e[8];
+                    t.skinIndex = e[9];
+                    t.tailIndex = e[10];
+                    t.iconIndex = e[11];
+                    t.zIndex = e[12];
+                    p.MooMoo.ActivePlayerManager.addPlayer(t);
+                    if (t.sid === p.MooMoo.myPlayer.sid) {
+                        Object.assign(p.MooMoo.myPlayer, t);
                     }
-                    (0, cacheItems_1.default)();
+                    (0, M.default)();
                 }));
-                app_1.MooMoo.emit("updatePlayers", data);
-                app_1.MooMoo.emit("updateplayers", data);
-                app_1.MooMoo.emit("33", data);
+                p.MooMoo.emit("updatePlayers", t);
+                p.MooMoo.emit("updateplayers", t);
+                p.MooMoo.emit("33", t);
             }
-            function updateHookPosition(data) {
-                if (this instanceof Player_1.default || this instanceof GameObject_1.default || this.isAI || !this.id) {} else {
-                    let tmpPlayer = app_1.MooMoo.GamePlayerManager.getPlayerBySid(this.sid);
-                    if (tmpPlayer) {
-                        tmpPlayer.x = data;
-                        tmpPlayer.y = this.y;
-                        if (app_1.MooMoo.onPositionUpdate) {
-                            app_1.MooMoo.onPositionUpdate(tmpPlayer);
+            function updateHookPosition(e) {
+                if (this instanceof m.default || this instanceof y.default || this.isAI || !this.id) {} else {
+                    let t = p.MooMoo.GamePlayerManager.getPlayerBySid(this.sid);
+                    if (t) {
+                        t.x = e;
+                        t.y = this.y;
+                        if (p.MooMoo.onPositionUpdate) {
+                            p.MooMoo.onPositionUpdate(t);
                         }
                     }
-                    app_1.MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
+                    p.MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
                 }
             }
-            exports.updateHookPosition = updateHookPosition;
-            exports["default"] = updatePlayers;
+            t.updateHookPosition = updateHookPosition;
+            t["default"] = updatePlayers;
         },
-        2798: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2798: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateStoreItems(data) {
-                app_1.MooMoo.emit("updateStoreItems", data);
-                app_1.MooMoo.emit("updatestoreitems", data);
-                app_1.MooMoo.emit("us", data);
+            const n = r(366);
+            function updateStoreItems(e) {
+                n.MooMoo.emit("updateStoreItems", e);
+                n.MooMoo.emit("updatestoreitems", e);
+                n.MooMoo.emit("us", e);
             }
-            exports["default"] = updateStoreItems;
+            t["default"] = updateStoreItems;
         },
-        3226: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        3226: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function updateUpgrades(data) {
-                app_1.MooMoo.emit("updateUpgrades", data);
-                app_1.MooMoo.emit("updateupgrades", data);
-                app_1.MooMoo.emit("16", data);
+            const n = r(366);
+            function updateUpgrades(e) {
+                n.MooMoo.emit("updateUpgrades", e);
+                n.MooMoo.emit("updateupgrades", e);
+                n.MooMoo.emit("16", e);
             }
-            exports["default"] = updateUpgrades;
+            t["default"] = updateUpgrades;
         },
-        2656: (__unused_webpack_module, exports, __webpack_require__) => {
-            Object.defineProperty(exports, "__esModule", {
+        2656: (e, t, r) => {
+            Object.defineProperty(t, "__esModule", {
                 value: true
             });
-            const app_1 = __webpack_require__(366);
-            function wiggleGameObject(data) {
-                app_1.MooMoo.emit("wiggleGameObject", data);
-                app_1.MooMoo.emit("wigglegameobject", data);
-                app_1.MooMoo.emit("8", data);
+            const n = r(366);
+            function wiggleGameObject(e) {
+                n.MooMoo.emit("wiggleGameObject", e);
+                n.MooMoo.emit("wigglegameobject", e);
+                n.MooMoo.emit("8", e);
             }
-            exports["default"] = wiggleGameObject;
+            t["default"] = wiggleGameObject;
         },
-        2298: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-            __webpack_require__.r(__webpack_exports__);
-            __webpack_require__.d(__webpack_exports__, {
-                default: () => __WEBPACK_DEFAULT_EXPORT__
+        2298: (e, t, r) => {
+            r.r(t);
+            r.d(t, {
+                default: () => n
             });
-            const decode = function(r) {
-                const e = 4294967296;
-                let t = 0;
-                if (r instanceof ArrayBuffer && (r = new Uint8Array(r)), "object" != typeof r || void 0 === r.length) throw new Error("Invalid argument type: Expected a byte array (Array or Uint8Array) to deserialize.");
-                if (!r.length) throw new Error("Invalid argument: The byte array to deserialize is empty.");
-                r instanceof Uint8Array || (r = new Uint8Array(r));
+            const decode = function(e) {
+                const t = 4294967296;
+                let r = 0;
+                if (e instanceof ArrayBuffer && (e = new Uint8Array(e)), "object" != typeof e || void 0 === e.length) throw new Error("Invalid argument type: Expected a byte array (Array or Uint8Array) to deserialize.");
+                if (!e.length) throw new Error("Invalid argument: The byte array to deserialize is empty.");
+                e instanceof Uint8Array || (e = new Uint8Array(e));
                 let n = i();
-                return r.length, n;
+                return e.length, n;
                 function i() {
-                    const e = r[t++];
-                    if (e >= 0 && e <= 127) return e;
-                    if (e >= 128 && e <= 143) return l(e - 128);
-                    if (e >= 144 && e <= 159) return c(e - 144);
-                    if (e >= 160 && e <= 191) return d(e - 160);
-                    if (192 === e) return null;
-                    if (193 === e) throw new Error("Invalid byte code 0xc1 found.");
-                    if (194 === e) return !1;
-                    if (195 === e) return !0;
-                    if (196 === e) return a(-1, 1);
-                    if (197 === e) return a(-1, 2);
-                    if (198 === e) return a(-1, 4);
-                    if (199 === e) return w(-1, 1);
-                    if (200 === e) return w(-1, 2);
-                    if (201 === e) return w(-1, 4);
-                    if (202 === e) return u(4);
-                    if (203 === e) return u(8);
-                    if (204 === e) return o(1);
-                    if (205 === e) return o(2);
-                    if (206 === e) return o(4);
-                    if (207 === e) return o(8);
-                    if (208 === e) return f(1);
-                    if (209 === e) return f(2);
-                    if (210 === e) return f(4);
-                    if (211 === e) return f(8);
-                    if (212 === e) return w(1);
-                    if (213 === e) return w(2);
-                    if (214 === e) return w(4);
-                    if (215 === e) return w(8);
-                    if (216 === e) return w(16);
-                    if (217 === e) return d(-1, 1);
-                    if (218 === e) return d(-1, 2);
-                    if (219 === e) return d(-1, 4);
-                    if (220 === e) return c(-1, 2);
-                    if (221 === e) return c(-1, 4);
-                    if (222 === e) return l(-1, 2);
-                    if (223 === e) return l(-1, 4);
-                    if (e >= 224 && e <= 255) return e - 256;
-                    throw console.debug("msgpack array:", r), new Error("Invalid byte value '" + e + "' at index " + (t - 1) + " in the MessagePack binary data (length " + r.length + "): Expecting a range of 0 to 255. This is not a byte array.");
+                    const t = e[r++];
+                    if (t >= 0 && t <= 127) return t;
+                    if (t >= 128 && t <= 143) return l(t - 128);
+                    if (t >= 144 && t <= 159) return c(t - 144);
+                    if (t >= 160 && t <= 191) return d(t - 160);
+                    if (192 === t) return null;
+                    if (193 === t) throw new Error("Invalid byte code 0xc1 found.");
+                    if (194 === t) return !1;
+                    if (195 === t) return !0;
+                    if (196 === t) return a(-1, 1);
+                    if (197 === t) return a(-1, 2);
+                    if (198 === t) return a(-1, 4);
+                    if (199 === t) return w(-1, 1);
+                    if (200 === t) return w(-1, 2);
+                    if (201 === t) return w(-1, 4);
+                    if (202 === t) return u(4);
+                    if (203 === t) return u(8);
+                    if (204 === t) return o(1);
+                    if (205 === t) return o(2);
+                    if (206 === t) return o(4);
+                    if (207 === t) return o(8);
+                    if (208 === t) return f(1);
+                    if (209 === t) return f(2);
+                    if (210 === t) return f(4);
+                    if (211 === t) return f(8);
+                    if (212 === t) return w(1);
+                    if (213 === t) return w(2);
+                    if (214 === t) return w(4);
+                    if (215 === t) return w(8);
+                    if (216 === t) return w(16);
+                    if (217 === t) return d(-1, 1);
+                    if (218 === t) return d(-1, 2);
+                    if (219 === t) return d(-1, 4);
+                    if (220 === t) return c(-1, 2);
+                    if (221 === t) return c(-1, 4);
+                    if (222 === t) return l(-1, 2);
+                    if (223 === t) return l(-1, 4);
+                    if (t >= 224 && t <= 255) return t - 256;
+                    throw console.debug("msgpack array:", e), new Error("Invalid byte value '" + t + "' at index " + (r - 1) + " in the MessagePack binary data (length " + e.length + "): Expecting a range of 0 to 255. This is not a byte array.");
                 }
-                function f(e) {
-                    let n = 0, i = !0;
-                    for (;e-- > 0; ) if (i) {
-                        let e = r[t++];
-                        n += 127 & e, 128 & e && (n -= 128), i = !1;
-                    } else n *= 256, n += r[t++];
+                function f(t) {
+                    let n = 0, M = !0;
+                    for (;t-- > 0; ) if (M) {
+                        let t = e[r++];
+                        n += 127 & t, 128 & t && (n -= 128), M = !1;
+                    } else n *= 256, n += e[r++];
                     return n;
                 }
-                function o(e) {
+                function o(t) {
                     let n = 0;
-                    for (;e-- > 0; ) n *= 256, n += r[t++];
+                    for (;t-- > 0; ) n *= 256, n += e[r++];
                     return n;
                 }
-                function u(e) {
-                    let n = new DataView(r.buffer, t, e);
-                    return t += e, 4 === e ? n.getFloat32(0, !1) : 8 === e ? n.getFloat64(0, !1) : void 0;
+                function u(t) {
+                    let n = new DataView(e.buffer, r, t);
+                    return r += t, 4 === t ? n.getFloat32(0, !1) : 8 === t ? n.getFloat64(0, !1) : void 0;
                 }
-                function a(e, n) {
-                    e < 0 && (e = o(n));
-                    let i = r.subarray(t, t + e);
-                    return t += e, i;
+                function a(t, n) {
+                    t < 0 && (t = o(n));
+                    let M = e.subarray(r, r + t);
+                    return r += t, M;
                 }
-                function l(r, e) {
-                    r < 0 && (r = o(e));
-                    let t = {};
-                    for (;r-- > 0; ) t[i()] = i();
-                    return t;
+                function l(e, t) {
+                    e < 0 && (e = o(t));
+                    let r = {};
+                    for (;e-- > 0; ) r[i()] = i();
+                    return r;
                 }
-                function c(r, e) {
-                    r < 0 && (r = o(e));
-                    let t = [];
-                    for (;r-- > 0; ) t.push(i());
-                    return t;
+                function c(e, t) {
+                    e < 0 && (e = o(t));
+                    let r = [];
+                    for (;e-- > 0; ) r.push(i());
+                    return r;
                 }
-                function d(e, n) {
-                    e < 0 && (e = o(n));
-                    let i = t;
-                    return t += e, function(r, e, t) {
-                        let n = e, i = "";
-                        for (t += e; n < t; ) {
-                            let e = r[n++];
-                            if (e > 127) if (e > 191 && e < 224) {
-                                if (n >= t) throw new Error("UTF-8 decode: incomplete 2-byte sequence");
-                                e = (31 & e) << 6 | 63 & r[n++];
-                            } else if (e > 223 && e < 240) {
-                                if (n + 1 >= t) throw new Error("UTF-8 decode: incomplete 3-byte sequence");
-                                e = (15 & e) << 12 | (63 & r[n++]) << 6 | 63 & r[n++];
+                function d(t, n) {
+                    t < 0 && (t = o(n));
+                    let M = r;
+                    return r += t, function(e, t, r) {
+                        let n = t, M = "";
+                        for (r += t; n < r; ) {
+                            let t = e[n++];
+                            if (t > 127) if (t > 191 && t < 224) {
+                                if (n >= r) throw new Error("UTF-8 decode: incomplete 2-byte sequence");
+                                t = (31 & t) << 6 | 63 & e[n++];
+                            } else if (t > 223 && t < 240) {
+                                if (n + 1 >= r) throw new Error("UTF-8 decode: incomplete 3-byte sequence");
+                                t = (15 & t) << 12 | (63 & e[n++]) << 6 | 63 & e[n++];
                             } else {
-                                if (!(e > 239 && e < 248)) throw new Error("UTF-8 decode: unknown multibyte start 0x" + e.toString(16) + " at index " + (n - 1));
-                                if (n + 2 >= t) throw new Error("UTF-8 decode: incomplete 4-byte sequence");
-                                e = (7 & e) << 18 | (63 & r[n++]) << 12 | (63 & r[n++]) << 6 | 63 & r[n++];
+                                if (!(t > 239 && t < 248)) throw new Error("UTF-8 decode: unknown multibyte start 0x" + t.toString(16) + " at index " + (n - 1));
+                                if (n + 2 >= r) throw new Error("UTF-8 decode: incomplete 4-byte sequence");
+                                t = (7 & t) << 18 | (63 & e[n++]) << 12 | (63 & e[n++]) << 6 | 63 & e[n++];
                             }
-                            if (e <= 65535) i += String.fromCharCode(e); else {
-                                if (!(e <= 1114111)) throw new Error("UTF-8 decode: code point 0x" + e.toString(16) + " exceeds UTF-16 reach");
-                                e -= 65536, i += String.fromCharCode(e >> 10 | 55296), i += String.fromCharCode(1023 & e | 56320);
+                            if (t <= 65535) M += String.fromCharCode(t); else {
+                                if (!(t <= 1114111)) throw new Error("UTF-8 decode: code point 0x" + t.toString(16) + " exceeds UTF-16 reach");
+                                t -= 65536, M += String.fromCharCode(t >> 10 | 55296), M += String.fromCharCode(1023 & t | 56320);
                             }
                         }
-                        return i;
-                    }(r, i, e);
+                        return M;
+                    }(e, M, t);
                 }
-                function w(r, n) {
-                    r < 0 && (r = o(n));
-                    let i = o(1), u = a(r);
-                    return 255 === i ? function(r) {
-                        if (4 === r.length) {
-                            let e = (r[0] << 24 >>> 0) + (r[1] << 16 >>> 0) + (r[2] << 8 >>> 0) + r[3];
-                            return new Date(1e3 * e);
+                function w(e, n) {
+                    e < 0 && (e = o(n));
+                    let M = o(1), p = a(e);
+                    return 255 === M ? function(e) {
+                        if (4 === e.length) {
+                            let t = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
+                            return new Date(1e3 * t);
                         }
-                        if (8 === r.length) {
-                            let t = (r[0] << 22 >>> 0) + (r[1] << 14 >>> 0) + (r[2] << 6 >>> 0) + (r[3] >>> 2), n = (3 & r[3]) * e + (r[4] << 24 >>> 0) + (r[5] << 16 >>> 0) + (r[6] << 8 >>> 0) + r[7];
+                        if (8 === e.length) {
+                            let r = (e[0] << 22 >>> 0) + (e[1] << 14 >>> 0) + (e[2] << 6 >>> 0) + (e[3] >>> 2), n = (3 & e[3]) * t + (e[4] << 24 >>> 0) + (e[5] << 16 >>> 0) + (e[6] << 8 >>> 0) + e[7];
+                            return new Date(1e3 * n + r / 1e6);
+                        }
+                        if (12 === e.length) {
+                            let t = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
+                            r -= 8;
+                            let n = f(8);
                             return new Date(1e3 * n + t / 1e6);
                         }
-                        if (12 === r.length) {
-                            let e = (r[0] << 24 >>> 0) + (r[1] << 16 >>> 0) + (r[2] << 8 >>> 0) + r[3];
-                            t -= 8;
-                            let n = f(8);
-                            return new Date(1e3 * n + e / 1e6);
-                        }
                         throw new Error("Invalid data length for a date value.");
-                    }(u) : {
-                        type: i,
-                        data: u
+                    }(p) : {
+                        type: M,
+                        data: p
                     };
                 }
             };
-            const __WEBPACK_DEFAULT_EXPORT__ = decode;
+            const n = decode;
         },
-        112: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-            __webpack_require__.r(__webpack_exports__);
-            __webpack_require__.d(__webpack_exports__, {
-                default: () => __WEBPACK_DEFAULT_EXPORT__
+        112: (e, t, r) => {
+            r.r(t);
+            r.d(t, {
+                default: () => n
             });
             const encode = function(e) {
                 const t = 4294967296;
-                let n, r, i = new Uint8Array(128), l = 0;
-                return a(e), i.subarray(0, l);
+                let r, n, M = new Uint8Array(128), p = 0;
+                return a(e), M.subarray(0, p);
                 function a(e) {
                     switch (typeof e) {
                       case "undefined":
@@ -2895,53 +2895,53 @@
                       case "number":
                         !function(e) {
                             if (isFinite(e) && Math.floor(e) === e) if (e >= 0 && e <= 127) s(e); else if (e < 0 && e >= -32) s(e); else if (e > 0 && e <= 255) c([ 204, e ]); else if (e >= -128 && e <= 127) c([ 208, e ]); else if (e > 0 && e <= 65535) c([ 205, e >>> 8, e ]); else if (e >= -32768 && e <= 32767) c([ 209, e >>> 8, e ]); else if (e > 0 && e <= 4294967295) c([ 206, e >>> 24, e >>> 16, e >>> 8, e ]); else if (e >= -2147483648 && e <= 2147483647) c([ 210, e >>> 24, e >>> 16, e >>> 8, e ]); else if (e > 0 && e <= 0x10000000000000000) {
-                                let n = e / t, r = e % t;
-                                c([ 211, n >>> 24, n >>> 16, n >>> 8, n, r >>> 24, r >>> 16, r >>> 8, r ]);
-                            } else e >= -0x8000000000000000 && e <= 0x8000000000000000 ? (s(211), u(e)) : c(e < 0 ? [ 211, 128, 0, 0, 0, 0, 0, 0, 0 ] : [ 207, 255, 255, 255, 255, 255, 255, 255, 255 ]); else r || (n = new ArrayBuffer(8), 
-                            r = new DataView(n)), r.setFloat64(0, e), s(203), c(new Uint8Array(n));
+                                let r = e / t, n = e % t;
+                                c([ 211, r >>> 24, r >>> 16, r >>> 8, r, n >>> 24, n >>> 16, n >>> 8, n ]);
+                            } else e >= -0x8000000000000000 && e <= 0x8000000000000000 ? (s(211), u(e)) : c(e < 0 ? [ 211, 128, 0, 0, 0, 0, 0, 0, 0 ] : [ 207, 255, 255, 255, 255, 255, 255, 255, 255 ]); else n || (r = new ArrayBuffer(8), 
+                            n = new DataView(r)), n.setFloat64(0, e), s(203), c(new Uint8Array(r));
                         }(e);
                         break;
 
                       case "string":
                         !function(e) {
                             let t = function(e) {
-                                let t = !0, n = e.length;
-                                for (let r = 0; r < n; r++) if (e.charCodeAt(r) > 127) {
+                                let t = !0, r = e.length;
+                                for (let n = 0; n < r; n++) if (e.charCodeAt(n) > 127) {
                                     t = !1;
                                     break;
                                 }
-                                let r = 0, i = new Uint8Array(e.length * (t ? 1 : 4));
-                                for (let t = 0; t !== n; t++) {
-                                    let l = e.charCodeAt(t);
-                                    if (l < 128) i[r++] = l; else {
-                                        if (l < 2048) i[r++] = l >> 6 | 192; else {
-                                            if (l > 55295 && l < 56320) {
-                                                if (++t >= n) throw new Error("UTF-8 encode: incomplete surrogate pair");
-                                                let a = e.charCodeAt(t);
-                                                if (a < 56320 || a > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + a.toString(16) + " at index " + t + " out of range");
-                                                l = 65536 + ((1023 & l) << 10) + (1023 & a), i[r++] = l >> 18 | 240, i[r++] = l >> 12 & 63 | 128;
-                                            } else i[r++] = l >> 12 | 224;
-                                            i[r++] = l >> 6 & 63 | 128;
+                                let n = 0, M = new Uint8Array(e.length * (t ? 1 : 4));
+                                for (let t = 0; t !== r; t++) {
+                                    let p = e.charCodeAt(t);
+                                    if (p < 128) M[n++] = p; else {
+                                        if (p < 2048) M[n++] = p >> 6 | 192; else {
+                                            if (p > 55295 && p < 56320) {
+                                                if (++t >= r) throw new Error("UTF-8 encode: incomplete surrogate pair");
+                                                let m = e.charCodeAt(t);
+                                                if (m < 56320 || m > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + m.toString(16) + " at index " + t + " out of range");
+                                                p = 65536 + ((1023 & p) << 10) + (1023 & m), M[n++] = p >> 18 | 240, M[n++] = p >> 12 & 63 | 128;
+                                            } else M[n++] = p >> 12 | 224;
+                                            M[n++] = p >> 6 & 63 | 128;
                                         }
-                                        i[r++] = 63 & l | 128;
+                                        M[n++] = 63 & p | 128;
                                     }
                                 }
-                                return t ? i : i.subarray(0, r);
-                            }(e), n = t.length;
-                            n <= 31 ? s(160 + n) : c(n <= 255 ? [ 217, n ] : n <= 65535 ? [ 218, n >>> 8, n ] : [ 219, n >>> 24, n >>> 16, n >>> 8, n ]), 
+                                return t ? M : M.subarray(0, n);
+                            }(e), r = t.length;
+                            r <= 31 ? s(160 + r) : c(r <= 255 ? [ 217, r ] : r <= 65535 ? [ 218, r >>> 8, r ] : [ 219, r >>> 24, r >>> 16, r >>> 8, r ]), 
                             c(t);
                         }(e);
                         break;
 
                       case "object":
                         null === e ? o() : e instanceof Date ? function(e) {
-                            let n = e.getTime() / 1e3;
-                            if (0 === e.getMilliseconds() && n >= 0 && n < 4294967296) c([ 214, 255, n >>> 24, n >>> 16, n >>> 8, n ]); else if (n >= 0 && n < 17179869184) {
-                                let r = 1e6 * e.getMilliseconds();
-                                c([ 215, 255, r >>> 22, r >>> 14, r >>> 6, r << 2 >>> 0 | n / t, n >>> 24, n >>> 16, n >>> 8, n ]);
+                            let r = e.getTime() / 1e3;
+                            if (0 === e.getMilliseconds() && r >= 0 && r < 4294967296) c([ 214, 255, r >>> 24, r >>> 16, r >>> 8, r ]); else if (r >= 0 && r < 17179869184) {
+                                let n = 1e6 * e.getMilliseconds();
+                                c([ 215, 255, n >>> 22, n >>> 14, n >>> 6, n << 2 >>> 0 | r / t, r >>> 24, r >>> 16, r >>> 8, r ]);
                             } else {
                                 let t = 1e6 * e.getMilliseconds();
-                                c([ 199, 12, 255, t >>> 24, t >>> 16, t >>> 8, t ]), u(n);
+                                c([ 199, 12, 255, t >>> 24, t >>> 16, t >>> 8, t ]), u(r);
                             }
                         }(e) : Array.isArray(e) ? f(e) : e instanceof Uint8Array || e instanceof Uint8ClampedArray ? function(e) {
                             let t = e.length;
@@ -2949,7 +2949,7 @@
                             c(e);
                         }(e) : e instanceof Int8Array || e instanceof Int16Array || e instanceof Uint16Array || e instanceof Int32Array || e instanceof Uint32Array || e instanceof Float32Array || e instanceof Float64Array ? f(e) : function(e) {
                             let t = 0;
-                            for (let n in e) t++;
+                            for (let r in e) t++;
                             t <= 15 ? s(128 + t) : c(t <= 65535 ? [ 222, t >>> 8, t ] : [ 223, t >>> 24, t >>> 16, t >>> 8, t ]);
                             for (let t in e) a(t), a(e[t]);
                         }(e);
@@ -2961,73 +2961,73 @@
                 function f(e) {
                     let t = e.length;
                     t <= 15 ? s(144 + t) : c(t <= 65535 ? [ 220, t >>> 8, t ] : [ 221, t >>> 24, t >>> 16, t >>> 8, t ]);
-                    for (let n = 0; n < t; n++) a(e[n]);
+                    for (let r = 0; r < t; r++) a(e[r]);
                 }
                 function s(e) {
-                    if (i.length < l + 1) {
-                        let e = 2 * i.length;
-                        for (;e < l + 1; ) e *= 2;
+                    if (M.length < p + 1) {
+                        let e = 2 * M.length;
+                        for (;e < p + 1; ) e *= 2;
                         let t = new Uint8Array(e);
-                        t.set(i), i = t;
+                        t.set(M), M = t;
                     }
-                    i[l] = e, l++;
+                    M[p] = e, p++;
                 }
                 function c(e) {
-                    if (i.length < l + e.length) {
-                        let t = 2 * i.length;
-                        for (;t < l + e.length; ) t *= 2;
-                        let n = new Uint8Array(t);
-                        n.set(i), i = n;
+                    if (M.length < p + e.length) {
+                        let t = 2 * M.length;
+                        for (;t < p + e.length; ) t *= 2;
+                        let r = new Uint8Array(t);
+                        r.set(M), M = r;
                     }
-                    i.set(e, l), l += e.length;
+                    M.set(e, p), p += e.length;
                 }
                 function u(e) {
-                    let n, r;
-                    e >= 0 ? (n = e / t, r = e % t) : (e++, n = Math.abs(e) / t, r = Math.abs(e) % t, 
-                    n = ~n, r = ~r), c([ n >>> 24, n >>> 16, n >>> 8, n, r >>> 24, r >>> 16, r >>> 8, r ]);
+                    let r, n;
+                    e >= 0 ? (r = e / t, n = e % t) : (e++, r = Math.abs(e) / t, n = Math.abs(e) % t, 
+                    r = ~r, n = ~n), c([ r >>> 24, r >>> 16, r >>> 8, r, n >>> 24, n >>> 16, n >>> 8, n ]);
                 }
             };
-            const __WEBPACK_DEFAULT_EXPORT__ = encode;
+            const n = encode;
         }
     };
-    var __webpack_module_cache__ = {};
-    function __webpack_require__(moduleId) {
-        var cachedModule = __webpack_module_cache__[moduleId];
-        if (cachedModule !== undefined) {
-            return cachedModule.exports;
+    var t = {};
+    function __webpack_require__(r) {
+        var n = t[r];
+        if (n !== undefined) {
+            return n.exports;
         }
-        var module = __webpack_module_cache__[moduleId] = {
+        var M = t[r] = {
             exports: {}
         };
-        __webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-        return module.exports;
+        e[r].call(M.exports, M, M.exports, __webpack_require__);
+        return M.exports;
     }
     (() => {
-        __webpack_require__.d = (exports, definition) => {
-            for (var key in definition) {
-                if (__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-                    Object.defineProperty(exports, key, {
+        __webpack_require__.d = (e, t) => {
+            for (var r in t) {
+                if (__webpack_require__.o(t, r) && !__webpack_require__.o(e, r)) {
+                    Object.defineProperty(e, r, {
                         enumerable: true,
-                        get: definition[key]
+                        get: t[r]
                     });
                 }
             }
         };
     })();
     (() => {
-        __webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
+        __webpack_require__.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t);
     })();
     (() => {
-        __webpack_require__.r = exports => {
+        __webpack_require__.r = e => {
             if (typeof Symbol !== "undefined" && Symbol.toStringTag) {
-                Object.defineProperty(exports, Symbol.toStringTag, {
+                Object.defineProperty(e, Symbol.toStringTag, {
                     value: "Module"
                 });
             }
-            Object.defineProperty(exports, "__esModule", {
+            Object.defineProperty(e, "__esModule", {
                 value: true
             });
         };
     })();
-    var __webpack_exports__ = __webpack_require__(366);
+    var r = __webpack_require__(366);
 })();
