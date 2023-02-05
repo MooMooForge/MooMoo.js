@@ -43,10 +43,12 @@ export default function hookWS() {
                 _onmessage = true;
                 SourceMapConfiguration.initialize()
             }
-            let data = MooMoo.msgpack.decode(args[0]);
-            let [packet, [...packetData]] = data;
-            let doSend = handleClientPackets(packet, packetData);
-            if (!doSend) return true;
+            try {
+                let data = MooMoo.msgpack.decode(args[0]);
+                let [packet, [...packetData]] = data;
+                let doSend = handleClientPackets(packet, packetData);
+                if (!doSend) return true;
+            } catch (e) {}
 
             return Reflect.apply(target, thisArg, args);
 

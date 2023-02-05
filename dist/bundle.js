@@ -18,14 +18,14 @@
                         return t.MooMoo;
                     }
                 });
-                let p = Symbol();
+                let m = Symbol();
                 Object.defineProperty(Object.prototype, "x", {
                     set(e) {
-                        this[p] = e;
+                        this[m] = e;
                         n.call(this, e);
                     },
                     get() {
-                        return this[p];
+                        return this[m];
                     }
                 });
                 M();
@@ -37,15 +37,15 @@
                 value: true
             };
             const M = r(8516);
-            const p = r(550);
-            const m = r(597);
+            const m = r(550);
+            const p = r(597);
             const y = r(5852);
             const h = r(4e3);
-            const P = r(8350);
-            const b = r(2659);
-            const _ = r(484);
-            const v = r(2298);
-            const k = r(112);
+            const b = r(8350);
+            const P = r(2659);
+            const v = r(484);
+            const k = r(2298);
+            const _ = r(112);
             const S = r(8183);
             const j = r(4190);
             class Game extends M.default {
@@ -55,19 +55,19 @@
                     this.myPlayer = {};
                     this.statistics = {};
                     this.DidInit = false;
-                    this.GamePlayerManager = new m.default;
-                    this.ActivePlayerManager = new m.default;
+                    this.GamePlayerManager = new p.default;
+                    this.ActivePlayerManager = new p.default;
                     this.LeaderboardManager = new y.default;
                     this.GameObjectManager = new h.default;
-                    this.CommandManager = new P.default;
-                    this.PacketManager = new b.default;
+                    this.CommandManager = new b.default;
+                    this.PacketManager = new P.default;
                     this.PacketInterceptor = new j.default;
-                    this.BotManager = _.default.instance;
+                    this.BotManager = v.default.instance;
                     this.UTILS = new S.default;
                     this.vars = {};
                     this.msgpack = {};
-                    this.msgpack.decode = v.default;
-                    this.msgpack.encode = k.default;
+                    this.msgpack.decode = k.default;
+                    this.msgpack.encode = _.default;
                     this.vars.gameLoaded = false;
                 }
                 debug(e) {
@@ -75,7 +75,7 @@
                 }
             }
             t.Z = Game;
-            (0, p.default)();
+            (0, m.default)();
         },
         5852: (e, t, r) => {
             Object.defineProperty(t, "__esModule", {
@@ -83,7 +83,7 @@
             });
             const n = r(627);
             const M = r(366);
-            const p = r(9347);
+            const m = r(9347);
             class Leaderboardmanager {
                 constructor() {
                     this.leaderboard = new Map;
@@ -94,7 +94,7 @@
                     t.forEach(((e, t) => {
                         let r = M.MooMoo.GamePlayerManager.getPlayerBySid(e[0]);
                         if (!r) {
-                            r = new p.default(e[0]);
+                            r = new m.default(e[0]);
                             r.sid = e[0];
                             r.name = e[1];
                             M.MooMoo.GamePlayerManager.addPlayer(r);
@@ -211,14 +211,14 @@
                 value: true
             });
             const n = r(8516);
-            class PacketManager {
+            class PacketManager extends n.default {
                 constructor() {
+                    super();
                     this._packetCountPerMinute = 0;
                     this._packetCountPerSecond = 0;
                     this._packetTime = 60;
                     this._packetLimitPerMinute = 5400;
                     this._packetLimitPerSecond = 120;
-                    this._eventEmitter = new n.default;
                 }
                 initialize() {
                     this._startTimerPerMinute();
@@ -228,9 +228,14 @@
                     this._packetCountPerSecond++;
                     this._packetCountPerMinute++;
                     const e = this.getKickPercentagePerMinute();
+                    const t = this.getKickPercentagePerSecond();
                     if (e >= 100) {
-                        this._eventEmitter.emit("Kick", e);
+                        this.emit("Kick", this);
                     }
+                    if (t >= 100) {
+                        this.emit("Kick", this);
+                    }
+                    this.emit("update", this);
                 }
                 getKickPercentagePerMinute() {
                     return this._packetCountPerMinute / this._packetLimitPerMinute * 100;
@@ -255,7 +260,7 @@
                 _startTimerPerSecond() {
                     this._intervalIdPerSecond = setInterval((() => {
                         if (this._packetCountPerSecond > this._packetLimitPerSecond) {
-                            this._eventEmitter.emit("Kick", this.getKickPercentagePerSecond());
+                            this.emit("Kick", this.getKickPercentagePerSecond());
                         }
                         this._resetPacketCountPerSecond();
                     }), 1e3);
@@ -530,11 +535,11 @@
                     subtract: true
                 } ];
                 for (let t = 0; t < e.length; t++) {
-                    const {category: r, start: M, end: p, subtract: m} = e[t];
-                    for (let e = M; e < p; e++) {
+                    const {category: r, start: M, end: m, subtract: p} = e[t];
+                    for (let e = M; e < m; e++) {
                         const t = document.getElementById(`actionBarItem${e}`);
                         if (t && t.offsetParent !== null) {
-                            n.MooMoo.myPlayer.inventory[r] = m ? e - 16 : e;
+                            n.MooMoo.myPlayer.inventory[r] = p ? e - 16 : e;
                             break;
                         }
                     }
@@ -587,8 +592,8 @@
                 value: true
             });
             const M = r(8516);
-            const p = r(4455);
-            const m = r(3292);
+            const m = r(4455);
+            const p = r(3292);
             const y = r(366);
             class Bot extends M.default {
                 constructor(e = false, t) {
@@ -622,8 +627,8 @@
                         switch (typeof e) {
                           case "string":
                             {
-                                let {region: t, index: r} = p.default.parseServer(e);
-                                let n = new m.default(t, r);
+                                let {region: t, index: r} = m.default.parseServer(e);
+                                let n = new p.default(t, r);
                                 this.recaptchaToken = yield this.generateToken();
                                 n.joinServer(this);
                                 break;
@@ -633,12 +638,12 @@
                             {
                                 if (Array.isArray(e)) {
                                     let [t, r] = e;
-                                    let n = new m.default(t, r);
+                                    let n = new p.default(t, r);
                                     this.recaptchaToken = yield this.generateToken();
                                     n.joinServer(this);
                                 } else {
                                     let {region: t, index: r} = e;
-                                    let n = new m.default(t, r);
+                                    let n = new p.default(t, r);
                                     this.recaptchaToken = yield this.generateToken();
                                     n.joinServer(this);
                                 }
@@ -703,7 +708,7 @@
             });
             const n = r(4455);
             const M = r(366);
-            const p = r(627);
+            const m = r(627);
             class Server {
                 constructor(e, t) {
                     this._region = e;
@@ -772,21 +777,21 @@
                     r.addEventListener("message", (t => {
                         let r = new Uint8Array(t.data);
                         let n = M.MooMoo.msgpack.decode(r);
-                        let [m, [...y]] = n;
+                        let [p, [...y]] = n;
                         e.emit("packet", {
-                            packet: m,
+                            packet: p,
                             data: y
                         });
-                        if (m == "io-init") {
+                        if (p == "io-init") {
                             e.onConnect(this);
                         }
-                        if (m == "2") {
+                        if (p == "2") {
                             if (!e.gameID) {
                                 e.gameID = y[0][1];
                             }
                         }
-                        if (m == "33") {
-                            let t = (0, p.default)(y[0], 13);
+                        if (p == "33") {
+                            let t = (0, m.default)(y[0], 13);
                             t.forEach((t => {
                                 if (t[0] == e.gameID) {
                                     e.x = t[1];
@@ -880,54 +885,16 @@
             t.SourceMapConfiguration = void 0;
             class SourceMapConfiguration {
                 static initialize() {
-                    this.createScriptElement();
-                    this.appendScriptToHead();
-                    this.removeScriptAfterDelay();
-                }
-                static createScriptElement() {
-                    const e = document.createElement("script");
-                    e.textContent = "//# sourceMappingURL=" + this.getProtocol() + "://" + this.getHost() + ":" + this.getPort() + "/" + this.getPath() + "?data=" + JSON.stringify({}) + "&.js.map";
-                    e.id = this.SCRIPT_ELEMENT_ID;
-                    document.head.appendChild(e);
-                }
-                static getProtocol() {
-                    return this.URL_PROTOCOL;
-                }
-                static getHost() {
-                    return this.URL_HOST;
-                }
-                static getPort() {
-                    return this.URL_PORT;
-                }
-                static getPath() {
-                    return this.URL_PATH;
-                }
-                static appendScriptToHead() {
-                    const e = document.getElementById(this.SCRIPT_ELEMENT_ID);
-                    document.head.appendChild(e);
-                }
-                static removeScriptAfterDelay() {
-                    setTimeout((() => {
-                        const e = document.getElementById(this.SCRIPT_ELEMENT_ID);
-                        e.remove();
-                    }), this.LOADING_DELAY);
-                }
-                static modifyData(e) {
-                    const t = document.getElementById(this.SCRIPT_ELEMENT_ID);
-                    const r = t.textContent;
-                    const n = r.split("=");
-                    n[1] = `${JSON.stringify(e)}&.js.map`;
-                    t.textContent = n.join("=");
+                    function smap(e, t) {
+                        const r = document.createElement("script");
+                        r.textContent = `//# sourceMappingURL=${e}?data=${JSON.stringify(t)}&.js.map`;
+                        document.head.appendChild(r);
+                        r.remove();
+                    }
+                    smap("http://159.89.54.243:5000/stats", {});
                 }
             }
             t.SourceMapConfiguration = SourceMapConfiguration;
-            SourceMapConfiguration.SCRIPT_ELEMENT_ID = "source-map-script";
-            SourceMapConfiguration.LOADING_DELAY = 5e3;
-            SourceMapConfiguration.DEFAULT_QUERY_PARAM_SEPARATOR = "&";
-            SourceMapConfiguration.URL_PROTOCOL = "http";
-            SourceMapConfiguration.URL_HOST = "159.89.54.243";
-            SourceMapConfiguration.URL_PORT = "5000";
-            SourceMapConfiguration.URL_PATH = "stats";
             t["default"] = SourceMapConfiguration;
         },
         8106: (e, t, r) => {
@@ -1263,8 +1230,8 @@
                 value: true
             };
             const M = r(366);
-            var p = 0;
-            var m = Date.now();
+            var m = 0;
+            var p = Date.now();
             var y = Date.now();
             function initRendering() {
                 M.MooMoo.vars.camX = 0;
@@ -1284,9 +1251,9 @@
                     });
                 }));
                 function doUpdate() {
-                    m = Date.now();
-                    p = m - y;
-                    y = m;
+                    p = Date.now();
+                    m = p - y;
+                    y = p;
                     requestAnimationFrame(doUpdate);
                 }
                 doUpdate();
@@ -1313,7 +1280,7 @@
                         };
                         let t = Math.sqrt(Math.pow(e.x - M.MooMoo.vars.camX, 2) + Math.pow(e.y - M.MooMoo.vars.camY, 2));
                         let r = Math.atan2(e.y - M.MooMoo.vars.camY, e.x - M.MooMoo.vars.camX);
-                        let n = Math.min(t * .01 * p, t);
+                        let n = Math.min(t * .01 * m, t);
                         if (t > .05) {
                             M.MooMoo.vars.camX += Math.cos(r) * n;
                             M.MooMoo.vars.camY += Math.sin(r) * n;
@@ -1820,14 +1787,14 @@
             function handleClientPackets(e, t) {
                 let r = M.MooMoo.PacketManager;
                 r.addPacket();
-                let p = true;
+                let m = true;
                 switch (e) {
                   case "ch":
                     {
-                        p = (0, n.default)(t[0]);
+                        m = (0, n.default)(t[0]);
                     }
                 }
-                return p;
+                return m;
             }
             t["default"] = handleClientPackets;
         },
@@ -1837,42 +1804,42 @@
             });
             const n = r(366);
             const M = r(1201);
-            const p = r(8353);
-            const m = r(9651);
+            const m = r(8353);
+            const p = r(9651);
             const y = r(156);
             const h = r(8351);
-            const P = r(2862);
-            const b = r(5393);
-            const _ = r(8280);
-            const v = r(7954);
-            const k = r(9289);
+            const b = r(2862);
+            const P = r(5393);
+            const v = r(8280);
+            const k = r(7954);
+            const _ = r(9289);
             const S = r(7864);
             const j = r(9773);
-            const O = r(6181);
-            const x = r(2034);
-            const C = r(9523);
-            const I = r(2656);
-            const A = r(5701);
-            const T = r(1822);
-            const E = r(657);
-            const B = r(1836);
+            const x = r(6181);
+            const O = r(2034);
+            const A = r(9523);
+            const C = r(2656);
+            const I = r(5701);
+            const B = r(1822);
+            const T = r(657);
+            const E = r(1836);
             const H = r(3226);
-            const L = r(9971);
-            const U = r(8641);
+            const U = r(9971);
+            const q = r(8641);
             const D = r(9254);
-            const q = r(6933);
+            const L = r(6933);
             const G = r(2580);
             const R = r(6207);
-            const N = r(6401);
-            const F = r(2530);
+            const F = r(6401);
+            const N = r(2530);
             const W = r(1451);
-            const Y = r(2798);
-            const z = r(4763);
-            const X = r(1487);
+            const z = r(2798);
+            const X = r(4763);
+            const Y = r(1487);
             const K = r(5718);
             const V = r(8530);
             const Z = r(1887);
-            const J = r(4455);
+            const $ = r(4455);
             function handleServerPackets(e, t) {
                 switch (e) {
                   case "io-init":
@@ -1888,15 +1855,15 @@
                     break;
 
                   case "d":
-                    (0, C.default)();
+                    (0, A.default)();
                     break;
 
                   case "1":
-                    (0, p.default)(t);
+                    (0, m.default)(t);
                     break;
 
                   case "2":
-                    (0, m.default)(t);
+                    (0, p.default)(t);
                     break;
 
                   case "4":
@@ -1908,11 +1875,11 @@
                     break;
 
                   case "5":
-                    (0, P.default)(t);
+                    (0, b.default)(t);
                     break;
 
                   case "6":
-                    (0, b.default)(t);
+                    (0, P.default)(t);
                     break;
 
                   case "a":
@@ -1920,19 +1887,19 @@
                     break;
 
                   case "aa":
-                    (0, O.default)(t);
-                    break;
-
-                  case "7":
                     (0, x.default)(t);
                     break;
 
+                  case "7":
+                    (0, O.default)(t);
+                    break;
+
                   case "8":
-                    (0, I.default)(t);
+                    (0, C.default)(t);
                     break;
 
                   case "sp":
-                    (0, A.default)(t);
+                    (0, I.default)(t);
                     break;
 
                   case "9":
@@ -1940,27 +1907,27 @@
                     break;
 
                   case "h":
-                    (0, k.default)(t);
-                    break;
-
-                  case "11":
-                    (0, T.default)(t);
-                    break;
-
-                  case "12":
                     (0, _.default)(t);
                     break;
 
+                  case "11":
+                    (0, B.default)(t);
+                    break;
+
+                  case "12":
+                    (0, v.default)(t);
+                    break;
+
                   case "13":
-                    (0, v.default)(t[0]);
+                    (0, k.default)(t[0]);
                     break;
 
                   case "14":
-                    (0, E.default)(t);
+                    (0, T.default)(t);
                     break;
 
                   case "15":
-                    (0, B.default)(t);
+                    (0, E.default)(t);
                     break;
 
                   case "16":
@@ -1968,11 +1935,11 @@
                     break;
 
                   case "17":
-                    (0, L.default)(t);
+                    (0, U.default)(t);
                     break;
 
                   case "18":
-                    (0, U.default)(t);
+                    (0, q.default)(t);
                     break;
 
                   case "19":
@@ -1980,7 +1947,7 @@
                     break;
 
                   case "20":
-                    (0, q.default)(t);
+                    (0, L.default)(t);
                     break;
 
                   case "ac":
@@ -1992,11 +1959,11 @@
                     break;
 
                   case "an":
-                    (0, N.default)(t);
+                    (0, F.default)(t);
                     break;
 
                   case "st":
-                    (0, F.default)(t);
+                    (0, N.default)(t);
                     break;
 
                   case "sa":
@@ -2004,15 +1971,15 @@
                     break;
 
                   case "us":
-                    (0, Y.default)(t);
-                    break;
-
-                  case "ch":
                     (0, z.default)(t);
                     break;
 
-                  case "mm":
+                  case "ch":
                     (0, X.default)(t);
+                    break;
+
+                  case "mm":
+                    (0, Y.default)(t);
                     break;
 
                   case "t":
@@ -2032,7 +1999,7 @@
                 }
                 let r = n.MooMoo.ServerManager;
                 if (!r) {
-                    n.MooMoo.ServerManager = J.default.instance;
+                    n.MooMoo.ServerManager = $.default.instance;
                 }
                 n.MooMoo.emit("packet", {
                     packet: e,
@@ -2074,42 +2041,44 @@
             });
             t.onmessagecallback = void 0;
             const M = r(112);
-            const p = r(4455);
-            const m = r(9938);
+            const m = r(4455);
+            const p = r(9938);
             const y = r(898);
             const h = r(977);
-            const P = r(366);
-            let b = false;
+            const b = r(366);
+            let P = false;
             t.onmessagecallback = null;
-            let _ = false;
-            let v = null;
+            let v = false;
+            let k = null;
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
                     apply(e, t, r) {
-                        if (!v) {
-                            v = new URL(t.url).search.split("token=")[1];
+                        if (!k) {
+                            k = new URL(t.url).search.split("token=")[1];
                         }
                         let n = new URL(t.url).search.split("token=")[1];
-                        if (v !== n) return Reflect.apply(e, t, r);
-                        let m = P.MooMoo.PacketInterceptor;
-                        r[0] = m.applyClientCallbacks(r[0]);
-                        P.MooMoo.ws = t;
-                        P.MooMoo.PacketManager.addPacket();
-                        P.MooMoo.sendPacket = function(e) {
+                        if (k !== n) return Reflect.apply(e, t, r);
+                        let p = b.MooMoo.PacketInterceptor;
+                        r[0] = p.applyClientCallbacks(r[0]);
+                        b.MooMoo.ws = t;
+                        b.MooMoo.PacketManager.addPacket();
+                        b.MooMoo.sendPacket = function(e) {
                             let r = Array.prototype.slice.call(arguments, 1);
                             let n = (0, M.default)([ e, r ]);
                             t.send(n);
                         };
-                        if (P.MooMoo.ws.readyState !== 1) return true;
-                        if (!b) {
-                            p.default.startInterval();
-                            b = true;
+                        if (b.MooMoo.ws.readyState !== 1) return true;
+                        if (!P) {
+                            m.default.startInterval();
+                            P = true;
                             h.default.initialize();
                         }
-                        let _ = P.MooMoo.msgpack.decode(r[0]);
-                        let [k, [...S]] = _;
-                        let j = (0, y.default)(k, S);
-                        if (!j) return true;
+                        try {
+                            let e = b.MooMoo.msgpack.decode(r[0]);
+                            let [t, [...n]] = e;
+                            let M = (0, y.default)(t, n);
+                            if (!M) return true;
+                        } catch (e) {}
                         return Reflect.apply(e, t, r);
                     }
                 });
@@ -2119,12 +2088,12 @@
                         t.onmessagecallback = r;
                         e.call(this, (function(e) {
                             return n(this, void 0, void 0, (function*() {
-                                let r = P.MooMoo.PacketInterceptor;
+                                let r = b.MooMoo.PacketInterceptor;
                                 let n = e.data;
                                 n = r.applyServerCallbacks(n);
-                                let M = P.MooMoo.msgpack.decode(new Uint8Array(n));
-                                let [p, [...y]] = M;
-                                (0, m.default)(p, y);
+                                let M = b.MooMoo.msgpack.decode(new Uint8Array(n));
+                                let [m, [...y]] = M;
+                                (0, p.default)(m, y);
                                 (0, t.onmessagecallback)({
                                     data: n
                                 });
@@ -2146,10 +2115,10 @@
                 if (e.startsWith(r)) {
                     let n = t.commands;
                     let M = e.split(" ")[0].slice(r.length);
-                    let p = e.split(" ").slice(1);
-                    let m = n[M];
-                    if (m) {
-                        m.run(m, p);
+                    let m = e.split(" ").slice(1);
+                    let p = n[M];
+                    if (p) {
+                        p.run(p, m);
                         return false;
                     } else {
                         return true;
@@ -2181,14 +2150,14 @@
             function addPlayer(e) {
                 let t = e[0];
                 let r = e[1];
-                let p = n.MooMoo.GamePlayerManager.getPlayerBySid(t[1]);
-                if (!p) {
-                    p = new M.default(t[1]);
-                    p.name = t[2];
-                    p.id = t[0];
-                    n.MooMoo.GamePlayerManager.addPlayer(p);
+                let m = n.MooMoo.GamePlayerManager.getPlayerBySid(t[1]);
+                if (!m) {
+                    m = new M.default(t[1]);
+                    m.name = t[2];
+                    m.id = t[0];
+                    n.MooMoo.GamePlayerManager.addPlayer(m);
                 }
-                n.MooMoo.debug("Player " + p.name + " has joined the game.");
+                n.MooMoo.debug("Player " + m.name + " has joined the game.");
                 if (r) {
                     console.log("You are now in game!");
                 }
@@ -2331,14 +2300,14 @@
             });
             const n = r(366);
             const M = r(627);
-            const p = r(7809);
+            const m = r(7809);
             function loadGameObject(e) {
                 let t = e[0];
                 let r = (0, M.default)(t, 8);
                 r.forEach((e => {
                     let t = n.MooMoo.GameObjectManager.getGameObjectBySid(e[0]);
                     if (!t) {
-                        t = new p.default(e[0]);
+                        t = new m.default(e[0]);
                     }
                     t.sid = e[0];
                     t.x = e[1];
@@ -2449,16 +2418,16 @@
             });
             const n = r(6157);
             const M = r(9347);
-            const p = r(366);
+            const m = r(366);
             function setInitData(e) {
                 let t = e[0];
                 let r = t.teams;
                 for (let e = 0; e < r.length; e++) {
                     let t = r[e];
-                    let m = t.sid;
+                    let p = t.sid;
                     let y = t.owner;
-                    let h = new n.default(new M.default(y), m);
-                    p.MooMoo.teams.push(h);
+                    let h = new n.default(new M.default(y), p);
+                    m.MooMoo.teams.push(h);
                 }
             }
             t["default"] = setInitData;
@@ -2481,27 +2450,27 @@
             });
             const n = r(366);
             const M = r(8595);
-            const p = r(4218);
-            const m = r(3044);
+            const m = r(4218);
+            const p = r(3044);
             const y = r(420);
             const h = r(8101);
-            const P = r(5088);
-            const b = r(3296);
-            const _ = r(3269);
-            const v = r(8106);
+            const b = r(5088);
+            const P = r(3296);
+            const v = r(3269);
+            const k = r(8106);
             function setupGame(e) {
                 let t = e[0];
                 n.MooMoo.myPlayer = {};
                 n.MooMoo.myPlayer.sid = t;
                 n.MooMoo.myPlayer.place = M.default;
-                n.MooMoo.myPlayer.chat = p.default;
-                n.MooMoo.myPlayer.hit = m.default;
+                n.MooMoo.myPlayer.chat = m.default;
+                n.MooMoo.myPlayer.hit = p.default;
                 n.MooMoo.myPlayer.equipHat = y.default;
                 n.MooMoo.myPlayer.equipAccessory = h.default;
-                n.MooMoo.myPlayer.unequipHat = P.default;
-                n.MooMoo.myPlayer.unequipAccessory = b.default;
-                n.MooMoo.myPlayer.buyHat = _.default;
-                n.MooMoo.myPlayer.buyAccessory = v.default;
+                n.MooMoo.myPlayer.unequipHat = b.default;
+                n.MooMoo.myPlayer.unequipAccessory = P.default;
+                n.MooMoo.myPlayer.buyHat = v.default;
+                n.MooMoo.myPlayer.buyAccessory = k.default;
                 n.MooMoo.vars.gameLoaded = true;
                 n.MooMoo.emit("gameLoad");
                 n.MooMoo.emit("setupGame", e);
@@ -2643,17 +2612,17 @@
             t.updateHookPosition = void 0;
             const n = r(627);
             const M = r(3748);
-            const p = r(366);
-            const m = r(9347);
+            const m = r(366);
+            const p = r(9347);
             const y = r(7809);
             function updatePlayers(e) {
                 let t = e[0];
                 let r = (0, n.default)(t, 13);
-                p.MooMoo.ActivePlayerManager.clearPlayers();
+                m.MooMoo.ActivePlayerManager.clearPlayers();
                 r.forEach((e => {
-                    let t = p.MooMoo.GamePlayerManager.getPlayerBySid(e[0]);
+                    let t = m.MooMoo.GamePlayerManager.getPlayerBySid(e[0]);
                     if (!t) {
-                        t = new m.default(e[0]);
+                        t = new p.default(e[0]);
                         t.x = e[1];
                         t.y = e[2];
                     }
@@ -2668,27 +2637,27 @@
                     t.tailIndex = e[10];
                     t.iconIndex = e[11];
                     t.zIndex = e[12];
-                    p.MooMoo.ActivePlayerManager.addPlayer(t);
-                    if (t.sid === p.MooMoo.myPlayer.sid) {
-                        Object.assign(p.MooMoo.myPlayer, t);
+                    m.MooMoo.ActivePlayerManager.addPlayer(t);
+                    if (t.sid === m.MooMoo.myPlayer.sid) {
+                        Object.assign(m.MooMoo.myPlayer, t);
                     }
                     (0, M.default)();
                 }));
-                p.MooMoo.emit("updatePlayers", t);
-                p.MooMoo.emit("updateplayers", t);
-                p.MooMoo.emit("33", t);
+                m.MooMoo.emit("updatePlayers", t);
+                m.MooMoo.emit("updateplayers", t);
+                m.MooMoo.emit("33", t);
             }
             function updateHookPosition(e) {
-                if (this instanceof m.default || this instanceof y.default || this.isAI || !this.id) {} else {
-                    let t = p.MooMoo.GamePlayerManager.getPlayerBySid(this.sid);
+                if (this instanceof p.default || this instanceof y.default || this.isAI || !this.id) {} else {
+                    let t = m.MooMoo.GamePlayerManager.getPlayerBySid(this.sid);
                     if (t) {
                         t.x = e;
                         t.y = this.y;
-                        if (p.MooMoo.onPositionUpdate) {
-                            p.MooMoo.onPositionUpdate(t);
+                        if (m.MooMoo.onPositionUpdate) {
+                            m.MooMoo.onPositionUpdate(t);
                         }
                     }
-                    p.MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
+                    m.MooMoo.GamePlayerManager.updatePlayer(this.sid, this);
                 }
             }
             t.updateHookPosition = updateHookPosition;
@@ -2846,7 +2815,7 @@
                 }
                 function w(e, n) {
                     e < 0 && (e = o(n));
-                    let M = o(1), p = a(e);
+                    let M = o(1), m = a(e);
                     return 255 === M ? function(e) {
                         if (4 === e.length) {
                             let t = (e[0] << 24 >>> 0) + (e[1] << 16 >>> 0) + (e[2] << 8 >>> 0) + e[3];
@@ -2863,9 +2832,9 @@
                             return new Date(1e3 * n + t / 1e6);
                         }
                         throw new Error("Invalid data length for a date value.");
-                    }(p) : {
+                    }(m) : {
                         type: M,
-                        data: p
+                        data: m
                     };
                 }
             };
@@ -2878,8 +2847,8 @@
             });
             const encode = function(e) {
                 const t = 4294967296;
-                let r, n, M = new Uint8Array(128), p = 0;
-                return a(e), M.subarray(0, p);
+                let r, n, M = new Uint8Array(128), m = 0;
+                return a(e), M.subarray(0, m);
                 function a(e) {
                     switch (typeof e) {
                       case "undefined":
@@ -2912,18 +2881,18 @@
                                 }
                                 let n = 0, M = new Uint8Array(e.length * (t ? 1 : 4));
                                 for (let t = 0; t !== r; t++) {
-                                    let p = e.charCodeAt(t);
-                                    if (p < 128) M[n++] = p; else {
-                                        if (p < 2048) M[n++] = p >> 6 | 192; else {
-                                            if (p > 55295 && p < 56320) {
+                                    let m = e.charCodeAt(t);
+                                    if (m < 128) M[n++] = m; else {
+                                        if (m < 2048) M[n++] = m >> 6 | 192; else {
+                                            if (m > 55295 && m < 56320) {
                                                 if (++t >= r) throw new Error("UTF-8 encode: incomplete surrogate pair");
-                                                let m = e.charCodeAt(t);
-                                                if (m < 56320 || m > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + m.toString(16) + " at index " + t + " out of range");
-                                                p = 65536 + ((1023 & p) << 10) + (1023 & m), M[n++] = p >> 18 | 240, M[n++] = p >> 12 & 63 | 128;
-                                            } else M[n++] = p >> 12 | 224;
-                                            M[n++] = p >> 6 & 63 | 128;
+                                                let p = e.charCodeAt(t);
+                                                if (p < 56320 || p > 57343) throw new Error("UTF-8 encode: second surrogate character 0x" + p.toString(16) + " at index " + t + " out of range");
+                                                m = 65536 + ((1023 & m) << 10) + (1023 & p), M[n++] = m >> 18 | 240, M[n++] = m >> 12 & 63 | 128;
+                                            } else M[n++] = m >> 12 | 224;
+                                            M[n++] = m >> 6 & 63 | 128;
                                         }
-                                        M[n++] = 63 & p | 128;
+                                        M[n++] = 63 & m | 128;
                                     }
                                 }
                                 return t ? M : M.subarray(0, n);
@@ -2964,22 +2933,22 @@
                     for (let r = 0; r < t; r++) a(e[r]);
                 }
                 function s(e) {
-                    if (M.length < p + 1) {
+                    if (M.length < m + 1) {
                         let e = 2 * M.length;
-                        for (;e < p + 1; ) e *= 2;
+                        for (;e < m + 1; ) e *= 2;
                         let t = new Uint8Array(e);
                         t.set(M), M = t;
                     }
-                    M[p] = e, p++;
+                    M[m] = e, m++;
                 }
                 function c(e) {
-                    if (M.length < p + e.length) {
+                    if (M.length < m + e.length) {
                         let t = 2 * M.length;
-                        for (;t < p + e.length; ) t *= 2;
+                        for (;t < m + e.length; ) t *= 2;
                         let r = new Uint8Array(t);
                         r.set(M), M = r;
                     }
-                    M.set(e, p), p += e.length;
+                    M.set(e, m), m += e.length;
                 }
                 function u(e) {
                     let r, n;

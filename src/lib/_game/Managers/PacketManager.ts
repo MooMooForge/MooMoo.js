@@ -1,11 +1,9 @@
 import EventEmitter from "../external/funcs/EventEmitter";
 
-class PacketManager {
+class PacketManager extends EventEmitter {
     private _packetCountPerMinute: number = 0;
     private _packetCountPerSecond: number = 0;
     private _packetTime: number = 60;
-
-    private _eventEmitter: EventEmitter;
 
     private _intervalIdPerMinute: ReturnType<typeof setInterval>;
     private _intervalIdPerSecond: ReturnType<typeof setInterval>;
@@ -14,7 +12,7 @@ class PacketManager {
     private readonly _packetLimitPerSecond: number = 120;
 
     constructor() {
-        this._eventEmitter = new EventEmitter();
+        super();
     }
 
     public initialize(): void {
@@ -26,9 +24,16 @@ class PacketManager {
         this._packetCountPerSecond++;
         this._packetCountPerMinute++;
         const kickPercentagePerMinute = this.getKickPercentagePerMinute();
+        const kickPercentagePerSecond = this.getKickPercentagePerSecond();
+
         if (kickPercentagePerMinute >= 100) {
-            this._eventEmitter.emit("Kick", kickPercentagePerMinute);
+            this.emit("Kick", this);
         }
+        if (kickPercentagePerSecond >= 100) {
+            this.emit("Kick", this);
+        }
+
+        this.emit("update", this)
     }
 
     public getKickPercentagePerMinute(): number {
@@ -60,7 +65,7 @@ class PacketManager {
     private _startTimerPerSecond(): void {
         this._intervalIdPerSecond = setInterval(() => {
             if (this._packetCountPerSecond > this._packetLimitPerSecond) {
-                this._eventEmitter.emit("Kick", this.getKickPercentagePerSecond());
+                this.emit("Kick", this.getKickPercentagePerSecond());
             }
             this._resetPacketCountPerSecond();
         }, 1000);
