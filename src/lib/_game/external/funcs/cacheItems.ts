@@ -12,7 +12,7 @@ function cacheItems() {
         { category: "mine", start: 29, end: 31, subtract: true },
         { category: "boostPad", start: 31, end: 33, subtract: true },
         { category: "trap", start: 31, end: 33, subtract: true },
-        { category: "turret", start: 33, end: 36, subtract: true },
+        { category: "turret", start: 33, end: 39, subtract: true },
         { category: "spawnPad", start: 36, end: 37, subtract: true }
     ];
 
