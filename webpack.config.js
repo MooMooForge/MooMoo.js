@@ -36,6 +36,10 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.coffee$/,
+                loader: "coffee-loader",
+              },
         ],
     },
     resolve: {
