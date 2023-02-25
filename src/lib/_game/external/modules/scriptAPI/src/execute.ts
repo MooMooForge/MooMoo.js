@@ -1,6 +1,8 @@
 import commands from "../lib/commands";
 
-function execute(ast: FunctionNode[]): FunctionTable {
+function execute(ast: FunctionNode[]): {
+    get: Function
+} {
     const functionTable: FunctionTable = {};
 
     for (const node of ast) {
@@ -15,7 +17,11 @@ function execute(ast: FunctionNode[]): FunctionTable {
         };
     }
 
-    return functionTable;
+    return {
+        get: function get(name: string) {
+            return functionTable[name]
+        }
+    }
 }
 
 export default execute

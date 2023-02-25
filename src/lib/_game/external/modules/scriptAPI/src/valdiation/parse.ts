@@ -6,10 +6,10 @@ function parse(tokens: string[]): FunctionNode[] | CustomError {
         if (token.endsWith("<<<")) {
             currentFunction = {
                 type: "function",
-                name: token.replace(/</g, ""),
+                name: token.replace(/[ <]/g, ""),
                 body: [],
             };
-        } else if (token === ">>>") {
+        } else if (token.includes(">>>")) {
             if (!currentFunction) {
                 const error: ParseError = {
                     type: "ParseError",
@@ -20,18 +20,30 @@ function parse(tokens: string[]): FunctionNode[] | CustomError {
             currentFunction!.body.push({
                 type: "command",
                 command: "enddef",
-                args: [],
-                body: [],
+                args: []
             });
             ast.push(currentFunction!);
             currentFunction = null;
         } else if (currentFunction) {
-            const [command, ...args] = token.split(" ");
+            const commandline = token.split(" ");
+            let command: string;
+            let args: string[];
+
+            for (let i = 0; i < commandline.length; i++) {
+                let currentElement: string = commandline[i];
+                if (currentElement !== "") {
+                    command = currentElement
+                    args = commandline.slice(i + 1)
+                    if (command == "chat") {
+                        args = [args.join(" ")]
+                    }
+                    break
+                }
+            }
             currentFunction.body.push({
                 type: "command",
                 command,
-                args,
-                body: [],
+                args
             });
         } // Ignore tokens that are not inside a function
     }

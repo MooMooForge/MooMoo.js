@@ -11,7 +11,6 @@ interface CommandNode {
   type: CommandType;
   command: string;
   args: string[];
-  body: AstNode[];
 }
 
 interface FunctionNode {

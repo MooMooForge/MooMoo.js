@@ -12,6 +12,7 @@ import encode from "./lib/_game/external/funcs/msgpack/encode.js";
 
 import UTILS from "./lib/_game/Managers/UTILS";
 import PacketInterceptor from "./lib/_game/Managers/PacketInterceptor";
+import loadAPI from "./lib/_game/external/modules/scriptAPI/loadCode";
 
 export type array = Array<any>;
 export type MessageEvent = Event

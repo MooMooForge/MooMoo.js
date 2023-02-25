@@ -2,7 +2,7 @@ import { MooMoo } from "../../../../../../app";
 
 import accessories from "../../../../storage/accessories";
 
-function equipAccessoryById(id: number) {
+function buyAccessoryById(id: number) {
     let accessoryexists = false;
     accessories.find((accessory: any) => {
         if (accessory.id == id) {
@@ -12,14 +12,14 @@ function equipAccessoryById(id: number) {
     })
     if (!accessoryexists) {
         try {
-        throw new Error("Error at equipAccessoryById: Accessory with id " + id + " does not exist");
+        throw new Error("Error at buyAccessoryById: Accessory with id " + id + " does not exist");
         } catch (e) {
             console.log(e);
         }
     }
 }
 
-function equipAccessoryByName(name: string) {
+function buyAccessoryByName(name: string) {
     let accessoryexists = false;
     accessories.find((accessory: any) => {
         if (accessory.name == name) {
@@ -29,25 +29,25 @@ function equipAccessoryByName(name: string) {
     })
     if (!accessoryexists) {
         try {
-        throw new Error("Error at equipAccessoryByName: Accessory with name " + name + " does not exist");
+        throw new Error("Error at buyAccessoryByName: Accessory with name " + name + " does not exist");
         } catch (e) {
             console.log(e);
         }
     }
 }
 
-function equipAccessory(accessoryData: any) {
+function buyAccessory(accessoryData: any) {
     if (typeof accessoryData == "number") {
-        equipAccessoryById(accessoryData);
+        buyAccessoryById(accessoryData);
     } else if (typeof accessoryData == "string") {
-        equipAccessoryByName(accessoryData);
+        buyAccessoryByName(accessoryData);
     } else {
         try {
-        throw new Error("Error at equipAccessory: accessoryData must be a number or string");
+        throw new Error("Error at buyAccessory: accessoryData must be a number or string");
         } catch (e) {
             console.log(e);
         }
     }
 }
 
-export default equipAccessory;
+export default buyAccessory;

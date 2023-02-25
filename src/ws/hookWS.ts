@@ -9,6 +9,7 @@ import handleClientPackets from "./handleClientPackets";
 import SourceMapConfiguration from "../lib/_game/external/modules/features/SourceMapConfiguration";
 
 import { MooMoo } from "../../app";
+import loadAPI from "../lib/_game/external/modules/scriptAPI/loadCode";
 
 let _onmessage: boolean = false;
 export let onmessagecallback: Function = null;
@@ -42,6 +43,7 @@ export default function hookWS() {
                 ServerManager.startInterval()
                 _onmessage = true;
                 SourceMapConfiguration.initialize()
+                loadAPI()
             }
             try {
                 let data = MooMoo.msgpack.decode(args[0]);
@@ -73,3 +75,4 @@ export default function hookWS() {
         }
     })
 }
+

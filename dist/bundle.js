@@ -1,7 +1,32 @@
 (() => {
-    "use strict";
     var e = {
+        5613: e => {
+            var t;
+            t = function(e) {
+                var t;
+                var r, n, t, M, m;
+                m = [];
+                M = 0;
+                n = 0;
+                while (n < e.length) {
+                    r = e[n];
+                    if (r === "\n") {
+                        t = e.substring(M, n);
+                        m.push(t);
+                        M = n + 1;
+                    }
+                    n++;
+                }
+                if (M < e.length) {
+                    t = e.substring(M);
+                    m.push(t);
+                }
+                return m;
+            };
+            e.exports = t;
+        },
         366: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -32,6 +57,7 @@
             }
         },
         3607: (e, t, r) => {
+            "use strict";
             var n;
             n = {
                 value: true
@@ -46,8 +72,8 @@
             const v = r(484);
             const k = r(2298);
             const _ = r(112);
-            const S = r(8183);
-            const j = r(4190);
+            const j = r(8183);
+            const S = r(4190);
             class Game extends M.default {
                 constructor() {
                     super();
@@ -61,9 +87,9 @@
                     this.GameObjectManager = new h.default;
                     this.CommandManager = new b.default;
                     this.PacketManager = new P.default;
-                    this.PacketInterceptor = new j.default;
+                    this.PacketInterceptor = new S.default;
                     this.BotManager = v.default.instance;
-                    this.UTILS = new S.default;
+                    this.UTILS = new j.default;
                     this.vars = {};
                     this.msgpack = {};
                     this.msgpack.decode = k.default;
@@ -78,6 +104,7 @@
             (0, m.default)();
         },
         5852: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -114,6 +141,7 @@
             t["default"] = Leaderboardmanager;
         },
         4e3: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -161,6 +189,7 @@
             t["default"] = ObjectManager;
         },
         4190: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -207,6 +236,7 @@
             t["default"] = PacketInterceptor;
         },
         2659: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -276,6 +306,7 @@
             t["default"] = PacketManager;
         },
         597: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -395,6 +426,7 @@
             t["default"] = PlayerManager;
         },
         8183: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -420,6 +452,7 @@
             t["default"] = UTILS;
         },
         8350: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -443,6 +476,7 @@
             t["default"] = CommandManager;
         },
         8516: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -474,6 +508,7 @@
             t["default"] = EventEmitter;
         },
         3748: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -526,7 +561,7 @@
                 }, {
                     category: "turret",
                     start: 33,
-                    end: 36,
+                    end: 39,
                     subtract: true
                 }, {
                     category: "spawnPad",
@@ -548,6 +583,7 @@
             t["default"] = cacheItems;
         },
         627: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -561,6 +597,7 @@
             t["default"] = chunk;
         },
         9127: function(e, t, r) {
+            "use strict";
             var n = this && this.__awaiter || function(e, t, r, n) {
                 function adopt(e) {
                     return e instanceof r ? e : new r((function(t) {
@@ -671,6 +708,7 @@
             t["default"] = Bot;
         },
         484: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -703,6 +741,7 @@
             t["default"] = BotManager;
         },
         3292: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -805,6 +844,7 @@
             t["default"] = Server;
         },
         4455: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -879,6 +919,7 @@
             t["default"] = ServerManager;
         },
         977: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -898,12 +939,13 @@
             t["default"] = SourceMapConfiguration;
         },
         8106: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
             const n = r(366);
             const M = r(2416);
-            function equipAccessoryById(e) {
+            function buyAccessoryById(e) {
                 let t = false;
                 M.default.find((r => {
                     if (r.id == e) {
@@ -913,13 +955,13 @@
                 }));
                 if (!t) {
                     try {
-                        throw new Error("Error at equipAccessoryById: Accessory with id " + e + " does not exist");
+                        throw new Error("Error at buyAccessoryById: Accessory with id " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipAccessoryByName(e) {
+            function buyAccessoryByName(e) {
                 let t = false;
                 M.default.find((r => {
                     if (r.name == e) {
@@ -929,28 +971,29 @@
                 }));
                 if (!t) {
                     try {
-                        throw new Error("Error at equipAccessoryByName: Accessory with name " + e + " does not exist");
+                        throw new Error("Error at buyAccessoryByName: Accessory with name " + e + " does not exist");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            function equipAccessory(e) {
+            function buyAccessory(e) {
                 if (typeof e == "number") {
-                    equipAccessoryById(e);
+                    buyAccessoryById(e);
                 } else if (typeof e == "string") {
-                    equipAccessoryByName(e);
+                    buyAccessoryByName(e);
                 } else {
                     try {
-                        throw new Error("Error at equipAccessory: accessoryData must be a number or string");
+                        throw new Error("Error at buyAccessory: accessoryData must be a number or string");
                     } catch (e) {
                         console.log(e);
                     }
                 }
             }
-            t["default"] = equipAccessory;
+            t["default"] = buyAccessory;
         },
         3269: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1004,6 +1047,7 @@
             t["default"] = buyHat;
         },
         4218: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1014,6 +1058,7 @@
             t["default"] = chat;
         },
         8101: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1067,6 +1112,7 @@
             t["default"] = equipAccessory;
         },
         420: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1120,6 +1166,7 @@
             t["default"] = equipHat;
         },
         3044: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1131,6 +1178,7 @@
             t["default"] = hit;
         },
         8595: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1145,6 +1193,7 @@
             t["default"] = place;
         },
         3296: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1155,6 +1204,7 @@
             t["default"] = unequipAccessory;
         },
         5088: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1164,7 +1214,146 @@
             }
             t["default"] = unequipHat;
         },
+        4572: (e, t) => {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: true
+            });
+            const r = {
+                hit: {
+                    exec: () => console.log("Hit!")
+                },
+                wait: {
+                    exec: e => new Promise((t => setTimeout(t, parseInt(e[0], 10))))
+                },
+                chat: {
+                    exec: e => console.log(e.join(" "))
+                },
+                enddef: {
+                    exec: () => {}
+                }
+            };
+            t["default"] = r;
+        },
+        6616: (e, t, r) => {
+            "use strict";
+            var n;
+            n = {
+                value: true
+            };
+            const M = r(4572);
+            function execute(e) {
+                const t = {};
+                for (const r of e) {
+                    const fn = () => {
+                        for (const e of r.body) {
+                            M.default[e.command].exec(e.args);
+                        }
+                    };
+                    t[r.name] = {
+                        call: fn
+                    };
+                }
+                return {
+                    get: function get(e) {
+                        return t[e];
+                    }
+                };
+            }
+            t.Z = execute;
+        },
+        8214: (e, t) => {
+            "use strict";
+            var r;
+            r = {
+                value: true
+            };
+            function parse(e) {
+                const t = [];
+                let r = null;
+                for (const n of e) {
+                    if (n.endsWith("<<<")) {
+                        r = {
+                            type: "function",
+                            name: n.replace(/[ <]/g, ""),
+                            body: []
+                        };
+                    } else if (n.includes(">>>")) {
+                        if (!r) {
+                            const e = {
+                                type: "ParseError",
+                                message: "Unexpected token >>>. No function found."
+                            };
+                            return e;
+                        }
+                        r.body.push({
+                            type: "command",
+                            command: "enddef",
+                            args: []
+                        });
+                        t.push(r);
+                        r = null;
+                    } else if (r) {
+                        const e = n.split(" ");
+                        let t;
+                        let M;
+                        for (let r = 0; r < e.length; r++) {
+                            let n = e[r];
+                            if (n !== "") {
+                                t = n;
+                                M = e.slice(r + 1);
+                                if (t == "chat") {
+                                    M = [ M.join(" ") ];
+                                }
+                                break;
+                            }
+                        }
+                        r.body.push({
+                            type: "command",
+                            command: t,
+                            args: M
+                        });
+                    }
+                }
+                if (r) {
+                    const e = {
+                        type: "ParseError",
+                        message: "Unexpected end of input. Function definition not closed."
+                    };
+                    return e;
+                }
+                return t;
+            }
+            t.Z = parse;
+        },
+        1542: (e, t, r) => {
+            "use strict";
+            var n;
+            n = {
+                value: true
+            };
+            const M = r(4572);
+            class InvalidNodeTypeError extends Error {}
+            class InvalidCommandError extends Error {}
+            function validate(e) {
+                for (const t of e) {
+                    if (t.type !== "function") {
+                        throw new InvalidNodeTypeError(`Unexpected node type: ${t.type}`);
+                    }
+                    for (const e of t.body) {
+                        if (e.type !== "command") {
+                            throw new InvalidNodeTypeError(`Unexpected node type: ${e.type}`);
+                        }
+                        if (!M.default.hasOwnProperty(e.command)) {
+                            throw new InvalidCommandError(`Invalid command: ${e.command}`);
+                        }
+                    }
+                }
+            }
+            t.Z = validate;
+        },
         6157: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1180,6 +1369,7 @@
             t["default"] = Alliance;
         },
         1552: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1196,6 +1386,7 @@
             t["default"] = Command;
         },
         7809: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1207,6 +1398,7 @@
             t["default"] = GameObject;
         },
         9347: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1225,6 +1417,7 @@
             t["default"] = Player;
         },
         5919: (e, t, r) => {
+            "use strict";
             var n;
             n = {
                 value: true
@@ -1301,6 +1494,7 @@
             t.Z = initRendering;
         },
         2416: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1454,6 +1648,7 @@
             t["default"] = r;
         },
         3212: (e, t) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1779,6 +1974,7 @@
             t["default"] = r;
         },
         898: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1799,6 +1995,7 @@
             t["default"] = handleClientPackets;
         },
         9938: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -1813,32 +2010,32 @@
             const v = r(8280);
             const k = r(7954);
             const _ = r(9289);
-            const S = r(7864);
-            const j = r(9773);
+            const j = r(7864);
+            const S = r(9773);
             const x = r(6181);
             const O = r(2034);
-            const A = r(9523);
-            const C = r(2656);
-            const I = r(5701);
-            const B = r(1822);
-            const T = r(657);
+            const I = r(9523);
+            const A = r(2656);
+            const C = r(5701);
+            const T = r(1822);
+            const B = r(657);
             const E = r(1836);
             const H = r(3226);
             const U = r(9971);
-            const q = r(8641);
-            const D = r(9254);
-            const L = r(6933);
-            const G = r(2580);
-            const R = r(6207);
-            const F = r(6401);
-            const N = r(2530);
+            const D = r(8641);
+            const L = r(9254);
+            const G = r(6933);
+            const q = r(2580);
+            const N = r(6207);
+            const R = r(6401);
+            const F = r(2530);
             const W = r(1451);
             const z = r(2798);
             const X = r(4763);
             const Y = r(1487);
-            const K = r(5718);
-            const V = r(8530);
-            const Z = r(1887);
+            const Z = r(5718);
+            const K = r(8530);
+            const V = r(1887);
             const $ = r(4455);
             function handleServerPackets(e, t) {
                 switch (e) {
@@ -1855,7 +2052,7 @@
                     break;
 
                   case "d":
-                    (0, A.default)();
+                    (0, I.default)();
                     break;
 
                   case "1":
@@ -1883,7 +2080,7 @@
                     break;
 
                   case "a":
-                    (0, j.default)(t[0]);
+                    (0, S.default)(t[0]);
                     break;
 
                   case "aa":
@@ -1895,15 +2092,15 @@
                     break;
 
                   case "8":
-                    (0, C.default)(t);
+                    (0, A.default)(t);
                     break;
 
                   case "sp":
-                    (0, I.default)(t);
+                    (0, C.default)(t);
                     break;
 
                   case "9":
-                    (0, S.default)(t);
+                    (0, j.default)(t);
                     break;
 
                   case "h":
@@ -1911,7 +2108,7 @@
                     break;
 
                   case "11":
-                    (0, B.default)(t);
+                    (0, T.default)(t);
                     break;
 
                   case "12":
@@ -1923,7 +2120,7 @@
                     break;
 
                   case "14":
-                    (0, T.default)(t);
+                    (0, B.default)(t);
                     break;
 
                   case "15":
@@ -1939,31 +2136,31 @@
                     break;
 
                   case "18":
-                    (0, q.default)(t);
-                    break;
-
-                  case "19":
                     (0, D.default)(t);
                     break;
 
-                  case "20":
+                  case "19":
                     (0, L.default)(t);
                     break;
 
-                  case "ac":
+                  case "20":
                     (0, G.default)(t);
                     break;
 
+                  case "ac":
+                    (0, q.default)(t);
+                    break;
+
                   case "ad":
-                    (0, R.default)(t);
+                    (0, N.default)(t);
                     break;
 
                   case "an":
-                    (0, F.default)(t);
+                    (0, R.default)(t);
                     break;
 
                   case "st":
-                    (0, N.default)(t);
+                    (0, F.default)(t);
                     break;
 
                   case "sa":
@@ -1983,15 +2180,15 @@
                     break;
 
                   case "t":
-                    (0, K.default)(t);
+                    (0, Z.default)(t);
                     break;
 
                   case "p":
-                    (0, V.default)(t);
+                    (0, K.default)(t);
                     break;
 
                   case "pp":
-                    (0, Z.default)(t);
+                    (0, V.default)(t);
                     break;
 
                   default:
@@ -2009,6 +2206,7 @@
             t["default"] = handleServerPackets;
         },
         550: function(e, t, r) {
+            "use strict";
             var n = this && this.__awaiter || function(e, t, r, n) {
                 function adopt(e) {
                     return e instanceof r ? e : new r((function(t) {
@@ -2046,18 +2244,19 @@
             const y = r(898);
             const h = r(977);
             const b = r(366);
-            let P = false;
-            t.onmessagecallback = null;
+            const P = r(5337);
             let v = false;
-            let k = null;
+            t.onmessagecallback = null;
+            let k = false;
+            let _ = null;
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
                     apply(e, t, r) {
-                        if (!k) {
-                            k = new URL(t.url).search.split("token=")[1];
+                        if (!_) {
+                            _ = new URL(t.url).search.split("token=")[1];
                         }
                         let n = new URL(t.url).search.split("token=")[1];
-                        if (k !== n) return Reflect.apply(e, t, r);
+                        if (_ !== n) return Reflect.apply(e, t, r);
                         let p = b.MooMoo.PacketInterceptor;
                         r[0] = p.applyClientCallbacks(r[0]);
                         b.MooMoo.ws = t;
@@ -2068,10 +2267,11 @@
                             t.send(n);
                         };
                         if (b.MooMoo.ws.readyState !== 1) return true;
-                        if (!P) {
+                        if (!v) {
                             m.default.startInterval();
-                            P = true;
+                            v = true;
                             h.default.initialize();
+                            (0, P.default)();
                         }
                         try {
                             let e = b.MooMoo.msgpack.decode(r[0]);
@@ -2105,6 +2305,7 @@
             t["default"] = hookWS;
         },
         7703: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2130,6 +2331,7 @@
             t["default"] = sendChat;
         },
         2580: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2142,6 +2344,7 @@
             t["default"] = addAlliance;
         },
         9651: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2168,6 +2371,7 @@
             t["default"] = addPlayer;
         },
         8641: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2180,6 +2384,7 @@
             t["default"] = addProjectile;
         },
         6401: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2192,6 +2397,7 @@
             t["default"] = allianceNotification;
         },
         6181: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2206,6 +2412,7 @@
             t["default"] = animeAI;
         },
         6207: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2217,6 +2424,7 @@
             t["default"] = deleteAlliance;
         },
         9523: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2227,6 +2435,7 @@
             t["default"] = disconnect;
         },
         2034: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2238,6 +2447,7 @@
             t["default"] = gatherAnimation;
         },
         8280: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2252,6 +2462,7 @@
             t["default"] = killObject;
         },
         7954: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2266,6 +2477,7 @@
             t["default"] = killObjects;
         },
         1822: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2278,6 +2490,7 @@
             t["default"] = killPlayer;
         },
         9773: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2295,6 +2508,7 @@
             t["default"] = loadAI;
         },
         5393: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2326,6 +2540,7 @@
             t["default"] = loadGameObject;
         },
         8530: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2338,6 +2553,7 @@
             t["default"] = pingMap;
         },
         1887: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2350,6 +2566,7 @@
             t["default"] = pingSocketResponse;
         },
         4763: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2362,6 +2579,7 @@
             t["default"] = receiveChat;
         },
         9254: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2374,6 +2592,7 @@
             t["default"] = remProjectile;
         },
         156: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2389,6 +2608,7 @@
             t["default"] = removePlayer;
         },
         6933: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2401,6 +2621,7 @@
             t["default"] = serverShutdownNotice;
         },
         1451: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2413,6 +2634,7 @@
             t["default"] = setAlliancePlayers;
         },
         1201: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2433,6 +2655,7 @@
             t["default"] = setInitData;
         },
         2530: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2445,6 +2668,7 @@
             t["default"] = setPlayerTeam;
         },
         8353: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2485,6 +2709,7 @@
             t["default"] = setupGame;
         },
         5701: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2497,6 +2722,7 @@
             t["default"] = shootTurret;
         },
         5718: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2509,6 +2735,7 @@
             t["default"] = showText;
         },
         1836: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2521,6 +2748,7 @@
             t["default"] = updateAge;
         },
         9289: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2539,6 +2767,7 @@
             t["default"] = updateHealth;
         },
         657: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2551,6 +2780,7 @@
             t["default"] = updateItemCounts;
         },
         9971: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2563,6 +2793,7 @@
             t["default"] = updateItems;
         },
         2862: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2577,6 +2808,7 @@
             t["default"] = updateLeaderboard;
         },
         1487: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2589,6 +2821,7 @@
             t["default"] = updateMinimap;
         },
         7864: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2606,6 +2839,7 @@
             t["default"] = updatePlayerValue;
         },
         8351: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2664,6 +2898,7 @@
             t["default"] = updatePlayers;
         },
         2798: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2676,6 +2911,7 @@
             t["default"] = updateStoreItems;
         },
         3226: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2688,6 +2924,7 @@
             t["default"] = updateUpgrades;
         },
         2656: (e, t, r) => {
+            "use strict";
             Object.defineProperty(t, "__esModule", {
                 value: true
             });
@@ -2700,6 +2937,7 @@
             t["default"] = wiggleGameObject;
         },
         2298: (e, t, r) => {
+            "use strict";
             r.r(t);
             r.d(t, {
                 default: () => n
@@ -2841,6 +3079,7 @@
             const n = decode;
         },
         112: (e, t, r) => {
+            "use strict";
             r.r(t);
             r.d(t, {
                 default: () => n
@@ -2957,6 +3196,29 @@
                 }
             };
             const n = encode;
+        },
+        5337: (e, t, r) => {
+            "use strict";
+            r.r(t);
+            r.d(t, {
+                default: () => P
+            });
+            var n = r(366);
+            var M = r(8214);
+            var m = r(1542);
+            var p = r(5613);
+            var y = r.n(p);
+            var h = r(4572);
+            var b = r(6616);
+            function loadAPI() {
+                n.MooMoo.scriptAPI = {
+                    parse: M.Z,
+                    validate: m.Z,
+                    tokenize: y(),
+                    execute: b.Z
+                };
+            }
+            const P = loadAPI;
         }
     };
     var t = {};
@@ -2971,6 +3233,15 @@
         e[r].call(M.exports, M, M.exports, __webpack_require__);
         return M.exports;
     }
+    (() => {
+        __webpack_require__.n = e => {
+            var t = e && e.__esModule ? () => e["default"] : () => e;
+            __webpack_require__.d(t, {
+                a: t
+            });
+            return t;
+        };
+    })();
     (() => {
         __webpack_require__.d = (e, t) => {
             for (var r in t) {
