@@ -5,6 +5,7 @@ function gatherAnimation(data:any) {
 
     MooMoo.emit("gatherAnimation", data);
     MooMoo.emit("gatheranimation", data);
+    MooMoo.emit("7", data)
 }
 
 export default gatherAnimation;
