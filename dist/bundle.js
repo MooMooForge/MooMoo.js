@@ -2440,10 +2440,10 @@
             const n = r(366);
             function killObject(e) {
                 let t = e[0];
-                n.MooMoo.GameObjectManager.removeObjectBySid(t);
                 n.MooMoo.emit("killObject", e);
                 n.MooMoo.emit("killobject", e);
                 n.MooMoo.emit("12", t);
+                n.MooMoo.GameObjectManager.removeObjectBySid(t);
             }
             t["default"] = killObject;
         },
